@@ -1,1 +1,1 @@
-# magento-2-reports
+- User guide: https://docs.mageplaza.com/reports/index.html

@@ -1,0 +1,49 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+$chartData = $block->getChartData();
+$store     = $this->getRequest()->getParam('store');
+?>
+<div class="dashboard-item-container">
+    <div class="title-content">
+        <?php if ($block->canShowTitle()) : ?>
+            <div class="dashboard-item-title"><?php echo $block->getTitle(); ?></div>
+        <?php endif; ?>
+        <div class="number"><?php echo $chartData['total'] ?></div>
+        <?php if ($block->isCompare()) : ?>
+            <div class="chart-rate <?php echo $chartData['rate'] > 0 ? 'up-rate' : ($chartData['rate'] < 0 ? 'down-rate' : '') ?>">
+                <?php echo abs($chartData['rate']) . '%' ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="dashboard-item-content-chart">
+        <?php if ($block->isEnabledChart()) : ?>
+            <canvas id="<?php echo $chartData['name'] ?>-chart"
+                    data-mage-init='{"initChart":{"chartData":<?php echo \Mageplaza\Reports\Helper\Data::jsonEncode($chartData) ?>}}'></canvas>
+        <?php else: ?>
+            <div class="ar-empty-text empty-text">
+                <?php echo __("Chart is disabled. To enable the chart, click <a href='%1'>here</a>", $block->getUrl('adminhtml/system_config/edit', ['section' => 'mageplaza_reports', 'store' => $store])) ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+</div>

@@ -1,0 +1,305 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+.grid-stack-item {
+    /*overflow-y: overlay;*/
+    border: 1px solid #ccc;
+}
+
+.ar_dashboard .dashboard-item-container {
+    margin: 5px;
+    position: relative;
+    height: 90%;
+    padding: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.compare {
+    float: left;
+    margin: 5px;
+}
+
+.top-container {
+    height: 50px;
+}
+
+.ar_dashboard .dashboard-container {
+    position: relative;
+}
+
+#ar_overlay {
+    background: rgba(255, 255, 255, 0.5);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 399;
+    display: none;
+}
+
+.loader {
+    font-size: 4rem;
+    left: 50%;
+    margin-left: -2rem;
+    margin-top: -2rem;
+    position: absolute;
+    top: 50%;
+}
+
+.up-rate:before {
+    color: lightgreen;
+    font-family: FontAwesome;
+    content: '\f062';
+}
+
+.down-rate:before {
+    color: red;
+    font-family: FontAwesome;
+    content: '\f063';
+}
+
+.ar_dashboard .title-content {
+    max-height: 70px;
+    overflow: overlay;
+    top: 0;
+    right: 10px;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.chart-rate {
+    float: right;
+}
+
+.number {
+    float: left;
+}
+
+.title-content .number, .chart-rate {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.chart-rate.up-rate {
+    color: lightgreen;
+}
+
+.chart-rate.down-rate {
+    color: red;
+}
+
+.mp-dashboard-advanced-reports {
+    position: relative;
+    display: flex;
+    border-color: #e3e3e3;
+    border-style: solid;
+    border-width: 1px 0;
+    margin-bottom: 3rem;
+    padding: 2.5rem 0;
+}
+
+.mp-dashboard-advanced-reports-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.mp-dashboard-advanced-reports-content {
+    line-height: 1.7;
+}
+
+.mp-dashboard-advanced-reports-actions {
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    align-self: center;
+    margin-left: 2.5rem;
+    margin-right: 1.5rem;
+    text-align: right;
+}
+
+.mp-action-advanced-reports {
+    background-color: #007dbd;
+    border-color: #007dbd;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    font-size: 1.6rem;
+    letter-spacing: .025em;
+    border: 1px solid;
+    display: inline-block;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    line-height: 1.36;
+    padding: 0.6rem 1em 0.6rem;
+    text-align: center;
+    vertical-align: baseline;
+}
+
+.mp-remove-dashboard-advanced-reports:after {
+    font-family: 'Admin Icons';
+    font-style: normal;
+    content: '\e62f';
+    transition: color 0.1s linear;
+    font-size: 1rem;
+}
+
+.mp-remove-dashboard-advanced-reports {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.date-range-picker {
+    z-index: 99;
+    position: relative;
+}
+
+#daterange, #compare-daterange {
+    display: block !important;
+    float: left;
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    width: 230px;
+}
+
+.ui-resizable-autohide > .draggable {
+    display: none;
+}
+
+.draggable {
+    display: block;
+    right: 0;
+    position: absolute;
+    z-index: 99;
+    color: #666;
+    margin: 5px;
+    cursor: move;
+}
+
+.not-draggable {
+    height: 100%;
+    /*top: 0;*/
+    /*bottom: 2px;*/
+    /*right: 0;*/
+    /*left: 0;*/
+    /*display: block;*/
+    /*position: absolute;*/
+}
+
+.date-range-picker span {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.ar-empty-text {
+    clear: both;
+}
+
+.grid-stack > .grid-stack-item > .ui-resizable-se {
+    bottom: 5px;
+    right: 0;
+}
+
+.ar_dashboard .dashboard-item-content {
+    position: absolute;
+    padding: -10px;
+    overflow-y: overlay;
+    bottom: 0px;
+    top: 30px;
+    right: 10px;
+    left: 15px;
+}
+
+.ar_dashboard .dashboard-totals {
+    margin: unset;
+    overflow-y: overlay;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.ar_dashboard .dashboard-item-content-chart {
+    overflow-y: overlay;
+    position: absolute;
+    bottom: 0;
+    top: 75px;
+    right: 10px;
+    left: 0;
+}
+
+.ar_dashboard .dashboard-store-stats-content .dashboard-item-content {
+    position: unset;
+}
+
+#grids .dashboard-item-container, #sales .dashboard-item-container, #diagrams .dashboard-item-container {
+    position: absolute;
+    overflow-y: overlay;
+    height: unset;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+}
+
+.ar_dashboard .dashboard-item-primary .dashboard-item-content {
+    position: unset;
+}
+
+.ar_dashboard .dashboard-item-title {
+    max-height: 30px;
+    overflow: overlay;
+    float: left;
+    width: 100%;
+    margin-right: 5px;
+}
+
+#lifetimeSales .price {
+    color: #eb5202;
+}
+
+.ar_dashboard ::-webkit-scrollbar-track {
+    border-radius: 20px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    /*background-color: #fff;*/
+}
+
+.ar_dashboard ::-webkit-scrollbar {
+    border-radius: 10px;
+    height: 7px;
+    width: 7px;
+    /*background-color: #fff;*/
+}
+
+.ar_dashboard ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ababaa;
+}

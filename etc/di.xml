@@ -1,0 +1,45 @@
+<?xml version="1.0"?><!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mageplaza\Reports\Model\CardsManageFactory">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="lastOrders" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LastOrders</item>
+                <item name="lastSearches" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LastSearches</item>
+                <item name="topSearches" xsi:type="string">Mageplaza\Reports\Block\Dashboard\TopSearches</item>
+                <item name="orders" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Orders</item>
+                <item name="averageOrderValue" xsi:type="string">Mageplaza\Reports\Block\Dashboard\AverageOrderValue</item>
+                <item name="salesByLocation" xsi:type="string">Mageplaza\Reports\Block\Dashboard\SalesByLocation</item>
+                <item name="repeatCustomerRate" xsi:type="string">Mageplaza\Reports\Block\Dashboard\RepeatCustomerRate</item>
+                <item name="totalSales" xsi:type="string">Mageplaza\Reports\Block\Dashboard\TotalSales</item>
+                <item name="bestsellers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Bestsellers</item>
+                <item name="mostViewedProducts" xsi:type="string">Mageplaza\Reports\Block\Dashboard\MostViewedProducts</item>
+                <item name="newCustomers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\NewCustomers</item>
+                <item name="customers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Customers</item>
+                <item name="tax" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Tax</item>
+                <item name="shipping" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Shipping</item>
+                <item name="lifetimeSales" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LifetimeSales</item>
+                <item name="averageOrder" xsi:type="string">Mageplaza\Reports\Block\Dashboard\AverageOrder</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

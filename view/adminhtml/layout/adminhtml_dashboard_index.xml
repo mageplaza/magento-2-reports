@@ -1,0 +1,37 @@
+<?xml version="1.0"?><!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <css src="Mageplaza_Reports/css/lib/gridstack.css"/>
+        <css src="Mageplaza_Reports/css/dashboard/custom.css"/>
+        <css src="Mageplaza_Core/css/font-awesome.min.css"/>
+        <css src="Mageplaza_Reports/css/lib/daterangepicker.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageplaza\Reports\Block\Dashboard\SwitchToNew" name="switch_to_ar_dashboard" before="-"/>
+            <block class="Magento\Backend\Block\Template" name="first_time_popup" ifconfig="mageplaza_reports/general/first_time_install" template="Mageplaza_Reports::dashboard/popup.phtml"/>
+            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" template="Mageplaza_Reports::dashboard.phtml" ifconfig="mageplaza_reports/general/enabled"/>
+        </referenceContainer>
+    </body>
+</page>

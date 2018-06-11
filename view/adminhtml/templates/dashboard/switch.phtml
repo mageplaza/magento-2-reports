@@ -1,0 +1,51 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<section class="mp-dashboard-advanced-reports" data-index="dashboard-advanced-reports">
+    <div class="mp-remove-dashboard-advanced-reports"></div>
+    <div class="mp-dashboard-advanced-reports-description">
+        <header class="mp-dashboard-advanced-reports-title">
+            <?php echo $block->escapeHtml(__('Mageplaza Advanced Reporting')) ?>
+        </header>
+        <div class="mp-dashboard-advanced-reports-content">
+            <?php echo $block->escapeHtml(
+                __('Gain new insights and take command of your business\' performance, using our dynamic product, order, and customer reports tailored to your customer data.')
+            ) ?>
+        </div>
+    </div>
+    <div class="mp-dashboard-advanced-reports-actions">
+        <a href="<?php echo $block->escapeUrl($block->getUrl('mpreports/dashboard/switchtonew')) ?>"
+           class="action mp-action-advanced-reports"
+           title="<?php echo $block->escapeHtml(__('Try to use new Dashboard')) ?>">
+            <span><?php echo $block->escapeHtml(__('Try to use new Dashboard')) ?></span>
+        </a>
+    </div>
+</section>
+<script>
+    require(['jquery'], function ($) {
+        $('.mp-remove-dashboard-advanced-reports').click(function () {
+            $('.mp-dashboard-advanced-reports').remove();
+            $.ajax({
+                url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+            })
+        });
+    })
+</script>

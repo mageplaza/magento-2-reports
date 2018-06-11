@@ -1,0 +1,60 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<div id="popup-modal">
+    <h1> Let’s experience your new dashboard </h1>
+</div>
+<script>
+    require(['jquery', 'Magento_Ui/js/modal/modal'], function ($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Hi there! Better reports are available',
+                buttons: [{
+                    text: $.mage.__('Continue'),
+                    class: '',
+                    click: function () {
+                        $.ajax({
+                            url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                            data: {switchToNew: 1},
+                            success: function (res) {
+                                if (res) {
+                                    window.location.href = res;
+                                }
+                            }
+                        });
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $('#popup-modal').modal('openModal');
+            $('#popup-modal').on('modalclosed', function () {
+                $.ajax({
+                    url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                    data: {firstTimeInstall: 1}
+                })
+            });
+        }
+    );
+</script>
