@@ -21,11 +21,6 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
-use Magento\Backend\Block\Template;
-use Magento\Directory\Model\Currency;
-use Magento\Framework\Pricing\Helper\Data as PriceHelper;
-use Mageplaza\Reports\Helper\Data;
-
 /**
  * Class TotalSales
  * @package Mageplaza\Reports\Block\Dashboard
@@ -40,38 +35,6 @@ class AverageOrderValue extends AbstractClass
     protected $_template = 'dashboard/chart.phtml';
 
     /**
-     * @var PriceHelper
-     */
-    protected $_priceHelper;
-
-    /**
-     * @var Currency
-     */
-    protected $_currency;
-
-    /**
-     * TotalSales constructor.
-     * @param Template\Context $context
-     * @param PriceHelper $priceHelper
-     * @param Currency $currency
-     * @param Data $helperData
-     * @param array $data
-     */
-    public function __construct(
-        Template\Context $context,
-        PriceHelper $priceHelper,
-        Currency $currency,
-        Data $helperData,
-        array $data = []
-    )
-    {
-        parent::__construct($context, $helperData, $data);
-
-        $this->_currency    = $currency;
-        $this->_priceHelper = $priceHelper;
-    }
-
-    /**
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -80,7 +43,7 @@ class AverageOrderValue extends AbstractClass
         $date   = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getSalesByDateRange($date[0], $date[1]);
 
-        return $this->_priceHelper->currency(($totals->getAverage() ? $totals->getAverage() : 0));
+        return $this->getBaseCurrency()->format($totals->getAverage() ? $totals->getAverage() : 0);
     }
 
     /**
@@ -125,10 +88,10 @@ class AverageOrderValue extends AbstractClass
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return string
      */
-    public function getYLabel()
+    protected function getYUnit()
     {
-        return __('orders');
+        return $this->getBasePriceFormat();
     }
 }

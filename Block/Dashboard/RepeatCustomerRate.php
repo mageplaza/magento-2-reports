@@ -22,8 +22,6 @@
 namespace Mageplaza\Reports\Block\Dashboard;
 
 use Magento\Backend\Block\Template;
-use Magento\Directory\Model\Currency;
-use Magento\Framework\Pricing\Helper\Data as PriceHelper;
 use Magento\Sales\Model\OrderFactory;
 use Mageplaza\Reports\Helper\Data;
 
@@ -51,37 +49,22 @@ class RepeatCustomerRate extends AbstractClass
     protected $_orderReportCollectionFactory;
 
     /**
-     * @var PriceHelper
-     */
-    protected $_priceHelper;
-
-    /**
-     * @var Currency
-     */
-    protected $_currency;
-
-    /**
      * RepeatCustomerRate constructor.
      * @param Template\Context $context
-     * @param Currency $currency
-     * @param PriceHelper $priceHelper
-     * @param OrderFactory $orderFactory
      * @param Data $helperData
+     * @param OrderFactory $orderFactory
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
-        Currency $currency,
-        PriceHelper $priceHelper,
-        OrderFactory $orderFactory,
         Data $helperData,
-        array $data = [])
+        OrderFactory $orderFactory,
+        array $data = []
+    )
     {
         parent::__construct($context, $helperData, $data);
 
-        $this->_priceHelper  = $priceHelper;
         $this->_orderFactory = $orderFactory;
-        $this->_currency     = $currency;
     }
 
     /**

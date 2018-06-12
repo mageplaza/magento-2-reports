@@ -20,8 +20,9 @@
 
 define([
     'jquery',
+    'Magento_Catalog/js/price-utils',
     'chartBundle'
-], function ($) {
+], function ($, priceUtils) {
     'use strict';
     $.widget('mageplaza.initChart', {
         options: {
@@ -68,12 +69,11 @@ define([
                         mode: 'index',
                         intersect: true,
                         callbacks: {
-
                             label: function (tooltipItem, data) {
                                 var dataset = data.datasets[tooltipItem.datasetIndex];
                                 var index = tooltipItem.index;
 
-                                return dataset.labels[index] + ': ' + dataset.data[index] + data.yUnit;
+                                return dataset.labels[index] + ': ' + (data.yUnit ? priceUtils.formatPrice(dataset.data[index], data.yUnit) : dataset.data[index]);
                             },
                             title: function (tooltipItems, data) {
                                 if (data.index === 'repeatCustomerRate') {
@@ -115,7 +115,7 @@ define([
                                 // Include a currency sign in the ticks
                                 callback: function (value, index, values) {
                                     if (Math.floor(value) === value) {
-                                        return this.options.scaleLabel.labelUnit + value;
+                                        return self.options.chartData.yUnit ? priceUtils.formatPrice(value, self.options.chartData.yUnit) : value;
                                     }
                                 }
                             }

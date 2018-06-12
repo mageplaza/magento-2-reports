@@ -57,8 +57,7 @@ class SalesByLocation extends AbstractClass
      * @param Data $helperData
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         Template\Context $context,
         OrderFactory $orderFactory,
         CountryFactory $countryFactory,

@@ -22,6 +22,8 @@
 namespace Mageplaza\Reports\Block\Dashboard;
 
 use Magento\Backend\Block\Template;
+use Magento\Directory\Model\Currency;
+use Magento\Framework\App\ObjectManager;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -36,6 +38,16 @@ abstract class AbstractClass extends Template
      * @var Data
      */
     protected $_helperData;
+
+    /**
+     * @var Currency
+     */
+    protected $baseCurrency;
+
+    /**
+     * @var string Price Format
+     */
+    protected $basePriceFormat;
 
     /**
      * @var string
@@ -87,6 +99,35 @@ abstract class AbstractClass extends Template
         $data['name']      = $this->getName();
 
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getBaseCurrency()
+    {
+        if (!$this->baseCurrency) {
+            $code = $this->_storeManager->getStore()->getBaseCurrencyCode();
+
+            $this->baseCurrency = ObjectManager::getInstance()->get(Currency::class)->load($code);
+        }
+
+        return $this->baseCurrency;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getBasePriceFormat()
+    {
+        if (!$this->basePriceFormat) {
+            $code = $this->getBaseCurrency()->getCode();
+
+            $this->basePriceFormat = ObjectManager::getInstance()->get(\Magento\Framework\Locale\FormatInterface::class)
+                ->getPriceFormat(null, $code);
+        }
+
+        return $this->basePriceFormat;
     }
 
     /**

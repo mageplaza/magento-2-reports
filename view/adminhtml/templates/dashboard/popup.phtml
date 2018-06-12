@@ -20,7 +20,7 @@
  */
 ?>
 <div id="popup-modal">
-    <h1> Let’s experience your new dashboard </h1>
+    <h1> <?php echo __('Let’s experience your new dashboard') ?> </h1>
 </div>
 <script>
     require(['jquery', 'Magento_Ui/js/modal/modal'], function ($, modal) {
@@ -28,7 +28,7 @@
                 type: 'popup',
                 responsive: true,
                 innerScroll: true,
-                title: 'Hi there! Better reports are available',
+                title: '<?php echo __('Hi there! Better reports are available') ?>',
                 buttons: [{
                     text: $.mage.__('Continue'),
                     class: '',
