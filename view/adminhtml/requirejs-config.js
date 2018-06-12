@@ -22,10 +22,7 @@ var config = {
     paths: {
         gridstack: 'Mageplaza_Reports/js/lib/gridstack',
         'gridstack.jqueryui': 'Mageplaza_Reports/js/lib/gridstack.jQueryUI',
-        lodash: 'Mageplaza_Reports/js/lib/lodash.min',
         daterangepicker: 'Mageplaza_Reports/js/lib/daterangepicker',
-        ar_moment: 'Mageplaza_Reports/js/lib/moment.min',
-        ar_momentTimezone: 'Mageplaza_Reports/js/lib/moment-timezone-with-data',
         chart: 'Mageplaza_Reports/js/lib/Chart.bundle',
         mpdaterangepicker: 'Mageplaza_Reports/js/dashboard/mpdaterangepicker',
         initGridStack: 'Mageplaza_Reports/js/dashboard/initGridStack',
@@ -34,6 +31,7 @@ var config = {
     },
     map: {
         '*': {
+            'lodash':'underscore',
             'jquery-ui/data': 'jquery/ui',
             'jquery-ui/disable-selection': 'jquery/ui',
             'jquery-ui/focusable': 'jquery/ui',
@@ -59,10 +57,7 @@ var config = {
     shim: {
         gridstack: ['jquery', 'jquery/ui'],
         'gridstack.jqueryui': ['jquery', 'jquery/ui'],
-        daterangepicker: ['jquery', 'jquery/ui', 'ar_moment'],
-        mpdaterangepicker: ['jquery', 'jquery/ui', 'ar_moment'],
-        chart: ['jquery', 'jquery/ui', 'ar_moment'],
-        initGridStack: ['jquery', 'gridstack'],
-        ar_momentTimezone: ['ar_moment']
+        mpdaterangepicker: ['jquery', 'jquery/ui', 'moment'],
+        chart: ['jquery', 'jquery/ui', 'moment'],
     }
 };

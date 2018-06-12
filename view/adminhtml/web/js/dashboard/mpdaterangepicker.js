@@ -20,7 +20,7 @@
 
 define([
     'jquery',
-    'ar_momentTimezone',
+    'moment',
     'daterangepicker',
 ], function ($, moment) {
     'use strict';
@@ -54,8 +54,8 @@ define([
         },
 
         initNowDateRange: function () {
-            var start = moment(moment().tz(this.options.timezone).subtract(31, 'days').format('Y-MM-DD')),
-                end = moment(moment().tz(this.options.timezone).format('Y-MM-DD')),
+            var start = moment(this.options.date[0]),
+                end = moment(this.options.date[1]),
                 dateRangeData = {
                     startDate: start,
                     endDate: end,

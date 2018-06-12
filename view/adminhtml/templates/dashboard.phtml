@@ -24,7 +24,7 @@ $params = $block->getRequest()->getParams();
 ?>
 <div class="ar_dashboard">
     <div class="date-range-picker"
-         data-mage-init='{"mpdaterangepicker":{"url":"<?php echo $block->getUrl('admin/dashboard/index', $params) ?>","isCompare":<?php echo $block->isCompare() ?>,"timezone":"<?php echo $block->getTimeZone() ?>"}}'>
+         data-mage-init='{"mpdaterangepicker":{"url":"<?php echo $block->getUrl('admin/dashboard/index', $params) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
         <div id="daterange"
         <i class="fa fa-calendar"></i>
         <span></span> <i class="fa fa-caret-down"></i>
@@ -72,10 +72,10 @@ $params = $block->getRequest()->getParams();
             <div id="<?php echo $card->getId() ?>"
                  class="<?php echo $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
                  data-gs-id="<?php echo $card->getId() ?>"
-                 data-gs-x="<?php echo $card->getDataGsX() !== null ? $card->getDataGsX() : '0' ?>"
-                 data-gs-y="<?php echo $card->getDataGsY() !== null ? $card->getDataGsY() : '100' ?>"
-                 data-gs-width="<?php echo $card->getDataGsWidth() !== null ? $card->getDataGsWidth() : '3' ?>"
-                 data-gs-height="<?php echo $card->getDataGsHeight() !== null ? $card->getDataGsHeight() : '4' ?>">
+                 data-gs-x="<?php echo $card->getX() !== null ? $card->getX() : '0' ?>"
+                 data-gs-y="<?php echo $card->getY() !== null ? $card->getY() : '100' ?>"
+                 data-gs-width="<?php echo $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
+                 data-gs-height="<?php echo $card->getHeight() !== null ? $card->getHeight() : '4' ?>">
                 <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
                 <div class="not-draggable">
                     <?php echo $block->getChildHtml($card->getId()) ?>

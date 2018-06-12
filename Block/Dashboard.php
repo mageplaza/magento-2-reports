@@ -122,18 +122,17 @@ class Dashboard extends Template
     }
 
     /**
-     * @return array|mixed
-     */
-    public function getTimeZone()
-    {
-        return $this->_helperData->getTimezone();
-    }
-
-    /**
      * @return array
      */
     protected function getMap()
     {
         return $this->_cardsManageFactory->getMap();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate(){
+        return json_encode($this->_helperData->getDateRange());
     }
 }
