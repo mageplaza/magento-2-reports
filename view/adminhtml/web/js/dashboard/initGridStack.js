@@ -21,7 +21,7 @@
 define([
     'jquery',
     'gridstack',
-    'gridstack.jqueryui'
+    'gridstackJqueryUi'
 ], function ($) {
     'use strict';
     $.widget('mageplaza.initGridStack', {
@@ -111,7 +111,7 @@ define([
                     }
                 });
             }
-        },
+        }
     });
 
     return $.mageplaza.initGridStack;

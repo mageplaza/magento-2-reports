@@ -103,7 +103,7 @@ class Data extends AbstractData
      */
     public function isEnabled($storeId = null)
     {
-        $storeId = $this->_request->getParam('store'); // todo must check website
+        $storeId = $this->_request->getParam('store');
 
         return parent::isEnabled($storeId);
     }

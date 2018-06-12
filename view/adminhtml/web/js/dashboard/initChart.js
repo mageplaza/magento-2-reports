@@ -20,7 +20,7 @@
 
 define([
     'jquery',
-    'chart',
+    'chartBundle'
 ], function ($) {
     'use strict';
     $.widget('mageplaza.initChart', {
@@ -49,12 +49,10 @@ define([
                             lineTension: 0.5, //cong
                             pointBorderWidth: 1,
                             pointBorderColor: 'transparent',
-                            fill: this.options.chartData.isFill,
-
+                            fill: this.options.chartData.isFill
                         }
                     ]
                 },
-
                 options: {
                     fillColor: 'rgba(220,220,220,0.9)',
                     legend: {
@@ -82,7 +80,7 @@ define([
                                     return tooltipItems[0].xLabel;
                                 }
                                 return '';
-                            },
+                            }
                         }
                     },
                     scales: {
@@ -96,7 +94,7 @@ define([
                                 unit: 'day',
                                 displayFormats: {
                                     day: 'Y-MMM-D'
-                                },
+                                }
                             },
                             ticks: {
                                 callback: function (label, index, labels) {
@@ -120,7 +118,7 @@ define([
                                         return this.options.scaleLabel.labelUnit + value;
                                     }
                                 }
-                            },
+                            }
                         }]
                     }
                 }
@@ -143,7 +141,7 @@ define([
                 data.data.datasets.push(compareDataset);
             }
             new Chart(ctx, data);
-        },
+        }
     });
 
     return $.mageplaza.initChart;

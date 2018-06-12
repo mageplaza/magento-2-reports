@@ -47,17 +47,6 @@
     position: relative;
 }
 
-#ar_overlay {
-    background: rgba(255, 255, 255, 0.5);
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 399;
-    display: none;
-}
-
 .loader {
     font-size: 4rem;
     left: 50%;
@@ -178,6 +167,17 @@
 .date-range-picker {
     z-index: 99;
     position: relative;
+}
+
+.date-range-picker #daterange,
+.date-range-picker #compare-daterange{
+    position: relative;
+}
+
+.date-range-picker .fa.fa-caret-down{
+    position: absolute;
+    right: 7px;
+    top: 7px;
 }
 
 #daterange, #compare-daterange {

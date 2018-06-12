@@ -24,65 +24,63 @@ $params = $block->getRequest()->getParams();
 ?>
 <div class="ar_dashboard">
     <div class="date-range-picker"
-         data-mage-init='{"mpdaterangepicker":{"url":"<?php echo $block->getUrl('admin/dashboard/index', $params) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
-        <div id="daterange"
-        <i class="fa fa-calendar"></i>
-        <span></span> <i class="fa fa-caret-down"></i>
+         data-mage-init='{"initDateRange":{"url":"<?php echo $block->getUrl('admin/dashboard/index', $params) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
+        <div id="daterange">
+            <i class="fa fa-calendar"></i>
+            <span></span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+        <?php if ($block->isCompare()) : ?>
+            <div class="compare">compare with</div>
+            <div id="compare-daterange">
+                <i class="fa fa-calendar"></i>
+                <span></span>
+                <i class="fa fa-caret-down"></i>
+            </div>
+        <?php endif; ?>
     </div>
-    <?php if ($block->isCompare()) : ?>
-    <div class="compare">compare with</div>
-    <div id="compare-daterange"
-    <i class="fa fa-calendar"></i>
-    <span></span> <i class="fa fa-caret-down"></i>
-</div>
-<?php endif; ?>
-</div>
-<div id="ar_overlay" class="ar_overlay">
-    <div class="loader">
-        <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif'); ?>" alt="Loading...">
-    </div>
-</div>
-<div class="dashboard-container row ">
-    <div class="top-container">
-        <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
-             style="float: right">
-            <button id="mp-ar-card" class="admin__action-dropdown" type="button">
-                <span class="admin__action-dropdown-text">Card</span>
-            </button>
-            <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
-                <div class="admin__action-dropdown-menu-header"></div>
-                <div class="admin__action-dropdown-menu-content">
-                    <?php foreach ($cards as $card) : ?>
-                        <div class="admin__field-option" data-repeat-index="0">
-                            <input class="admin__control-checkbox"
-                                   type="checkbox" <?php echo $card->getVisible() ? 'checked' : ''; ?>
-                                   id="card-<?php echo $card->getId() ?>"
-                                   cart-id="<?php echo $card->getId(); ?>">
-                            <label class="admin__field-label"
-                                   for="card-<?php echo $card->getId() ?>"><?php echo $card->getTitle(); ?></label>
-                        </div>
-                    <?php endforeach; ?>
+    <div class="dashboard-container row ">
+        <div class="top-container">
+            <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
+                 style="float: right">
+                <button id="mp-ar-card" class="admin__action-dropdown" type="button">
+                    <span class="admin__action-dropdown-text">Card</span>
+                </button>
+                <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
+                    <div class="admin__action-dropdown-menu-header"></div>
+                    <div class="admin__action-dropdown-menu-content">
+                        <?php foreach ($cards as $card) : ?>
+                            <div class="admin__field-option" data-repeat-index="0">
+                                <input class="admin__control-checkbox"
+                                       type="checkbox" <?php echo $card->getVisible() ? 'checked' : ''; ?>
+                                       id="card-<?php echo $card->getId() ?>"
+                                       cart-id="<?php echo $card->getId(); ?>">
+                                <label class="admin__field-label"
+                                       for="card-<?php echo $card->getId() ?>"><?php echo $card->getTitle(); ?></label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="grid-stack"
-         data-mage-init='{"initGridStack":{"url":"<?php echo $block->getUrl('mpreports/cards/saveposition', ['form_key' => $block->getFormKey()]) ?>"}}'>
-        <?php foreach ($cards as $card) : ?>
-            <div id="<?php echo $card->getId() ?>"
-                 class="<?php echo $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-                 data-gs-id="<?php echo $card->getId() ?>"
-                 data-gs-x="<?php echo $card->getX() !== null ? $card->getX() : '0' ?>"
-                 data-gs-y="<?php echo $card->getY() !== null ? $card->getY() : '100' ?>"
-                 data-gs-width="<?php echo $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
-                 data-gs-height="<?php echo $card->getHeight() !== null ? $card->getHeight() : '4' ?>">
-                <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
-                <div class="not-draggable">
-                    <?php echo $block->getChildHtml($card->getId()) ?>
+        <div class="grid-stack"
+             data-mage-init='{"initGridStack":{"url":"<?php echo $block->getUrl('mpreports/cards/saveposition', ['form_key' => $block->getFormKey()]) ?>"}}'>
+            <?php foreach ($cards as $card) : ?>
+                <div id="<?php echo $card->getId() ?>"
+                     class="<?php echo $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
+                     data-gs-id="<?php echo $card->getId() ?>"
+                     data-gs-x="<?php echo $card->getX() !== null ? $card->getX() : '0' ?>"
+                     data-gs-y="<?php echo $card->getY() !== null ? $card->getY() : '100' ?>"
+                     data-gs-width="<?php echo $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
+                     data-gs-height="<?php echo $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
+                     data-gs-min-width="2" data-gs-min-height="3">
+                    <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
+                    <div class="not-draggable">
+                        <?php echo $block->getChildHtml($card->getId()) ?>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
 </div>
 
