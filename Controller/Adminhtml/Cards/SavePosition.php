@@ -73,10 +73,10 @@ class SavePosition extends Action
                 ? $config->getConfig()
                 : $this->_cardsManageFactory->getDefaultConfig()->getConfig();
             foreach ($items as $id => $item) {
-                $data[$id]['data_gs_x']      = $item['x'];
-                $data[$id]['data_gs_y']      = $item['y'];
-                $data[$id]['data_gs_width']  = $item['width'];
-                $data[$id]['data_gs_height'] = $item['height'];
+                $data[$id]['x']      = $item['x'];
+                $data[$id]['y']      = $item['y'];
+                $data[$id]['width']  = $item['width'];
+                $data[$id]['height'] = $item['height'];
                 $data[$id]['visible']        = isset($item['visible']) ? $item['visible'] : 1;
             }
             $data = \Mageplaza\Reports\Helper\Data::jsonEncode($data);

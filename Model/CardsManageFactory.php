@@ -111,10 +111,10 @@ class CardsManageFactory
             if (isset($config[$alias])) {
                 $card = new DataObject([
                     'id'             => $alias,
-                    'data_gs_x'      => $config[$alias]['data_gs_x'],
-                    'data_gs_y'      => $config[$alias]['data_gs_y'],
-                    'data_gs_width'  => $config[$alias]['data_gs_width'],
-                    'data_gs_height' => $config[$alias]['data_gs_height'],
+                    'x'      => $config[$alias]['x'],
+                    'y'      => $config[$alias]['y'],
+                    'width'  => $config[$alias]['width'],
+                    'height' => $config[$alias]['height'],
                     'visible'        => isset($config[$alias]['visible']) ? $config[$alias]['visible'] : 1,
                 ]);
             } else {
@@ -177,7 +177,7 @@ class CardsManageFactory
                 'namespace'  => 'mageplaza_reports_cards',
                 'identifier' => 'default',
                 'user_id'    => $userId,
-                'config'     => '{"lastOrders":{"data_gs_x":"0","data_gs_y":"6","data_gs_width":"3","data_gs_height":"10","visible":1},"totals":{"data_gs_x":3,"data_gs_y":0,"data_gs_width":3,"data_gs_height":4,"visible":1},"sales":{"data_gs_x":6,"data_gs_y":0,"data_gs_width":3,"data_gs_height":4,"visible":1},"grids":{"data_gs_x":"0","data_gs_y":"12","data_gs_width":"5","data_gs_height":"4","visible":1},"diagrams":{"data_gs_x":0,"data_gs_y":4,"data_gs_width":3,"data_gs_height":4,"visible":1},"lastSearches":{"data_gs_x":"0","data_gs_y":"16","data_gs_width":"3","data_gs_height":"3","visible":1},"topSearches":{"data_gs_x":"0","data_gs_y":"19","data_gs_width":"3","data_gs_height":"3","visible":1},"transactions":{"data_gs_x":9,"data_gs_y":4,"data_gs_width":3,"data_gs_height":4,"visible":1},"averageOrderValue":{"data_gs_x":"100","data_gs_y":"100","data_gs_width":"3","data_gs_height":"10","visible":"0"},"salesByLocation":{"data_gs_x":"9","data_gs_y":"0","data_gs_width":"3","data_gs_height":"10","visible":1},"repeatCustomerRate":{"data_gs_x":"3","data_gs_y":"28","data_gs_width":"6","data_gs_height":"14","visible":1},"totalSales":{"data_gs_x":"3","data_gs_y":"0","data_gs_width":"6","data_gs_height":"14","visible":1},"orders":{"data_gs_x":"3","data_gs_y":"14","data_gs_width":"6","data_gs_height":"14","visible":1},"bestsellers":{"data_gs_x":"9","data_gs_y":"10","data_gs_width":"3","data_gs_height":"10","visible":1},"customers":{"data_gs_x":"9","data_gs_y":"30","data_gs_width":"3","data_gs_height":"10","visible":1},"lifetimeSales":{"data_gs_x":"0","data_gs_y":"0","data_gs_width":"3","data_gs_height":"3","visible":1},"shipping":{"data_gs_x":"100","data_gs_y":"100","data_gs_width":"4","data_gs_height":"10","visible":"0"},"newCustomers":{"data_gs_x":"9","data_gs_y":"20","data_gs_width":"3","data_gs_height":"10","visible":1},"mostViewedProducts":{"data_gs_x":"9","data_gs_y":"40","data_gs_width":"3","data_gs_height":"10","visible":1},"tax":{"data_gs_x":"100","data_gs_y":"100","data_gs_width":"3","data_gs_height":"9","visible":"0"},"averageOrder":{"data_gs_x":"0","data_gs_y":"3","data_gs_width":"3","data_gs_height":"3","visible":1}}'
+                'config'     => '{"lastOrders":{"x":"0","y":"6","width":"3","height":"10","visible":1},"totals":{"x":3,"y":0,"width":3,"height":4,"visible":1},"sales":{"x":6,"y":0,"width":3,"height":4,"visible":1},"grids":{"x":"0","y":"12","width":"5","height":"4","visible":1},"diagrams":{"x":0,"y":4,"width":3,"height":4,"visible":1},"lastSearches":{"x":"0","y":"16","width":"3","height":"3","visible":1},"topSearches":{"x":"0","y":"19","width":"3","height":"3","visible":1},"transactions":{"x":9,"y":4,"width":3,"height":4,"visible":1},"averageOrderValue":{"x":"100","y":"100","width":"3","height":"10","visible":"0"},"salesByLocation":{"x":"9","y":"0","width":"3","height":"10","visible":1},"repeatCustomerRate":{"x":"3","y":"28","width":"6","height":"14","visible":1},"totalSales":{"x":"3","y":"0","width":"6","height":"14","visible":1},"orders":{"x":"3","y":"14","width":"6","height":"14","visible":1},"bestsellers":{"x":"9","y":"10","width":"3","height":"10","visible":1},"customers":{"x":"9","y":"30","width":"3","height":"10","visible":1},"lifetimeSales":{"x":"0","y":"0","width":"3","height":"3","visible":1},"shipping":{"x":"100","y":"100","width":"4","height":"10","visible":"0"},"newCustomers":{"x":"9","y":"20","width":"3","height":"10","visible":1},"mostViewedProducts":{"x":"9","y":"40","width":"3","height":"10","visible":1},"tax":{"x":"100","y":"100","width":"3","height":"9","visible":"0"},"averageOrder":{"x":"0","y":"3","width":"3","height":"3","visible":1}}'
             ])->save();
         }
 
