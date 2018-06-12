@@ -83,7 +83,7 @@ class CardsManageFactory
         array $charts = []
     )
     {
-        $this->_authSession = $authSession;
+        $this->_authSession  = $authSession;
         $this->objectManager = $objectManager;
         $this->_bookmark     = $bookmark;
         $this->_helperData   = $helperData;
@@ -110,12 +110,12 @@ class CardsManageFactory
             $block = $this->objectManager->create($blockInstanceName);
             if (isset($config[$alias])) {
                 $card = new DataObject([
-                    'id'             => $alias,
-                    'x'      => $config[$alias]['x'],
-                    'y'      => $config[$alias]['y'],
-                    'width'  => $config[$alias]['width'],
-                    'height' => $config[$alias]['height'],
-                    'visible'        => isset($config[$alias]['visible']) ? $config[$alias]['visible'] : 1,
+                    'id'      => $alias,
+                    'x'       => $config[$alias]['x'],
+                    'y'       => $config[$alias]['y'],
+                    'width'   => $config[$alias]['width'],
+                    'height'  => $config[$alias]['height'],
+                    'visible' => isset($config[$alias]['visible']) ? $config[$alias]['visible'] : 1,
                 ]);
             } else {
                 $card = new DataObject();
@@ -158,20 +158,20 @@ class CardsManageFactory
             ->addFieldToFilter('user_id', $userId)
             ->addFieldToFilter('identifier', 'default')->getFirstItem();
         if (!$default->getId()) {
-//            $defaultConfig = [
-//                'lastOrders'         => ['data_gs_x' => 0, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'totals'             => ['data_gs_x' => 3, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'sales'              => ['data_gs_x' => 6, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'grids'              => ['data_gs_x' => 9, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'diagrams'           => ['data_gs_x' => 0, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'lastSearches'       => ['data_gs_x' => 3, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'topSearches'        => ['data_gs_x' => 6, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'transactions'       => ['data_gs_x' => 9, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'averageOrderValue'  => ['data_gs_x' => 0, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'salesByLocation'    => ['data_gs_x' => 3, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'repeatCustomerRate' => ['data_gs_x' => 6, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//                'totalSales'         => ['data_gs_x' => 9, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
-//            ];
+            //            $defaultConfig = [
+            //                'lastOrders'         => ['data_gs_x' => 0, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'totals'             => ['data_gs_x' => 3, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'sales'              => ['data_gs_x' => 6, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'grids'              => ['data_gs_x' => 9, 'data_gs_y' => 0, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'diagrams'           => ['data_gs_x' => 0, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'lastSearches'       => ['data_gs_x' => 3, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'topSearches'        => ['data_gs_x' => 6, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'transactions'       => ['data_gs_x' => 9, 'data_gs_y' => 4, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'averageOrderValue'  => ['data_gs_x' => 0, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'salesByLocation'    => ['data_gs_x' => 3, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'repeatCustomerRate' => ['data_gs_x' => 6, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //                'totalSales'         => ['data_gs_x' => 9, 'data_gs_y' => 8, 'data_gs_width' => 3, 'data_gs_height' => 4, 'visible' => 1],
+            //            ];
 
             $default = $this->_bookmark->create()->addData([
                 'namespace'  => 'mageplaza_reports_cards',

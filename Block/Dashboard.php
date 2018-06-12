@@ -132,7 +132,8 @@ class Dashboard extends Template
     /**
      * @return string
      */
-    public function getDate(){
+    public function getDate()
+    {
         return json_encode($this->_helperData->getDateRange());
     }
 }
