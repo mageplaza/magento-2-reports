@@ -40,6 +40,7 @@ php bin/magento setup:static-content:deploy
 Along with other reports which are already accessible and available in default Magento 2, Mageplaza Reports extension complements two more advanced reports:
 * Sale by Location report
 * Repeat customers rate report
+
 While the Sale by location report helps store owners have an overview of sales in specific countries/regions, that of Repeat customer rate shows how your loyalty program is doing in a visual way.
 
 These statistical data are also ready to be compared with that of the previous period on a daily, monthly or even yearly basis.
@@ -56,6 +57,7 @@ Store admins can select a period in which statistical data is demonstrated. Mage
 * This month
 * Last month
 * Custom range
+
 With Custom Range, admins are able to select specific time for the report and will not be limited to any range of time.
 
 ![customizable report period & report comparison](https://i.imgur.com/AvP9AJD.png)
@@ -67,6 +69,7 @@ Moreover, statistic data can be compared with that of the previous period which 
 * The previous month
 * The previous year
 * Custom range
+
 With Custom Range, store admins can filter figures which belong to a specific period of time to compare with the initial ones.
 
 ### Line-chart reports
@@ -109,7 +112,7 @@ This extension is compatible with many other Mageplaza products, such as Reward 
 - Reports in specified period
 - Compare statistic data with previous period
 - Enhance default reports on Tax, Revenue, Shipping and Quantity
-= Highly informative Dashboard
+- Highly informative Dashboard
 - Drag and drop to arrange report layouts
 - Adjust report boards’ sizes by pulling double arrows
 
