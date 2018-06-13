@@ -1,8 +1,8 @@
 # Magento 2 Reports by Mageplaza
 
-As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
+**Mageplaza Reports for Magento 2** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
-To facilitate the management of statistics, Mageplaza proudly introduce **Reports**. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
+To facilitate the management of statistics, we proudly introduce **Magento 2 Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
 
 ## 1. Documentation
 - [Installation guide](https://www.mageplaza.com/install-magento-2-extension/)
