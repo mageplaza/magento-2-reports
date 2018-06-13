@@ -82,7 +82,7 @@ In Mageplaza Reports extension standard version; reports on repeat customer rate
 
 On the dashboard, store admins can drag and drop to move report areas and arrange figure sections with ease. Moreover, the report board’s size can be adjusted by pulling the double arrow. Let’s see the screen gif below:
 
-![flexible dashboard layouts](https://i.imgur.com/SjIiLSM.png)
+![flexible dashboard layouts](https://i.imgur.com/jzcfzrS.gifv)
 
 ## 5. More features
 
