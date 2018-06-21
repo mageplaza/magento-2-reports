@@ -143,4 +143,9 @@ class SalesByLocation extends AbstractClass
     {
         return __('Sale By Location');
     }
+
+    public function canShowDetail()
+    {
+        return true;
+    }
 }
