@@ -240,7 +240,7 @@
     max-height: 30px;
     overflow: overlay;
     float: left;
-    width: 100%;
+    /*width: 100%;*/
     margin-right: 5px;
 }
 #lifetimeSales .price {
@@ -260,4 +260,19 @@
 .ar_dashboard ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #ababaa;
+}
+.ar_dashboard .view-detail{
+    float: right;
+}
+.ar_dashboard .upgrade-nof {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    right: 0;
+    background: #ccc;
+    /* opacity: 0.5; */
+    color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 5px;
 }

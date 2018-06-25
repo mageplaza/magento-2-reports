@@ -27,6 +27,9 @@ $store     = $this->getRequest()->getParam('store');
         <?php if ($block->canShowTitle()) : ?>
             <div class="dashboard-item-title"><?php echo $block->getTitle(); ?></div>
         <?php endif; ?>
+        <?php if($block->canShowDetail()) : ?>
+            <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Detail') ?></a></div>
+        <?php endif; ?>
         <div class="number"><?php echo $chartData['total'] ?></div>
         <?php if ($block->isCompare()) : ?>
             <div class="chart-rate <?php echo $chartData['rate'] > 0 ? 'up-rate' : ($chartData['rate'] < 0 ? 'down-rate' : '') ?>">

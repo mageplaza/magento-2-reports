@@ -44,4 +44,12 @@ class NewCustomers extends AbstractClass
     {
         return __('New Customers');
     }
+
+    /**
+     * @return bool
+     */
+    public function canShowDetail()
+    {
+        return true;
+    }
 }

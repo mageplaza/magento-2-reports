@@ -22,6 +22,9 @@
 <div class="dashboard-item-container">
     <div>
         <div class="dashboard-item-title"><?php echo $block->getTitle() ?></div>
+        <?php if($block->canShowDetail()) : ?>
+        <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Detail') ?></a></div>
+        <?php endif; ?>
     </div>
     <?php if (count($block->getCollection())): ?>
         <div class="dashboard-item-content">

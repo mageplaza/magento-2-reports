@@ -19,7 +19,7 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-$cards  = $block->getCards();
+$cards = $block->getCards();
 $params = $block->getRequest()->getParams();
 ?>
 <div class="ar_dashboard">
@@ -82,5 +82,27 @@ $params = $block->getRequest()->getParams();
             <?php endforeach; ?>
         </div>
     </div>
+    <script>
+        require([
+            'jquery'
+        ], function ($) {
+            $('.view-detail a').click(function (e) {
+                var href = jQuery(this).attr('href');
+                if (href === '') {
+                    if (!jQuery(this).parent().find('.upgrade-nof').length) {
+                        jQuery(this).parent().append('<div class="upgrade-nof">' +
+                            '<?php echo __('Please upgrade to %1 version to see more detail', '<a href="#">Pro</a>') ?>'
+                            + '</div>');
+                    }
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            });
+            $('body').click(function (e) {
+                if(!$(e.target).parents().hasClass('view-detail')){
+                    $('.upgrade-nof').remove();
+                }
+            })
+        })
+    </script>
 </div>
-

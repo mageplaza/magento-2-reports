@@ -148,4 +148,5 @@ class SalesByLocation extends AbstractClass
     {
         return true;
     }
+
 }

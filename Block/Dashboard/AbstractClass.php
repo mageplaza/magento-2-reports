@@ -257,7 +257,17 @@ abstract class AbstractClass extends Template
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function canShowDetail(){
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDetailUrl(){
+        return '';
     }
 }
