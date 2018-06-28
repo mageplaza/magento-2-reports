@@ -43,6 +43,8 @@ class Index extends Action
      */
     protected $_jsonHelper;
 
+    protected $abandonedCarts;
+
     /**
      * Index constructor.
      * @param Context $context
@@ -52,12 +54,14 @@ class Index extends Action
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        Data $jsonHelper
+        Data $jsonHelper,
+        \Mageplaza\ReportsPro\Model\ResourceModel\AbandonedCarts $abandonedCarts
     )
     {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->_jsonHelper = $jsonHelper;
+        $this->abandonedCarts =$abandonedCarts;
     }
 
     /**
@@ -65,7 +69,8 @@ class Index extends Action
      */
     public function execute()
     {
-
+//        $this->abandonedCarts->aggregate();
+//        die('asd');
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Maqeplaza_Reports::dashboard');
