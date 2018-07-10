@@ -24,7 +24,7 @@
         <div class="dashboard-item-title"><?php echo $block->getTitle(); ?></div>
     <?php endif; ?>
     <?php if($block->canShowDetail()) : ?>
-        <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Detail') ?></a></div>
+        <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>" target="_blank"><?php echo __('View Detail') ?></a></div>
     <?php endif; ?>
     <?php echo $block->getChildHtml(); ?>
     <?php if ($block->getName() == 'grids') : ?>

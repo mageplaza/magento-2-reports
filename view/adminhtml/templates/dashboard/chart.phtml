@@ -28,7 +28,7 @@ $store     = $this->getRequest()->getParam('store');
             <div class="dashboard-item-title"><?php echo $block->getTitle(); ?></div>
         <?php endif; ?>
         <?php if($block->canShowDetail()) : ?>
-            <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Detail') ?></a></div>
+            <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>" target="_blank"><?php echo __('View Detail') ?></a></div>
         <?php endif; ?>
         <div class="line-2">
             <div class="number"><?php echo $chartData['total'] ?></div>

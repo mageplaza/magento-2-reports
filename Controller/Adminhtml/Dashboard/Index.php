@@ -79,7 +79,7 @@ class Index extends Action
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
             $result = ['dashboard' => $dashBoard->toHtml()];
-            $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
+            return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
         } else {
             return $resultPage;
         }
