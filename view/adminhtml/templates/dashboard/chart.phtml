@@ -30,12 +30,14 @@ $store     = $this->getRequest()->getParam('store');
         <?php if($block->canShowDetail()) : ?>
             <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Detail') ?></a></div>
         <?php endif; ?>
-        <div class="number"><?php echo $chartData['total'] ?></div>
-        <?php if ($block->isCompare()) : ?>
-            <div class="chart-rate <?php echo $chartData['rate'] > 0 ? 'up-rate' : ($chartData['rate'] < 0 ? 'down-rate' : '') ?>">
-                <?php echo abs($chartData['rate']) . '%' ?>
-            </div>
-        <?php endif; ?>
+        <div class="line-2">
+            <div class="number"><?php echo $chartData['total'] ?></div>
+            <?php if ($block->isCompare()) : ?>
+                <div class="chart-rate <?php echo $chartData['rate'] > 0 ? 'up-rate' : ($chartData['rate'] < 0 ? 'down-rate' : '') ?>">
+                    <?php echo abs($chartData['rate']) . '%' ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="dashboard-item-content-chart">

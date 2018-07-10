@@ -276,3 +276,6 @@
     border-radius: 6px;
     padding: 5px;
 }
+.ar_dashboard .line-2 {
+    clear: both;
+}

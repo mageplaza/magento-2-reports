@@ -200,7 +200,7 @@ class Data extends AbstractData
      * @return array
      * @throws \Exception
      */
-    public function getPeriodsDate($startDate, $endDate = null, $days)
+    public function getPeriodsDate($startDate, $endDate = null, $days,$isObject = 0)
     {
         $data = [];
         if ($endDate) {
@@ -216,7 +216,11 @@ class Data extends AbstractData
         $interval  = new \DateInterval('P1D');
         $daterange = new \DatePeriod($startDate, $interval, $endDate);
         foreach ($daterange as $date) {
-            $data[] = $date->format("Y-m-d");
+            if(!$isObject){
+                $data[] = $date->format("Y-m-d");
+            }else{
+                $data[$date->format("Y-m-d")] = new \Magento\Framework\DataObject();
+            }
         }
 
         return $data;
