@@ -326,4 +326,11 @@ class Data extends AbstractData
 
         return $totals = $collection->getFirstItem();
     }
+
+    /**
+     * @return bool
+     */
+    public function isProPackage(){
+        return false;
+    }
 }
