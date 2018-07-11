@@ -144,8 +144,7 @@ class Data extends AbstractData
         if (!$startDate || !$endDate) {
             return 0;
         }
-
-        return date('z', strtotime($endDate) - strtotime($startDate));
+        return (int)((strtotime($endDate) - strtotime($startDate))/(60*60*24));
     }
 
     /**
