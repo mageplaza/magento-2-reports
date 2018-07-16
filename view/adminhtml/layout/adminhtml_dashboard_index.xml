@@ -21,17 +21,14 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="adminhtml_dashboard_index"/>
+    <update handle="styles"/>
     <head>
-        <css src="Mageplaza_Reports/css/lib/gridstack.css"/>
-        <css src="Mageplaza_Reports/css/dashboard/custom.css"/>
         <css src="Mageplaza_Core/css/font-awesome.min.css"/>
-        <css src="Mageplaza_Reports/css/lib/daterangepicker.css"/>
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" template="Mageplaza_Reports::dashboard.phtml" ifconfig="mageplaza_reports/general/enabled"/>
+            <block class="Mageplaza\Reports\Block\Dashboard\SwitchToNew" name="switch_to_ar_dashboard" before="-"/>
+            <block class="Magento\Backend\Block\Template" name="first_time_popup" ifconfig="mageplaza_reports/general/first_time_install" template="Mageplaza_Reports::dashboard/popup.phtml"/>
         </referenceContainer>
-        <referenceBlock name="analytics_service_external_link" remove="true"/>
     </body>
 </page>
