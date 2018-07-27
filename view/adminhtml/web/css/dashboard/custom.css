@@ -61,7 +61,7 @@
 }
 .ar_dashboard .title-content {
     max-height: 70px;
-    overflow: scroll;
+    overflow: auto;
     top: 0;
     right: 10px;
     left: 0;
@@ -239,7 +239,7 @@
 }
 .ar_dashboard .dashboard-item-title {
     max-height: 30px;
-    overflow: scroll;
+    overflow: auto;
     float: left;
     /*width: 100%;*/
     margin-right: 5px;
