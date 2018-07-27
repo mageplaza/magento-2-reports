@@ -113,7 +113,6 @@ class Data extends AbstractData
      */
     public function getDateRange()
     {
-//        \Zend_Debug::dump($this->_request->getParams());die;
         if ($dateRange = $this->_request->getParam('dateRange')) {
             if ($this->isCompare()) {
                 $startDate        = $dateRange[0];

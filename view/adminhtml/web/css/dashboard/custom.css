@@ -61,7 +61,7 @@
 }
 .ar_dashboard .title-content {
     max-height: 70px;
-    overflow: overlay;
+    overflow: scroll;
     top: 0;
     right: 10px;
     left: 0;
@@ -188,9 +188,7 @@
 .date-range-picker span {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.ar-empty-text {
-    clear: both;
-}
+
 .grid-stack > .grid-stack-item > .ui-resizable-se {
     bottom: 5px;
     right: 0;
@@ -198,7 +196,7 @@
 .ar_dashboard .dashboard-item-content {
     position: absolute;
     padding: -10px;
-    overflow-y: overlay;
+    overflow-y: scroll;
     bottom: 0px;
     top: 30px;
     right: 10px;
@@ -206,7 +204,7 @@
 }
 .ar_dashboard .dashboard-totals {
     margin: unset;
-    overflow-y: overlay;
+    overflow-y: scroll;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -214,7 +212,7 @@
     left: 0;
 }
 .ar_dashboard .dashboard-item-content-chart {
-    overflow-y: overlay;
+    overflow-y: scroll;
     position: absolute;
     bottom: 0;
     top: 75px;
@@ -226,7 +224,7 @@
 }
 #grids .dashboard-item-container, #sales .dashboard-item-container, #diagrams .dashboard-item-container {
     position: absolute;
-    overflow-y: overlay;
+    overflow-y: scroll;
     height: unset;
     left: 0;
     top: 0;
@@ -236,9 +234,12 @@
 .ar_dashboard .dashboard-item-primary .dashboard-item-content {
     position: unset;
 }
+.ar_dashboard .empty-text {
+    clear: both;
+}
 .ar_dashboard .dashboard-item-title {
     max-height: 30px;
-    overflow: overlay;
+    overflow: scroll;
     float: left;
     /*width: 100%;*/
     margin-right: 5px;
