@@ -19,7 +19,6 @@
  */
 
 .grid-stack-item {
-    /*overflow-y: overlay;*/
     border: 1px solid #cccccc;
 }
 .ar_dashboard .dashboard-item-container {
@@ -196,7 +195,7 @@
 .ar_dashboard .dashboard-item-content {
     position: absolute;
     padding: -10px;
-    overflow-y: scroll;
+    overflow-y: auto;
     bottom: 0px;
     top: 30px;
     right: 10px;
@@ -204,7 +203,7 @@
 }
 .ar_dashboard .dashboard-totals {
     margin: unset;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -212,7 +211,7 @@
     left: 0;
 }
 .ar_dashboard .dashboard-item-content-chart {
-    overflow-y: scroll;
+    overflow-y: auto;
     position: absolute;
     bottom: 0;
     top: 75px;
@@ -224,7 +223,7 @@
 }
 #grids .dashboard-item-container, #sales .dashboard-item-container, #diagrams .dashboard-item-container {
     position: absolute;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: unset;
     left: 0;
     top: 0;
