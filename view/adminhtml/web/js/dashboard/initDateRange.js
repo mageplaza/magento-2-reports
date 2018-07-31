@@ -121,6 +121,8 @@ define([
             var self = this;
 
             dateRangeEl.on('apply.daterangepicker', function (ev, picker, moment) {
+                dateRangeEl.data().startDate = picker.startDate;
+                dateRangeEl.data().endDate = picker.endDate;
                 var data = {
                     dateRange: {
                         0: picker.startDate.format('Y-MM-DD H:m:s'),
