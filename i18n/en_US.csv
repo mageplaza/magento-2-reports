@@ -1,6 +1,5 @@
 "Average Order","Average Order"
 "Average Order Value","Average Order Value"
-orders,orders
 Bestsellers,Bestsellers
 Customers,Customers
 "Last Order","Last Order"
@@ -17,7 +16,12 @@ Shipping,Shipping
 Tax,Tax
 "Top Search Terms","Top Search Terms"
 Totals,Totals
+Dashboard,Dashboard
+"Please upgrade to %1 version to see more detail","Please upgrade to %1 version to see more detail"
+"View Details","View Details"
 "Chart is disabled. To enable the chart, click <a href='%1'>here</a>","Chart is disabled. To enable the chart, click <a href='%1'>here</a>"
+"Let’s experience your new dashboard","Let’s experience your new dashboard"
+"Hi there! Better reports are available","Hi there! Better reports are available"
 "We couldn't find any records.","We couldn't find any records."
 "Mageplaza Advanced Reporting","Mageplaza Advanced Reporting"
 "Gain new insights and take command of your business' performance, using our dynamic product, order, and customer reports tailored to your customer data.","Gain new insights and take command of your business' performance, using our dynamic product, order, and customer reports tailored to your customer data."
@@ -27,5 +31,4 @@ Reports,Reports
 "General Configuration","General Configuration"
 "Module Enable","Module Enable"
 "Enable Chart","Enable Chart"
-"Enable Compare","Enable Compare"
-"View Detail","View Detail"
+"Enable Comparison","Enable Comparison"

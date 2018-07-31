@@ -131,7 +131,7 @@ Below, we will take a look at how Reports can be configured.
 
 * In the **Module Enable** field: Choose Yes to enable Reports extension.
 * In the **Enable Chart** field: Select Yes to show the graph.
-* In the **Enable Compare** field: select Yes to display comparison of store performance between time periods.
+* In the **Enable Comparison** field: select Yes to display comparison of store performance between time periods.
 
 ### Quick report outside the Dashboard
 
