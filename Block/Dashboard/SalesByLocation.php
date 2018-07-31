@@ -144,11 +144,17 @@ class SalesByLocation extends AbstractClass
         return __('Sale By Location');
     }
 
+    /**
+     * @return bool
+     */
     public function canShowDetail()
     {
         return true;
     }
 
+    /**
+     * @return string
+     */
     public function getDetailUrl()
     {
         if (!$this->_helperData->isProPackage()) {
