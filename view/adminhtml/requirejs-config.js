@@ -29,6 +29,12 @@ var config = {
         initChart: 'Mageplaza_Reports/js/dashboard/initChart'
     },
     map: {
+        daterangepicker:{
+            'moment':'Mageplaza_Reports/js/lib/moment.min'
+        },
+        initDateRange:{
+            'moment':'Mageplaza_Reports/js/lib/moment.min'
+        },
         gridstack: {
             'lodash': 'underscore'
         },

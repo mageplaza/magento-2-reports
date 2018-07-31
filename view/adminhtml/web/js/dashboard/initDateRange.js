@@ -70,6 +70,7 @@ define([
                         '2YTD': [moment().subtract(2, 'year'), moment()]
                     }
                 };
+            debugger;
             this.initDateRange(dateRangeEl, start, end, dateRangeData);
         },
 
