@@ -27,15 +27,8 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class LastOrders extends AbstractClass
 {
-    const NAME = 'lastOrders';
-
-    /**
-     * @return AbstractClass|void
-     */
-    protected function _prepareLayout()
-    {
-        $this->addChild('mp_lastOrders', '\Magento\Backend\Block\Dashboard\Orders\Grid');
-    }
+    const NAME              = 'lastOrders';
+    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Orders\Grid::class;
 
     /**
      * @return \Magento\Framework\Phrase|string

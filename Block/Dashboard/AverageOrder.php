@@ -30,18 +30,6 @@ class AverageOrder extends AbstractClass
     const NAME = 'averageOrder';
 
     /**
-     * @return AbstractClass|void
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function _prepareLayout()
-    {
-        $block = $this->getLayout()->createBlock('Magento\Backend\Block\Dashboard\Sales')
-            ->setTemplate('Mageplaza_Reports::dashboard/bar.phtml');
-
-        $this->setChild('mp_lifetimeSales', $block);
-    }
-
-    /**
      * @return \Magento\Framework\Phrase|string
      */
     public function getTitle()
@@ -50,10 +38,16 @@ class AverageOrder extends AbstractClass
     }
 
     /**
-     * @return bool
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function canShowTitle()
+    public function getTotalLabel()
     {
-        return false;
+        $total = $this->_helperData->getLifetimeSales();
+        if (isset($total['average'])) {
+            return $this->format($total['average']);
+        }
+
+        return parent::getTotalLabel();
     }
 }

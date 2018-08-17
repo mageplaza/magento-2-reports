@@ -32,7 +32,8 @@ use Mageplaza\Reports\Helper\Data;
  */
 abstract class AbstractClass extends Template
 {
-    const NAME = '';
+    const NAME              = '';
+    const MAGE_REPORT_CLASS = '';
 
     /**
      * @var Data
@@ -50,9 +51,14 @@ abstract class AbstractClass extends Template
     protected $basePriceFormat;
 
     /**
-     * @var string
+     * @var \Magento\Directory\Model\Currency|null
      */
-    protected $_template = 'dashboard/default.phtml';
+    protected $_currentCurrencyCode = null;
+
+    /**
+     * @var
+     */
+    protected $_currency;
 
     /**
      * AbstractClass constructor.
@@ -72,33 +78,123 @@ abstract class AbstractClass extends Template
     }
 
     /**
+     * @inheritdoc
+     */
+    /**
+     * @inheritdoc
+     */
+    public function getContentHtml()
+    {
+        if (static::MAGE_REPORT_CLASS) {
+            return $this->getLayout()->createBlock(static::MAGE_REPORT_CLASS)
+                ->toHtml();
+        }
+
+        return $this->toHtml();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTotalLabel()
+    {
+        return '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canShowCompareRate()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCanShowDetail()
+    {
+        return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDetailUrl()
+    {
+        return '';
+    }
+
+    /**
+     * Formatting value specific for this store
+     *
+     * @param $price
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function format($price)
+    {
+        return $this->getCurrency()->format($price);
+    }
+
+    /**
+     * Setting currency model
+     *
+     * @param \Magento\Directory\Model\Currency $currency
+     * @return void
+     */
+    public function setCurrency($currency)
+    {
+        $this->_currency = $currency;
+    }
+
+    /**
+     * Retrieve currency model if not set then return currency model for current store
+     *
+     * @return Currency|null
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getCurrency()
+    {
+        if ($this->_currentCurrencyCode === null) {
+            if ($store = $this->getRequest()->getParam('store')) {
+                $this->_currentCurrencyCode = $this->_storeManager->getStore($store)->getBaseCurrency();
+            } else if ($website = $this->getRequest()->getParam('website')) {
+                $this->_currentCurrencyCode = $this->_storeManager->getWebsite($website)->getBaseCurrency();
+            } else if ($group = $this->getRequest()->getParam('group')) {
+                $this->_currentCurrencyCode = $this->_storeManager->getGroup($group)->getWebsite()->getBaseCurrency();
+            } else {
+                $this->_currentCurrencyCode = $this->_storeManager->getStore()->getBaseCurrency();
+            }
+        }
+
+        return $this->_currentCurrencyCode;
+    }
+
+    /**
      * @return array
      * @throws \Exception
      */
     public function getChartData()
     {
-        $data          = [];
-        $date          = $this->_helperData->getDateRange();
-        $data['label'] = $this->getChartDataLabel();
-        $data['data']  = $this->getDataByDateRange($date[0], $date[1]);
-        if ($this->isCompare()) {
-            $data['compareData'] = $this->getDataByDateRange($date[2], $date[3]);
-        } else {
-            $data['compareData'] = [];
-        }
-        $data['days']      = $days = max($this->_helperData->getDaysByDateRange($date[0], $date[1]),
-            $this->_helperData->getDaysByDateRange($date[2], $date[3]));
-        $data['labels']    = $this->_helperData->getPeriodsDate($date[0], null, $days);
-        $data['stepSize']  = round($days / 6);
-        $data['total']     = $this->getTotal();
-        $data['rate']      = $this->getRate();
-        $data['yUnit']     = $this->getYUnit();
-        $data['yLabel']    = $this->getYLabel();
-        $data['isFill']    = $this->isFill();
-        $data['isCompare'] = $this->isCompare();
-        $data['name']      = $this->getName();
+        $date = $this->_helperData->getDateRange();
+        $days = max($this->_helperData->getDaysByDateRange($date[0], $date[1]), $this->_helperData->getDaysByDateRange($date[2], $date[3]));
 
-        return $data;
+        return [
+            'label'       => $this->getChartDataLabel(),
+            'data'        => $this->getDataByDateRange($date[0], $date[1]),
+            'days'        => $days,
+            'labels'      => $this->_helperData->getPeriodsDate($date[0], null, $days),
+            'stepSize'    => round($days / 6),
+            'total'       => $this->getTotal(),
+            'rate'        => $this->getRate(),
+            'yUnit'       => $this->getYUnit(),
+            'yLabel'      => $this->getYLabel(),
+            'isFill'      => $this->isFill(),
+            'isCompare'   => $this->isCompare(),
+            'name'        => $this->getName(),
+            'compareData' => $this->isCompare() ? $this->getDataByDateRange($date[2], $date[3]) : []
+        ];
     }
 
     /**
@@ -246,28 +342,6 @@ abstract class AbstractClass extends Template
      */
     public function getName()
     {
-        return $this::NAME;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canShowTitle()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function canShowDetail(){
-        return false;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDetailUrl(){
-        return '';
+        return static::NAME;
     }
 }

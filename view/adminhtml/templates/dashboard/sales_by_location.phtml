@@ -19,29 +19,21 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 ?>
-<div class="dashboard-item-container">
-    <div>
-        <div class="dashboard-item-title"><?php echo $block->getTitle() ?></div>
-        <?php if($block->canShowDetail()) : ?>
-        <div class="view-detail"><a href="<?php echo $block->getDetailUrl() ?>"><?php echo __('View Details') ?></a></div>
-        <?php endif; ?>
-    </div>
+<div class="dashboard-item-content">
     <?php if (count($block->getCollection())): ?>
-        <div class="dashboard-item-content">
-            <table class="admin__table-primary dashboard-data" id="sales_by_location_table">
-                <tbody>
-                <?php foreach ($block->getCollection() as $item): ?>
-                    <tr title="">
-                        <td class=""><?php echo $item['country'] ?></td>
-                        <td class=""><?php echo $item['count'] ?></td>
-                        <?php if ($block->isCompare()) : ?>
-                            <td class="<?php echo $item['rate'] > 0 ? 'up-rate' : ($item['rate'] < 0 ? 'down-rate' : '') ?>"><?php echo abs($item['rate']) . '%' ?></td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+        <table class="admin__table-primary dashboard-data" id="sales_by_location_table">
+            <tbody>
+            <?php foreach ($block->getCollection() as $item): ?>
+                <tr title="">
+                    <td class=""><?php echo $item['country'] ?></td>
+                    <td class=""><?php echo $item['count'] ?></td>
+                    <?php if ($block->isCompare()) : ?>
+                        <td class="<?php echo $item['rate'] > 0 ? 'up-rate' : ($item['rate'] < 0 ? 'down-rate' : '') ?>"><?php echo abs($item['rate']) . '%' ?></td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php else : ?>
         <div class="empty-text"><?php echo __('We couldn\'t find any records.') ?></div>
     <?php endif; ?>

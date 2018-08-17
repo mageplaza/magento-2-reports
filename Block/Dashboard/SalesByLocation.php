@@ -145,14 +145,6 @@ class SalesByLocation extends AbstractClass
     }
 
     /**
-     * @return bool
-     */
-    public function canShowDetail()
-    {
-        return true;
-    }
-
-    /**
      * @return string
      */
     public function getDetailUrl()

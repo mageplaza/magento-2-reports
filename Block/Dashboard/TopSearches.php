@@ -28,14 +28,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
 class TopSearches extends AbstractClass
 {
     const NAME = 'topSearches';
-
-    /**
-     * @return AbstractClass|void
-     */
-    protected function _prepareLayout()
-    {
-        $this->addChild('mp_topSearches', 'Magento\Search\Block\Adminhtml\Dashboard\Top');
-    }
+    const MAGE_REPORT_CLASS = \Magento\Search\Block\Adminhtml\Dashboard\Top::class;
 
     /**
      * @return \Magento\Framework\Phrase|string

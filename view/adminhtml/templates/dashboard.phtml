@@ -24,14 +24,14 @@ $params = $block->getRequest()->getParams();
 ?>
 <div class="ar_dashboard">
     <div class="date-range-picker"
-         data-mage-init='{"initDateRange":{"url":"<?php echo $block->getUrl('mpreports/dashboard/index', $params) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
+         data-mage-init='{"initDateRange":{"url":"<?php echo $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
         <div id="daterange">
             <i class="fa fa-calendar"></i>
             <span></span>
             <i class="fa fa-caret-down"></i>
         </div>
         <?php if ($block->isCompare()) : ?>
-            <div class="compare">compare with</div>
+            <div class="compare"><?php echo __('compare with') ?></div>
             <div id="compare-daterange">
                 <i class="fa fa-calendar"></i>
                 <span></span>
@@ -44,7 +44,7 @@ $params = $block->getRequest()->getParams();
             <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
                  style="float: right">
                 <button id="mp-ar-card" class="admin__action-dropdown" type="button">
-                    <span class="admin__action-dropdown-text">Card</span>
+                    <span class="admin__action-dropdown-text"><?php echo __('Card') ?></span>
                 </button>
                 <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
                     <div class="admin__action-dropdown-menu-header"></div>
@@ -76,21 +76,41 @@ $params = $block->getRequest()->getParams();
                      data-gs-min-width="2" data-gs-min-height="3">
                     <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
                     <div class="not-draggable">
-                        <?php echo $block->getChildHtml($card->getId()) ?>
+                        <div class="dashboard-item-container">
+                            <div class="dashboard-item-header">
+                                <?php if ($title = $card->getTitle()) : ?>
+                                    <div class="dashboard-item-title"><?php echo $title; ?></div>
+                                <?php endif; ?>
+                                <?php if($card->getCanShowDetail()) : ?>
+                                    <div class="view-detail"><a href="<?php echo $card->getDetailUrl() ?>" target="_blank"><?php echo __('View Details') ?></a></div>
+                                <?php endif; ?>
+                                <div style="clear: both"></div>
+                                <?php if($totalLabel = $card->getTotalLabel()): ?>
+                                    <div class="dashboard-sales-value">
+                                        <?php /* @escapeNotVerified */ echo $totalLabel ?>
+                                        <span class="dashboard-sales-decimals"></span>
+                                        <?php if ($block->isCompare() && ($rate = $card->getTotalCompareRate())) : ?>
+                                            <div class="chart-rate <?php echo $rate > 0 ? 'up-rate' : ($rate < 0 ? 'down-rate' : '') ?>">
+                                                <?php echo abs($rate) . '%' ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <?php echo $card->getContentHtml() ?>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
     <script>
-        require([
-            'jquery'
-        ], function ($) {
+        require(['jquery'], function ($) {
             $('.view-detail a').click(function (e) {
-                var href = jQuery(this).attr('href');
+                var href = $(this).attr('href');
                 if (href === '') {
-                    if (!jQuery(this).parent().find('.upgrade-nof').length) {
-                        jQuery(this).parent().append('<div class="upgrade-nof">' +
+                    if (!$(this).parent().find('.upgrade-nof').length) {
+                        $(this).parent().append('<div class="upgrade-nof">' +
                             '<?php echo __('Please upgrade to %1 version to see more detail', '<a href="#">Pro</a>') ?>'
                             + '</div>');
                     }

@@ -28,14 +28,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
 class Customers extends AbstractClass
 {
     const NAME = 'customers';
-
-    /**
-     * @return AbstractClass|void
-     */
-    protected function _prepareLayout()
-    {
-        $this->addChild('mp_customers', 'Magento\Backend\Block\Dashboard\Tab\Customers\Most');
-    }
+    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Customers\Most::class;
 
     /**
      * @return \Magento\Framework\Phrase|string
@@ -43,14 +36,6 @@ class Customers extends AbstractClass
     public function getTitle()
     {
         return __('Customers');
-    }
-
-    /**
-     * @return bool
-     */
-    public function canShowDetail()
-    {
-        return true;
     }
 
     /**

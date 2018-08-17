@@ -27,15 +27,8 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class LastSearches extends AbstractClass
 {
-    const NAME = 'lastSearches';
-
-    /**
-     * @return AbstractClass|void
-     */
-    protected function _prepareLayout()
-    {
-        $this->addChild('mp_lastSearches', 'Magento\Search\Block\Adminhtml\Dashboard\Last');
-    }
+    const NAME              = 'lastSearches';
+    const MAGE_REPORT_CLASS = \Magento\Search\Block\Adminhtml\Dashboard\Last::class;
 
     /**
      * @return \Magento\Framework\Phrase|string

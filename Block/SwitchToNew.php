@@ -19,21 +19,21 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\Reports\Block\Dashboard;
+namespace Mageplaza\Reports\Block;
 
 use Magento\Backend\Block\Template;
 use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class SwitchToNew
- * @package Mageplaza\Reports\Block\Dashboard
+ * @package Mageplaza\Reports\Block
  */
 class SwitchToNew extends Template
 {
     /**
      * @var string
      */
-    protected $_template = 'dashboard/switch.phtml';
+    protected $_template = 'Mageplaza_Reports::switch.phtml';
 
     /**
      * @var Data

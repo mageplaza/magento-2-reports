@@ -27,8 +27,8 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Mageplaza\Reports\Block\Dashboard\SwitchToNew" name="switch_to_ar_dashboard" before="-"/>
-            <block class="Magento\Backend\Block\Template" name="first_time_popup" ifconfig="mageplaza_reports/general/first_time_install" template="Mageplaza_Reports::dashboard/popup.phtml"/>
+            <block class="Mageplaza\Reports\Block\SwitchToNew" name="switch_to_ar_dashboard" before="-"/>
+            <block class="Magento\Backend\Block\Template" name="first_time_popup" ifconfig="mageplaza_reports/general/first_time_install" template="Mageplaza_Reports::popup.phtml"/>
         </referenceContainer>
     </body>
 </page>

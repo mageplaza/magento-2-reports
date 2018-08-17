@@ -35,6 +35,14 @@ class AverageOrderValue extends AbstractClass
     protected $_template = 'dashboard/chart.phtml';
 
     /**
+     * @return \Magento\Framework\Phrase|string
+     */
+    public function getTitle()
+    {
+        return __('Average Order Value');
+    }
+
+    /**
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -77,14 +85,6 @@ class AverageOrderValue extends AbstractClass
         $totals = $this->_helperData->getSalesByDateRange($date, $endDate);
 
         return round($totals->getAverage() ? $totals->getAverage() : 0, 2);
-    }
-
-    /**
-     * @return \Magento\Framework\Phrase|string
-     */
-    public function getTitle()
-    {
-        return __('Average Order Value');
     }
 
     /**

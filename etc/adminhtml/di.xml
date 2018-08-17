@@ -27,4 +27,26 @@
     <type name="Magento\Backend\Helper\Data">
         <plugin name="backend_logo_url" type="Mageplaza\Reports\Plugin\BackendLogoUrl" sortOrder="1"/>
     </type>
+    <type name="Mageplaza\Reports\Model\CardsManageFactory">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="lastOrders" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LastOrders</item>
+                <item name="lastSearches" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LastSearches</item>
+                <item name="topSearches" xsi:type="string">Mageplaza\Reports\Block\Dashboard\TopSearches</item>
+                <item name="orders" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Orders</item>
+                <item name="averageOrderValue" xsi:type="string">Mageplaza\Reports\Block\Dashboard\AverageOrderValue</item>
+                <item name="salesByLocation" xsi:type="string">Mageplaza\Reports\Block\Dashboard\SalesByLocation</item>
+                <item name="repeatCustomerRate" xsi:type="string">Mageplaza\Reports\Block\Dashboard\RepeatCustomerRate</item>
+                <item name="totalSales" xsi:type="string">Mageplaza\Reports\Block\Dashboard\TotalSales</item>
+                <item name="bestsellers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Bestsellers</item>
+                <item name="mostViewedProducts" xsi:type="string">Mageplaza\Reports\Block\Dashboard\MostViewedProducts</item>
+                <item name="newCustomers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\NewCustomers</item>
+                <item name="customers" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Customers</item>
+                <item name="tax" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Tax</item>
+                <item name="shipping" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Shipping</item>
+                <item name="lifetimeSales" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LifetimeSales</item>
+                <item name="averageOrder" xsi:type="string">Mageplaza\Reports\Block\Dashboard\AverageOrder</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

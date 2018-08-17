@@ -144,7 +144,8 @@ class Data extends AbstractData
         if (!$startDate || !$endDate) {
             return 0;
         }
-        return (int)((strtotime($endDate) - strtotime($startDate))/(60*60*24));
+
+        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
     }
 
     /**
@@ -199,7 +200,7 @@ class Data extends AbstractData
      * @return array
      * @throws \Exception
      */
-    public function getPeriodsDate($startDate, $endDate = null, $days,$isObject = 0)
+    public function getPeriodsDate($startDate, $endDate = null, $days, $isObject = 0)
     {
         $data = [];
         if ($endDate) {
@@ -215,9 +216,9 @@ class Data extends AbstractData
         $interval  = new \DateInterval('P1D');
         $daterange = new \DatePeriod($startDate, $interval, $endDate);
         foreach ($daterange as $date) {
-            if(!$isObject){
+            if (!$isObject) {
                 $data[] = $date->format("Y-m-d");
-            }else{
+            } else {
                 $data[$date->format("Y-m-d")] = new \Magento\Framework\DataObject();
             }
         }
@@ -256,6 +257,49 @@ class Data extends AbstractData
             ->addFieldToFilter('status', ['neq' => 'Canceled']);
 
         return $collection;
+    }
+
+    protected $lifetimeSales = [];
+
+    /**
+     * @return array
+     */
+    public function getLifetimeSales()
+    {
+        if (!sizeof($this->lifetimeSales)) {
+            try {
+                $isFilter   = $this->_request->getParam(
+                        'store'
+                    ) || $this->_request->getParam(
+                        'website'
+                    ) || $this->_request->getParam(
+                        'group'
+                    );
+                $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);
+
+                if ($store = $this->_request->getParam('store')) {
+                    $collection->addFieldToFilter('store_id', $store);
+                } else if ($website = $this->_request->getParam('website')) {
+                    $storeIds = $this->storeManager->getWebsite($website)->getStoreIds();
+                    $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
+                } else if ($group = $this->_request->getParam('group')) {
+                    $storeIds = $this->storeManager->getGroup($group)->getStoreIds();
+                    $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
+                }
+
+                $collection->load();
+                $sales = $collection->getFirstItem();
+
+                $this->lifetimeSales = [
+                    'lifetime' => $sales->getLifetime(),
+                    'average'  => $sales->getAverage()
+                ];
+            } catch (\Exception $e) {
+                $this->lifetimeSales = [];
+            }
+        }
+
+        return $this->lifetimeSales;
     }
 
     /**
@@ -329,7 +373,8 @@ class Data extends AbstractData
     /**
      * @return bool
      */
-    public function isProPackage(){
+    public function isProPackage()
+    {
         return false;
     }
 }
