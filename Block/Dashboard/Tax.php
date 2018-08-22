@@ -38,7 +38,7 @@ class Tax extends AbstractClass
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getTotal()
+    public function getTotalLabel()
     {
         $date   = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
@@ -50,7 +50,7 @@ class Tax extends AbstractClass
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getRate()
+    public function getTotalCompareRate()
     {
         $dates         = $this->_helperData->getDateRange();
         $totals        = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);

@@ -81,15 +81,19 @@ $params = $block->getRequest()->getParams();
                                 <?php if ($title = $card->getTitle()) : ?>
                                     <div class="dashboard-item-title"><?php echo $title; ?></div>
                                 <?php endif; ?>
-                                <?php if($card->getCanShowDetail()) : ?>
+                                <?php if($card->canShowDetail()) : ?>
                                     <div class="view-detail"><a href="<?php echo $card->getDetailUrl() ?>" target="_blank"><?php echo __('View Details') ?></a></div>
                                 <?php endif; ?>
                                 <div style="clear: both"></div>
-                                <?php if($totalLabel = $card->getTotalLabel()): ?>
+                                <?php
+                                $totalLabel = $card->getTotalLabel();
+                                if($totalLabel !== ''): ?>
                                     <div class="dashboard-sales-value">
                                         <?php /* @escapeNotVerified */ echo $totalLabel ?>
                                         <span class="dashboard-sales-decimals"></span>
-                                        <?php if ($block->isCompare() && ($rate = $card->getTotalCompareRate())) : ?>
+                                        <?php
+                                        $rate = $card->getTotalCompareRate();
+                                        if ($block->isCompare() && ($rate !== '')) : ?>
                                             <div class="chart-rate <?php echo $rate > 0 ? 'up-rate' : ($rate < 0 ? 'down-rate' : '') ?>">
                                                 <?php echo abs($rate) . '%' ?>
                                             </div>

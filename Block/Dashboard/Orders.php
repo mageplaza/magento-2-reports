@@ -81,7 +81,7 @@ class Orders extends AbstractClass
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getRate()
+    public function getTotalCompareRate()
     {
         $date         = $this->_helperData->getDateRange();
         $count        = $this->getDataByDate($date[0], $date[1]);
@@ -102,7 +102,7 @@ class Orders extends AbstractClass
      * @return int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getTotal()
+    public function getTotalLabel()
     {
         $date  = $this->_helperData->getDateRange();
         $count = $this->getDataByDate($date[0], $date[1]);

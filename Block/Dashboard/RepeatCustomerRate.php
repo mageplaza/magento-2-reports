@@ -151,8 +151,8 @@ class RepeatCustomerRate extends AbstractClass
         $data['days']        = $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
         $data['labels']      = $this->_helperData->getPeriodsDate($date[0], null, $days);
         $data['stepSize']    = round($days / 6);
-        $data['total']       = $this->getTotal();
-        $data['rate']        = $this->getRate();
+        $data['total']       = $this->getTotalLabel();
+        $data['rate']        = $this->getTotalCompareRate();
         $data['label']       = $this->getChartDataLabel();
         $data['yUnit']       = $this->getYUnit();
         $data['yLabel']      = $this->getYLabel();
@@ -183,7 +183,7 @@ class RepeatCustomerRate extends AbstractClass
      * @return int|string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getTotal()
+    public function getTotalLabel()
     {
         $date  = $this->_helperData->getDateRange();
         $total = $this->getRepeatRateByDateRange($date[0], $date[1]);
@@ -195,7 +195,7 @@ class RepeatCustomerRate extends AbstractClass
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function getRate()
+    public function getTotalCompareRate()
     {
         $date              = $this->_helperData->getDateRange();
         $repeatRate        = $this->getRepeatRateByDateRange($date[0], $date[1]);

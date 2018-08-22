@@ -61,7 +61,7 @@ class Bestsellers extends AbstractClass
     /**
      * @return bool
      */
-    public function getCanShowDetail()
+    public function canShowDetail()
     {
         return true;
     }

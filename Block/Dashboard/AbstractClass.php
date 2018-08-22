@@ -102,27 +102,19 @@ abstract class AbstractClass extends Template
     }
 
     /**
-     * @return bool
-     */
-    public function canShowCompareRate()
-    {
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getCanShowDetail()
-    {
-        return false;
-    }
-
-    /**
      * @return string
      */
-    public function getDetailUrl()
+    public function getTotalCompareRate()
     {
         return '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function canShowDetail()
+    {
+        return false;
     }
 
     /**
