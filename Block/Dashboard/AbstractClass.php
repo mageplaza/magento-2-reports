@@ -96,7 +96,7 @@ abstract class AbstractClass extends Template
     /**
      * @return string
      */
-    public function getTotalLabel()
+    public function getTotal()
     {
         return '';
     }
@@ -104,7 +104,7 @@ abstract class AbstractClass extends Template
     /**
      * @return string
      */
-    public function getTotalCompareRate()
+    public function getRate()
     {
         return '';
     }
@@ -237,14 +237,6 @@ abstract class AbstractClass extends Template
     }
 
     /**
-     * @return int
-     */
-    protected function getTotal()
-    {
-        return rand(1, 1000);
-    }
-
-    /**
      * @param $date
      * @param null $endDate
      * @return int
@@ -252,14 +244,6 @@ abstract class AbstractClass extends Template
     protected function getDataByDate($date, $endDate = null)
     {
         return rand(1, 10);
-    }
-
-    /**
-     * @return int
-     */
-    protected function getRate()
-    {
-        return rand(-100, 100);
     }
 
     /**

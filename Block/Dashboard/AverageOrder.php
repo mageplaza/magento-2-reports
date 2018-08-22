@@ -41,7 +41,7 @@ class AverageOrder extends AbstractClass
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getTotalLabel()
+    public function getTotal()
     {
         $total = $this->_helperData->getLifetimeSales();
         if (isset($total['average'])) {

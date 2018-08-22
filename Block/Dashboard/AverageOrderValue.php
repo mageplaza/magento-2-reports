@@ -46,7 +46,7 @@ class AverageOrderValue extends AbstractClass
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getTotalLabel()
+    public function getTotal()
     {
         $date   = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getSalesByDateRange($date[0], $date[1]);
@@ -58,7 +58,7 @@ class AverageOrderValue extends AbstractClass
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getTotalCompareRate()
+    public function getRate()
     {
         $dates         = $this->_helperData->getDateRange();
         $totals        = $this->_helperData->getSalesByDateRange($dates[0], $dates[1]);

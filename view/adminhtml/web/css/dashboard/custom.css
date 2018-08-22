@@ -272,7 +272,7 @@
     background: #ccc;
     /* opacity: 0.5; */
     color: white;
-    border: 1px solid black;
+    border: 1px solid #bbb;
     border-radius: 6px;
     padding: 5px;
 }
