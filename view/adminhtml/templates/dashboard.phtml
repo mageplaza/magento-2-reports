@@ -39,7 +39,7 @@ $params = $block->getRequest()->getParams();
             </div>
         <?php endif; ?>
     </div>
-    <div class="dashboard-container row ">
+    <div class="dashboard-container row">
         <div class="top-container">
             <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
                  style="float: right">
@@ -106,27 +106,27 @@ $params = $block->getRequest()->getParams();
                     </div>
                 </div>
             <?php endforeach; ?>
+            <script>
+                require(['jquery'], function ($) {
+                    $('.view-detail a').click(function (e) {
+                        var href = $(this).attr('href');
+                        if (href === '') {
+                            if (!$(this).parent().find('.upgrade-nof').length) {
+                                $(this).parent().append('<div class="upgrade-nof">' +
+                                    '<?php echo __('Please upgrade to %1 version to see more detail', '<a href="#">Pro</a>') ?>'
+                                    + '</div>');
+                            }
+                            e.stopPropagation();
+                            e.preventDefault();
+                        }
+                    });
+                    $('body').click(function (e) {
+                        if(!$(e.target).parents().hasClass('view-detail')){
+                            $('.upgrade-nof').remove();
+                        }
+                    })
+                })
+            </script>
         </div>
     </div>
-    <script>
-        require(['jquery'], function ($) {
-            $('.view-detail a').click(function (e) {
-                var href = $(this).attr('href');
-                if (href === '') {
-                    if (!$(this).parent().find('.upgrade-nof').length) {
-                        $(this).parent().append('<div class="upgrade-nof">' +
-                            '<?php echo __('Please upgrade to %1 version to see more detail', '<a href="#">Pro</a>') ?>'
-                            + '</div>');
-                    }
-                    e.stopPropagation();
-                    e.preventDefault();
-                }
-            });
-            $('body').click(function (e) {
-                if(!$(e.target).parents().hasClass('view-detail')){
-                    $('.upgrade-nof').remove();
-                }
-            })
-        })
-    </script>
 </div>
