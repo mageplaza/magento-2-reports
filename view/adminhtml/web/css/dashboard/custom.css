@@ -75,7 +75,7 @@
 }
 .title-content .number, .chart-rate {
     font-weight: 600;
-    font-size: 30px;
+    /*font-size: 30px;*/
 }
 .chart-rate.up-rate {
     color: lightgreen;

@@ -23,6 +23,7 @@ namespace Mageplaza\Reports\Model;
 
 use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\DataObject;
+use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\ObjectManagerInterface as ObjectManager;
 use Magento\Ui\Model\BookmarkFactory;
 use Mageplaza\Reports\Helper\Data;
@@ -39,6 +40,11 @@ class CardsManageFactory
      * @var \Magento\Framework\ObjectManagerInterface
      */
     protected $objectManager = null;
+
+    /**
+     * @var ManagerInterface
+     */
+    protected $eventManager;
 
     /**
      * @var array
@@ -69,6 +75,7 @@ class CardsManageFactory
      * CardsManageFactory constructor.
      * @param Session $authSession
      * @param ObjectManager $objectManager
+     * @param ManagerInterface $eventManager
      * @param BookmarkFactory $bookmark
      * @param Data $helperData
      * @param array $map
@@ -77,6 +84,7 @@ class CardsManageFactory
     public function __construct(
         Session $authSession,
         ObjectManager $objectManager,
+        ManagerInterface $eventManager,
         BookmarkFactory $bookmark,
         Data $helperData,
         array $map = [],
@@ -85,6 +93,7 @@ class CardsManageFactory
     {
         $this->_authSession  = $authSession;
         $this->objectManager = $objectManager;
+        $this->eventManager  = $eventManager;
         $this->_bookmark     = $bookmark;
         $this->_helperData   = $helperData;
         $this->_map          = $map;
@@ -170,6 +179,10 @@ class CardsManageFactory
      */
     public function getMap()
     {
-        return $this->_map;
+        $cards = new DataObject($this->_map);
+
+        $this->eventManager->dispatch('mageplaza_report_init_cards', ['cards' => $cards]);
+
+        return $cards->getData();
     }
 }
