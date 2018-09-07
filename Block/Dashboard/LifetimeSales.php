@@ -44,8 +44,8 @@ class LifetimeSales extends AbstractClass
     public function getTotal()
     {
         $total = $this->_helperData->getLifetimeSales();
-        if (isset($total['average'])) {
-            return $this->format($total['average']);
+        if (isset($total['lifetime'])) {
+            return $this->format($total['lifetime']);
         }
 
         return parent::getTotalLabel();
