@@ -94,7 +94,7 @@ $params = $block->getRequest()->getParams();
                                         <?php
                                         $rate = $card->getRate();
                                         if ($block->isCompare() && ($rate !== '')) : ?>
-                                            <div class="chart-rate <?php echo $rate > 0 ? 'up-rate' : ($rate < 0 ? 'down-rate' : '') ?>">
+                                            <div class="chart-rate <?php echo $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
                                                 <?php echo abs($rate) . '%' ?>
                                             </div>
                                         <?php endif; ?>

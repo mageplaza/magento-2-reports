@@ -136,20 +136,6 @@ class Data extends AbstractData
 
     /**
      * @param $startDate
-     * @param $endDate
-     * @return false|int|string
-     */
-    public function getDaysByDateRange($startDate, $endDate)
-    {
-        if (!$startDate || !$endDate) {
-            return 0;
-        }
-
-        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
-    }
-
-    /**
-     * @param $startDate
      * @param null $endDate
      * @param null $isConvertToLocalTime
      * @return array
@@ -176,6 +162,20 @@ class Data extends AbstractData
     public function getTimezone()
     {
         return $this->getConfigValue('general/locale/timezone');
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @return false|int|string
+     */
+    public function getDaysByDateRange($startDate, $endDate)
+    {
+        if (!$startDate || !$endDate) {
+            return 0;
+        }
+
+        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
     }
 
     /**

@@ -18,6 +18,13 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
+#anchor-content{
+    background: #f4f6f6;
+}
+.dashboard-container .grid-stack-item{
+    background: #fff;
+}
+
 .grid-stack-item {
     border: 1px solid #cccccc;
 }
@@ -48,13 +55,11 @@
     position: absolute;
     top: 50%;
 }
-.up-rate:before {
-    color: lightgreen;
+.up-rate.mp-green:before {
     font-family: FontAwesome;
     content: '\f062';
 }
-.down-rate:before {
-    color: red;
+.down-rate.mp-red:before {
     font-family: FontAwesome;
     content: '\f063';
 }
@@ -77,12 +82,7 @@
     font-weight: 600;
     /*font-size: 30px;*/
 }
-.chart-rate.up-rate {
-    color: lightgreen;
-}
-.chart-rate.down-rate {
-    color: red;
-}
+
 .mp-dashboard-advanced-reports {
     position: relative;
     display: flex;

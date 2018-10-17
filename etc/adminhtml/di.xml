@@ -49,4 +49,28 @@
             </argument>
         </arguments>
     </type>
+    <type name="Mageplaza\Reports\Block\Menu">
+        <arguments>
+            <argument name="girdName" xsi:type="array">
+                <item name="mpreports_details_salesbycustomergroup" xsi:type="string">mp_reports_sales_by_customer_group_grid.mp_reports_sales_by_customer_group_details_listing_data_source</item>
+                <item name="mpreports_details_abandonedcarts" xsi:type="string">mp_reports_abandoned_carts_grid.mp_reports_abandoned_carts_details_listing_data_source</item>
+                <item name="mpreports_details_stockvssold" xsi:type="string">mp_reports_stock_vs_sold_grid.mp_reports_stock_vs_sold_details_listing_data_source</item>
+                <item name="mpreports_details_bestsellers" xsi:type="string">mp_reports_bestsellers_grid.mp_reports_bestsellers_details_listing_data_source</item>
+                <item name="mpreports_details_salesbyproduct" xsi:type="string">mp_reports_sales_by_product_grid.mp_reports_sales_by_product_details_listing_data_source</item>
+                <item name="mpreports_details_salesbylocation" xsi:type="string">mp_reports_sales_by_location_grid.mp_reports_sales_by_location_details_listing_data_source</item>
+                <item name="mpreports_details_salesbystate" xsi:type="string">mp_reports_sales_by_state_grid.mp_reports_sales_by_location_details_listing_data_source</item>
+                <item name="mpreports_details_salesbycity" xsi:type="string">mp_reports_sales_by_city_grid.mp_reports_sales_by_location_details_listing_data_source</item>
+                <item name="mpreports_details_salesbycustomer" xsi:type="string">mp_reports_sales_by_customer_grid.mp_reports_sales_by_customer_details_listing_data_source</item>
+            </argument>
+            <argument name="menuUrls" xsi:type="array">
+                <item name="mpreports/details/salesbycustomergroup" xsi:type="string" translate="true">Sales By Customer Group</item>
+                <item name="mpreports/details/abandonedcarts" xsi:type="string" translate="true">Abandoned Carts</item>
+                <item name="mpreports/details/stockvssold" xsi:type="string" translate="true">Stock vs Sold</item>
+                <item name="mpreports/details/bestsellers" xsi:type="string" translate="true">Bestseller</item>
+                <item name="mpreports/details/salesbyproduct" xsi:type="string" translate="true">Sales By Product</item>
+                <item name="mpreports/details/salesbylocation" xsi:type="string" translate="true">Sales By Location</item>
+                <item name="mpreports/details/salesbycustomer" xsi:type="string" translate="true">Sales By Customer</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

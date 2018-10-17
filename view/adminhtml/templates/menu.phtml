@@ -1,0 +1,72 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+$gridName       = $block->getGridName();
+$date           = $block->getDateRange();
+$menu           = $block->getMenuUrls() ? $block->getMenuUrls() : [];
+$storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
+?>
+<div id="menu" class="mp_menu"
+     data-mage-init='{"Mageplaza_Reports/js/detail/menu":{"gridName":"<?php echo $gridName ?>","date":<?php echo json_encode($date) ?>,"storeUrl":"<?php echo $storeFilterUrl ?>"}}'>
+    <div class="admin__action-dropdown-wrap menu-select">
+        <a href="#" class="admin__action-dropdown"
+           title="Menu"
+           data-mage-init='{"dropdown":{"autoPosition":true}}'
+           data-toggle="dropdown">
+            <i class="fa fa-bars"></i>
+        </a>
+        <ul class="admin__action-dropdown-menu">
+            <?php foreach ($menu as $item) : ?>
+                <li><a href="<?php echo $item['path'] ?>"><?php echo $item['label'] ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="date-range-picker">
+        <div id="daterange">
+            <i class="fa fa-calendar"></i>
+            <span></span>
+            <i class="fa fa-caret-down"></i>
+        </div>
+    </div>
+    <div class="mp-rp-store-switcher">
+        <?php echo $block->getChildHtml() ?>
+    </div>
+    <div class="customer-group">
+        <select id="customer-group-id">
+            <?php foreach ($block->getCustomerGroup() as $group) : ?>
+                <option value="<?php echo $group['value'] ?>"><?php echo $group['label'] ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div class="period">
+        <span><strong><?php echo __('Group By') ?></strong></span>
+        <select id="period">
+            <option value="day"><?php echo __('Day') ?></option>
+            <option value="week"><?php echo __('Week') ?></option>
+            <option value="month"><?php echo __('Month') ?></option>
+            <option value="year"><?php echo __('Year') ?></option>
+        </select>
+    </div>
+</div>
+
+
+
+
