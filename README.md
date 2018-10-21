@@ -4,6 +4,12 @@
 
 To facilitate the management of statistics, we proudly introduce **Magento 2 Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
 
+
+[![Latest Stable Version](https://poser.pugx.org/mageplaza/module-reports/v/stable)](https://packagist.org/packages/mageplaza/module-reports)
+[![Total Downloads](https://poser.pugx.org/mageplaza/module-reports/downloads)](https://packagist.org/packages/mageplaza/module-reports)
+
+
+
 ## 1. Documentation
 - [Installation guide](https://www.mageplaza.com/install-magento-2-extension/)
 - [User guide](https://github.com/magepages/mpdocs/blob/master/docs/reports/index.md)
