@@ -23,9 +23,8 @@ namespace Mageplaza\Reports\Controller\Adminhtml\Dashboard;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
 use Magento\Framework\Json\Helper\Data;
-
+use Magento\Framework\View\Result\PageFactory;
 
 /**
  * Class Index
@@ -55,9 +54,10 @@ class Index extends Action
         Data $jsonHelper
     )
     {
-        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-        $this->_jsonHelper = $jsonHelper;
+        $this->_jsonHelper       = $jsonHelper;
+
+        parent::__construct($context);
     }
 
     /**
@@ -72,10 +72,11 @@ class Index extends Action
         $resultPage->getConfig()->getTitle()->prepend(__('Dashboard'));
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result = ['dashboard' => $dashBoard->toHtml()];
+            $result    = ['dashboard' => $dashBoard->toHtml()];
+
             return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
-        } else {
-            return $resultPage;
         }
+
+        return $resultPage;
     }
 }

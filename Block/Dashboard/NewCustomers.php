@@ -27,7 +27,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class NewCustomers extends AbstractClass
 {
-    const NAME = 'newCustomers';
+    const NAME              = 'newCustomers';
     const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::class;
 
     /**

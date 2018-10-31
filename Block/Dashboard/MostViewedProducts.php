@@ -27,7 +27,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class MostViewedProducts extends AbstractClass
 {
-    const NAME = 'mostViewedProducts';
+    const NAME              = 'mostViewedProducts';
     const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Products\Viewed::class;
 
     /**

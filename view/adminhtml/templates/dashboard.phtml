@@ -19,7 +19,7 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-$cards = $block->getCards();
+$cards  = $block->getCards();
 $params = $block->getRequest()->getParams();
 ?>
 <div class="ar_dashboard">
@@ -81,15 +81,18 @@ $params = $block->getRequest()->getParams();
                                 <?php if ($title = $card->getTitle()) : ?>
                                     <div class="dashboard-item-title"><?php echo $title; ?></div>
                                 <?php endif; ?>
-                                <?php if($card->canShowDetail()) : ?>
-                                    <div class="view-detail"><a href="<?php echo $card->getDetailUrl() ?>" target="_blank"><?php echo __('View Details') ?></a></div>
+                                <?php if ($card->canShowDetail()) : ?>
+                                    <div class="view-detail">
+                                        <a href="<?php echo $card->getDetailUrl() ?>" target="_blank"><?php echo __('View Details') ?></a>
+                                    </div>
                                 <?php endif; ?>
                                 <div style="clear: both"></div>
                                 <?php
                                 $totalLabel = $card->getTotal();
-                                if($totalLabel !== ''): ?>
+                                if ($totalLabel !== ''): ?>
                                     <div class="dashboard-sales-value">
-                                        <?php /* @escapeNotVerified */ echo $totalLabel ?>
+                                        <?php /* @escapeNotVerified */
+                                        echo $totalLabel ?>
                                         <span class="dashboard-sales-decimals"></span>
                                         <?php
                                         $rate = $card->getRate();
@@ -121,7 +124,7 @@ $params = $block->getRequest()->getParams();
                         }
                     });
                     $('body').click(function (e) {
-                        if(!$(e.target).parents().hasClass('view-detail')){
+                        if (!$(e.target).parents().hasClass('view-detail')) {
                             $('.upgrade-nof').remove();
                         }
                     })

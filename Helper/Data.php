@@ -70,11 +70,11 @@ class Data extends AbstractData
         TimezoneInterface $timezone
     )
     {
-        parent::__construct($context, $objectManager, $storeManager);
-
         $this->_orderCollectionFactory = $orderCollectionFactory;
         $this->_dateTime               = $dateTime;
         $this->_timezone               = $timezone;
+
+        parent::__construct($context, $objectManager, $storeManager);
     }
 
     /**

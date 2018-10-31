@@ -21,9 +21,9 @@
 
 namespace Mageplaza\Reports\Plugin\Model;
 
+use Magento\Backend\Model\Url;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Mageplaza\Reports\Helper\Data;
-use Magento\Backend\Model\Url;
 
 /**
  * Class StartupPageUrl
@@ -52,7 +52,7 @@ class StartupPageUrl
     )
     {
         $this->resultRedirectFactory = $resultRedirectFactory;
-        $this->_helperData = $helperData;
+        $this->_helperData           = $helperData;
     }
 
     /**
@@ -65,6 +65,7 @@ class StartupPageUrl
         if ($this->_helperData->isEnabled()) {
             $result = 'mpreports/dashboard';
         }
+
         return $result;
     }
 }
