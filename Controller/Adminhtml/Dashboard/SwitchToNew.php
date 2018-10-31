@@ -64,11 +64,11 @@ class SwitchToNew extends Action
         JsonHelper $jsonHelper
     )
     {
-        parent::__construct($context);
-
         $this->_storageWriter = $storageWriter;
         $this->_cache         = $typeList;
         $this->_jsonHelper    = $jsonHelper;
+
+        parent::__construct($context);
     }
 
     /**

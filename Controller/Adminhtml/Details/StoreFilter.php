@@ -19,21 +19,20 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\Reports\Controller\Adminhtml\Dashboard;
+namespace Mageplaza\Reports\Controller\Adminhtml\Details;
 
 use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
 use Magento\Framework\Json\Helper\Data;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Index
- * @package Mageplaza\Reports\Controller\Adminhtml\Dashboard
+ * Class StoreFilter
+ * @package Mageplaza\Reports\Controller\Adminhtml\Details
  */
-class Index extends Action
+class StoreFilter extends Action
 {
     /**
-     * @var PageFactory
+     * @var bool|PageFactory
      */
     protected $resultPageFactory;
 
@@ -43,13 +42,13 @@ class Index extends Action
     protected $_jsonHelper;
 
     /**
-     * Index constructor.
-     * @param Context $context
+     * StoreFilter constructor.
+     * @param Action\Context $context
      * @param PageFactory $resultPageFactory
      * @param Data $jsonHelper
      */
     public function __construct(
-        Context $context,
+        Action\Context $context,
         PageFactory $resultPageFactory,
         Data $jsonHelper
     )
@@ -61,20 +60,25 @@ class Index extends Action
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\View\Result\Page
      */
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Maqeplaza_Reports::dashboard');
-        $resultPage->addBreadcrumb(__('Dashboard'), __('Dashboard'));
-        $resultPage->getConfig()->getTitle()->prepend(__('Dashboard'));
         if ($this->getRequest()->isAjax()) {
-            $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result    = ['dashboard' => $dashBoard->toHtml()];
+            $storeHtml = $resultPage->getLayout()
+                ->createBlock('Magento\Backend\Block\Store\Switcher')
+                ->setSwitchWebsites(0)
+                ->setSwitchStoreGroups(0)
+                ->setSwitchStoreViews(1)
+                ->setUseConfirm(0)
+                ->setDefaultSelectionName(__('All Websites'))
+                ->toHtml();
 
-            return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
+            return $this->getResponse()->representJson(
+                $this->_jsonHelper->jsonEncode(
+                    ['store' => $storeHtml]
+                ));
         }
 
         return $resultPage;

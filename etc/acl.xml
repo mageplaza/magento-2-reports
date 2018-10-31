@@ -24,6 +24,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
+                <resource id="Mageplaza_Reports::dashboard" title="Mageplaza Reports Dashboard" translate="title" sortOrder="1"/>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

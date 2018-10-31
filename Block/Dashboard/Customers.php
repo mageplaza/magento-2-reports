@@ -27,7 +27,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class Customers extends AbstractClass
 {
-    const NAME = 'customers';
+    const NAME              = 'customers';
     const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Customers\Most::class;
 
     /**
@@ -46,6 +46,7 @@ class Customers extends AbstractClass
         if (!$this->_helperData->isProPackage()) {
             return parent::getDetailUrl();
         }
+
         return $this->getUrl('mpreports/details/salesbycustomer');
     }
 

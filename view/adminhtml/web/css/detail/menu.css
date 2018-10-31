@@ -1,0 +1,103 @@
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+
+#menu {
+    height: 50px;
+    background-color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.fa.fa-bars {
+    font-size: 20px;
+    margin-top: -4px;
+    margin-left: -10px;
+}
+
+.menu-select {
+    float: left;
+}
+
+.menu-select .admin__action-dropdown {
+    height: 28px;
+    margin: 11px;
+}
+
+.menu-select .admin__action-dropdown-menu {
+    left: 0;
+    right: auto;
+    width: 200px;
+    z-index: 99;
+}
+
+.menu-select .admin__action-dropdown-menu a:hover {
+    background-color: #cccccc;
+}
+
+.mp-rp-store-switcher, .date-range-picker, .customer-group {
+    float: left;
+}
+
+.period {
+    float: right;
+    margin-right: 20px;
+}
+
+.mp-rp-store-switcher, .customer-group {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#daterange {
+    margin-left: 20px;
+    border: 1px solid #cccccc;
+    height: 29px;
+}
+
+#daterange, #customer-group-id, #period {
+    margin-top: 11px;
+    padding: 4px;
+    background-color: #ffffff;
+    border: none;
+}
+
+.store-switcher.store-view span.store-switcher-label {
+    display: none;
+}
+
+.admin__field-tooltip.tooltip {
+    display: none;
+}
+
+.sticky-header {
+    top: 0;
+}
+
+button#store-change-button {
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    padding-bottom: 4px;
+    margin-top: 3px;
+}
+
+.store-switcher .dropdown .dropdown-menu[data-role="stores-list"], .admin__action-dropdown-wrap.active .admin__action-dropdown-menu {
+    z-index: 999;
+}

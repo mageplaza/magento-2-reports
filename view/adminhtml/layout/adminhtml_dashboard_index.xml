@@ -24,6 +24,7 @@
     <update handle="styles"/>
     <head>
         <css src="Mageplaza_Core/css/font-awesome.min.css"/>
+        <css src="Mageplaza_Reports/css/dashboard/custom.css"/>
     </head>
     <body>
         <referenceContainer name="content">

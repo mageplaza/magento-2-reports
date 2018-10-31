@@ -21,9 +21,9 @@
 
 namespace Mageplaza\Reports\Plugin;
 
-use Mageplaza\Reports\Helper\Data;
 use Magento\Backend\Helper\Data as BackendHelper;
 use Magento\Backend\Model\UrlInterface;
+use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class BackendLogoUrl
@@ -40,7 +40,6 @@ class BackendLogoUrl
      * @var UrlInterface
      */
     protected $_backendUrl;
-
 
     /**
      * BackendLogoUrl constructor.
@@ -66,6 +65,7 @@ class BackendLogoUrl
         if ($this->_helperData->isEnabled()) {
             $result = $this->_backendUrl->getRouteUrl('mpreports/dashboard');
         }
+
         return $result;
     }
 }
