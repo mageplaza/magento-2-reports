@@ -18,11 +18,11 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-#anchor-content {
+.mpreports-dashboard-index #anchor-content {
     background: #f4f6f6;
 }
 
-.dashboard-container .grid-stack-item {
+.mpreports-dashboard-index .dashboard-container .grid-stack-item {
     background: #fff;
 }
 

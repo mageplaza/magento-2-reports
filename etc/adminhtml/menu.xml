@@ -26,8 +26,6 @@
              action="mpreports/dashboard"
              title="Dashboard" translate="title"
              module="Mageplaza_Reports"
-             resource="Mageplaza_Reports::dashboard"
-             dependsOnConfig="mageplaza_reports/general/enabled"
-             dependsOnModule="Mageplaza_Reports"/>
+             resource="Mageplaza_Reports::dashboard"/>
     </menu>
 </config>

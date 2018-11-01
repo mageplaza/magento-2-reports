@@ -49,4 +49,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Backend\Model\Menu\Builder\AbstractCommand">
+        <plugin name="mageplaza_report_hide_menu" type="Mageplaza\Reports\Plugin\MoveMenu"/>
+    </type>
 </config>
