@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_Core
+ * @package     Mageplaza_Reports
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -26,7 +26,7 @@ use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class MoveMenu
- * @package Mageplaza\Core\Plugin
+ * @package Mageplaza\Reports\Plugin
  */
 class MoveMenu
 {
