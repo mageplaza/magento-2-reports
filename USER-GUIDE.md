@@ -6,7 +6,7 @@
 - Download from our Live site: https://www.mageplaza.com/magento-2-reports-extension/
 - Get Support: https://github.com/mageplaza/magento-2-reports/issues
 - Contribute on Github: https://github.com/mageplaza/magento-2-reports
-- Changelog: https://www.mageplaza.com/releases/reports
+- Changelog: https://www.mageplaza.com/releases/reports/
 - License https://www.mageplaza.com/LICENSE.txt
 
 
