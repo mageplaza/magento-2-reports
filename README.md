@@ -1,4 +1,4 @@
-# Magento 2 Reports by Mageplaza
+# Magento 2 Reports FREE by Mageplaza
 
 **Mageplaza Reports for Magento 2** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
