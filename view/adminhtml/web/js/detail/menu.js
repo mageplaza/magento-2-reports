@@ -35,6 +35,8 @@ define([
             this.initStoreSwitcher();
             this.initCustomerGroupSelect();
             this.initPeriodSelect();
+            this.initOrderStatusSelect();
+            this.initDateUsedSelect();
         },
         initDateRange: function (el, start, end, data) {
             function cb(start, end) {
@@ -129,6 +131,39 @@ define([
                     params.mpFilter = {};
                 }
                 params.mpFilter.period = $(this).val();
+                grid.reload();
+            });
+        },
+        initDateUsedSelect: function (grid) {
+            var self = this;
+            $('.date_used select').change(function () {
+                var grid = uiRegistry.get(self.options.gridName);
+                var params = grid.get('params');
+                if (typeof params.mpFilter === 'undefined') {
+                    params.mpFilter = {};
+                }
+                params.mpFilter.dateUsed = $(this).val();
+                grid.reload();
+            });
+        },
+        initOrderStatusSelect: function () {
+            var self = this;
+            var cardsTableEl = $('.mp-rp-order-status.admin__action-dropdown-wrap.admin__data-grid-action-columns');
+            $('button#mp-rp-order-status').click(function () {
+                if (cardsTableEl.hasClass('_active')) {
+                    cardsTableEl.removeClass('_active');
+                } else {
+                    cardsTableEl.addClass('_active');
+                }
+            });
+            $('.order_status input').click(function () {
+                var grid = uiRegistry.get(self.options.gridName);
+                var params = grid.get('params');
+                if (typeof params.mpFilter === 'undefined') {
+                    params.mpFilter = {};
+                }
+                params.mpFilter.orderStatus = $('#order_status :input').serializeArray()
+                ;
                 grid.reload();
             });
         }

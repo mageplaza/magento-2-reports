@@ -19,6 +19,7 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
+/** @var \Mageplaza\Reports\Block\Menu $block */
 $gridName       = $block->getGridName();
 $date           = $block->getDateRange();
 $menu           = $block->getMenuUrls() ? $block->getMenuUrls() : [];
@@ -57,12 +58,44 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </select>
     </div>
     <div class="period">
-        <span><strong><?php echo __('Group By') ?></strong></span>
+        <span><strong><?php echo __('Period') ?></strong></span>
         <select id="period">
             <option value="day"><?php echo __('Day') ?></option>
             <option value="week"><?php echo __('Week') ?></option>
             <option value="month"><?php echo __('Month') ?></option>
             <option value="year"><?php echo __('Year') ?></option>
+        </select>
+    </div>
+    <div class="order_status">
+        <span class="label"><strong><?php echo __('Order Status') ?></strong></span>
+        <div class="mp-rp-order-status admin__action-dropdown-wrap admin__data-grid-action-columns"
+             style="float: right">
+            <button id="mp-rp-order-status" class="admin__action-dropdown" type="button">
+                <span class="admin__action-dropdown-text"><?php echo __('--Select--') ?></span>
+            </button>
+            <div class="admin__action-dropdown-menu _overflow" id="order_status">
+                <div class="admin__action-dropdown-menu-header"></div>
+                <div class="admin__action-dropdown-menu-content">
+                    <?php foreach ($block->getOrderStatusList() as $status) : ?>
+                        <div class="admin__field-option" data-repeat-index="0">
+                            <input class="admin__control-checkbox"
+                                   type="checkbox"
+                                   checked
+                                   name="<?php echo $status['value'] ?>"
+                                   id="<?php echo $status['value'] ?>">
+                            <label class="admin__field-label"
+                                   for="<?php echo $status['value'] ?>"><?php echo $status['label']; ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="date_used">
+        <span><strong><?php echo __('Date Used') ?></strong></span>
+        <select id="date_used" class="select-box">
+            <option value="created_at"><?php echo __('Created At') ?></option>
+            <option value="updated_at"><?php echo __('Updated At') ?></option>
         </select>
     </div>
 </div>

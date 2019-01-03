@@ -24,6 +24,7 @@ namespace Mageplaza\Reports\Block;
 use Magento\Backend\Block\Template;
 use Magento\Customer\Model\Customer\Source\Group;
 use Mageplaza\Reports\Helper\Data;
+use Magento\Sales\Model\Config\Source\Order\Status;
 
 /**
  * Class Menu
@@ -35,6 +36,11 @@ class Menu extends Template
      * @var Group
      */
     protected $customerGroup;
+
+    /**
+     * @var Status
+     */
+    protected $orderStatus;
 
     /**
      * @var Data
@@ -55,6 +61,7 @@ class Menu extends Template
      * Menu constructor.
      * @param Template\Context $context
      * @param Group $customerGroup
+     * @param Status $orderStatus
      * @param Data $helperData
      * @param array $girdName
      * @param array $menuUrls
@@ -63,6 +70,7 @@ class Menu extends Template
     public function __construct(
         Template\Context $context,
         Group $customerGroup,
+        Status $orderStatus,
         Data $helperData,
         array $girdName = [],
         array $menuUrls = [],
@@ -71,6 +79,7 @@ class Menu extends Template
         parent::__construct($context, $data);
 
         $this->customerGroup = $customerGroup;
+        $this->orderStatus = $orderStatus;
         $this->helperData    = $helperData;
         $this->girdName      = $girdName;
         $this->menuUrls      = $menuUrls;
@@ -124,5 +133,15 @@ class Menu extends Template
         }
 
         return $urls;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderStatusList()
+    {
+        $statuses = $this->orderStatus->toOptionArray();
+        array_shift($statuses);
+        return $statuses;
     }
 }
