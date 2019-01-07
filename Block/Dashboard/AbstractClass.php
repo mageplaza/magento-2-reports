@@ -79,9 +79,7 @@ abstract class AbstractClass extends Template
 
     /**
      * @inheritdoc
-     */
-    /**
-     * @inheritdoc
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getContentHtml()
     {
@@ -319,5 +317,13 @@ abstract class AbstractClass extends Template
     public function getName()
     {
         return static::NAME;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDetailUrl()
+    {
+        return '';
     }
 }

@@ -21,7 +21,8 @@
 define([
     'jquery',
     'gridstack',
-    'gridstackJqueryUi'
+    'gridstackJqueryUi',
+    'touchPunch'
 ], function ($) {
     'use strict';
     $.widget('mageplaza.initGridStack', {
@@ -33,7 +34,9 @@ define([
                 gridWidget = [];
             var savePositionUrl = this.options.url;
 
+
             var options = {
+                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
                 cellHeight: 20,
                 verticalMargin: 10
             };
