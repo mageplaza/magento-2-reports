@@ -34,7 +34,7 @@ class Dashboard extends Template
     /**
      * @var string
      */
-    protected $_template = 'dashboard/index.phtml';
+    protected $_template = 'Mageplaza_Reports::dashboard.phtml';
 
     /**
      * @var CardsManageFactory
