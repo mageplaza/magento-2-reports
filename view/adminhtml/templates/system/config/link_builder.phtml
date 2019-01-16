@@ -1,0 +1,83 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterCoupon
+ * @copyright   Copyright (c) 2018 Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+$url = $block->getBaseUrl();
+?>
+
+<button id="mp-reports-builder" type="button" class="primary"><?php echo __('Generate') ?></button>
+<div class="mp-reports-link-builder">
+    <input type="text" id="mp-reports-link-builder-input" value="" readonly="readonly"/>
+    <div class="input-group-btn">
+        <button id="mp-reports-link-builder-copy" type="button" title="Copy URL to clipboard"
+                data-clipboard-target="#better-coupon-link-builder-input">
+            <i aria-hidden="true" data-hidden="true" class="fa fa-clipboard"></i>
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        var linkContainer = $('.mp-reports-link-builder'),
+            urlInput = $('#mp-reports-link-builder-input'),
+            buttonCopy = $('#mp-reports-link-builder-copy'),
+            accessKeyEl = $('#mageplaza_reports_mobile_access_key');
+
+        linkContainer.hide();
+
+        urlInput.on('click', function (el) {
+            $(this).select();
+        });
+
+        buttonCopy.on('click', function (e) {
+            urlInput.select();
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+
+            e.currentTarget.setAttribute('class', 'mp-tooltipped');
+            e.currentTarget.setAttribute('aria-label', '<?php echo __('Copied!') ?>');
+        });
+        buttonCopy.on('mouseleave', function (e) {
+            e.currentTarget.removeAttribute('class');
+            e.currentTarget.removeAttribute('aria-label');
+        });
+
+        $('#mp-reports-builder').on('click', function () {
+            var isValid = true;
+
+            accessKeyEl.addClass('required-entry');
+            isValid &= accessKeyEl.valid();
+            accessKeyEl.removeClass('required-entry');
+
+            if (!isValid) {
+                linkContainer.hide();
+                return;
+            }
+
+            var url = '<?= $url ?>';
+
+            url += 'mpreports/dashboard/index?accessKey=' + accessKeyEl.val().trim();
+
+            urlInput.val(url);
+            linkContainer.show();
+        });
+    });
+</script>
+

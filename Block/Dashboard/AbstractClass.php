@@ -73,7 +73,7 @@ abstract class AbstractClass extends Template
     )
     {
         parent::__construct($context, $data);
-
+        $this->setArea('adminhtml');
         $this->_helperData = $helperData;
     }
 
@@ -84,7 +84,8 @@ abstract class AbstractClass extends Template
     public function getContentHtml()
     {
         if (static::MAGE_REPORT_CLASS) {
-            return $this->getLayout()->createBlock(static::MAGE_REPORT_CLASS)
+
+            return $this->getLayout()->createBlock(static::MAGE_REPORT_CLASS)->setArea('adminhtml')
                 ->toHtml();
         }
 

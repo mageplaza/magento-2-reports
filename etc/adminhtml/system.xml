@@ -43,6 +43,14 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
+            <group id="mobile" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mobile Dashboard</label>
+                <field id="access_key" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                </field>
+                <field id="auto_generate" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Mageplaza\Reports\Block\Adminhtml\System\Config\LinkBuilder</frontend_model>
+                </field>
+            </group>
         </section>
     </system>
 </config>

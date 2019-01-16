@@ -22,6 +22,7 @@
 $cards  = $block->getCards();
 $params = $block->getRequest()->getParams();
 ?>
+<div style="clear: both; height: 20px"></div>
 <div class="ar_dashboard">
     <div class="date-range-picker"
          data-mage-init='{"initDateRange":{"url":"<?php echo $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>

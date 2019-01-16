@@ -113,6 +113,8 @@ define([
                     var dashboard = $('<div>' + res.dashboard + '</div>').find('.dashboard-container');
                     dashboardContainer.html(dashboard.html());
                     dashboardContainer.trigger('contentUpdated');
+                },
+                error:function (res) {
                 }
             })
         },

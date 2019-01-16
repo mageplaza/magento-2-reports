@@ -377,4 +377,14 @@ class Data extends AbstractData
     {
         return false;
     }
+
+    /**
+     * @param null $storeId
+     *
+     * @return array|mixed
+     */
+    public function getConfigMobileAccessKey($storeId = null)
+    {
+        return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/mobile/access_key', $storeId);
+    }
 }

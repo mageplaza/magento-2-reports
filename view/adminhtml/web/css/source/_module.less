@@ -21,3 +21,89 @@
 li#menu-mageplaza-reports-dashboard ~ li#menu-magento-backend-dashboard {
   display: none;
 }
+
+#mp-reports-builder {
+  margin-bottom: 10px;
+}
+
+#mp-reports-link-builder-input {
+  background: #fff !important;
+  font-size: 14px;
+  cursor: auto !important;
+  display: table-cell;
+  color: #2e2e2e !important;
+  border: 1px solid #e5e5e5 !important;
+  opacity: 1 !important;
+  border-radius: 3px 0 0 3px !important;
+  width: calc(~"100% - 35px") !important;
+  float: left;
+}
+
+#mp-reports-link-builder-copy {
+  margin-left: 0;
+  background-color: #fafafa;
+  color: #2e2e2e;
+  padding: 6px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 0 3px 3px 0;
+  font-size: 14px;
+  font-weight: 400;
+  border-left: none;
+  &:active {
+    background-color: #e1e1e1;
+    border-color: #e3e3e3;
+    color: #2e2e2e;
+  }
+}
+
+.mp-tooltipped {
+  position: relative;
+  &:before {
+    position: absolute;
+    z-index: 1000001;
+    display: none;
+    width: 0;
+    height: 0;
+    color: rgba(0, 0, 0, .8);
+    pointer-events: none;
+    content: "";
+    border: 5px solid transparent;
+    top: auto;
+    right: 50%;
+    bottom: -5px;
+    margin-right: -5px;
+    border-bottom-color: rgba(0, 0, 0, .8)
+  }
+  &:after {
+    position: absolute;
+    z-index: 1000000;
+    display: none;
+    padding: 5px 8px;
+    font: normal normal 11px/1.5 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: break-word;
+    white-space: pre;
+    pointer-events: none;
+    content: attr(aria-label);
+    background: rgba(0, 0, 0, .8);
+    border-radius: 3px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    top: 100%;
+    right: 50%;
+    margin-top: 5px;
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%)
+  }
+  &:hover, &:active, &:focus {
+    &:before, &:after {
+      display: inline-block;
+      text-decoration: none
+    }
+  }
+}

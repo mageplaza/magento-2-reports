@@ -34,11 +34,11 @@ define([
                 gridWidget = [];
             var savePositionUrl = this.options.url;
 
-
             var options = {
                 alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
                 cellHeight: 20,
-                verticalMargin: 10
+                verticalMargin: 10,
+                draggable: {handle: '.draggable', scroll: true, appendTo:    'body'},
             };
             gridStackEl.gridstack(options);
             var grid = gridStackEl.data('gridstack');
@@ -57,7 +57,7 @@ define([
                 saveCardPosition(data);
             });
 
-            $('.grid-stack-item').draggable({cancel: ".not-draggable"});
+            // $('.grid-stack-item').draggable({cancel: ".not-draggable"});
 
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
             $('button#mp-ar-card').click(function () {
