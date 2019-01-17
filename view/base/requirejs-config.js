@@ -26,13 +26,17 @@ var config = {
         chartBundle: 'Mageplaza_Reports/js/lib/Chart.bundle.min',
         initDateRange: 'Mageplaza_Reports/js/dashboard/initDateRange',
         initGridStack: 'Mageplaza_Reports/js/dashboard/initGridStack',
-        initChart: 'Mageplaza_Reports/js/dashboard/initChart'
+        initChart: 'Mageplaza_Reports/js/dashboard/initChart',
+        mpReportsMenu: 'Mageplaza_Reports/js/detail/menu'
     },
     map: {
         daterangepicker: {
             'moment': 'Mageplaza_Reports/js/lib/moment.min'
         },
         initDateRange: {
+            'moment': 'Mageplaza_Reports/js/lib/moment.min'
+        },
+        mpReportsMenu: {
             'moment': 'Mageplaza_Reports/js/lib/moment.min'
         },
         gridstack: {
