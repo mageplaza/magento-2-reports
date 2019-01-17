@@ -27,11 +27,11 @@ define([
     'use strict';
     $.widget('mageplaza.initGridStack', {
         options: {
-            url: ''
+            url: '',
+            gridWidget: []
         },
         _create: function () {
-            var gridStackEl = $('.grid-stack'),
-                gridWidget = [];
+            var gridStackEl = $('.grid-stack');
             var savePositionUrl = this.options.url;
 
             var options = {
@@ -45,6 +45,9 @@ define([
             //save card position on change
             gridStackEl.on('change', function (event, items) {
                 var data = {};
+                if(items === undefined){
+                    return;
+                }
                 for (var item of items) {
                     data[item.id] = {
                         'x': item.x,
@@ -72,7 +75,7 @@ define([
                     cardsTableEl.removeClass('_active');
                 }
             });
-
+            var self=this;
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
                     var cartId = $(this).attr('cart-id'),
@@ -81,13 +84,13 @@ define([
                         if (cardEl.length) {
                             cardEl.removeClass('hide');
                             grid.addWidget(cardEl);
-                        } else if (gridWidget[cartId]) {
-                            cardEl = gridWidget[cartId];
+                        } else if (self.options.gridWidget[cartId]) {
+                            cardEl = self.options.gridWidget[cartId];
                             grid.addWidget(cardEl);
                         }
                         cardEl.draggable({cancel: ".not-draggable"});
                     } else {
-                        gridWidget[cartId] = cardEl.attr('data-gs-y', 100).attr('data-gs-x', 100);
+                        self.options.gridWidget[cartId] = cardEl.attr('data-gs-y', 100).attr('data-gs-x', 100);
                         grid.removeWidget(cardEl);
                     }
                     var data = {};
