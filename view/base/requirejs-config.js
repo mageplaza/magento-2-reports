@@ -27,7 +27,6 @@ var config = {
         initDateRange: 'Mageplaza_Reports/js/dashboard/initDateRange',
         initGridStack: 'Mageplaza_Reports/js/dashboard/initGridStack',
         initChart: 'Mageplaza_Reports/js/dashboard/initChart',
-        mpReportsMenu: 'Mageplaza_Reports/js/detail/menu'
     },
     map: {
         daterangepicker: {
@@ -36,7 +35,7 @@ var config = {
         initDateRange: {
             'moment': 'Mageplaza_Reports/js/lib/moment.min'
         },
-        mpReportsMenu: {
+        'Mageplaza_Reports/js/detail/menu': {
             'moment': 'Mageplaza_Reports/js/lib/moment.min'
         },
         gridstack: {

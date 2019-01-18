@@ -26,7 +26,7 @@ $menu           = $block->getMenuUrls() ? $block->getMenuUrls() : [];
 $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
 ?>
 <div id="menu" class="mp_menu"
-     data-mage-init='{"mpReportsMenu":{"gridName":"<?php echo $gridName ?>","date":<?php echo json_encode($date) ?>,"storeUrl":"<?php echo $storeFilterUrl ?>"}}'>
+     data-mage-init='{"Mageplaza_Reports/js/detail/menu":{"gridName":"<?php echo $gridName ?>","date":<?php echo json_encode($date) ?>,"storeUrl":"<?php echo $storeFilterUrl ?>"}}'>
     <div class="admin__action-dropdown-wrap menu-select">
         <a href="#" class="admin__action-dropdown"
            title="Menu"
