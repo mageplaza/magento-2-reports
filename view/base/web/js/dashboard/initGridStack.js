@@ -25,43 +25,21 @@ define([
     'touchPunch'
 ], function ($) {
     'use strict';
+    var gridStackEl = $('.grid-stack');
+
     $.widget('mageplaza.initGridStack', {
         options: {
             url: '',
             gridWidget: []
         },
         _create: function () {
-            var gridStackEl = $('.grid-stack');
-            var savePositionUrl = this.options.url;
-
-            var options = {
-                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-                cellHeight: 20,
-                verticalMargin: 10,
-                draggable: {handle: '.draggable', scroll: true, appendTo:    'body'},
-            };
-            gridStackEl.gridstack(options);
-            var grid = gridStackEl.data('gridstack');
-            //save card position on change
-            gridStackEl.on('change', function (event, items) {
-                var data = {};
-                if(items === undefined){
-                    return;
-                }
-                for (var item of items) {
-                    data[item.id] = {
-                        'x': item.x,
-                        'y': item.y,
-                        'width': item.width,
-                        'height': item.height
-                    }
-                }
-
-                saveCardPosition(data);
-            });
-
-            // $('.grid-stack-item').draggable({cancel: ".not-draggable"});
-
+            this.initGrid();
+            this.options.grid = gridStackEl.data('gridstack');
+            this.changeCardPositionObs();
+            this.toggleCardTable();
+            this.toggleCardVisible();
+        },
+        toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
             $('button#mp-ar-card').click(function () {
                 if (cardsTableEl.hasClass('_active')) {
@@ -75,23 +53,39 @@ define([
                     cardsTableEl.removeClass('_active');
                 }
             });
-            var self=this;
+        },
+        changeCardPositionObs: function () {
+            var self = this;
+            gridStackEl.on('change', function (event, items) {
+                var data = {};
+                if (items === undefined) {
+                    return;
+                }
+                for (var item of items) {
+                    data[item.id] = {
+                        'x': item.x,
+                        'y': item.y,
+                        'width': item.width,
+                        'height': item.height
+                    }
+                }
+
+                self.saveCardPosition(data);
+            });
+        },
+        toggleCardVisible: function () {
+            var self = this;
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
                     var cartId = $(this).attr('cart-id'),
                         cardEl = $('#' + cartId);
                     if (this.checked) {
-                        if (cardEl.length) {
-                            cardEl.removeClass('hide');
-                            grid.addWidget(cardEl);
-                        } else if (self.options.gridWidget[cartId]) {
-                            cardEl = self.options.gridWidget[cartId];
-                            grid.addWidget(cardEl);
-                        }
-                        cardEl.draggable({cancel: ".not-draggable"});
+                        cardEl.removeClass('hide');
+                        self.options.grid.addWidget(cardEl);
                     } else {
-                        self.options.gridWidget[cartId] = cardEl.attr('data-gs-y', 100).attr('data-gs-x', 100);
-                        grid.removeWidget(cardEl);
+                        self.options.grid.removeWidget(cardEl, 0);
+                        cardEl.attr('data-gs-y', 100).attr('data-gs-x', 100);
+                        cardEl.addClass('hide');
                     }
                     var data = {};
                     data[cartId] = {
@@ -102,21 +96,27 @@ define([
                         'height': cardEl.attr('data-gs-height')
                     };
                     // save card position when show/hide card
-                    saveCardPosition(data);
+                    self.saveCardPosition(data);
                 });
             });
+        },
+        saveCardPosition: function (data) {
+            $.ajax({
+                url: this.options.url,
+                data: {items: data},
+                type: 'POST'
+            });
+        },
+        initGrid: function () {
+            var gridStackEl = $('.grid-stack');
 
-            var saveCardPosition = function (data) {
-                $.ajax({
-                    url: savePositionUrl,
-                    data: {items: data},
-                    type: 'POST',
-                    success: function (res) {
-                    },
-                    error: function (res) {
-                    }
-                });
-            }
+            var options = {
+                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+                cellHeight: 20,
+                verticalMargin: 10,
+                draggable: {handle: '.draggable', scroll: true, appendTo: 'body'},
+            };
+            gridStackEl.gridstack(options);
         }
     });
 
