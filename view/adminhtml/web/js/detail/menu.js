@@ -162,9 +162,13 @@ define([
                 if (typeof params.mpFilter === 'undefined') {
                     params.mpFilter = {};
                 }
-                params.mpFilter.orderStatus = $('#order_status :input').serializeArray()
-                ;
+                params.mpFilter.orderStatus = $('#order_status :input').serializeArray();
                 grid.reload();
+            });
+            $('body').click(function (e) {
+                if (!$(e.target).parents().hasClass('mp-rp-order-status')) {
+                    $('.mp-rp-order-status').removeClass('_active');
+                }
             });
         }
     });
