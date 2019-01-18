@@ -16452,3 +16452,15 @@ body._in-resize * {
         padding-top: 1rem;
     }
 }
+.grid-stack .view-detail{
+    display: none;
+}
+
+@media all and (max-width: 768px) {
+    .admin__data-grid-action-columns-menu._overflow .admin__action-dropdown-menu-content{
+        width: 20rem;
+    }
+    .ar_dashboard .dashboard-item-title{
+        width: 80%;
+    }
+}
