@@ -57,6 +57,7 @@ $params = $block->getRequest()->getParams();
                                        id="card-<?php echo $card->getId() ?>"
                                        cart-id="<?php echo $card->getId(); ?>">
                                 <label class="admin__field-label"
+                                       title="<?php echo $card->getTitle(); ?>"
                                        for="card-<?php echo $card->getId() ?>"><?php echo $card->getTitle(); ?></label>
                             </div>
                         <?php endforeach; ?>
