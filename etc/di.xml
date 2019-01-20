@@ -40,6 +40,7 @@
                 <item name="shipping" xsi:type="string">Mageplaza\Reports\Block\Dashboard\Shipping</item>
                 <item name="lifetimeSales" xsi:type="string">Mageplaza\Reports\Block\Dashboard\LifetimeSales</item>
                 <item name="averageOrder" xsi:type="string">Mageplaza\Reports\Block\Dashboard\AverageOrder</item>
+                <item name="conversionFunnel" xsi:type="string">Mageplaza\Reports\Block\Dashboard\ConversionFunnel</item>
             </argument>
         </arguments>
     </type>

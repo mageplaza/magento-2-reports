@@ -1,0 +1,53 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_ReportsPro
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Reports\Block\Dashboard\ConversionFunnel $block */
+?>
+<div class="funnel-container" style="position: absolute; z-index: 1; width: 100%;height: 15%">
+    <img src="<?= $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/funnel-container1.png') ?>">
+    <div class="viewed" style="position: absolute; z-index: 1; width: 100%;height: 15%">
+        <img src="<?= $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/viewed.png') ?>">
+        <?php echo __('Product Viewed: ') . $block->getProductViews() ?>
+    </div>
+    <div class="cart">
+
+        <?php echo __('Add To Cart: ') . $block->getAllCartItems() ?>
+    </div>
+    <div class="ordered">
+
+        <?php echo __('Ordered: ') . $block->getAllOrderItem() ?>
+    </div>
+</div>
+<style>
+    .funnel-container img{
+        position: absolute;
+        max-height: 95%;
+        left: 0;
+        margin: auto;
+        right: 0;
+    }
+    .funnel-container{
+        position: relative;
+        overflow: scroll;
+        height: 100%;
+        text-align: center;
+    }
+</style>
