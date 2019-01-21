@@ -22,7 +22,7 @@
 $url = $block->getBaseUrl();
 ?>
 
-<button id="mp-reports-builder" type="button" class="primary"><?php echo __('Generate') ?></button>
+<button id="mp-reports-builder" type="button" class="primary"><?php echo __('Change Key') ?></button>
 <div class="mp-reports-link-builder">
     <input type="text" id="mp-reports-link-builder-input" value="" readonly="readonly"/>
     <div class="input-group-btn">
@@ -35,13 +35,14 @@ $url = $block->getBaseUrl();
 
 <script type="text/javascript">
     require(['jquery'], function ($) {
-        var linkContainer = $('.mp-reports-link-builder'),
-            urlInput = $('#mp-reports-link-builder-input'),
+        var urlInput = $('#mp-reports-link-builder-input'),
             buttonCopy = $('#mp-reports-link-builder-copy'),
             accessKeyEl = $('#mageplaza_reports_mobile_access_key');
 
-        linkContainer.hide();
+        var url = '<?= $url ?>';
+        url += 'mpreports/dashboard/index?accessKey=' + accessKeyEl.val().trim();
 
+        urlInput.val(url);
         urlInput.on('click', function (el) {
             $(this).select();
         });
@@ -60,24 +61,14 @@ $url = $block->getBaseUrl();
         });
 
         $('#mp-reports-builder').on('click', function () {
-            var isValid = true;
-
-            accessKeyEl.addClass('required-entry');
-            isValid &= accessKeyEl.valid();
-            accessKeyEl.removeClass('required-entry');
-
-            if (!isValid) {
-                linkContainer.hide();
-                return;
-            }
-
-            var url = '<?= $url ?>';
-
-            url += 'mpreports/dashboard/index?accessKey=' + accessKeyEl.val().trim();
-
-            urlInput.val(url);
-            linkContainer.show();
+            var randKey = Math.random().toString(36).substring(2, 12)
+            accessKeyEl.val(randKey);
         });
     });
 </script>
+<style>
+    #mageplaza_reports_mobile_access_key{
+        pointer-events: none;
+    }
+</style>
 

@@ -147,6 +147,9 @@
     vertical-align: baseline;
 }
 
+.mp-dashboard-advanced-reports-actions a:hover{
+    color: #fff;
+}
 .mp-remove-dashboard-advanced-reports:after {
     font-family: 'Admin Icons';
     font-style: normal;
