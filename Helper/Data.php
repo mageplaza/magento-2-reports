@@ -120,13 +120,13 @@ class Data extends AbstractData
     {
         if ($dateRange = $this->_request->getParam('dateRange')) {
             if ($this->isCompare()) {
-                $startDate        = $dateRange[0];
-                $endDate          = $dateRange[1];
-                $compareStartDate = $dateRange[2];
-                $compareEndDate   = $dateRange[3];
+                $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
+                $compareEndDate   = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
             } else {
-                $startDate        = $dateRange[0];
-                $endDate          = $dateRange[1];
+                $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
                 $compareStartDate = null;
                 $compareEndDate   = null;
             }
@@ -137,6 +137,18 @@ class Data extends AbstractData
         }
 
         return [$startDate, $endDate, $compareStartDate, $compareEndDate];
+    }
+
+    /**
+     * @param $format
+     * @param $date
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function formatDate($format, $date)
+    {
+        return (new \DateTime($date))->format($format);
     }
 
     /**
