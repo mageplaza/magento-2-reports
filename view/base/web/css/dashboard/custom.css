@@ -131,13 +131,12 @@
 
 .mp-action-advanced-reports {
     background-color: #007dbd;
-    border-color: #007dbd;
     color: #ffffff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
     white-space: nowrap;
     font-size: 1.6rem;
     letter-spacing: .025em;
-    border: 1px solid;
+    border: 1px solid #007dbd;
     display: inline-block;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 600;
@@ -223,8 +222,8 @@
 .ar_dashboard .dashboard-item-content {
     position: absolute;
     padding: -10px;
-    overflow-y: auto;
-    bottom: 0px;
+    overflow-y: overlay;
+    bottom: 0;
     top: 30px;
     right: 10px;
     left: 10px;
@@ -241,7 +240,7 @@
 }
 
 .ar_dashboard .dashboard-item-content-chart {
-    overflow-y: auto;
+    overflow-y: overlay;
     position: absolute;
     bottom: 0;
     top: 75px;
@@ -324,7 +323,7 @@
 
 /* Conversion Funnel Card */
 
-.funnel-container img{
+.funnel-container img {
     position: absolute;
     width: 95%;
     height: 100%;
@@ -333,14 +332,16 @@
     margin: auto;
     right: 0;
 }
-.funnel-container.funnel{
+
+.funnel-container.funnel {
     margin-top: 20px;
     position: absolute;
     height: calc(100% - 44px);
     width: 95%;
     text-align: center;
 }
-.funnel-container .viewed,.funnel-container .cart,.funnel-container .ordered{
+
+.funnel-container .viewed, .funnel-container .cart, .funnel-container .ordered {
     position: absolute;
     width: 100%;
     transform: translate(-50%, -50%);
@@ -348,12 +349,15 @@
     color: white;
     font-weight: 800;
 }
-.funnel-container .viewed{
+
+.funnel-container .viewed {
     top: 19%;
 }
-.funnel-container .cart{
+
+.funnel-container .cart {
     top: 46%;
 }
-.funnel-container .ordered{
+
+.funnel-container .ordered {
     top: 73%;
 }

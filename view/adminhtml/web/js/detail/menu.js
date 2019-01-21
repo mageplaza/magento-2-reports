@@ -82,7 +82,7 @@ define([
 
             });
         },
-        initStoreSwitcher: function (grid) {
+        initStoreSwitcher: function () {
             var self = this;
             $('[data-role="stores-list"] a').on("click", function (e) {
                 var grid = uiRegistry.get(self.options.gridName);
@@ -122,7 +122,7 @@ define([
                 grid.reload();
             });
         },
-        initPeriodSelect: function (grid) {
+        initPeriodSelect: function () {
             var self = this;
             $('.period select').change(function () {
                 var grid = uiRegistry.get(self.options.gridName);
@@ -134,7 +134,7 @@ define([
                 grid.reload();
             });
         },
-        initDateUsedSelect: function (grid) {
+        initDateUsedSelect: function () {
             var self = this;
             $('.date_used select').change(function () {
                 var grid = uiRegistry.get(self.options.gridName);
@@ -149,14 +149,14 @@ define([
         initOrderStatusSelect: function () {
             var self = this;
             var cardsTableEl = $('.mp-rp-order-status.admin__action-dropdown-wrap.admin__data-grid-action-columns');
-            $('button#mp-rp-order-status').click(function () {
+            $('button#mp-rp-order-status').on('click',function () {
                 if (cardsTableEl.hasClass('_active')) {
                     cardsTableEl.removeClass('_active');
                 } else {
                     cardsTableEl.addClass('_active');
                 }
             });
-            $('.order_status input').click(function () {
+            $('.order_status input').on('click',function () {
                 var grid = uiRegistry.get(self.options.gridName);
                 var params = grid.get('params');
                 if (typeof params.mpFilter === 'undefined') {
@@ -165,7 +165,7 @@ define([
                 params.mpFilter.orderStatus = $('#order_status :input').serializeArray();
                 grid.reload();
             });
-            $('body').click(function (e) {
+            $('body').on('click',function (e) {
                 if (!$(e.target).parents().hasClass('mp-rp-order-status')) {
                     $('.mp-rp-order-status').removeClass('_active');
                 }

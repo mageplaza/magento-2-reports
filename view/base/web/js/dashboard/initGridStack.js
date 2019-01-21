@@ -39,14 +39,14 @@ define([
         },
         toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
-            $('button#mp-ar-card').click(function () {
+            $('button#mp-ar-card').on('click',function () {
                 if (cardsTableEl.hasClass('_active')) {
                     cardsTableEl.removeClass('_active');
                 } else {
                     cardsTableEl.addClass('_active');
                 }
             });
-            $('body').click(function (e) {
+            $('body').on('click',function (e) {
                 if (!$(e.target).parents().hasClass('mp-ar-card')) {
                     cardsTableEl.removeClass('_active');
                 }
@@ -77,7 +77,7 @@ define([
             var self = this;
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
-                    var cartId = $(this).attr('cart-id'),
+                    var cartId = $(this).attr('data-cart-id'),
                         cardEl = $('#' + cartId);
                     if (this.checked) {
                         cardEl.removeClass('hide');
@@ -112,7 +112,7 @@ define([
 
             var options = {
                 alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-                cellHeight: 20,
+                cellHeight: 30,
                 verticalMargin: 10,
                 draggable: {handle: '.draggable', scroll: true, appendTo: 'body'},
             };

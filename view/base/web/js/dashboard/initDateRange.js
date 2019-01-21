@@ -114,8 +114,6 @@ define([
                     dashboardContainer.html(dashboard.html());
                     dashboardContainer.trigger('contentUpdated');
                 },
-                error:function (res) {
-                }
             })
         },
 

@@ -55,7 +55,7 @@ $params = $block->getRequest()->getParams();
                                 <input class="admin__control-checkbox"
                                        type="checkbox" <?php echo $card->getVisible() ? 'checked' : ''; ?>
                                        id="card-<?php echo $card->getId() ?>"
-                                       cart-id="<?php echo $card->getId(); ?>">
+                                       data-cart-id="<?php echo $card->getId(); ?>">
                                 <label class="admin__field-label"
                                        title="<?php echo $card->getTitle(); ?>"
                                        for="card-<?php echo $card->getId() ?>"><?php echo $card->getTitle(); ?></label>
@@ -113,7 +113,7 @@ $params = $block->getRequest()->getParams();
             <?php endforeach; ?>
             <script>
                 require(['jquery'], function ($) {
-                    $('.view-detail a').click(function (e) {
+                    $('.view-detail a').on('click',function (e) {
                         var href = $(this).attr('href');
                         if (href === '') {
                             if (!$(this).parent().find('.upgrade-nof').length) {
@@ -125,7 +125,7 @@ $params = $block->getRequest()->getParams();
                             e.preventDefault();
                         }
                     });
-                    $('body').click(function (e) {
+                    $('body').on('click',function (e) {
                         if (!$(e.target).parents().hasClass('view-detail')) {
                             $('.upgrade-nof').remove();
                         }

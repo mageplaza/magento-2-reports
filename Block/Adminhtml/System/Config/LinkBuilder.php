@@ -14,8 +14,8 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_BetterCoupon
- * @copyright   Copyright (c) 2018 Mageplaza (https://www.mageplaza.com/)
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
@@ -28,7 +28,7 @@ use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class LinkBuilder
- * @package Mageplaza\BetterCoupon\Block\Adminhtml\System\Config
+ * @package Mageplaza\Reports\Block\Adminhtml\System\Config
  */
 class LinkBuilder extends Field
 {
@@ -62,7 +62,8 @@ class LinkBuilder extends Field
     /**
      * Unset scope
      *
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param AbstractElement $element
+     *
      * @return string
      */
     public function render(AbstractElement $element)
@@ -75,10 +76,11 @@ class LinkBuilder extends Field
     /**
      * Get the button Generate & Send
      *
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param AbstractElement $element
+     *
      * @return string
      */
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    protected function _getElementHtml(AbstractElement $element)
     {
         return $this->_toHtml();
     }

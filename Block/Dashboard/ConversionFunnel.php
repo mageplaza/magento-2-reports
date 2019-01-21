@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_ReportsPro
+ * @package     Mageplaza_Reports
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -28,8 +28,8 @@ use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollec
 use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 
 /**
- * Class AbandonedCart
- * @package Mageplaza\ReportsPro\Block\Dashboard
+ * Class ConversionFunnel
+ * @package Mageplaza\Reports\Block\Dashboard
  */
 class ConversionFunnel extends AbstractClass
 {
@@ -111,6 +111,9 @@ class ConversionFunnel extends AbstractClass
         return $collection->getSize();
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllOrderItem()
     {
         $collection = $this->orderItemCollectionFactory->create();
@@ -120,7 +123,7 @@ class ConversionFunnel extends AbstractClass
     }
 
     /**
-     * @param $collection
+     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\ReportsPro\Model\ResourceModel\Viewed\Collection|\Magento\Quote\Model\ResourceModel\Quote\Item\Collection| $collection
      * @return mixed
      */
     protected function addFilter($collection)
@@ -143,7 +146,9 @@ class ConversionFunnel extends AbstractClass
     /**
      * @param null $from
      * @param null $to
+     *
      * @return array
+     * @throws \Exception
      */
     protected function getDateRange($from = null, $to = null)
     {

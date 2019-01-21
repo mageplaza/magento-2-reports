@@ -48,6 +48,6 @@ class AverageOrder extends AbstractClass
             return $this->format($total['average']);
         }
 
-        return parent::getTotalLabel();
+        return '';
     }
 }

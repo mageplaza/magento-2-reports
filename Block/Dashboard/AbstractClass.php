@@ -247,6 +247,7 @@ abstract class AbstractClass extends Template
 
     /**
      * @return array
+     * @throws \Exception
      */
     protected function getDateRange()
     {

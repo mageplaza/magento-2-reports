@@ -42,6 +42,7 @@ define([
             new Chart(ctx, data);
         },
         getOptions: function () {
+            var self = this;
             return {
                 fillColor: 'rgba(220,220,220,0.9)',
                 legend: {

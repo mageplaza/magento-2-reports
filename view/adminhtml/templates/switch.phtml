@@ -41,7 +41,7 @@
 </section>
 <script>
     require(['jquery'], function ($) {
-        $('.mp-remove-dashboard-advanced-reports').click(function () {
+        $('.mp-remove-dashboard-advanced-reports').on('click',function () {
             $('.mp-dashboard-advanced-reports').remove();
             $.ajax({
                 url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',

@@ -43,7 +43,7 @@ $url = $block->getBaseUrl();
         url += 'mpreports/dashboard/index?accessKey=' + accessKeyEl.val().trim();
 
         urlInput.val(url);
-        urlInput.on('click', function (el) {
+        urlInput.on('click', function () {
             $(this).select();
         });
 
@@ -62,6 +62,9 @@ $url = $block->getBaseUrl();
 
         $('#mp-reports-builder').on('click', function () {
             var randKey = Math.random().toString(36).substring(2, 12)
+                + Math.random().toString(36).substring(2, 12)
+                + Math.random().toString(36).substring(2, 12)
+                + Math.random().toString(36).substring(2, 4);
             accessKeyEl.val(randKey);
         });
     });

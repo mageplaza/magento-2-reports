@@ -4998,7 +4998,7 @@ table > caption {
     margin-left: 8.33333333%;
 }
 .col-xs-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
 }
 .row-gutter {
     margin-left: -1.5rem;
@@ -15978,7 +15978,7 @@ body._in-resize * {
         margin-left: 8.33333333%;
     }
     .col-m-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
     .page-layout-admin-2columns-left .page-columns {
         margin-left: -30px;
@@ -16198,7 +16198,7 @@ body._in-resize * {
         margin-left: 8.33333333%;
     }
     .col-l-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
     .steps-wizard .steps-wizard-navigation {
         text-align: left;
@@ -16362,7 +16362,7 @@ body._in-resize * {
         margin-left: 8.33333333%;
     }
     .col-xl-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 @media all and (max-width: 767px) {

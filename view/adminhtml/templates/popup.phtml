@@ -46,10 +46,10 @@
                     }
                 }]
             };
-
-            var popup = modal(options, $('#popup-modal'));
-            $('#popup-modal').modal('openModal');
-            $('#popup-modal').on('modalclosed', function () {
+            var popup = $('#popup-modal');
+            modal(options, popup);
+            popup.modal('openModal');
+            popup.on('modalclosed', function () {
                 $.ajax({
                     url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
                     data: {firstTimeInstall: 1}

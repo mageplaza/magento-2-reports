@@ -45,6 +45,7 @@ class AverageOrderValue extends AbstractClass
     /**
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getTotal()
     {
@@ -57,6 +58,7 @@ class AverageOrderValue extends AbstractClass
     /**
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getRate()
     {
