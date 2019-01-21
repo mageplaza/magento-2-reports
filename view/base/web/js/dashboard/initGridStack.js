@@ -25,7 +25,6 @@ define([
     'touchPunch'
 ], function ($) {
     'use strict';
-    var gridStackEl = $('.grid-stack');
 
     $.widget('mageplaza.initGridStack', {
         options: {
@@ -34,7 +33,6 @@ define([
         },
         _create: function () {
             this.initGrid();
-            this.options.grid = gridStackEl.data('gridstack');
             this.changeCardPositionObs();
             this.toggleCardTable();
             this.toggleCardVisible();
@@ -56,6 +54,8 @@ define([
         },
         changeCardPositionObs: function () {
             var self = this;
+            var gridStackEl = $('.grid-stack');
+
             gridStackEl.on('change', function (event, items) {
                 var data = {};
                 if (items === undefined) {
@@ -84,7 +84,7 @@ define([
                         self.options.grid.addWidget(cardEl);
                     } else {
                         self.options.grid.removeWidget(cardEl, 0);
-                        cardEl.attr('data-gs-y', 100).attr('data-gs-x', 100);
+                        cardEl.attr('data-gs-y', 100).attr('data-gs-x', 0);
                         cardEl.addClass('hide');
                     }
                     var data = {};
@@ -117,6 +117,7 @@ define([
                 draggable: {handle: '.draggable', scroll: true, appendTo: 'body'},
             };
             gridStackEl.gridstack(options);
+            this.options.grid = gridStackEl.data('gridstack');
         }
     });
 

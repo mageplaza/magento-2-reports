@@ -54,12 +54,13 @@ class Data extends AbstractData
 
     /**
      * Data constructor.
-     * @param Context $context
+     *
+     * @param Context                $context
      * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface $storeManager
-     * @param CollectionFactory $orderCollectionFactory
-     * @param DateTime $dateTime
-     * @param TimezoneInterface $timezone
+     * @param StoreManagerInterface  $storeManager
+     * @param CollectionFactory      $orderCollectionFactory
+     * @param DateTime               $dateTime
+     * @param TimezoneInterface      $timezone
      */
     public function __construct(
         Context $context,
@@ -99,6 +100,7 @@ class Data extends AbstractData
 
     /**
      * @param null $storeId
+     *
      * @return bool
      */
     public function isEnabled($storeId = null)
@@ -109,9 +111,12 @@ class Data extends AbstractData
     }
 
     /**
+     * @param null $format
+     *
      * @return array
+     * @throws \Exception
      */
-    public function getDateRange()
+    public function getDateRange($format = null)
     {
         if ($dateRange = $this->_request->getParam('dateRange')) {
             if ($this->isCompare()) {
@@ -126,26 +131,30 @@ class Data extends AbstractData
                 $compareEndDate   = null;
             }
         } else {
-            list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now');
+            list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
             $days = date('z', strtotime($endDate) - strtotime($startDate));
-            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat('-1 month -' . ($days + 1) . ' day', '-1 month -1 day');
+            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat('-1 month -' . ($days + 1) . ' day', '-1 month -1 day', null, $format);
         }
 
         return [$startDate, $endDate, $compareStartDate, $compareEndDate];
     }
 
     /**
-     * @param $startDate
+     * @param      $startDate
      * @param null $endDate
      * @param null $isConvertToLocalTime
+     *
+     * @param null $format
+     *
      * @return array
+     * @throws \Exception
      */
-    public function getDateTimeRangeFormat($startDate, $endDate = null, $isConvertToLocalTime = null)
+    public function getDateTimeRangeFormat($startDate, $endDate = null, $isConvertToLocalTime = null, $format = null)
     {
         if (!$endDate) {
             $endDate = $startDate;
         }
-        $startDate = (new \DateTime($startDate, new \DateTimeZone($this->getTimezone())))->setTime(0, 0, 0);
+        $startDate = (new \DateTime($startDate, new \DateTimeZone($this->getTimezone())))->setTime(00, 00, 00);
         $endDate   = (new \DateTime($endDate, new \DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
 
         if ($isConvertToLocalTime) {
@@ -153,7 +162,7 @@ class Data extends AbstractData
             $endDate->setTimezone(new \DateTimeZone('UTC'));
         }
 
-        return [$startDate->format('Y-m-d H:i:s'), $endDate->format('Y-m-d H:i:s')];
+        return [$startDate->format($format ? $format : 'Y-m-d H:i:s'), $endDate->format($format ? $format : 'Y-m-d H:i:s')];
     }
 
     /**
@@ -167,6 +176,7 @@ class Data extends AbstractData
     /**
      * @param $startDate
      * @param $endDate
+     *
      * @return false|int|string
      */
     public function getDaysByDateRange($startDate, $endDate)
@@ -175,13 +185,14 @@ class Data extends AbstractData
             return 0;
         }
 
-        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
+        return (int) ((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
     }
 
     /**
-     * @param $collection
-     * @param $startDate
+     * @param      $collection
+     * @param      $startDate
      * @param null $endDate
+     *
      * @return mixed
      */
     public function addTimeFilter($collection, $startDate, $endDate = null)
@@ -194,9 +205,10 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $startDate
+     * @param      $startDate
      * @param null $endDate
-     * @param $days
+     * @param      $days
+     *
      * @return array
      * @throws \Exception
      */
@@ -228,6 +240,7 @@ class Data extends AbstractData
 
     /**
      * @param $collection
+     *
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -235,10 +248,10 @@ class Data extends AbstractData
     {
         if ($this->_request->getParam('store')) {
             $collection->addFieldToFilter('store_id', $this->_request->getParam('store'));
-        } else if ($this->_request->getParam('website')) {
+        } elseif ($this->_request->getParam('website')) {
             $storeIds = $this->storeManager->getWebsite($this->_request->getParam('website'))->getStoreIds();
             $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-        } else if ($this->_request->getParam('group')) {
+        } elseif ($this->_request->getParam('group')) {
             $storeIds = $this->storeManager->getGroup($this->_request->getParam('group'))->getStoreIds();
             $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
         }
@@ -248,6 +261,7 @@ class Data extends AbstractData
 
     /**
      * @param $collection
+     *
      * @return mixed
      */
     public function addStatusFilter($collection)
@@ -279,10 +293,10 @@ class Data extends AbstractData
 
                 if ($store = $this->_request->getParam('store')) {
                     $collection->addFieldToFilter('store_id', $store);
-                } else if ($website = $this->_request->getParam('website')) {
+                } elseif ($website = $this->_request->getParam('website')) {
                     $storeIds = $this->storeManager->getWebsite($website)->getStoreIds();
                     $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-                } else if ($group = $this->_request->getParam('group')) {
+                } elseif ($group = $this->_request->getParam('group')) {
                     $storeIds = $this->storeManager->getGroup($group)->getStoreIds();
                     $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
                 }
@@ -303,8 +317,9 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $startDate
+     * @param      $startDate
      * @param null $endDate
+     *
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -329,6 +344,7 @@ class Data extends AbstractData
     /**
      * @param $startDate
      * @param $endDate
+     *
      * @return \Magento\Framework\DataObject
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -357,7 +373,7 @@ class Data extends AbstractData
                 if ($this->_request->getParam('group')) {
                     $storeIds = $this->storeManager->getGroup($this->_request->getParam('group'))->getStoreIds();
                     $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-                } else if (!$collection->isLive()) {
+                } elseif (!$collection->isLive()) {
                     $collection->addFieldToFilter(
                         'store_id',
                         ['eq' => $this->storeManager->getStore(\Magento\Store\Model\Store::ADMIN_CODE)->getId()]
