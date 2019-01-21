@@ -49,5 +49,6 @@
         <!--<referenceContainer name="header.container" remove="true"/>-->
         <referenceContainer name="page.top" remove="true"/>
         <referenceContainer name="footer-container" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
     </body>
 </page>
