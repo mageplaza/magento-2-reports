@@ -5062,6 +5062,7 @@ body {
     display: inline-block;
     margin-left: -4px;
     vertical-align: top;
+    width: 100%;
     /*width: calc(100% - 8.800000000000001rem);*/
 }
 .page-content {
