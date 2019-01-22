@@ -113,6 +113,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getAllOrderItem()
     {
@@ -124,7 +125,9 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\ReportsPro\Model\ResourceModel\Viewed\Collection|\Magento\Quote\Model\ResourceModel\Quote\Item\Collection| $collection
+     *
      * @return mixed
+     * @throws \Exception
      */
     protected function addFilter($collection)
     {

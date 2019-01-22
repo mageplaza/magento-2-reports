@@ -29,6 +29,7 @@ use Mageplaza\Reports\Helper\Data;
 /**
  * Class AbstractClass
  * @package Mageplaza\Reports\Block\Dashboard
+ * @method setArea(string $string)
  */
 abstract class AbstractClass extends Template
 {
@@ -296,6 +297,7 @@ abstract class AbstractClass extends Template
 
     /**
      * @return array
+     * @throws \Exception
      */
     protected function getChartDataLabel()
     {
