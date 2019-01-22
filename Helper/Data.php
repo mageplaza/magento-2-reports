@@ -353,8 +353,9 @@ class Data extends AbstractData
         $collection = $this->addStoreFilter($collection);
         $collection = $this->addTimeFilter($collection, $startDate, $endDate);
         $collection->load();
+        $sales = $collection->getFirstItem();
 
-        return $sales = $collection->getFirstItem();
+        return $sales;
     }
 
     /**
@@ -399,8 +400,9 @@ class Data extends AbstractData
             }
         }
         $collection->load();
+        $totals = $collection->getFirstItem();
 
-        return $totals = $collection->getFirstItem();
+        return $totals;
     }
 
     /**

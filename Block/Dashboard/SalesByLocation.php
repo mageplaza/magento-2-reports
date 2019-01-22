@@ -77,6 +77,7 @@ class SalesByLocation extends AbstractClass
      *
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
+     * @throws \Exception
      */
     protected function getDataByDateRange($startDate, $endDate, $size = null)
     {

@@ -91,6 +91,7 @@ class RepeatCustomerRate extends AbstractClass
      *
      * @return array|int
      * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
+     * @throws \Exception
      */
     protected function getDataByDate($startDate, $endDate = null)
     {

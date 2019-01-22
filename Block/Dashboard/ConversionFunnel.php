@@ -155,25 +155,25 @@ class ConversionFunnel extends AbstractClass
      * @return array
      * @throws \Exception
      */
-    protected function getDateRange($from = null, $to = null)
+    protected function getDateRange($fromDate = null, $toDate = null)
     {
-        if ($from === null) {
-            $from = isset($this->_request->getParam('mpFilter')['startDate'])
+        if ($fromDate === null) {
+            $fromDate = isset($this->_request->getParam('mpFilter')['startDate'])
                 ? $this->_request->getParam('mpFilter')['startDate']
                 : (($this->_request->getParam('startDate') !== null) ? $this->_request->getParam('startDate') : null);
         }
-        if ($to === null) {
-            $to = isset($this->_request->getParam('mpFilter')['endDate'])
+        if ($toDate === null) {
+            $toDate = isset($this->_request->getParam('mpFilter')['endDate'])
                 ? $this->_request->getParam('mpFilter')['endDate']
                 : (($this->_request->getParam('endDate') !== null) ? $this->_request->getParam('endDate') : null);
         }
-        if ($to == null || $from == null) {
+        if ($toDate == null || $fromDate == null) {
             $dates = $this->_helperData->getDateRange();
-            $from  = $dates[0];
-            $to    = $dates[1];
+            $fromDate  = $dates[0];
+            $toDate    = $dates[1];
         }
 
-        return [$from, $to];
+        return [$fromDate, $toDate];
     }
 
     /**

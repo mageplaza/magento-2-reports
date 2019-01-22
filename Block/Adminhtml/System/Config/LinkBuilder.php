@@ -79,6 +79,7 @@ class LinkBuilder extends Field
      * @param AbstractElement $element
      *
      * @return string
+     * @SuppressWarnings(Unused)
      */
     protected function _getElementHtml(AbstractElement $element)
     {
