@@ -37,6 +37,7 @@ class Shipping extends AbstractClass
     /**
      * @return float|int|string
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getTotal()
     {
@@ -49,6 +50,7 @@ class Shipping extends AbstractClass
     /**
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getRate()
     {

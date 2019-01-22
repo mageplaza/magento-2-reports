@@ -71,11 +71,12 @@ class SalesByLocation extends AbstractClass
     }
 
     /**
-     * @param $startDate
-     * @param $endDate
+     * @param      $startDate
+     * @param      $endDate
      * @param null $size
+     *
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
      */
     protected function getDataByDateRange($startDate, $endDate, $size = null)
     {
@@ -103,6 +104,7 @@ class SalesByLocation extends AbstractClass
     /**
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getCollection()
     {

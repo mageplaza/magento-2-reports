@@ -164,6 +164,7 @@ class CardsManageFactory
      */
     public function getDefaultConfig()
     {
+        /** @var \Magento\Ui\Model\Bookmark $default */
         if($this->_authSession->getUser()){
             $userId = $this->_authSession->getUser()->getId();
             $default = $this->_bookmark->create()->getCollection()

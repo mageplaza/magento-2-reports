@@ -22,7 +22,7 @@
 namespace Mageplaza\Reports\Block\Dashboard;
 
 /**
- * Class TotalSales
+ * Class AverageOrderValue
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class AverageOrderValue extends AbstractClass

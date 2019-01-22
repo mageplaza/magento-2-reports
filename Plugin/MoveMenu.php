@@ -48,6 +48,7 @@ class MoveMenu
      * @param AbstractCommand $subject
      * @param $itemParams
      * @return mixed
+     * @SuppressWarnings(Unused)
      */
     public function afterExecute(AbstractCommand $subject, $itemParams)
     {

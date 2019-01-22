@@ -50,10 +50,11 @@ class RepeatCustomerRate extends AbstractClass
 
     /**
      * RepeatCustomerRate constructor.
+     *
      * @param Template\Context $context
-     * @param Data $helperData
-     * @param OrderFactory $orderFactory
-     * @param array $data
+     * @param Data             $helperData
+     * @param OrderFactory     $orderFactory
+     * @param array            $data
      */
     public function __construct(
         Template\Context $context,
@@ -70,6 +71,7 @@ class RepeatCustomerRate extends AbstractClass
     /**
      * @param $customerId
      * @param $time
+     *
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -84,10 +86,11 @@ class RepeatCustomerRate extends AbstractClass
     }
 
     /**
-     * @param $startDate
+     * @param      $startDate
      * @param null $endDate
+     *
      * @return array|int
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
      */
     protected function getDataByDate($startDate, $endDate = null)
     {
@@ -105,6 +108,7 @@ class RepeatCustomerRate extends AbstractClass
 
         $first  = 0;
         $repeat = [];
+        /** @var \Magento\Sales\Model\Order $order */
         foreach ($customerOrdersPerTime as $order) {
             if ($this->checkRepeatCustomer($order->getCustomerId(), $order->getCreatedAt())) {
                 $repeat[$order->getCustomerId()] = 1;
@@ -119,6 +123,7 @@ class RepeatCustomerRate extends AbstractClass
     /**
      * @param $startDate
      * @param $endDate
+     *
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -144,8 +149,12 @@ class RepeatCustomerRate extends AbstractClass
      */
     public function getChartData()
     {
-        $data                = [];
-        $date                = $this->_helperData->getDateRange();
+        $data = [];
+        try {
+            $date = $this->_helperData->getDateRange();
+        } catch (\Exception $e) {
+            $date = ['',''];
+        }
         $data['data']        = $this->getDataByDateRange($date[0], $date[1])['data'];
         $data['compareData'] = $this->getDataByDateRange($date[0], $date[1])['compareData'];
         $data['days']        = $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
@@ -166,6 +175,7 @@ class RepeatCustomerRate extends AbstractClass
     /**
      * @param $startDate
      * @param $endDate
+     *
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -182,6 +192,7 @@ class RepeatCustomerRate extends AbstractClass
     /**
      * @return int|string
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getTotal()
     {
@@ -194,6 +205,7 @@ class RepeatCustomerRate extends AbstractClass
     /**
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getRate()
     {

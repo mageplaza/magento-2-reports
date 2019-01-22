@@ -26,7 +26,7 @@ use Magento\Sales\Model\OrderFactory;
 use Mageplaza\Reports\Helper\Data;
 
 /**
- * Class Transactions
+ * Class Orders
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class Orders extends AbstractClass
@@ -62,10 +62,12 @@ class Orders extends AbstractClass
     }
 
     /**
-     * @param $date
+     * @param      $date
      * @param null $endDate
+     *
      * @return int
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
+     * @throws \Exception
      */
     protected function getDataByDate($date, $endDate = null)
     {
@@ -80,6 +82,7 @@ class Orders extends AbstractClass
     /**
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getRate()
     {
@@ -101,6 +104,7 @@ class Orders extends AbstractClass
     /**
      * @return int
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getTotal()
     {

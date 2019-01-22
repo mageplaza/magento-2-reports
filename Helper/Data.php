@@ -71,11 +71,11 @@ class Data extends AbstractData
         TimezoneInterface $timezone
     )
     {
+        parent::__construct($context, $objectManager, $storeManager);
+
         $this->_orderCollectionFactory = $orderCollectionFactory;
         $this->_dateTime               = $dateTime;
         $this->_timezone               = $timezone;
-
-        parent::__construct($context, $objectManager, $storeManager);
     }
 
     /**
@@ -201,11 +201,12 @@ class Data extends AbstractData
     }
 
     /**
-     * @param      $collection
-     * @param      $startDate
-     * @param null $endDate
+     * @param   \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
+     * @param                                                                           $startDate
+     * @param null                                                                      $endDate
      *
      * @return mixed
+     * @throws \Exception
      */
     public function addTimeFilter($collection, $startDate, $endDate = null)
     {
@@ -219,12 +220,13 @@ class Data extends AbstractData
     /**
      * @param      $startDate
      * @param null $endDate
-     * @param      $days
+     * @param int  $days
+     * @param int  $isObject
      *
      * @return array
      * @throws \Exception
      */
-    public function getPeriodsDate($startDate, $endDate = null, $days, $isObject = 0)
+    public function getPeriodsDate($startDate, $endDate = null, $days = 0, $isObject = 0)
     {
         $data = [];
         if ($endDate) {
@@ -239,6 +241,7 @@ class Data extends AbstractData
 
         $interval  = new \DateInterval('P1D');
         $daterange = new \DatePeriod($startDate, $interval, $endDate);
+        /** @var \DateTime $date */
         foreach ($daterange as $date) {
             if (!$isObject) {
                 $data[] = $date->format("Y-m-d");
@@ -251,7 +254,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $collection
+     * @param \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -272,7 +275,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $collection
+     * @param \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
      *
      * @return mixed
      */
@@ -334,6 +337,7 @@ class Data extends AbstractData
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getSalesByDateRange($startDate, $endDate = null)
     {
@@ -359,6 +363,7 @@ class Data extends AbstractData
      *
      * @return \Magento\Framework\DataObject
      * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
      */
     public function getTotalsByDateRange($startDate, $endDate)
     {

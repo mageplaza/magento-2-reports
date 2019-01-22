@@ -54,10 +54,10 @@ class Index extends Action
         Data $jsonHelper
     )
     {
+        parent::__construct($context);
+
         $this->resultPageFactory = $resultPageFactory;
         $this->_jsonHelper       = $jsonHelper;
-
-        parent::__construct($context);
     }
 
     /**

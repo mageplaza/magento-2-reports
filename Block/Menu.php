@@ -95,6 +95,7 @@ class Menu extends Template
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function getDateRange()
     {

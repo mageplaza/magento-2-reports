@@ -18,8 +18,13 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-
-$cards  = $block->getCards();
+/** @var \Mageplaza\Reports\Block\Dashboard $block */
+/** @var Mageplaza\Reports\Model\CardsManageFactory $card */
+try {
+    $cards = $block->getCards();
+} catch (Exception $e) {
+    $cards = [];
+}
 $params = $block->getRequest()->getParams();
 ?>
 <div style="clear: both; height: 20px"></div>

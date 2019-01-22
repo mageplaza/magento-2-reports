@@ -222,7 +222,7 @@
 .ar_dashboard .dashboard-item-content {
     position: absolute;
     padding: -10px;
-    overflow-y: overlay;
+    overflow-y: auto;
     bottom: 0;
     top: 30px;
     right: 10px;
@@ -240,7 +240,7 @@
 }
 
 .ar_dashboard .dashboard-item-content-chart {
-    overflow-y: overlay;
+    overflow-y: auto;
     position: absolute;
     bottom: 0;
     top: 75px;

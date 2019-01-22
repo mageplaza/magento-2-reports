@@ -240,6 +240,7 @@ abstract class AbstractClass extends Template
      * @param $date
      * @param null $endDate
      * @return int
+     * @SuppressWarnings(Unused)
      */
     protected function getDataByDate($date, $endDate = null)
     {

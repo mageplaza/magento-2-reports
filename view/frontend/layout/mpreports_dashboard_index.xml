@@ -15,7 +15,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_Blog
+ * @package     Mageplaza_Reports
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -31,7 +31,6 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <!--<block class="Magento\Backend\Block\Template" name="aaa" template="Mageplaza_Reports::test.phtml"/>-->
             <block class="Magento\Backend\Block\Store\Switcher" name="mp.report.store_switcher">
                 <arguments>
                     <argument name="switch_websites" xsi:type="string">0</argument>
@@ -46,7 +45,6 @@
 
         </referenceContainer>
 
-        <!--<referenceContainer name="header.container" remove="true"/>-->
         <referenceContainer name="page.top" remove="true"/>
         <referenceContainer name="footer-container" remove="true"/>
         <referenceBlock name="copyright" remove="true"/>

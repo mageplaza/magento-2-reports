@@ -43,7 +43,8 @@ class BackendLogoUrl
 
     /**
      * BackendLogoUrl constructor.
-     * @param Data $helperData
+     *
+     * @param Data         $helperData
      * @param UrlInterface $backendUrl
      */
     public function __construct(
@@ -57,8 +58,10 @@ class BackendLogoUrl
 
     /**
      * @param BackendHelper $data
-     * @param $result
+     * @param               $result
+     *
      * @return string
+     * @SuppressWarnings(Unused)
      */
     public function afterGetHomePageUrl(BackendHelper $data, $result)
     {

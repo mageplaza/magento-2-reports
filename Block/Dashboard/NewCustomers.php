@@ -22,7 +22,7 @@
 namespace Mageplaza\Reports\Block\Dashboard;
 
 /**
- * Class LastOrders
+ * Class NewCustomers
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class NewCustomers extends AbstractClass

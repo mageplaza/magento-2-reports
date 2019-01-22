@@ -81,6 +81,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getProductViews()
     {
@@ -102,6 +103,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     public function getAllCartItems()
     {

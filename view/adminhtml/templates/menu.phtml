@@ -21,7 +21,11 @@
 
 /** @var \Mageplaza\Reports\Block\Menu $block */
 $gridName       = $block->getGridName();
-$date           = $block->getDateRange();
+try {
+    $date = $block->getDateRange();
+} catch (Exception $e) {
+    $date = [];
+}
 $menu           = $block->getMenuUrls() ? $block->getMenuUrls() : [];
 $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
 ?>

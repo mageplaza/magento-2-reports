@@ -131,12 +131,16 @@ class Dashboard extends Template
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function getDate()
     {
         return json_encode($this->_helperData->getDateRange());
     }
 
+    /**
+     * @return string
+     */
     public function getArea()
     {
         return 'adminhtml';

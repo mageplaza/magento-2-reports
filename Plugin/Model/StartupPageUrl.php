@@ -43,8 +43,9 @@ class StartupPageUrl
 
     /**
      * StartupPageUrl constructor.
+     *
      * @param RedirectFactory $resultRedirectFactory
-     * @param Data $helperData
+     * @param Data            $helperData
      */
     public function __construct(
         RedirectFactory $resultRedirectFactory,
@@ -57,8 +58,10 @@ class StartupPageUrl
 
     /**
      * @param Url $url
-     * @param $result
+     * @param     $result
+     *
      * @return string
+     * @SuppressWarnings(Unused)
      */
     public function afterGetStartupPageUrl(Url $url, $result)
     {

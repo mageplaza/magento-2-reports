@@ -48,6 +48,6 @@ class LifetimeSales extends AbstractClass
             return $this->format($total['lifetime']);
         }
 
-        return parent::getTotalLabel();
+        return '';
     }
 }
