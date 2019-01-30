@@ -23,7 +23,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
 
 use Magento\Backend\Block\Template;
 use Mageplaza\Reports\Helper\Data;
-use Mageplaza\ReportsPro\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
+use Mageplaza\Reports\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
 use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollectionFactory;
 use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 
@@ -126,7 +126,7 @@ class ConversionFunnel extends AbstractClass
     }
 
     /**
-     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\ReportsPro\Model\ResourceModel\Viewed\Collection|\Magento\Quote\Model\ResourceModel\Quote\Item\Collection| $collection
+     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\Reports\Model\ResourceModel\Viewed\Collection|\Magento\Quote\Model\ResourceModel\Quote\Item\Collection| $collection
      *
      * @return mixed
      * @throws \Exception
