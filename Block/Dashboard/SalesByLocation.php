@@ -148,19 +148,7 @@ class SalesByLocation extends AbstractClass
      */
     public function getTitle()
     {
-        return __('Sale By Location');
-    }
-
-    /**
-     * @return string
-     */
-    public function getDetailUrl()
-    {
-        if (!$this->_helperData->isProPackage()) {
-            return parent::getDetailUrl();
-        }
-
-        return $this->getUrl('mpreports/details/salesbylocation');
+        return __('Sales By Location');
     }
 
     /**

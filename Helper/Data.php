@@ -53,6 +53,11 @@ class Data extends AbstractData
     protected $_timezone;
 
     /**
+     * @var array
+     */
+    protected $lifetimeSales = [];
+
+    /**
      * Data constructor.
      *
      * @param Context $context
@@ -287,8 +292,6 @@ class Data extends AbstractData
         return $collection;
     }
 
-    protected $lifetimeSales = [];
-
     /**
      * @return array
      */
@@ -402,14 +405,6 @@ class Data extends AbstractData
         $totals = $collection->getFirstItem();
 
         return $totals;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isProPackage()
-    {
-        return false;
     }
 
     /**

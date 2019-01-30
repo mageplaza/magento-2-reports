@@ -70,11 +70,12 @@ class Index extends Action
         JsonHelper $jsonHelper,
         Data $helperData
     ) {
-        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->resultForwardFactory = $resultForwardFactory;
         $this->_jsonHelper = $jsonHelper;
         $this->helperData = $helperData;
+
+        parent::__construct($context);
     }
 
     /**

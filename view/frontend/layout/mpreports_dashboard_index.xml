@@ -42,9 +42,7 @@
                 </arguments>
             </block>
             <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard"/>
-
         </referenceContainer>
-
         <referenceContainer name="page.top" remove="true"/>
         <referenceContainer name="footer-container" remove="true"/>
         <referenceBlock name="copyright" remove="true"/>

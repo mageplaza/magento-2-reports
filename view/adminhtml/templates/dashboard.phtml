@@ -69,9 +69,11 @@ $params = $block->getRequest()->getParams();
                     </div>
                 </div>
             </div>
+            <?= $block->getChildHtml('mpreports_additional_header') ?>
         </div>
+        <div style="clear: both; height: 20px"></div>
         <div class="grid-stack"
-             data-mage-init='{"initGridStack":{"url":"<?php echo $block->getUrl('mpreports/cards/saveposition', ['form_key' => $block->getFormKey()]) ?>"}}'>
+             data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
             <?php foreach ($cards as $card) : ?>
                 <div id="<?php echo $card->getId() ?>"
                      class="<?php echo $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
@@ -99,9 +101,7 @@ $params = $block->getRequest()->getParams();
                                 $totalLabel = $card->getTotal();
                                 if ($totalLabel !== '') : ?>
                                     <div class="dashboard-sales-value">
-                                        <?php /* @escapeNotVerified */
-                                        echo $totalLabel ?>
-                                        <span class="dashboard-sales-decimals"></span>
+                                        <?php echo $totalLabel ?>
                                         <?php
                                         $rate = $card->getRate();
                                         if ($block->isCompare() && ($rate !== '')) : ?>

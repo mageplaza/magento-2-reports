@@ -39,18 +39,6 @@ class Customers extends AbstractClass
     }
 
     /**
-     * @return string
-     */
-    public function getDetailUrl()
-    {
-        if (!$this->_helperData->isProPackage()) {
-            return parent::getDetailUrl();
-        }
-
-        return $this->getUrl('mpreports/details/salesbycustomer');
-    }
-
-    /**
      * @return bool
      */
     public function canShowDetail()

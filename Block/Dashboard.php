@@ -145,4 +145,16 @@ class Dashboard extends Template
     {
         return 'adminhtml';
     }
+
+    /**
+     * @return array
+     */
+    public function getGridStackConfig()
+    {
+        $config = [
+            "url" => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()])
+        ];
+
+        return $config;
+    }
 }

@@ -27,7 +27,7 @@ namespace Mageplaza\Reports\Block\Dashboard;
  */
 class Bestsellers extends AbstractClass
 {
-    const NAME              = 'lastOrders';
+    const NAME              = 'bestsellers';
     const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Products\Ordered::class;
 
     /**
@@ -44,18 +44,6 @@ class Bestsellers extends AbstractClass
     public function getTitle()
     {
         return __('Bestsellers');
-    }
-
-    /**
-     * @return string
-     */
-    public function getDetailUrl()
-    {
-        if (!$this->_helperData->isProPackage()) {
-            return parent::getDetailUrl();
-        }
-
-        return $this->getUrl('mpreports/details/bestsellers');
     }
 
     /**

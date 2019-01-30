@@ -22,10 +22,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Mageplaza_Reports::dashboard"
-             action="mpreports/dashboard"
-             title="Dashboard" translate="title"
-             module="Mageplaza_Reports"
-             resource="Mageplaza_Reports::dashboard"/>
+        <add id="Mageplaza_Reports::dashboard" action="mpreports/dashboard" title="Dashboard" translate="title" module="Mageplaza_Reports" resource="Mageplaza_Reports::dashboard"/>
     </menu>
 </config>
