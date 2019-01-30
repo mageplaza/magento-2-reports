@@ -124,6 +124,6 @@ button#mp-rp-order-status {
     padding: 4px 30px 5px 10px;
 }
 
-button#mp-rp-order-status:before{
+button#mp-rp-order-status:before {
     content: none;
 }

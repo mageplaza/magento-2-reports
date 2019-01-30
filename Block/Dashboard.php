@@ -48,6 +48,7 @@ class Dashboard extends Template
 
     /**
      * Dashboard constructor.
+     *
      * @param Template\Context $context
      * @param CardsManageFactory $cardsManageFactory
      * @param Data $helperData
@@ -58,12 +59,11 @@ class Dashboard extends Template
         CardsManageFactory $cardsManageFactory,
         Data $helperData,
         array $data = []
-    )
-    {
-        parent::__construct($context, $data);
-
+    ) {
         $this->_cardsManageFactory = $cardsManageFactory;
-        $this->_helperData         = $helperData;
+        $this->_helperData = $helperData;
+
+        parent::__construct($context, $data);
     }
 
     /**

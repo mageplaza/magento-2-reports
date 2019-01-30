@@ -22,14 +22,15 @@
 /** @var Mageplaza\Reports\Block\Dashboard\ConversionFunnel $block */
 ?>
 <div class="funnel-container funnel">
-    <img alt="image" src="<?= $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/funnel-container.png') ?>">
+    <img alt="image"
+         src="<?= $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/funnel-container.png') ?>">
     <div class="viewed">
         <?php echo __('Product Viewed: ') . $block->getProductViews() ?>
     </div>
     <div class="cart">
         <?php echo __('Add To Cart: ') . $block->getAllCartItems() ?>
     </div>
-    <div class="ordered" >
+    <div class="ordered">
         <?php echo __('Ordered: ') . $block->getAllOrderItem() ?>
     </div>
 </div>

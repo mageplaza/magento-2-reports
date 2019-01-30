@@ -44,14 +44,13 @@ class BackendLogoUrl
     /**
      * BackendLogoUrl constructor.
      *
-     * @param Data         $helperData
+     * @param Data $helperData
      * @param UrlInterface $backendUrl
      */
     public function __construct(
         Data $helperData,
         UrlInterface $backendUrl
-    )
-    {
+    ) {
         $this->_helperData = $helperData;
         $this->_backendUrl = $backendUrl;
     }

@@ -43,6 +43,7 @@ class StoreFilter extends Action
 
     /**
      * StoreFilter constructor.
+     *
      * @param Action\Context $context
      * @param PageFactory $resultPageFactory
      * @param Data $jsonHelper
@@ -51,10 +52,9 @@ class StoreFilter extends Action
         Action\Context $context,
         PageFactory $resultPageFactory,
         Data $jsonHelper
-    )
-    {
+    ) {
         $this->resultPageFactory = $resultPageFactory;
-        $this->_jsonHelper       = $jsonHelper;
+        $this->_jsonHelper = $jsonHelper;
 
         parent::__construct($context);
     }
@@ -78,7 +78,8 @@ class StoreFilter extends Action
             return $this->getResponse()->representJson(
                 $this->_jsonHelper->jsonEncode(
                     ['store' => $storeHtml]
-                ));
+                )
+            );
         }
 
         return $resultPage;

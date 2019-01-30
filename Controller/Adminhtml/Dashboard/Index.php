@@ -44,6 +44,7 @@ class Index extends Action
 
     /**
      * Index constructor.
+     *
      * @param Context $context
      * @param PageFactory $resultPageFactory
      * @param Data $jsonHelper
@@ -52,12 +53,11 @@ class Index extends Action
         Context $context,
         PageFactory $resultPageFactory,
         Data $jsonHelper
-    )
-    {
+    ) {
         parent::__construct($context);
 
         $this->resultPageFactory = $resultPageFactory;
-        $this->_jsonHelper       = $jsonHelper;
+        $this->_jsonHelper = $jsonHelper;
     }
 
     /**
@@ -72,7 +72,7 @@ class Index extends Action
         $resultPage->getConfig()->getTitle()->prepend(__('Dashboard'));
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result    = ['dashboard' => $dashBoard->toHtml()];
+            $result = ['dashboard' => $dashBoard->toHtml()];
 
             return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
         }

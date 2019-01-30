@@ -45,6 +45,7 @@ class Orders extends AbstractClass
 
     /**
      * Transactions constructor.
+     *
      * @param Template\Context $context
      * @param OrderFactory $orderFactory
      * @param Data $helperData
@@ -54,11 +55,11 @@ class Orders extends AbstractClass
         Template\Context $context,
         OrderFactory $orderFactory,
         Data $helperData,
-        array $data = [])
-    {
-        parent::__construct($context, $helperData, $data);
-
+        array $data = []
+    ) {
         $this->_orderFactory = $orderFactory;
+
+        parent::__construct($context, $helperData, $data);
     }
 
     /**
@@ -86,14 +87,14 @@ class Orders extends AbstractClass
      */
     public function getRate()
     {
-        $date         = $this->_helperData->getDateRange();
-        $count        = $this->getDataByDate($date[0], $date[1]);
+        $date = $this->_helperData->getDateRange();
+        $count = $this->getDataByDate($date[0], $date[1]);
         $countCompare = $this->getDataByDate($date[2], $date[3]);
         if ($countCompare == 0 && $count == 0) {
             return 0;
-        } else if ($countCompare == 0) {
+        } elseif ($countCompare == 0) {
             return 100;
-        } else if ($count == 0) {
+        } elseif ($count == 0) {
             return -100;
         }
         $rate = ($count - $countCompare) * 100 / $countCompare;
@@ -108,7 +109,7 @@ class Orders extends AbstractClass
      */
     public function getTotal()
     {
-        $date  = $this->_helperData->getDateRange();
+        $date = $this->_helperData->getDateRange();
         $count = $this->getDataByDate($date[0], $date[1]);
 
         return $count;

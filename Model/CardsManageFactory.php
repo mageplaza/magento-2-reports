@@ -74,13 +74,13 @@ class CardsManageFactory
     /**
      * CardsManageFactory constructor.
      *
-     * @param Session          $authSession
-     * @param ObjectManager    $objectManager
+     * @param Session $authSession
+     * @param ObjectManager $objectManager
      * @param ManagerInterface $eventManager
-     * @param BookmarkFactory  $bookmark
-     * @param Data             $helperData
-     * @param array            $map
-     * @param array            $charts
+     * @param BookmarkFactory $bookmark
+     * @param Data $helperData
+     * @param array $map
+     * @param array $charts
      */
     public function __construct(
         Session $authSession,
@@ -90,15 +90,14 @@ class CardsManageFactory
         Data $helperData,
         array $map = [],
         array $charts = []
-    )
-    {
-        $this->_authSession  = $authSession;
+    ) {
+        $this->_authSession = $authSession;
         $this->objectManager = $objectManager;
-        $this->eventManager  = $eventManager;
-        $this->_bookmark     = $bookmark;
-        $this->_helperData   = $helperData;
-        $this->_map          = $map;
-        $this->_charts       = $charts;
+        $this->eventManager = $eventManager;
+        $this->_bookmark = $bookmark;
+        $this->_helperData = $helperData;
+        $this->_map = $map;
+        $this->_charts = $charts;
     }
 
     /** create Cards Collection
@@ -165,7 +164,7 @@ class CardsManageFactory
     public function getDefaultConfig()
     {
         /** @var \Magento\Ui\Model\Bookmark $default */
-        if($this->_authSession->getUser()){
+        if ($this->_authSession->getUser()) {
             $userId = $this->_authSession->getUser()->getId();
             $default = $this->_bookmark->create()->getCollection()
                 ->addFieldToFilter('namespace', 'mageplaza_reports_cards')
@@ -179,7 +178,7 @@ class CardsManageFactory
                     'config'     => '{"lastOrders":{"x":"0","y":"6","width":"3","height":"10","visible":1},"totals":{"x":3,"y":0,"width":3,"height":4,"visible":1},"sales":{"x":6,"y":0,"width":3,"height":4,"visible":1},"grids":{"x":"0","y":"12","width":"5","height":"4","visible":1},"diagrams":{"x":0,"y":4,"width":3,"height":4,"visible":1},"lastSearches":{"x":"0","y":"16","width":"3","height":"3","visible":1},"topSearches":{"x":"0","y":"19","width":"3","height":"3","visible":1},"transactions":{"x":9,"y":4,"width":3,"height":4,"visible":1},"averageOrderValue":{"x":"100","y":"100","width":"3","height":"10","visible":0},"salesByLocation":{"x":"9","y":"0","width":"3","height":"10","visible":1},"repeatCustomerRate":{"x":"3","y":"28","width":"6","height":"14","visible":1},"totalSales":{"x":"3","y":"0","width":"6","height":"14","visible":1},"orders":{"x":"3","y":"14","width":"6","height":"14","visible":1},"bestsellers":{"x":"9","y":"10","width":"3","height":"10","visible":1},"customers":{"x":"9","y":"30","width":"3","height":"10","visible":1},"lifetimeSales":{"x":"0","y":"0","width":"3","height":"3","visible":1},"shipping":{"x":"100","y":"100","width":"4","height":"10","visible":0},"newCustomers":{"x":"9","y":"20","width":"3","height":"10","visible":1},"mostViewedProducts":{"x":"9","y":"40","width":"3","height":"10","visible":1},"tax":{"x":"100","y":"100","width":"3","height":"9","visible":0},"averageOrder":{"x":"0","y":"3","width":"3","height":"3","visible":1}}'
                 ])->save();
             }
-        }else{
+        } else {
             $default = $this->_bookmark->create()->getCollection()
                 ->addFieldToFilter('namespace', 'mageplaza_reports_cards_mobile')
                 ->addFieldToFilter('user_id', '1')
