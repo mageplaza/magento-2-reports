@@ -42,6 +42,7 @@ class SwitchToNew extends Template
 
     /**
      * SwitchToNew constructor.
+     *
      * @param Template\Context $context
      * @param Data $helperData
      * @param array $data
@@ -49,8 +50,8 @@ class SwitchToNew extends Template
     public function __construct(
         Template\Context $context,
         Data $helperData,
-        array $data = [])
-    {
+        array $data = []
+    ) {
         parent::__construct($context, $data);
 
         $this->_helperData = $helperData;

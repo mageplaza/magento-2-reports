@@ -20,10 +20,10 @@
  */
 ?>
 <div class="dashboard-item-content">
-    <?php if (count($block->getCollection())): ?>
+    <?php if (count($block->getCollection())) : ?>
         <table class="admin__table-primary dashboard-data" id="sales_by_location_table">
             <tbody>
-            <?php foreach ($block->getCollection() as $item): ?>
+            <?php foreach ($block->getCollection() as $item) : ?>
                 <tr title="">
                     <td class=""><?php echo $item['country'] ?></td>
                     <td class=""><?php echo $item['count'] ?></td>

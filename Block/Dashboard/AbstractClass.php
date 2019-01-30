@@ -63,6 +63,7 @@ abstract class AbstractClass extends Template
 
     /**
      * AbstractClass constructor.
+     *
      * @param Template\Context $context
      * @param Data $helperData
      * @param array $data
@@ -71,9 +72,9 @@ abstract class AbstractClass extends Template
         Template\Context $context,
         Data $helperData,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $data);
+
         $this->setArea('adminhtml');
         $this->_helperData = $helperData;
     }
@@ -85,7 +86,6 @@ abstract class AbstractClass extends Template
     public function getContentHtml()
     {
         if (static::MAGE_REPORT_CLASS) {
-
             return $this->getLayout()->createBlock(static::MAGE_REPORT_CLASS)->setArea('adminhtml')
                 ->toHtml();
         }
@@ -121,6 +121,7 @@ abstract class AbstractClass extends Template
      * Formatting value specific for this store
      *
      * @param $price
+     *
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -133,6 +134,7 @@ abstract class AbstractClass extends Template
      * Setting currency model
      *
      * @param \Magento\Directory\Model\Currency $currency
+     *
      * @return void
      */
     public function setCurrency($currency)
@@ -151,9 +153,9 @@ abstract class AbstractClass extends Template
         if ($this->_currentCurrencyCode === null) {
             if ($store = $this->getRequest()->getParam('store')) {
                 $this->_currentCurrencyCode = $this->_storeManager->getStore($store)->getBaseCurrency();
-            } else if ($website = $this->getRequest()->getParam('website')) {
+            } elseif ($website = $this->getRequest()->getParam('website')) {
                 $this->_currentCurrencyCode = $this->_storeManager->getWebsite($website)->getBaseCurrency();
-            } else if ($group = $this->getRequest()->getParam('group')) {
+            } elseif ($group = $this->getRequest()->getParam('group')) {
                 $this->_currentCurrencyCode = $this->_storeManager->getGroup($group)->getWebsite()->getBaseCurrency();
             } else {
                 $this->_currentCurrencyCode = $this->_storeManager->getStore()->getBaseCurrency();
@@ -190,7 +192,8 @@ abstract class AbstractClass extends Template
     }
 
     /**
-     * @return mixed
+     * @return Currency
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getBaseCurrency()
     {
@@ -204,7 +207,8 @@ abstract class AbstractClass extends Template
     }
 
     /**
-     * @return mixed
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getBasePriceFormat()
     {
@@ -221,6 +225,7 @@ abstract class AbstractClass extends Template
     /**
      * @param $startDate
      * @param $endDate
+     *
      * @return array
      */
     protected function getDataByDateRange($startDate, $endDate)
@@ -228,9 +233,9 @@ abstract class AbstractClass extends Template
         $data = [];
         while (strtotime($endDate) >= strtotime($startDate)) {
             $data['labels'][] = date('Y-m-d', strtotime($startDate));
-            $data['data'][]   = $this->getDataByDate($startDate);
-            $startDate        = strtotime('+1 day', strtotime($startDate));
-            $startDate        = date('Y-m-d H:i:s', $startDate);
+            $data['data'][] = $this->getDataByDate($startDate);
+            $startDate = strtotime('+1 day', strtotime($startDate));
+            $startDate = date('Y-m-d H:i:s', $startDate);
         }
 
         return $data;
@@ -239,6 +244,7 @@ abstract class AbstractClass extends Template
     /**
      * @param $date
      * @param null $endDate
+     *
      * @return int
      * @SuppressWarnings(Unused)
      */
@@ -305,7 +311,7 @@ abstract class AbstractClass extends Template
         $date = $this->_helperData->getDateRange();
 
         return [date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
-                date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
+            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
     }
 
     /**

@@ -21,9 +21,9 @@
 
 namespace Mageplaza\Reports\Controller\Cards;
 
+use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Backend\Model\Auth\Session;
 use Mageplaza\Reports\Model\CardsManageFactory;
 
 /**
@@ -44,6 +44,7 @@ class SavePosition extends Action
 
     /**
      * SavePosition constructor.
+     *
      * @param Context $context
      * @param Session $authSession
      * @param CardsManageFactory $cardsManageFactory
@@ -52,11 +53,10 @@ class SavePosition extends Action
         Context $context,
         Session $authSession,
         CardsManageFactory $cardsManageFactory
-    )
-    {
+    ) {
         parent::__construct($context);
 
-        $this->_authSession        = $authSession;
+        $this->_authSession = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
     }
 
@@ -68,14 +68,14 @@ class SavePosition extends Action
     {
         if ($this->getRequest()->isAjax() && $items = $this->getRequest()->getParam('items')) {
             $config = $this->_cardsManageFactory->getCurrentConfig();
-            $data   = $config->getId()
+            $data = $config->getId()
                 ? $config->getConfig()
                 : $this->_cardsManageFactory->getDefaultConfig()->getConfig();
             foreach ($items as $id => $item) {
-                $data[$id]['x']       = $item['x'];
-                $data[$id]['y']       = $item['y'];
-                $data[$id]['width']   = $item['width'];
-                $data[$id]['height']  = $item['height'];
+                $data[$id]['x'] = $item['x'];
+                $data[$id]['y'] = $item['y'];
+                $data[$id]['width'] = $item['width'];
+                $data[$id]['height'] = $item['height'];
                 $data[$id]['visible'] = isset($item['visible']) ? $item['visible'] : 1;
             }
             $data = \Mageplaza\Reports\Helper\Data::jsonEncode($data);

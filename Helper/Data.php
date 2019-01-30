@@ -55,12 +55,12 @@ class Data extends AbstractData
     /**
      * Data constructor.
      *
-     * @param Context                $context
+     * @param Context $context
      * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface  $storeManager
-     * @param CollectionFactory      $orderCollectionFactory
-     * @param DateTime               $dateTime
-     * @param TimezoneInterface      $timezone
+     * @param StoreManagerInterface $storeManager
+     * @param CollectionFactory $orderCollectionFactory
+     * @param DateTime $dateTime
+     * @param TimezoneInterface $timezone
      */
     public function __construct(
         Context $context,
@@ -69,13 +69,12 @@ class Data extends AbstractData
         CollectionFactory $orderCollectionFactory,
         DateTime $dateTime,
         TimezoneInterface $timezone
-    )
-    {
+    ) {
         parent::__construct($context, $objectManager, $storeManager);
 
         $this->_orderCollectionFactory = $orderCollectionFactory;
-        $this->_dateTime               = $dateTime;
-        $this->_timezone               = $timezone;
+        $this->_dateTime = $dateTime;
+        $this->_timezone = $timezone;
     }
 
     /**
@@ -120,15 +119,15 @@ class Data extends AbstractData
     {
         if ($dateRange = $this->_request->getParam('dateRange')) {
             if ($this->isCompare()) {
-                $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
                 $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
-                $compareEndDate   = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
+                $compareEndDate = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
             } else {
-                $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
                 $compareStartDate = null;
-                $compareEndDate   = null;
+                $compareEndDate = null;
             }
         } else {
             list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
@@ -167,7 +166,7 @@ class Data extends AbstractData
             $endDate = $startDate;
         }
         $startDate = (new \DateTime($startDate, new \DateTimeZone($this->getTimezone())))->setTime(00, 00, 00);
-        $endDate   = (new \DateTime($endDate, new \DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
+        $endDate = (new \DateTime($endDate, new \DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
 
         if ($isConvertToLocalTime) {
             $startDate->setTimezone(new \DateTimeZone('UTC'));
@@ -197,13 +196,13 @@ class Data extends AbstractData
             return 0;
         }
 
-        return (int) ((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
+        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
     }
 
     /**
      * @param   \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
      * @param                                                                           $startDate
-     * @param null                                                                      $endDate
+     * @param null $endDate
      *
      * @return mixed
      * @throws \Exception
@@ -220,8 +219,8 @@ class Data extends AbstractData
     /**
      * @param      $startDate
      * @param null $endDate
-     * @param int  $days
-     * @param int  $isObject
+     * @param int $days
+     * @param int $isObject
      *
      * @return array
      * @throws \Exception
@@ -239,7 +238,7 @@ class Data extends AbstractData
 
         $startDate = new \DateTime($startDate);
 
-        $interval  = new \DateInterval('P1D');
+        $interval = new \DateInterval('P1D');
         $daterange = new \DatePeriod($startDate, $interval, $endDate);
         /** @var \DateTime $date */
         foreach ($daterange as $date) {
@@ -297,13 +296,13 @@ class Data extends AbstractData
     {
         if (!sizeof($this->lifetimeSales)) {
             try {
-                $isFilter   = $this->_request->getParam(
-                        'store'
-                    ) || $this->_request->getParam(
-                        'website'
-                    ) || $this->_request->getParam(
-                        'group'
-                    );
+                $isFilter = $this->_request->getParam(
+                    'store'
+                ) || $this->_request->getParam(
+                    'website'
+                ) || $this->_request->getParam(
+                    'group'
+                );
                 $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);
 
                 if ($store = $this->_request->getParam('store')) {
@@ -342,12 +341,12 @@ class Data extends AbstractData
     public function getSalesByDateRange($startDate, $endDate = null)
     {
         $isFilter = $this->_request->getParam(
-                'store'
-            ) || $this->_request->getParam(
-                'website'
-            ) || $this->_request->getParam(
-                'group'
-            );
+            'store'
+        ) || $this->_request->getParam(
+            'website'
+        ) || $this->_request->getParam(
+            'group'
+        );
 
         $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);
         $collection = $this->addStoreFilter($collection);
@@ -369,12 +368,12 @@ class Data extends AbstractData
     public function getTotalsByDateRange($startDate, $endDate)
     {
         $isFilter = $this->_request->getParam(
-                'store'
-            ) || $this->_request->getParam(
-                'website'
-            ) || $this->_request->getParam(
-                'group'
-            );
+            'store'
+        ) || $this->_request->getParam(
+            'website'
+        ) || $this->_request->getParam(
+            'group'
+        );
 
         /* @var $collection \Magento\Reports\Model\ResourceModel\Order\Collection */
         $collection = $this->_orderCollectionFactory->create();

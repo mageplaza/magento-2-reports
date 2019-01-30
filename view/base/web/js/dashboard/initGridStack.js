@@ -39,14 +39,14 @@ define([
         },
         toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
-            $('button#mp-ar-card').on('click',function () {
+            $('button#mp-ar-card').on('click', function () {
                 if (cardsTableEl.hasClass('_active')) {
                     cardsTableEl.removeClass('_active');
                 } else {
                     cardsTableEl.addClass('_active');
                 }
             });
-            $('body').on('click',function (e) {
+            $('body').on('click', function (e) {
                 if (!$(e.target).parents().hasClass('mp-ar-card')) {
                     cardsTableEl.removeClass('_active');
                 }

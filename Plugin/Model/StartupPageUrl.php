@@ -45,15 +45,14 @@ class StartupPageUrl
      * StartupPageUrl constructor.
      *
      * @param RedirectFactory $resultRedirectFactory
-     * @param Data            $helperData
+     * @param Data $helperData
      */
     public function __construct(
         RedirectFactory $resultRedirectFactory,
         Data $helperData
-    )
-    {
+    ) {
         $this->resultRedirectFactory = $resultRedirectFactory;
-        $this->_helperData           = $helperData;
+        $this->_helperData = $helperData;
     }
 
     /**

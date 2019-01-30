@@ -41,7 +41,7 @@ class Shipping extends AbstractClass
      */
     public function getTotal()
     {
-        $date   = $this->_helperData->getDateRange();
+        $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
         return $this->getBaseCurrency()->format($totals->getShipping() ? $totals->getShipping() : 0);
@@ -54,14 +54,14 @@ class Shipping extends AbstractClass
      */
     public function getRate()
     {
-        $dates         = $this->_helperData->getDateRange();
-        $totals        = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
+        $dates = $this->_helperData->getDateRange();
+        $totals = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3]);
         if ($totals->getShipping() == 0 && $compareTotals->getShipping() == 0) {
             return 0;
-        } else if ($compareTotals->getShipping() == 0) {
+        } elseif ($compareTotals->getShipping() == 0) {
             return 100;
-        } else if ($totals->getShipping() == 0) {
+        } elseif ($totals->getShipping() == 0) {
             return -100;
         }
 
@@ -71,6 +71,7 @@ class Shipping extends AbstractClass
     /**
      * @param $date
      * @param null $endDate
+     *
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -83,6 +84,7 @@ class Shipping extends AbstractClass
 
     /**
      * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getYUnit()
     {

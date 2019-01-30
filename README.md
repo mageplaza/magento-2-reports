@@ -1,4 +1,4 @@
-# Magento 2 Reports by Mageplaza
+# Magento 2 Reports FREE by Mageplaza
 
 **Mageplaza Reports for Magento 2** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
@@ -51,7 +51,7 @@ While the Sale by location report helps store owners have an overview of sales i
 
 These statistical data are also ready to be compared with that of the previous period on a daily, monthly or even yearly basis.
 
-![new advanced reports](https://i.imgur.com/suhEKmX.png)
+![new advanced reports](https://i.imgur.com/Xz7maXc.png)
 
 ### Customizable report period & report comparison
 
@@ -66,7 +66,7 @@ Store admins can select a period in which statistical data is demonstrated. Mage
 
 With Custom Range, admins are able to select specific time for the report and will not be limited to any range of time.
 
-![customizable report period & report comparison](https://i.imgur.com/AvP9AJD.png)
+![customizable report period & report comparison](https://i.imgur.com/v1Mrh7R.png)
 
 
 #### Report comparison
@@ -82,13 +82,13 @@ With Custom Range, store admins can filter figures which belong to a specific pe
 
 In Mageplaza Reports extension standard version; reports on repeat customer rate, transactions, total sales, average order value, tax, and shipping will be displayed as line charts. This provides store owners with a visual look at statistic data, making it easier to compare, follow and process figures. In every graph, the rates between numbers will also be shown with red standing for positive statistics and green indicating negative ones.
 
-![line-chart reports](https://i.imgur.com/1DL4ks1.png)
+![line-chart reports](https://i.imgur.com/lpQDb5Y.png)
 
 ### Flexible dashboard layouts
 
 On the dashboard, store admins can drag and drop to move report areas and arrange figure sections with ease. Moreover, the report board’s size can be adjusted by pulling the double arrow. Let’s see the screen gif below:
 
-![dashboard layouts](https://i.imgur.com/jzcfzrS.gif)
+![dashboard layouts](https://i.imgur.com/cLbXk6G.gif)
 
 
 ## 5. More features

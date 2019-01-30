@@ -52,6 +52,7 @@ class SwitchToNew extends Action
 
     /**
      * SwitchToNew constructor.
+     *
      * @param Context $context
      * @param Writer $storageWriter
      * @param TypeListInterface $typeList
@@ -62,11 +63,10 @@ class SwitchToNew extends Action
         Writer $storageWriter,
         TypeListInterface $typeList,
         JsonHelper $jsonHelper
-    )
-    {
+    ) {
         $this->_storageWriter = $storageWriter;
-        $this->_cache         = $typeList;
-        $this->_jsonHelper    = $jsonHelper;
+        $this->_cache = $typeList;
+        $this->_jsonHelper = $jsonHelper;
 
         parent::__construct($context);
     }
@@ -103,10 +103,12 @@ class SwitchToNew extends Action
      */
     private function saveConfig($code, $value)
     {
-        $this->_storageWriter->save($code,
+        $this->_storageWriter->save(
+            $code,
             $value,
             ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            Store::DEFAULT_STORE_ID);
+            Store::DEFAULT_STORE_ID
+        );
         $this->_cache->cleanType('config');
         $this->_cache->cleanType('full_page');
     }

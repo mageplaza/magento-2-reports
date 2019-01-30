@@ -52,20 +52,19 @@ class RepeatCustomerRate extends AbstractClass
      * RepeatCustomerRate constructor.
      *
      * @param Template\Context $context
-     * @param Data             $helperData
-     * @param OrderFactory     $orderFactory
-     * @param array            $data
+     * @param Data $helperData
+     * @param OrderFactory $orderFactory
+     * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Data $helperData,
         OrderFactory $orderFactory,
         array $data = []
-    )
-    {
-        parent::__construct($context, $helperData, $data);
-
+    ) {
         $this->_orderFactory = $orderFactory;
+
+        parent::__construct($context, $helperData, $data);
     }
 
     /**
@@ -101,13 +100,13 @@ class RepeatCustomerRate extends AbstractClass
         $customerOrdersPerTime = $this->_helperData->addTimeFilter($customerOrdersPerTime, $startDate, $endDate);
         $customerOrdersPerTime->addFieldToFilter('customer_is_guest', 0);
 
-        $orders                  = $this->_orderFactory->create()->getCollection();
-        $orders                  = $this->_helperData->addStoreFilter($orders);
-        $orders                  = $this->_helperData->addStatusFilter($orders);
-        $orders                  = $this->_helperData->addTimeFilter($orders, $startDate, $endDate);
+        $orders = $this->_orderFactory->create()->getCollection();
+        $orders = $this->_helperData->addStoreFilter($orders);
+        $orders = $this->_helperData->addStatusFilter($orders);
+        $orders = $this->_helperData->addTimeFilter($orders, $startDate, $endDate);
         $guestOrdersPerTimeCount = $orders->addFieldToFilter('customer_is_guest', 1)->getSize();
 
-        $first  = 0;
+        $first = 0;
         $repeat = [];
         /** @var \Magento\Sales\Model\Order $order */
         foreach ($customerOrdersPerTime as $order) {
@@ -132,13 +131,13 @@ class RepeatCustomerRate extends AbstractClass
     {
         $data = [];
         while (strtotime($endDate) >= strtotime($startDate)) {
-            $data['data']['labels'][]        = __('first');
+            $data['data']['labels'][] = __('first');
             $data['compareData']['labels'][] = __('repeat');
-            $customerRepeat                  = $this->getDataByDate($startDate);
-            $data['data']['data'][]          = $customerRepeat[0];
-            $data['compareData']['data'][]   = $customerRepeat[1];
-            $startDate                       = strtotime('+1 day', strtotime($startDate));
-            $startDate                       = date('Y-m-d H:i:s', $startDate);
+            $customerRepeat = $this->getDataByDate($startDate);
+            $data['data']['data'][] = $customerRepeat[0];
+            $data['compareData']['data'][] = $customerRepeat[1];
+            $startDate = strtotime('+1 day', strtotime($startDate));
+            $startDate = date('Y-m-d H:i:s', $startDate);
         }
 
         return $data;
@@ -154,21 +153,21 @@ class RepeatCustomerRate extends AbstractClass
         try {
             $date = $this->_helperData->getDateRange();
         } catch (\Exception $e) {
-            $date = ['',''];
+            $date = ['', ''];
         }
-        $data['data']        = $this->getDataByDateRange($date[0], $date[1])['data'];
+        $data['data'] = $this->getDataByDateRange($date[0], $date[1])['data'];
         $data['compareData'] = $this->getDataByDateRange($date[0], $date[1])['compareData'];
-        $data['days']        = $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
-        $data['labels']      = $this->_helperData->getPeriodsDate($date[0], null, $days);
-        $data['stepSize']    = round($days / 6);
-        $data['total']       = $this->getTotal();
-        $data['rate']        = $this->getRate();
-        $data['label']       = $this->getChartDataLabel();
-        $data['yUnit']       = $this->getYUnit();
-        $data['yLabel']      = $this->getYLabel();
-        $data['isFill']      = $this->isFill();
-        $data['isCompare']   = $this->isCompare();
-        $data['name']        = $this->getName();
+        $data['days'] = $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
+        $data['labels'] = $this->_helperData->getPeriodsDate($date[0], null, $days);
+        $data['stepSize'] = round($days / 6);
+        $data['total'] = $this->getTotal();
+        $data['rate'] = $this->getRate();
+        $data['label'] = $this->getChartDataLabel();
+        $data['yUnit'] = $this->getYUnit();
+        $data['yLabel'] = $this->getYLabel();
+        $data['isFill'] = $this->isFill();
+        $data['isCompare'] = $this->isCompare();
+        $data['name'] = $this->getName();
 
         return $data;
     }
@@ -197,7 +196,7 @@ class RepeatCustomerRate extends AbstractClass
      */
     public function getTotal()
     {
-        $date  = $this->_helperData->getDateRange();
+        $date = $this->_helperData->getDateRange();
         $total = $this->getRepeatRateByDateRange($date[0], $date[1]);
 
         return round($total, 2) . '%';
@@ -210,10 +209,10 @@ class RepeatCustomerRate extends AbstractClass
      */
     public function getRate()
     {
-        $date              = $this->_helperData->getDateRange();
-        $repeatRate        = $this->getRepeatRateByDateRange($date[0], $date[1]);
+        $date = $this->_helperData->getDateRange();
+        $repeatRate = $this->getRepeatRateByDateRange($date[0], $date[1]);
         $compareRepeatRate = $this->getRepeatRateByDateRange($date[2], $date[3]);
-        $rate              = $repeatRate - $compareRepeatRate;
+        $rate = $repeatRate - $compareRepeatRate;
 
         return round($rate, 2);
     }

@@ -23,11 +23,10 @@ namespace Mageplaza\Reports\Controller\Dashboard;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\ForwardFactory;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\Reports\Helper\Data;
-use Magento\Framework\Controller\Result\ForwardFactory;
-
 
 /**
  * Class StoreFilter
@@ -58,11 +57,11 @@ class Index extends Action
     /**
      * Index constructor.
      *
-     * @param \Magento\Framework\App\Action\Context               $context
-     * @param \Magento\Framework\View\Result\PageFactory          $resultPageFactory
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
-     * @param \Magento\Framework\Json\Helper\Data                 $jsonHelper
-     * @param \Mageplaza\Reports\Helper\Data                      $helperData
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param \Mageplaza\Reports\Helper\Data $helperData
      */
     public function __construct(
         Context $context,
@@ -70,13 +69,12 @@ class Index extends Action
         ForwardFactory $resultForwardFactory,
         JsonHelper $jsonHelper,
         Data $helperData
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->_jsonHelper       = $jsonHelper;
-        $this->helperData        = $helperData;
+        $this->_jsonHelper = $jsonHelper;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -86,14 +84,14 @@ class Index extends Action
     {
         $resultPage = $this->resultPageFactory->create();
 
-        $accessKey       = $this->getRequest()->getParam('accessKey');
+        $accessKey = $this->getRequest()->getParam('accessKey');
         $accessKeyConfig = $this->helperData->getConfigMobileAccessKey();
         if ($accessKey !== $accessKeyConfig) {
             return $this->_redirect('noroute');
         }
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result    = ['dashboard' => $dashBoard->toHtml()];
+            $result = ['dashboard' => $dashBoard->toHtml()];
 
             return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
         }

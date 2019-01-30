@@ -37,6 +37,7 @@ class MoveMenu
 
     /**
      * MoveMenu constructor.
+     *
      * @param Data $helper
      */
     public function __construct(Data $helper)
@@ -47,6 +48,7 @@ class MoveMenu
     /**
      * @param AbstractCommand $subject
      * @param $itemParams
+     *
      * @return mixed
      * @SuppressWarnings(Unused)
      */

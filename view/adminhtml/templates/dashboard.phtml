@@ -90,13 +90,14 @@ $params = $block->getRequest()->getParams();
                                 <?php endif; ?>
                                 <?php if ($card->canShowDetail()) : ?>
                                     <div class="view-detail">
-                                        <a href="<?php echo $card->getDetailUrl() ?>" target="_blank"><?php echo __('View Details') ?></a>
+                                        <a href="<?php echo $card->getDetailUrl() ?>"
+                                           target="_blank"><?php echo __('View Details') ?></a>
                                     </div>
                                 <?php endif; ?>
                                 <div style="clear: both"></div>
                                 <?php
                                 $totalLabel = $card->getTotal();
-                                if ($totalLabel !== ''): ?>
+                                if ($totalLabel !== '') : ?>
                                     <div class="dashboard-sales-value">
                                         <?php /* @escapeNotVerified */
                                         echo $totalLabel ?>
@@ -118,7 +119,7 @@ $params = $block->getRequest()->getParams();
             <?php endforeach; ?>
             <script>
                 require(['jquery'], function ($) {
-                    $('.view-detail a').on('click',function (e) {
+                    $('.view-detail a').on('click', function (e) {
                         var href = $(this).attr('href');
                         if (href === '') {
                             if (!$(this).parent().find('.upgrade-nof').length) {
@@ -130,7 +131,7 @@ $params = $block->getRequest()->getParams();
                             e.preventDefault();
                         }
                     });
-                    $('body').on('click',function (e) {
+                    $('body').on('click', function (e) {
                         if (!$(e.target).parents().hasClass('view-detail')) {
                             $('.upgrade-nof').remove();
                         }

@@ -20,13 +20,13 @@
  */
 
 /** @var \Mageplaza\Reports\Block\Menu $block */
-$gridName       = $block->getGridName();
+$gridName = $block->getGridName();
 try {
     $date = $block->getDateRange();
 } catch (Exception $e) {
     $date = [];
 }
-$menu           = $block->getMenuUrls() ? $block->getMenuUrls() : [];
+$menu = $block->getMenuUrls() ? $block->getMenuUrls() : [];
 $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
 ?>
 <div id="menu" class="mp_menu"

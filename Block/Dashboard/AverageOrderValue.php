@@ -49,7 +49,7 @@ class AverageOrderValue extends AbstractClass
      */
     public function getTotal()
     {
-        $date   = $this->_helperData->getDateRange();
+        $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getSalesByDateRange($date[0], $date[1]);
 
         return $this->getBaseCurrency()->format($totals->getAverage() ? $totals->getAverage() : 0);
@@ -62,14 +62,14 @@ class AverageOrderValue extends AbstractClass
      */
     public function getRate()
     {
-        $dates         = $this->_helperData->getDateRange();
-        $totals        = $this->_helperData->getSalesByDateRange($dates[0], $dates[1]);
+        $dates = $this->_helperData->getDateRange();
+        $totals = $this->_helperData->getSalesByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getSalesByDateRange($dates[2], $dates[3]);
         if ($totals->getAverage() == 0 && $compareTotals->getAverage() == 0) {
             return 0;
-        } else if ($compareTotals->getAverage() == 0) {
+        } elseif ($compareTotals->getAverage() == 0) {
             return 100;
-        } else if ($totals->getAverage() == 0) {
+        } elseif ($totals->getAverage() == 0) {
             return -100;
         }
 
@@ -79,6 +79,7 @@ class AverageOrderValue extends AbstractClass
     /**
      * @param $date
      * @param null $endDate
+     *
      * @return float|int
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -91,6 +92,7 @@ class AverageOrderValue extends AbstractClass
 
     /**
      * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getYUnit()
     {

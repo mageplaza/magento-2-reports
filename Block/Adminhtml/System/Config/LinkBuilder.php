@@ -44,6 +44,7 @@ class LinkBuilder extends Field
 
     /**
      * Generate constructor.
+     *
      * @param Template\Context $context
      * @param Data $helper
      * @param array $data
@@ -52,8 +53,7 @@ class LinkBuilder extends Field
         Template\Context $context,
         Data $helper,
         array $data = []
-    )
-    {
+    ) {
         $this->helper = $helper;
 
         parent::__construct($context, $data);
