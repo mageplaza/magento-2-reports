@@ -23,6 +23,9 @@ namespace Mageplaza\Reports\Controller\Adminhtml\Dashboard;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Page;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Json\Helper\Data;
 use Magento\Framework\View\Result\PageFactory;
 
@@ -54,18 +57,18 @@ class Index extends Action
         PageFactory $resultPageFactory,
         Data $jsonHelper
     ) {
-        parent::__construct($context);
-
         $this->resultPageFactory = $resultPageFactory;
         $this->_jsonHelper = $jsonHelper;
+
+        parent::__construct($context);
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return Page|ResponseInterface|ResultInterface
      */
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Maqeplaza_Reports::dashboard');
         $resultPage->addBreadcrumb(__('Dashboard'), __('Dashboard'));

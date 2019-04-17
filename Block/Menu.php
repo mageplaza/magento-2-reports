@@ -21,6 +21,7 @@
 
 namespace Mageplaza\Reports\Block;
 
+use Exception;
 use Magento\Backend\Block\Template;
 use Magento\Customer\Model\Customer\Source\Group;
 use Magento\Sales\Model\Config\Source\Order\Status;
@@ -96,7 +97,7 @@ class Menu extends Template
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDateRange()
     {

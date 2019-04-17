@@ -54,7 +54,7 @@ class MoveMenu
      */
     public function afterExecute(AbstractCommand $subject, $itemParams)
     {
-        if ($itemParams['id'] == 'Mageplaza_Reports::dashboard' && !$this->helper->isEnabled()) {
+        if ($itemParams['id'] === 'Mageplaza_Reports::dashboard' && !$this->helper->isEnabledDashboard()) {
             $itemParams['removed'] = true;
         }
 

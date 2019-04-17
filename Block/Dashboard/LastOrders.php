@@ -21,17 +21,20 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Backend\Block\Dashboard\Orders\Grid;
+use Magento\Framework\Phrase;
+
 /**
  * Class LastOrders
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class LastOrders extends AbstractClass
 {
-    const NAME              = 'lastOrders';
-    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Orders\Grid::class;
+    const NAME = 'lastOrders';
+    const MAGE_REPORT_CLASS = Grid::class;
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

@@ -21,7 +21,10 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Exception;
 use Magento\Backend\Block\Template;
+use Magento\Framework\Phrase;
+use Magento\Quote\Model\ResourceModel\Quote\Item\Collection;
 use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollectionFactory;
 use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Mageplaza\Reports\Helper\Data;
@@ -82,7 +85,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function getProductViews()
     {
@@ -104,7 +107,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function getAllCartItems()
     {
@@ -116,7 +119,7 @@ class ConversionFunnel extends AbstractClass
 
     /**
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function getAllOrderItem()
     {
@@ -127,10 +130,10 @@ class ConversionFunnel extends AbstractClass
     }
 
     /**
-     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\Reports\Model\ResourceModel\Viewed\Collection|\Magento\Quote\Model\ResourceModel\Quote\Item\Collection| $collection
+     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\Reports\Model\ResourceModel\Viewed\Collection|Collection| $collection
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function addFilter($collection)
     {
@@ -154,24 +157,22 @@ class ConversionFunnel extends AbstractClass
      * @param null $toDate
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDateRange($fromDate = null, $toDate = null)
     {
         if ($fromDate === null) {
             $fromDate = isset($this->_request->getParam('mpFilter')['startDate'])
                 ? $this->_request->getParam('mpFilter')['startDate']
-                : (($this->_request->getParam('startDate') !== null) ? $this->_request->getParam('startDate') : null);
+                : $this->_request->getParam('startDate');
         }
         if ($toDate === null) {
             $toDate = isset($this->_request->getParam('mpFilter')['endDate'])
                 ? $this->_request->getParam('mpFilter')['endDate']
-                : (($this->_request->getParam('endDate') !== null) ? $this->_request->getParam('endDate') : null);
+                : $this->_request->getParam('endDate');
         }
-        if ($toDate == null || $fromDate == null) {
-            $dates = $this->_helperData->getDateRange();
-            $fromDate = $dates[0];
-            $toDate = $dates[1];
+        if ($toDate === null || $fromDate === null) {
+            list($fromDate, $toDate) = $this->_helperData->getDateRange();
         }
 
         return [$fromDate, $toDate];
@@ -182,18 +183,18 @@ class ConversionFunnel extends AbstractClass
      */
     protected function getStore()
     {
-        $storeParam = $this->_request->getParam('store');
+        $storeParam = $this->_request->getParam('store') ?: 0;
         $storeFilterParam = isset($this->_request->getParam('mpFilter')['store'])
             ? $this->_request->getParam('mpFilter')['store'] : null;
-        $storeId = ($storeFilterParam !== null && $storeFilterParam !== "")
+        $storeId = ($storeFilterParam !== null && $storeFilterParam !== '')
             ? $storeFilterParam
-            : (($storeParam !== null && $storeParam !== "") ? $storeParam : 0);
+            : $storeParam;
 
         return $storeId;
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

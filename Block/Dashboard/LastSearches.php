@@ -21,17 +21,20 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Framework\Phrase;
+use Magento\Search\Block\Adminhtml\Dashboard\Last;
+
 /**
  * Class LastSearches
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class LastSearches extends AbstractClass
 {
-    const NAME              = 'lastSearches';
-    const MAGE_REPORT_CLASS = \Magento\Search\Block\Adminhtml\Dashboard\Last::class;
+    const NAME = 'lastSearches';
+    const MAGE_REPORT_CLASS = Last::class;
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

@@ -19,18 +19,23 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-/** @var \Mageplaza\Reports\Block\Menu $block */
+use Mageplaza\Reports\Block\Menu;
+
+/** @var Menu $block */
 $gridName = $block->getGridName();
 try {
     $date = $block->getDateRange();
 } catch (Exception $e) {
     $date = [];
 }
-$menu = $block->getMenuUrls() ? $block->getMenuUrls() : [];
+$menu = $block->getMenuUrls() ?: [];
 $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
 ?>
-<div id="menu" class="mp_menu"
-     data-mage-init='{"Mageplaza_Reports/js/detail/menu":{"gridName":"<?php echo $gridName ?>","date":<?php echo json_encode($date) ?>,"storeUrl":"<?php echo $storeFilterUrl ?>"}}'>
+<div id="menu" class="mp_menu" data-mage-init='{"Mageplaza_Reports/js/detail/menu":{
+                                                    "gridName":"<?= $gridName ?>",
+                                                    "date":<?= json_encode($date) ?>,
+                                                    "storeUrl":"<?= $storeFilterUrl ?>"
+                                                }}'>
     <div class="admin__action-dropdown-wrap menu-select">
         <a href="#" class="admin__action-dropdown"
            title="Menu"
@@ -40,7 +45,7 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </a>
         <ul class="admin__action-dropdown-menu">
             <?php foreach ($menu as $item) : ?>
-                <li><a href="<?php echo $item['path'] ?>"><?php echo $item['label'] ?></a></li>
+                <li><a href="<?= $item['path'] ?>"><?= $item['label'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -52,30 +57,30 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </div>
     </div>
     <div class="mp-rp-store-switcher">
-        <?php echo $block->getChildHtml() ?>
+        <?= $block->getChildHtml() ?>
     </div>
     <div class="customer-group">
         <select id="customer-group-id">
             <?php foreach ($block->getCustomerGroup() as $group) : ?>
-                <option value="<?php echo $group['value'] ?>"><?php echo $group['label'] ?></option>
+                <option value="<?= $group['value'] ?>"><?= $group['label'] ?></option>
             <?php endforeach; ?>
         </select>
     </div>
     <div class="period">
-        <span><strong><?php echo __('Period') ?></strong></span>
+        <span><strong><?= __('Period') ?></strong></span>
         <select id="period">
-            <option value="day"><?php echo __('Day') ?></option>
-            <option value="week"><?php echo __('Week') ?></option>
-            <option value="month"><?php echo __('Month') ?></option>
-            <option value="year"><?php echo __('Year') ?></option>
+            <option value="day"><?= __('Day') ?></option>
+            <option value="week"><?= __('Week') ?></option>
+            <option value="month"><?= __('Month') ?></option>
+            <option value="year"><?= __('Year') ?></option>
         </select>
     </div>
     <div class="order_status">
-        <span class="label"><strong><?php echo __('Order Status') ?></strong></span>
+        <span class="label"><strong><?= __('Order Status') ?></strong></span>
         <div class="mp-rp-order-status admin__action-dropdown-wrap admin__data-grid-action-columns"
              style="float: right">
             <button id="mp-rp-order-status" class="admin__action-dropdown" type="button">
-                <span class="admin__action-dropdown-text"><?php echo __('--Select--') ?></span>
+                <span class="admin__action-dropdown-text"><?= __('--Select--') ?></span>
             </button>
             <div class="admin__action-dropdown-menu _overflow" id="order_status">
                 <div class="admin__action-dropdown-menu-header"></div>
@@ -85,10 +90,10 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
                             <input class="admin__control-checkbox"
                                    type="checkbox"
                                    checked
-                                   name="<?php echo $status['value'] ?>"
-                                   id="<?php echo $status['value'] ?>">
+                                   name="<?= $status['value'] ?>"
+                                   id="<?= $status['value'] ?>">
                             <label class="admin__field-label"
-                                   for="<?php echo $status['value'] ?>"><?php echo $status['label']; ?></label>
+                                   for="<?= $status['value'] ?>"><?= $status['label']; ?></label>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -96,10 +101,10 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </div>
     </div>
     <div class="date_used">
-        <span><strong><?php echo __('Date Used') ?></strong></span>
+        <span><strong><?= __('Date Used') ?></strong></span>
         <select id="date_used" class="select-box">
-            <option value="created_at"><?php echo __('Created At') ?></option>
-            <option value="updated_at"><?php echo __('Updated At') ?></option>
+            <option value="created_at"><?= __('Created At') ?></option>
+            <option value="updated_at"><?= __('Updated At') ?></option>
         </select>
     </div>
 </div>

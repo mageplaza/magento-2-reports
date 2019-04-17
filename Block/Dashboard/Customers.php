@@ -21,17 +21,20 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Backend\Block\Dashboard\Tab\Customers\Most;
+use Magento\Framework\Phrase;
+
 /**
  * Class Customers
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class Customers extends AbstractClass
 {
-    const NAME              = 'customers';
-    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Customers\Most::class;
+    const NAME = 'customers';
+    const MAGE_REPORT_CLASS = Most::class;
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

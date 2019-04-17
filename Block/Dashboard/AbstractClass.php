@@ -21,9 +21,13 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Exception;
 use Magento\Backend\Block\Template;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Locale\FormatInterface;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -33,7 +37,7 @@ use Mageplaza\Reports\Helper\Data;
  */
 abstract class AbstractClass extends Template
 {
-    const NAME              = '';
+    const NAME = '';
     const MAGE_REPORT_CLASS = '';
 
     /**
@@ -52,7 +56,7 @@ abstract class AbstractClass extends Template
     protected $basePriceFormat;
 
     /**
-     * @var \Magento\Directory\Model\Currency|null
+     * @var Currency|null
      */
     protected $_currentCurrencyCode = null;
 
@@ -81,7 +85,7 @@ abstract class AbstractClass extends Template
 
     /**
      * @inheritdoc
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getContentHtml()
     {
@@ -123,7 +127,7 @@ abstract class AbstractClass extends Template
      * @param $price
      *
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function format($price)
     {
@@ -133,7 +137,7 @@ abstract class AbstractClass extends Template
     /**
      * Setting currency model
      *
-     * @param \Magento\Directory\Model\Currency $currency
+     * @param Currency $currency
      *
      * @return void
      */
@@ -146,7 +150,7 @@ abstract class AbstractClass extends Template
      * Retrieve currency model if not set then return currency model for current store
      *
      * @return Currency|null
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getCurrency()
     {
@@ -167,12 +171,15 @@ abstract class AbstractClass extends Template
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getChartData()
     {
         $date = $this->_helperData->getDateRange();
-        $days = max($this->_helperData->getDaysByDateRange($date[0], $date[1]), $this->_helperData->getDaysByDateRange($date[2], $date[3]));
+        $days = max(
+            $this->_helperData->getDaysByDateRange($date[0], $date[1]),
+            $this->_helperData->getDaysByDateRange($date[2], $date[3])
+        );
 
         return [
             'label'       => $this->getChartDataLabel(),
@@ -193,7 +200,7 @@ abstract class AbstractClass extends Template
 
     /**
      * @return Currency
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     protected function getBaseCurrency()
     {
@@ -208,14 +215,14 @@ abstract class AbstractClass extends Template
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     protected function getBasePriceFormat()
     {
         if (!$this->basePriceFormat) {
             $code = $this->getBaseCurrency()->getCode();
 
-            $this->basePriceFormat = ObjectManager::getInstance()->get(\Magento\Framework\Locale\FormatInterface::class)
+            $this->basePriceFormat = ObjectManager::getInstance()->get(FormatInterface::class)
                 ->getPriceFormat(null, $code);
         }
 
@@ -250,12 +257,12 @@ abstract class AbstractClass extends Template
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        return rand(1, 10);
+        return mt_rand(1, 10);
     }
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDateRange()
     {
@@ -304,14 +311,14 @@ abstract class AbstractClass extends Template
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getChartDataLabel()
     {
         $date = $this->_helperData->getDateRange();
 
         return [date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
-            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
+                date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
     }
 
     /**

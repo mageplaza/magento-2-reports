@@ -21,6 +21,9 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
+
 /**
  * Class LifetimeSales
  * @package Mageplaza\Reports\Block\Dashboard
@@ -30,7 +33,7 @@ class LifetimeSales extends AbstractClass
     const NAME = 'lifetimeSales';
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {
@@ -39,7 +42,7 @@ class LifetimeSales extends AbstractClass
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getTotal()
     {

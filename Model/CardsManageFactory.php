@@ -21,10 +21,12 @@
 
 namespace Mageplaza\Reports\Model;
 
+use Exception;
 use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\ObjectManagerInterface as ObjectManager;
+use Magento\Ui\Model\Bookmark;
 use Magento\Ui\Model\BookmarkFactory;
 use Mageplaza\Reports\Helper\Data;
 
@@ -37,9 +39,9 @@ class CardsManageFactory
     /**
      * Object Manager instance
      *
-     * @var \Magento\Framework\ObjectManagerInterface
+     * @var ObjectManager
      */
-    protected $objectManager = null;
+    protected $objectManager;
 
     /**
      * @var ManagerInterface
@@ -103,7 +105,7 @@ class CardsManageFactory
     /** create Cards Collection
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function create()
     {
@@ -135,8 +137,8 @@ class CardsManageFactory
     }
 
     /**
-     * @return \Magento\Framework\DataObject|\Magento\Ui\Model\Bookmark
-     * @throws \Exception
+     * @return DataObject|Bookmark
+     * @throws Exception
      */
     public function getCurrentConfig()
     {
@@ -158,12 +160,12 @@ class CardsManageFactory
     }
 
     /**
-     * @return DataObject|\Magento\Ui\Model\Bookmark
-     * @throws \Exception
+     * @return DataObject|Bookmark
+     * @throws Exception
      */
     public function getDefaultConfig()
     {
-        /** @var \Magento\Ui\Model\Bookmark $default */
+        /** @var Bookmark $default */
         if ($this->_authSession->getUser()) {
             $userId = $this->_authSession->getUser()->getId();
             $default = $this->_bookmark->create()->getCollection()
