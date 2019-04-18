@@ -30,4 +30,7 @@
     <type name="Magento\Backend\Model\Menu\Builder\AbstractCommand">
         <plugin name="mageplaza_report_hide_menu" type="Mageplaza\Reports\Plugin\MoveMenu"/>
     </type>
+    <type name="Magento\Framework\App\Route\Config">
+        <plugin name="mageplaza_report_redirect" type="Mageplaza\Reports\Plugin\Config"/>
+    </type>
 </config>
