@@ -48,17 +48,14 @@ class Config
     /**
      * @param BackendConfig $subject
      * @param $result
-     * @param $frontName
-     * @param null $scope
      * @return mixed
      */
-    public function afterGetRouteByFrontName(BackendConfig $subject, $result, $frontName, $scope = null)
+    public function afterGetRouteByFrontName(BackendConfig $subject, $result)
     {
-        if ($this->helper->versionCompare('2.2.8','=')){
-            if (!$result) {
-                return $frontName;
-            }
+        if (!$result && $this->helper->versionCompare('2.2.8', '=')) {
+            return 'admin';
         }
+
         return $result;
     }
 }
