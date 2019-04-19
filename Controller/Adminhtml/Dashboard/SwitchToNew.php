@@ -26,6 +26,9 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Storage\Writer;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Store\Model\Store;
 
@@ -72,7 +75,7 @@ class SwitchToNew extends Action
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|null
+     * @return ResponseInterface|Redirect|ResultInterface|null
      */
     public function execute()
     {

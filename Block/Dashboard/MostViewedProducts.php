@@ -21,17 +21,20 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Backend\Block\Dashboard\Tab\Products\Viewed;
+use Magento\Framework\Phrase;
+
 /**
  * Class MostViewedProducts
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class MostViewedProducts extends AbstractClass
 {
-    const NAME              = 'mostViewedProducts';
-    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Products\Viewed::class;
+    const NAME = 'mostViewedProducts';
+    const MAGE_REPORT_CLASS = Viewed::class;
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

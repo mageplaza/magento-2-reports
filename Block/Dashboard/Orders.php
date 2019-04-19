@@ -21,7 +21,10 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Exception;
 use Magento\Backend\Block\Template;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Magento\Sales\Model\OrderFactory;
 use Mageplaza\Reports\Helper\Data;
 
@@ -67,8 +70,8 @@ class Orders extends AbstractClass
      * @param null $endDate
      *
      * @return int
-     * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
-     * @throws \Exception
+     * @throws LocalizedException*@throws \Exception
+     * @throws Exception
      */
     protected function getDataByDate($date, $endDate = null)
     {
@@ -82,19 +85,21 @@ class Orders extends AbstractClass
 
     /**
      * @return float|int
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Exception
+     * @throws LocalizedException
+     * @throws Exception
      */
     public function getRate()
     {
         $date = $this->_helperData->getDateRange();
         $count = $this->getDataByDate($date[0], $date[1]);
         $countCompare = $this->getDataByDate($date[2], $date[3]);
-        if ($countCompare == 0 && $count == 0) {
+        if ($countCompare === 0 && $count === 0) {
             return 0;
-        } elseif ($countCompare == 0) {
+        }
+        if ($countCompare === 0) {
             return 100;
-        } elseif ($count == 0) {
+        }
+        if ($count === 0) {
             return -100;
         }
         $rate = ($count - $countCompare) * 100 / $countCompare;
@@ -104,19 +109,18 @@ class Orders extends AbstractClass
 
     /**
      * @return int
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Exception
+     * @throws LocalizedException
+     * @throws Exception
      */
     public function getTotal()
     {
         $date = $this->_helperData->getDateRange();
-        $count = $this->getDataByDate($date[0], $date[1]);
 
-        return $count;
+        return $this->getDataByDate($date[0], $date[1]);
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     protected function getYLabel()
     {
@@ -124,7 +128,7 @@ class Orders extends AbstractClass
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

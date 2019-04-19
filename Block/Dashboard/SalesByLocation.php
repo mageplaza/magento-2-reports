@@ -21,9 +21,13 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Exception;
 use Magento\Backend\Block\Template;
 use Magento\Directory\Model\CountryFactory;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Magento\Sales\Model\OrderFactory;
+use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -77,12 +81,13 @@ class SalesByLocation extends AbstractClass
      * @param null $size
      *
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException*@throws \Exception
-     * @throws \Exception
+     * @throws LocalizedException*@throws \Exception
+     * @throws Exception
      */
     protected function getDataByDateRange($startDate, $endDate, $size = null)
     {
         $data = [];
+        /** @var Collection $collection */
         $collection = $this->_orderFactory->create()->getCollection();
         $collection = $this->_helperData->addStoreFilter($collection);
         $collection = $this->_helperData->addStatusFilter($collection);
@@ -106,8 +111,8 @@ class SalesByLocation extends AbstractClass
 
     /**
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Exception
+     * @throws LocalizedException
+     * @throws Exception
      */
     public function getCollection()
     {
@@ -144,7 +149,7 @@ class SalesByLocation extends AbstractClass
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

@@ -64,7 +64,7 @@ class BackendLogoUrl
      */
     public function afterGetHomePageUrl(BackendHelper $data, $result)
     {
-        if ($this->_helperData->isEnabled()) {
+        if ($this->_helperData->isEnabledDashboard()) {
             $result = $this->_backendUrl->getRouteUrl('mpreports/dashboard');
         }
 

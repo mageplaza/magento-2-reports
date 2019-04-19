@@ -21,7 +21,9 @@
 
 namespace Mageplaza\Reports\Block;
 
+use Exception;
 use Magento\Backend\Block\Template;
+use Magento\Framework\Exception\LocalizedException;
 use Mageplaza\Reports\Helper\Data;
 use Mageplaza\Reports\Model\CardsManageFactory;
 
@@ -68,7 +70,7 @@ class Dashboard extends Template
 
     /**
      * @return Template|void
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     protected function _prepareLayout()
     {
@@ -114,7 +116,7 @@ class Dashboard extends Template
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getCards()
     {
@@ -131,11 +133,11 @@ class Dashboard extends Template
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDate()
     {
-        return json_encode($this->_helperData->getDateRange());
+        return Data::jsonEncode($this->_helperData->getDateRange());
     }
 
     /**
@@ -152,7 +154,7 @@ class Dashboard extends Template
     public function getGridStackConfig()
     {
         $config = [
-            "url" => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()])
+            'url' => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()])
         ];
 
         return $config;

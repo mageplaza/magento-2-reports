@@ -25,6 +25,7 @@
         <mageplaza_reports>
             <general>
                 <enabled>0</enabled>
+                <dashboard_enabled>1</dashboard_enabled>
                 <chart_enabled>1</chart_enabled>
                 <compare>1</compare>
                 <shownof>1</shownof>

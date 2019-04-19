@@ -18,7 +18,7 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-/** @var \Mageplaza\Reports\Block\Dashboard $block */
+/** @var Dashboard $block */
 /** @var Mageplaza\Reports\Model\CardsManageFactory $card */
 try {
     $cards = $block->getCards();
@@ -26,18 +26,19 @@ try {
     $cards = [];
 }
 $params = $block->getRequest()->getParams();
-?>
+
+use Mageplaza\Reports\Block\Dashboard; ?>
 <div style="clear: both; height: 20px"></div>
 <div class="ar_dashboard">
     <div class="date-range-picker"
-         data-mage-init='{"initDateRange":{"url":"<?php echo $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?php echo $block->isCompare() ?>,"date":<?php echo $block->getDate() ?>}}'>
+         data-mage-init='{"initDateRange":{"url":"<?= $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?= $block->isCompare() ?>,"date":<?= $block->getDate() ?>}}'>
         <div id="daterange">
             <i class="fa fa-calendar"></i>
             <span></span>
             <i class="fa fa-caret-down"></i>
         </div>
         <?php if ($block->isCompare()) : ?>
-            <div class="compare"><?php echo __('compare with') ?></div>
+            <div class="compare"><?= __('compare with') ?></div>
             <div id="compare-daterange">
                 <i class="fa fa-calendar"></i>
                 <span></span>
@@ -50,7 +51,7 @@ $params = $block->getRequest()->getParams();
             <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
                  style="float: right">
                 <button id="mp-ar-card" class="admin__action-dropdown" type="button">
-                    <span class="admin__action-dropdown-text"><?php echo __('Card') ?></span>
+                    <span class="admin__action-dropdown-text"><?= __('Card') ?></span>
                 </button>
                 <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
                     <div class="admin__action-dropdown-menu-header"></div>
@@ -58,12 +59,12 @@ $params = $block->getRequest()->getParams();
                         <?php foreach ($cards as $card) : ?>
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
-                                       type="checkbox" <?php echo $card->getVisible() ? 'checked' : ''; ?>
-                                       id="card-<?php echo $card->getId() ?>"
-                                       data-cart-id="<?php echo $card->getId(); ?>">
+                                       type="checkbox" <?= $card->getVisible() ? 'checked' : ''; ?>
+                                       id="card-<?= $card->getId() ?>"
+                                       data-cart-id="<?= $card->getId(); ?>">
                                 <label class="admin__field-label"
-                                       title="<?php echo $card->getTitle(); ?>"
-                                       for="card-<?php echo $card->getId() ?>"><?php echo $card->getTitle(); ?></label>
+                                       title="<?= $card->getTitle(); ?>"
+                                       for="card-<?= $card->getId() ?>"><?= $card->getTitle(); ?></label>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -75,25 +76,25 @@ $params = $block->getRequest()->getParams();
         <div class="grid-stack"
              data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
             <?php foreach ($cards as $card) : ?>
-                <div id="<?php echo $card->getId() ?>"
-                     class="<?php echo $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-                     data-gs-id="<?php echo $card->getId() ?>"
-                     data-gs-x="<?php echo $card->getX() !== null ? $card->getX() : '0' ?>"
-                     data-gs-y="<?php echo $card->getY() !== null ? $card->getY() : '100' ?>"
-                     data-gs-width="<?php echo $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
-                     data-gs-height="<?php echo $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
+                <div id="<?= $card->getId() ?>"
+                     class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
+                     data-gs-id="<?= $card->getId() ?>"
+                     data-gs-x="<?= $card->getX() !== null ? $card->getX() : '0' ?>"
+                     data-gs-y="<?= $card->getY() !== null ? $card->getY() : '100' ?>"
+                     data-gs-width="<?= $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
+                     data-gs-height="<?= $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
                      data-gs-min-width="2" data-gs-min-height="3">
                     <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
                     <div class="not-draggable">
                         <div class="dashboard-item-container">
                             <div class="dashboard-item-header">
                                 <?php if ($title = $card->getTitle()) : ?>
-                                    <div class="dashboard-item-title"><?php echo $title; ?></div>
+                                    <div class="dashboard-item-title"><?= $title; ?></div>
                                 <?php endif; ?>
                                 <?php if ($card->canShowDetail()) : ?>
                                     <div class="view-detail">
-                                        <a href="<?php echo $card->getDetailUrl() ?>"
-                                           target="_blank"><?php echo __('View Details') ?></a>
+                                        <a href="<?= $card->getDetailUrl() ?>"
+                                           target="_blank"><?= __('View Details') ?></a>
                                     </div>
                                 <?php endif; ?>
                                 <div style="clear: both"></div>
@@ -101,18 +102,18 @@ $params = $block->getRequest()->getParams();
                                 $totalLabel = $card->getTotal();
                                 if ($totalLabel !== '') : ?>
                                     <div class="dashboard-sales-value">
-                                        <?php echo $totalLabel ?>
+                                        <?= $totalLabel ?>
                                         <?php
                                         $rate = $card->getRate();
-                                        if ($block->isCompare() && ($rate !== '')) : ?>
-                                            <div class="chart-rate <?php echo $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                                <?php echo abs($rate) . '%' ?>
+                                        if (($rate !== '') && $block->isCompare()) : ?>
+                                            <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
+                                                <?= abs($rate) . '%' ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <?php echo $card->getContentHtml() ?>
+                            <?= $card->getContentHtml() ?>
                         </div>
                     </div>
                 </div>
@@ -124,7 +125,7 @@ $params = $block->getRequest()->getParams();
                         if (href === '') {
                             if (!$(this).parent().find('.upgrade-nof').length) {
                                 $(this).parent().append('<div class="upgrade-nof">' +
-                                    '<?php echo __('Please upgrade to %1 version to see more detail', '<a href="https://www.mageplaza.com/magento-2-reports-extension/#pricing-table" target="_blank">Pro</a>') ?>'
+                                    '<?= __('Please upgrade to %1 version to see more detail', '<a href="https://www.mageplaza.com/magento-2-reports-extension/#pricing-table" target="_blank">Pro</a>') ?>'
                                     + '</div>');
                             }
                             e.stopPropagation();

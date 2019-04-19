@@ -24,6 +24,7 @@ namespace Mageplaza\Reports\Block\Adminhtml\System\Config;
 use Magento\Backend\Block\Template;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Url;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -43,18 +44,25 @@ class LinkBuilder extends Field
     protected $helper;
 
     /**
-     * Generate constructor.
-     *
+     * @var Url
+     */
+    protected $url;
+
+    /**
+     * LinkBuilder constructor.
      * @param Template\Context $context
      * @param Data $helper
+     * @param Url $url
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Data $helper,
+        Url $url,
         array $data = []
     ) {
         $this->helper = $helper;
+        $this->url = $url;
 
         parent::__construct($context, $data);
     }
@@ -92,5 +100,21 @@ class LinkBuilder extends Field
     public function isEnabled()
     {
         return $this->helper->isEnabled();
+    }
+
+    /**
+     * @return string
+     */
+    public function getBuilderUrl()
+    {
+        return $this->url->getUrl('mpreports/dashboard/index', ['accessKey' => 'access_key', '_nosid' => true]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccessKey()
+    {
+        return $this->helper->getConfigMobileAccessKey();
     }
 }

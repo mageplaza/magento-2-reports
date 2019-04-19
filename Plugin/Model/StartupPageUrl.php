@@ -64,7 +64,7 @@ class StartupPageUrl
      */
     public function afterGetStartupPageUrl(Url $url, $result)
     {
-        if ($this->_helperData->isEnabled()) {
+        if ($this->_helperData->isEnabledDashboard()) {
             $result = 'mpreports/dashboard';
         }
 

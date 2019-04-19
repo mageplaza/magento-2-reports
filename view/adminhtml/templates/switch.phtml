@@ -23,19 +23,19 @@
     <div class="mp-remove-dashboard-advanced-reports"></div>
     <div class="mp-dashboard-advanced-reports-description">
         <header class="mp-dashboard-advanced-reports-title">
-            <?php echo $block->escapeHtml(__('Mageplaza Advanced Reporting')) ?>
+            <?= $block->escapeHtml(__('Mageplaza Advanced Reporting')) ?>
         </header>
         <div class="mp-dashboard-advanced-reports-content">
-            <?php echo $block->escapeHtml(
+            <?= $block->escapeHtml(
                 __('The better reports provides ecommerce insights across performance metrics, product sales, customers, and cost of goods sold. Instantly measure metrics like customer lifetime value, gross margin, net profit, and more to build and automate high-quality ecommerce reports.')
             ) ?>
         </div>
     </div>
     <div class="mp-dashboard-advanced-reports-actions">
-        <a href="<?php echo $block->escapeUrl($block->getUrl('mpreports/dashboard/switchtonew')) ?>"
+        <a href="<?= $block->escapeUrl($block->getUrl('mpreports/dashboard/switchtonew')) ?>"
            class="action mp-action-advanced-reports"
-           title="<?php echo $block->escapeHtml(__('Try to use new Dashboard')) ?>">
-            <span><?php echo $block->escapeHtml(__('Try to use new Dashboard')) ?></span>
+           title="<?= $block->escapeHtml(__('Try to use new Dashboard')) ?>">
+            <span><?= $block->escapeHtml(__('Try to use new Dashboard')) ?></span>
         </a>
     </div>
 </section>
@@ -44,7 +44,7 @@
         $('.mp-remove-dashboard-advanced-reports').on('click', function () {
             $('.mp-dashboard-advanced-reports').remove();
             $.ajax({
-                url: '<?php echo $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                url: '<?= $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
             })
         });
     })

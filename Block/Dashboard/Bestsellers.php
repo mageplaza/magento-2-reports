@@ -21,25 +21,28 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
+use Magento\Backend\Block\Dashboard\Tab\Products\Ordered;
+use Magento\Framework\Phrase;
+
 /**
  * Class Bestsellers
  * @package Mageplaza\Reports\Block\Dashboard
  */
 class Bestsellers extends AbstractClass
 {
-    const NAME              = 'bestsellers';
-    const MAGE_REPORT_CLASS = \Magento\Backend\Block\Dashboard\Tab\Products\Ordered::class;
+    const NAME = 'bestsellers';
+    const MAGE_REPORT_CLASS = Ordered::class;
 
     /**
      * @return AbstractClass|void
      */
     protected function _prepareLayout()
     {
-        $this->addChild('mp_bestsellers', 'Magento\Backend\Block\Dashboard\Tab\Products\Ordered');
+        $this->addChild('mp_bestsellers', Ordered::class);
     }
 
     /**
-     * @return \Magento\Framework\Phrase|string
+     * @return Phrase|string
      */
     public function getTitle()
     {

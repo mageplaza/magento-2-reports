@@ -14,15 +14,15 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_BetterCoupon
- * @copyright   Copyright (c) 2018 Mageplaza (https://www.mageplaza.com/)
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-
-$url = $block->getBaseUrl();
 ?>
 
-<button id="mp-reports-builder" type="button" class="primary"><?php echo __('Change Key') ?></button>
+<button id="mp-reports-builder" type="button" class="primary">
+    <?= $block->getAccessKey() ? __('Change Key') : __('Generate Url') ?>
+</button>
 <div class="mp-reports-link-builder">
     <input type="text" id="mp-reports-link-builder-input" value="" readonly="readonly"/>
     <div class="input-group-btn">
@@ -37,12 +37,10 @@ $url = $block->getBaseUrl();
     require(['jquery'], function ($) {
         var urlInput = $('#mp-reports-link-builder-input'),
             buttonCopy = $('#mp-reports-link-builder-copy'),
-            accessKeyEl = $('#mageplaza_reports_mobile_access_key');
+            accessKeyEl = $('#mageplaza_reports_mobile_access_key'),
+            urlOrg = '<?= $block->getBuilderUrl() ?>';
 
-        var url = '<?= $url ?>';
-        url += 'mpreports/dashboard/index?accessKey=' + accessKeyEl.val().trim();
-
-        urlInput.val(url);
+        changeUrl(accessKeyEl.val().trim());
         urlInput.on('click', function () {
             $(this).select();
         });
@@ -53,7 +51,7 @@ $url = $block->getBaseUrl();
             window.getSelection().removeAllRanges();
 
             e.currentTarget.setAttribute('class', 'mp-tooltipped');
-            e.currentTarget.setAttribute('aria-label', '<?php echo __('Copied!') ?>');
+            e.currentTarget.setAttribute('aria-label', '<?= __('Copied!') ?>');
         });
         buttonCopy.on('mouseleave', function (e) {
             e.currentTarget.removeAttribute('class');
@@ -66,7 +64,15 @@ $url = $block->getBaseUrl();
                 + Math.random().toString(36).substring(2, 12)
                 + Math.random().toString(36).substring(2, 4);
             accessKeyEl.val(randKey);
+            changeUrl(randKey);
+
+            $('#row_mageplaza_reports_mobile_access_key .note').show();
+            $('.mp-reports-link-builder').show();
         });
+
+        function changeUrl(key) {
+            urlInput.val(urlOrg.replace('access_key', key));
+        }
     });
 </script>
 <style>
@@ -78,5 +84,15 @@ $url = $block->getBaseUrl();
         opacity: .5;
         cursor: not-allowed;
     }
+
+    #row_mageplaza_reports_mobile_access_key .note {
+        display: none;
+    }
+
+    <?php if (!$block->getAccessKey()) : ?>
+    .mp-reports-link-builder {
+        display: none;
+    }
+    <?php endif; ?>
 </style>
 

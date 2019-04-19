@@ -21,11 +21,20 @@
 
 namespace Mageplaza\Reports\Helper;
 
+use DateInterval;
+use DatePeriod;
+use DateTimeZone;
+use Exception;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\DataObject;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Reports\Model\ResourceModel\Order\Collection;
 use Magento\Reports\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 
@@ -38,7 +47,7 @@ class Data extends AbstractData
     const CONFIG_MODULE_PATH = 'mageplaza_reports';
 
     /**
-     * @var \Magento\Reports\Model\ResourceModel\Order\CollectionFactory
+     * @var CollectionFactory
      */
     protected $_orderCollectionFactory;
 
@@ -75,29 +84,31 @@ class Data extends AbstractData
         DateTime $dateTime,
         TimezoneInterface $timezone
     ) {
-        parent::__construct($context, $objectManager, $storeManager);
-
         $this->_orderCollectionFactory = $orderCollectionFactory;
         $this->_dateTime = $dateTime;
         $this->_timezone = $timezone;
+
+        parent::__construct($context, $objectManager, $storeManager);
     }
 
     /**
+     * @param null $storeId
      * @return mixed
      */
-    public function isCompare()
+    public function isCompare($storeId = null)
     {
-        $storeId = $this->_request->getParam('store');
+        $storeId = $storeId ?: $this->_request->getParam('store');
 
         return $this->getConfigGeneral('compare', $storeId);
     }
 
     /**
+     * @param null $storeId
      * @return mixed
      */
-    public function isEnabledChart()
+    public function isEnabledChart($storeId = null)
     {
-        $storeId = $this->_request->getParam('store');
+        $storeId = $storeId ?: $this->_request->getParam('store');
 
         return $this->getConfigGeneral('chart_enabled', $storeId);
     }
@@ -109,16 +120,28 @@ class Data extends AbstractData
      */
     public function isEnabled($storeId = null)
     {
-        $storeId = $this->_request->getParam('store');
+        $storeId = $storeId ?: $this->_request->getParam('store');
 
         return parent::isEnabled($storeId);
+    }
+
+    /**
+     * @param null $storeId
+     *
+     * @return bool
+     */
+    public function isEnabledDashboard($storeId = null)
+    {
+        $storeId = $storeId ?: $this->_request->getParam('store');
+
+        return $this->isEnabled($storeId) && $this->getConfigGeneral('dashboard_enabled', $storeId);
     }
 
     /**
      * @param null $format
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDateRange($format = null)
     {
@@ -137,7 +160,12 @@ class Data extends AbstractData
         } else {
             list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
             $days = date('z', strtotime($endDate) - strtotime($startDate));
-            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat('-1 month -' . ($days + 1) . ' day', '-1 month -1 day', null, $format);
+            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat(
+                '-1 month -' . ($days + 1) . ' day',
+                '-1 month -1 day',
+                null,
+                $format
+            );
         }
 
         return [$startDate, $endDate, $compareStartDate, $compareEndDate];
@@ -148,7 +176,7 @@ class Data extends AbstractData
      * @param $date
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function formatDate($format, $date)
     {
@@ -163,22 +191,19 @@ class Data extends AbstractData
      * @param null $format
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDateTimeRangeFormat($startDate, $endDate = null, $isConvertToLocalTime = null, $format = null)
     {
-        if (!$endDate) {
-            $endDate = $startDate;
-        }
-        $startDate = (new \DateTime($startDate, new \DateTimeZone($this->getTimezone())))->setTime(00, 00, 00);
-        $endDate = (new \DateTime($endDate, new \DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
+        $endDate = (new \DateTime($endDate ?: $startDate, new DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
+        $startDate = (new \DateTime($startDate, new DateTimeZone($this->getTimezone())))->setTime(00, 00, 00);
 
         if ($isConvertToLocalTime) {
-            $startDate->setTimezone(new \DateTimeZone('UTC'));
-            $endDate->setTimezone(new \DateTimeZone('UTC'));
+            $startDate->setTimezone(new DateTimeZone('UTC'));
+            $endDate->setTimezone(new DateTimeZone('UTC'));
         }
 
-        return [$startDate->format($format ? $format : 'Y-m-d H:i:s'), $endDate->format($format ? $format : 'Y-m-d H:i:s')];
+        return [$startDate->format($format ?: 'Y-m-d H:i:s'), $endDate->format($format ?: 'Y-m-d H:i:s')];
     }
 
     /**
@@ -205,12 +230,12 @@ class Data extends AbstractData
     }
 
     /**
-     * @param   \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
-     * @param                                                                           $startDate
+     * @param AbstractCollection $collection
+     * @param $startDate
      * @param null $endDate
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function addTimeFilter($collection, $startDate, $endDate = null)
     {
@@ -228,7 +253,7 @@ class Data extends AbstractData
      * @param int $isObject
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getPeriodsDate($startDate, $endDate = null, $days = 0, $isObject = 0)
     {
@@ -243,14 +268,14 @@ class Data extends AbstractData
 
         $startDate = new \DateTime($startDate);
 
-        $interval = new \DateInterval('P1D');
-        $daterange = new \DatePeriod($startDate, $interval, $endDate);
+        $interval = new DateInterval('P1D');
+        $daterange = new DatePeriod($startDate, $interval, $endDate);
         /** @var \DateTime $date */
         foreach ($daterange as $date) {
             if (!$isObject) {
-                $data[] = $date->format("Y-m-d");
+                $data[] = $date->format('Y-m-d');
             } else {
-                $data[$date->format("Y-m-d")] = new \Magento\Framework\DataObject();
+                $data[$date->format('Y-m-d')] = new DataObject();
             }
         }
 
@@ -258,10 +283,10 @@ class Data extends AbstractData
     }
 
     /**
-     * @param \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
+     * @param AbstractCollection $collection
      *
      * @return mixed
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function addStoreFilter($collection)
     {
@@ -279,7 +304,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection $collection
+     * @param AbstractCollection $collection
      *
      * @return mixed
      */
@@ -297,15 +322,11 @@ class Data extends AbstractData
      */
     public function getLifetimeSales()
     {
-        if (!sizeof($this->lifetimeSales)) {
+        if (!count($this->lifetimeSales)) {
             try {
-                $isFilter = $this->_request->getParam(
-                    'store'
-                ) || $this->_request->getParam(
-                    'website'
-                ) || $this->_request->getParam(
-                    'group'
-                );
+                $isFilter = $this->_request->getParam('store')
+                    || $this->_request->getParam('website')
+                    || $this->_request->getParam('group');
                 $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);
 
                 if ($store = $this->_request->getParam('store')) {
@@ -325,7 +346,7 @@ class Data extends AbstractData
                     'lifetime' => $sales->getLifetime(),
                     'average'  => $sales->getAverage()
                 ];
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->lifetimeSales = [];
             }
         }
@@ -338,82 +359,67 @@ class Data extends AbstractData
      * @param null $endDate
      *
      * @return mixed
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Exception
+     * @throws LocalizedException
+     * @throws Exception
      */
     public function getSalesByDateRange($startDate, $endDate = null)
     {
-        $isFilter = $this->_request->getParam(
-            'store'
-        ) || $this->_request->getParam(
-            'website'
-        ) || $this->_request->getParam(
-            'group'
-        );
+        $isFilter = $this->_request->getParam('store')
+            || $this->_request->getParam('website')
+            || $this->_request->getParam('group');
 
         $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);
         $collection = $this->addStoreFilter($collection);
         $collection = $this->addTimeFilter($collection, $startDate, $endDate);
         $collection->load();
-        $sales = $collection->getFirstItem();
 
-        return $sales;
+        return $collection->getFirstItem();
     }
 
     /**
      * @param $startDate
      * @param $endDate
      *
-     * @return \Magento\Framework\DataObject
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Exception
+     * @return DataObject
+     * @throws LocalizedException
+     * @throws Exception
      */
     public function getTotalsByDateRange($startDate, $endDate)
     {
-        $isFilter = $this->_request->getParam(
-            'store'
-        ) || $this->_request->getParam(
-            'website'
-        ) || $this->_request->getParam(
-            'group'
-        );
+        $isFilter = $this->_request->getParam('store')
+            || $this->_request->getParam('website')
+            || $this->_request->getParam('group');
 
-        /* @var $collection \Magento\Reports\Model\ResourceModel\Order\Collection */
+        /* @var $collection Collection */
         $collection = $this->_orderCollectionFactory->create();
         $collection = $this->addTimeFilter($collection, $startDate, $endDate);
         $collection->checkIsLive('')->calculateTotals($isFilter);
 
         if ($this->_request->getParam('store')) {
             $collection->addFieldToFilter('store_id', $this->_request->getParam('store'));
-        } else {
-            if ($this->_request->getParam('website')) {
-                $storeIds = $this->storeManager->getWebsite($this->_request->getParam('website'))->getStoreIds();
-                $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-            } else {
-                if ($this->_request->getParam('group')) {
-                    $storeIds = $this->storeManager->getGroup($this->_request->getParam('group'))->getStoreIds();
-                    $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-                } elseif (!$collection->isLive()) {
-                    $collection->addFieldToFilter(
-                        'store_id',
-                        ['eq' => $this->storeManager->getStore(\Magento\Store\Model\Store::ADMIN_CODE)->getId()]
-                    );
-                }
-            }
+        } elseif ($this->_request->getParam('website')) {
+            $storeIds = $this->storeManager->getWebsite($this->_request->getParam('website'))->getStoreIds();
+            $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
+        } elseif ($this->_request->getParam('group')) {
+            $storeIds = $this->storeManager->getGroup($this->_request->getParam('group'))->getStoreIds();
+            $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
+        } elseif (!$collection->isLive()) {
+            $collection->addFieldToFilter(
+                'store_id',
+                ['eq' => $this->storeManager->getStore(Store::ADMIN_CODE)->getId()]
+            );
         }
-        $collection->load();
-        $totals = $collection->getFirstItem();
 
-        return $totals;
+        $collection->load();
+
+        return $collection->getFirstItem();
     }
 
     /**
-     * @param null $storeId
-     *
      * @return array|mixed
      */
-    public function getConfigMobileAccessKey($storeId = null)
+    public function getConfigMobileAccessKey()
     {
-        return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/mobile/access_key', $storeId);
+        return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/mobile/access_key');
     }
 }
