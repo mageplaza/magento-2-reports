@@ -62,13 +62,13 @@ class Shipping extends AbstractClass
         $dates = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3]);
-        if ($totals->getShipping() === 0 && $compareTotals->getShipping() === 0) {
+        if ((int) $totals->getShipping() === 0 && (int) $compareTotals->getShipping() === 0) {
             return 0;
         }
-        if ($compareTotals->getShipping() === 0) {
+        if ((int) $compareTotals->getShipping() === 0) {
             return 100;
         }
-        if ($totals->getShipping() === 0) {
+        if ((int) $totals->getShipping() === 0) {
             return -100;
         }
 

@@ -62,13 +62,13 @@ class TotalSales extends AbstractClass
         $dates = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3]);
-        if ($totals->getRevenue() === 0 && $compareTotals->getRevenue() === 0) {
+        if ((int) $totals->getRevenue() === 0 && (int) $compareTotals->getRevenue() === 0) {
             return 0;
         }
-        if ($compareTotals->getRevenue() === 0) {
+        if ((int) $compareTotals->getRevenue() === 0) {
             return 100;
         }
-        if ($totals->getRevenue() === 0) {
+        if ((int) $totals->getRevenue() === 0) {
             return -100;
         }
 

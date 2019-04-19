@@ -70,13 +70,13 @@ class AverageOrderValue extends AbstractClass
         $dates = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getSalesByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getSalesByDateRange($dates[2], $dates[3]);
-        if ($totals->getAverage() === 0 && $compareTotals->getAverage() === 0) {
+        if ((int) $totals->getAverage() === 0 && (int) $compareTotals->getAverage() === 0) {
             return 0;
         }
-        if ($compareTotals->getAverage() === 0) {
+        if ((int) $compareTotals->getAverage() === 0) {
             return 100;
         }
-        if ($totals->getAverage() === 0) {
+        if ((int) $totals->getAverage() === 0) {
             return -100;
         }
 
