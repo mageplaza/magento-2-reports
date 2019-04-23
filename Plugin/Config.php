@@ -53,7 +53,7 @@ class Config
     public function afterGetRouteByFrontName(BackendConfig $subject, $result)
     {
         if (!$result && $this->helper->versionCompare('2.2.8', '=')) {
-            return 'admin';
+            return 'adminhtml';
         }
 
         return $result;
