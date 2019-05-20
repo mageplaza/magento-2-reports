@@ -183,6 +183,22 @@ In the Dashboard, you can:
 - [Magento 2 security extension](https://github.com/mageplaza/magento-2-security)
 
 
-
+**The Most Popular Magento 2 Advanced Reports extension FREE**
+- [Advanced Reports Documentation](#1-advanced-reports-documentation)
+- [Advanced Reports FAQs](#2-advanced-reports-faqs)
+- [How to install Magento 2 Advanced Reports extension](#3-how-to-install-magento-2-advanced-reports-extension)
+- [Mageplaza Advanced Reports features](#4-mageplaza-advanced-reports-features)
+  - [New advanced reports](#new-advanced-reports)
+  - [Customizable report period & report comparison](#customizable-report-period--report-comparison)
+  - [Line-chart reports](#line-chart-reports)
+  - [Flexible reports dashboard layouts](#flexible-reports-dashboard-layouts)
+- [More Advanced Reports features](#5-more-advanced-reports-features)
+  - [Friendly presentation](#friendly-presentation)
+  - [Rates & Changes](#rates--changes)
+  - [Enhance default reports](#enhance-default-reports)
+- [Full Magento 2 Advanced Reports features](#6-full-magento-2-advanced-reports-features)
+- [How to configure Advanced Reports extension](#7-how-to-configure-advanced-reports-extension)
+  - [Advanced Reports General Configuration](#advanced-reports-general-configuration)
+  - [Quick report outside the Dashboard](#quick-report-outside-the-dashboard)
 
 
