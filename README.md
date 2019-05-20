@@ -1,8 +1,8 @@
-# The Most Popular Advanced Reports For Magento 2 (FREE)
+# The Most Popular Magento 2 Advanced Reports extension FREE!
 
-**Mageplaza Advanced Reports for Magento 2** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
+**Mageplaza Magento 3 Advanced Reports** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
-To facilitate the management of statistics, we proudly introduce **Magento 2 Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
+To facilitate the management of statistics, we proudly introduce **Magento 2 Advanced Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
 
 
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-reports/v/stable)](https://packagist.org/packages/mageplaza/module-reports)
@@ -10,13 +10,15 @@ To facilitate the management of statistics, we proudly introduce **Magento 2 Rep
 
 
 
-## 1. Documentation
+## 1. Advanced Reports Documentation
+- [Mageplaza sale page](https://www.mageplaza.com/magento-2-reports-extension/)
+
 - [Installation guide](https://www.mageplaza.com/install-magento-2-extension/)
 - [User guide](https://github.com/magepages/mpdocs/blob/master/docs/reports/index.md)
 
-## 2. FAQs
+## 2. Advanced Reports FAQs
 
-Q: I got an error: Mageplaza_Core has been already defined
+Q: I got an error: `Mageplaza_Core` has been already defined
 
 A: Read solution [here](https://github.com/mageplaza/module-core/issues/3)
 
@@ -28,7 +30,7 @@ A: Yes, it can.
 * Config of the extension in each store will be applied in the store itself.
 * Config in this store doesn't affect the config in the other store.
 
-## 3. How to install Reports extension
+## 3. How to install Magento 2 Advanced Reports extension
 
 ### ✓ Install via composer (recommend)
 Run the following command in Magento 2 root folder:
@@ -39,23 +41,23 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-## 4. Highlight features
+## 4. Mageplaza Advanced Reports features
 
 ### New advanced reports
 
-Along with other reports which are already accessible and available in default Magento 2, Mageplaza Reports extension complements two more advanced reports:
-* Sale by Location report
-* Repeat customers rate report
+Along with other reports which are already accessible and available in default Magento 2, **Mageplaza Advanced Reports extension** complements two more advanced reports:
+- **Sale by Location report**
+- **Repeat customers rate report**
 
-While the Sale by location report helps store owners have an overview of sales in specific countries/regions, that of Repeat customer rate shows how your loyalty program is doing in a visual way.
+While the **Sale by location report** helps store owners have an overview of sales in specific countries/regions, that of Repeat customer rate shows how your loyalty program is doing in a visual way.
 
 These statistical data are also ready to be compared with that of the previous period on a daily, monthly or even yearly basis.
 
-![new advanced reports](https://i.imgur.com/Xz7maXc.png)
+![new advanced reports for Magento 2](https://i.imgur.com/Xz7maXc.png)
 
 ### Customizable report period & report comparison
 
-Store admins can select a period in which statistical data is demonstrated. Mageplaza Reports extension allows you to show figures of:
+Store admins can select a period in which statistical data is demonstrated. **Mageplaza Advanced Reports Magento 2** allows you to show figures of:
 * Today
 * Yesterday
 * Last 7 days
@@ -66,7 +68,7 @@ Store admins can select a period in which statistical data is demonstrated. Mage
 
 With Custom Range, admins are able to select specific time for the report and will not be limited to any range of time.
 
-![customizable report period & report comparison](https://i.imgur.com/v1Mrh7R.png)
+![Magento 2 customizable report period & report comparison](https://i.imgur.com/v1Mrh7R.png)
 
 
 #### Report comparison
@@ -76,22 +78,22 @@ Moreover, statistic data can be compared with that of the previous period which 
 * The previous year
 * Custom range
 
-With Custom Range, store admins can filter figures which belong to a specific period of time to compare with the initial ones.
+With **Custom Range**, store admins can filter figures which belong to a specific period of time to compare with the initial ones.
 
 ### Line-chart reports
 
-In Mageplaza Reports extension standard version; reports on repeat customer rate, transactions, total sales, average order value, tax, and shipping will be displayed as line charts. This provides store owners with a visual look at statistic data, making it easier to compare, follow and process figures. In every graph, the rates between numbers will also be shown with red standing for positive statistics and green indicating negative ones.
+In **Mageplaza Advanced Reports standard version**; reports on repeat customer rate, transactions, total sales, average order value, tax, and shipping will be displayed as line charts. This provides store owners with a visual look at statistic data, making it easier to compare, follow and process figures. In every graph, the rates between numbers will also be shown with red standing for positive statistics and green indicating negative ones.
 
-![line-chart reports](https://i.imgur.com/lpQDb5Y.png)
+![Magento 2 line-chart reports](https://i.imgur.com/lpQDb5Y.png)
 
-### Flexible dashboard layouts
+### Flexible reports dashboard layouts
 
-On the dashboard, store admins can drag and drop to move report areas and arrange figure sections with ease. Moreover, the report board’s size can be adjusted by pulling the double arrow. Let’s see the screen gif below:
+On the **Magento 2 dashboard**, store admins can drag and drop to move report areas and arrange figure sections with ease. Moreover, the report board’s size can be adjusted by pulling the double arrow. Let’s see the screen gif below:
 
-![dashboard layouts](https://i.imgur.com/cLbXk6G.gif)
+![Magento 2 dashboard extension](https://i.imgur.com/cLbXk6G.gif)
 
 
-## 5. More features
+## 5. More Advanced Reports features
 
 ### Friendly presentation
 
@@ -103,13 +105,13 @@ A great thing about Reports is its instant analysis. With just a quick glance, y
 
 ### Enhance default reports
 
-Mageplaza Reports better the default reports that come with Magento2. It adds further analysis of Revenue, Tax, Shipping and Quantity.
+**Advanced Reports** better the default reports that come with Magento2. It adds further analysis of **Revenue, Tax, Shipping and Quantity**.
 
 ### High compatibility
 
-This extension is compatible with many other Mageplaza products, such as Reward points, Gift card, Affiliate and etc. Once you have the others installed, their statistics will appear in the Reports as well.
+Advanced Reports extension is compatible with many [other Mageplaza products](https://www.mageplaza.com/magento-2-extensions/), such as **Reward points**, **Gift card**, **Affiliate** and etc. Once you have the others installed, their statistics will appear in the Reports as well.
 
-## 6. Full-features list
+## 6. Full Magento 2 Advanced Reports features
 
 - Enable/Disable module
 - Enable store admins to show customized reports on Dashboard
@@ -123,7 +125,7 @@ This extension is compatible with many other Mageplaza products, such as Reward 
 - Drag and drop to arrange report layouts
 - Adjust report boards’ sizes by pulling double arrows
 
-## 7. How to configure Mageplaza Report extension
+## 7. How to configure Advanced Reports extension
 
 First, you need to enable the module. Login to Magento backend, then on the admin panel choose **Store > Settings > Configuration > Mageplaza Extensions > Reports**. 
 
@@ -131,9 +133,9 @@ First, you need to enable the module. Login to Magento backend, then on the admi
 
 Below, we will take a look at how Reports can be configured.
 
-### General Configuration
+### Advanced Reports General Configuration
 
-![general configuration](https://i.imgur.com/IGClDwN.png)
+![Magento 2 Advanced Reports General Configuration](https://i.imgur.com/IGClDwN.png)
 
 * In the **Module Enable** field: Choose Yes to enable Reports extension.
 * In the **Enable Chart** field: Select Yes to show the graph.
@@ -143,13 +145,42 @@ Below, we will take a look at how Reports can be configured.
 
 After the initial configuration is completed, your dashboard will change with the addition of new graphs as shown in the following image:
 
-![report outside the dashboard](https://i.imgur.com/EZl9a4Q.png)
+![magento 2 report outside the dashboard](https://i.imgur.com/EZl9a4Q.png)
 
 In the Dashboard, you can:
 * Remove and add report cards that suit your need.
 * Rearrange the cards as you see fit and even adjust their size
 
+**Peoples also search:**
+- magento 2 advanced reporting
+- magento 2 custom reports
+- magento 2 reporting extension
+- magento 2 reports
+- advanced reporting magento 2
+- magento 2 advanced reports
+- magento 2 reports extension
+- create custom reports in magento 2 admin
+- magento 2 dashboard extension
+- magento 2 advanced reporting not working
+- magento 2 reporting
+- magento 2 create custom report module
+- magento 2 create custom report
+- magento 2 sales report
+- magento 2 dashboard
+- magento 2 advanced reports free
+- magento 2 advanced reports extension free
+- magento 2 inventory report
 
+
+**Other free extension on Github**
+- [Magento 2 backend reindex](https://github.com/mageplaza/magento-2-backend-reindex)
+- [Magento 2 login as customer module](https://github.com/mageplaza/magento-2-login-as-customer)
+- [Magento 2 popup extension](https://github.com/mageplaza/magento-2-better-popup)
+- [Magento 2 instagram feed module](https://github.com/mageplaza/magento-2-instagram-feed)
+- [Magento 2 social login](https://github.com/mageplaza/magento-2-social-login)
+- [Magento 2 twitter widget](https://github.com/mageplaza/magento-2-twitter-widget)
+- [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
+- [Magento 2 security extension](https://github.com/mageplaza/magento-2-security)
 
 
 
