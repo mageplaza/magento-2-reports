@@ -68,6 +68,11 @@ class Index extends Action
      */
     public function execute()
     {
+        if (!$this->_authorization->isAllowed('Mageplaza_Reports::dashboard')) {
+            $this->_forward('defaultNoRoute');
+            return null;
+        }
+
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Maqeplaza_Reports::dashboard');
