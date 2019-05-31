@@ -46,6 +46,11 @@ class Index extends Action
     protected $_jsonHelper;
 
     /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::dashboard';
+
+    /**
      * Index constructor.
      *
      * @param Context $context
@@ -68,11 +73,6 @@ class Index extends Action
      */
     public function execute()
     {
-        if (!$this->_authorization->isAllowed('Mageplaza_Reports::dashboard')) {
-            $this->_forward('defaultNoRoute');
-            return null;
-        }
-
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Maqeplaza_Reports::dashboard');
