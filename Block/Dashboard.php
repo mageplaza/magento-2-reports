@@ -61,7 +61,8 @@ class Dashboard extends Template
         CardsManageFactory $cardsManageFactory,
         Data $helperData,
         array $data = []
-    ) {
+    )
+    {
         $this->_cardsManageFactory = $cardsManageFactory;
         $this->_helperData = $helperData;
 
@@ -150,11 +151,13 @@ class Dashboard extends Template
 
     /**
      * @return array
+     * @return array
      */
     public function getGridStackConfig()
     {
         $config = [
-            'url' => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()])
+            'url' => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()]),
+            'url_loadcard' => $this->getUrl('mpreports/cards/loadcard', ['form_key' => $this->getFormKey()])
         ];
 
         return $config;
