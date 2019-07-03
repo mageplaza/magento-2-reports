@@ -87,41 +87,13 @@ define([
                             url: url_load_card,
                             data: {id: cartId},
                             success: function (result) {
-                                var title = result.title
-                                    ? '<div class="dashboard-item-title">' + result.title + '</div>' : '';
-                                var detail = result.showDetail
-                                    ? '<div class="view-detail">' +
-                                    '<a href="' + result.detaiUrl + '" target="_blank">' + result.viewDetail + '</a>' +
-                                    '</div>'
-                                    : '';
-                                var rate = '';
-                                if (result.rate !== '' && result.isCompare) {
-                                    var percent = result.rate > 0 ? 'up-rate mp-green'
-                                        : result.rate < 0 ? 'down-rate mp-red' : '';
-                                    rate = '<div class="chart-rate ' + percent + '">' + Math.abs(result.rate) + '% </div>';
-                                }
-                                var totalLabel = '';
-                                if (result.total !== '') {
-                                    totalLabel = '<div class="dashboard-sales-value">' + result.total + rate + '</div>';
-                                }
-
-                                var cardhtml = '<div id="' + result.id + '"'
-                                    + ' class="hide" data-gs-id="' + result.id + '"'
-                                    + ' data-gs-x="100" data-gs-y="100"'
-                                    + ' data-gs-width="3" data-gs-height="4"'
-                                    + ' data-gs-min-width="2" data-gs-min-height="3">'
-                                    + ' <div class="draggable"><i class="fa fa-arrows-alt"></i></div>'
-                                    + ' <div class="not-draggable">'
-                                    + ' <div class="dashboard-item-container">'
-                                    + ' <div class="dashboard-item-header">'
-                                    + title
-                                    + detail
-                                    + '<div style="clear: both"></div>'
-                                    + totalLabel
-                                    + result.content
-                                    + '</div></div></div>';
-                                if (Number(result.visible) === 0 && $('#' + result.id).length < 1) {
-                                    $('.grid-stack').append(cardhtml);
+                                debugger;
+                                if ($('#' + cartId).length < 1) {
+                                    if (result.status === '1'){
+                                        $('.grid-stack').append(result.html);
+                                    }else{
+                                        console.log(result.error)
+                                    }
                                 }
                                 self.changeCard(card, cartId);
                                 $('#' + cartId).trigger('contentUpdated');

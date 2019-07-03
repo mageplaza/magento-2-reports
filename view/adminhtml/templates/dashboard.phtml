@@ -77,47 +77,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
              data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
             <?php foreach ($cards as $card) : ?>
                 <?php if ($card->getVisible()): ?>
-                    <div id="<?= $card->getId() ?>"
-                         class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-                         data-gs-id="<?= $card->getId() ?>"
-                         data-gs-x="<?= $card->getX() !== null ? $card->getX() : '0' ?>"
-                         data-gs-y="<?= $card->getY() !== null ? $card->getY() : '100' ?>"
-                         data-gs-width="<?= $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
-                         data-gs-height="<?= $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
-                         data-gs-min-width="2" data-gs-min-height="3">
-                        <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
-                        <div class="not-draggable">
-                            <div class="dashboard-item-container">
-                                <div class="dashboard-item-header">
-                                    <?php if ($title = $card->getTitle()) : ?>
-                                        <div class="dashboard-item-title"><?= $title; ?></div>
-                                    <?php endif; ?>
-                                    <?php if ($card->canShowDetail()) : ?>
-                                        <div class="view-detail">
-                                            <a href="<?= $card->getDetailUrl() ?>"
-                                               target="_blank"><?= __('View Details') ?></a>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div style="clear: both"></div>
-                                    <?php
-                                    $totalLabel = $card->getTotal();
-                                    if ($totalLabel !== '') : ?>
-                                        <div class="dashboard-sales-value">
-                                            <?= $totalLabel ?>
-                                            <?php
-                                            $rate = $card->getRate();
-                                            if (($rate !== '') && $block->isCompare()) : ?>
-                                                <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                                    <?= abs($rate) . '%' ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                                <?= $card->getContentHtml() ?>
-                            </div>
-                        </div>
-                    </div>
+                    <?= $block->getChildBlock('mp_card')->setCard($card)->toHtml() ?>
                 <?php endif; ?>
             <?php endforeach; ?>
             <script>

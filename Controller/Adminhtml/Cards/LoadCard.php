@@ -29,6 +29,7 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Mageplaza\Reports\Helper\Data;
 use Mageplaza\Reports\Model\CardsManageFactory;
+use Mageplaza\Reports\Block\Dashboard\Card;
 
 /**
  * Class SavePosition
@@ -46,8 +47,6 @@ class LoadCard extends Action
      */
     protected $_cardsManageFactory;
 
-    protected $_data;
-
     /**
      * SavePosition constructor.
      *
@@ -58,47 +57,45 @@ class LoadCard extends Action
     public function __construct(
         Context $context,
         Session $authSession,
-        CardsManageFactory $cardsManageFactory,
-        Data $data
+        CardsManageFactory $cardsManageFactory
     ) {
-        $this->_authSession        = $authSession;
+        $this->_authSession = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
-        $this->_data               = $data;
 
         parent::__construct($context);
     }
 
     /**
-     * @return ResponseInterface|ResultInterface|void
+     * @return ResponseInterface|ResultInterface
      * @throws Exception
      */
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
-        if ($id && $this->getRequest()->isAjax()) {
-            $cardsManager = $this->_cardsManageFactory->create();
-            $data         = [];
-            foreach ($cardsManager as $card) {
-                if ($card->getId() === $id) {
-                    $data = [
-                        'id'         => $card->getId(),
-                        'visible'    => $card->getVisible(),
-                        'x'          => $card->getX(),
-                        'y'          => $card->getY(),
-                        'width'      => $card->getWidth(),
-                        'height'     => $card->getHeight(),
-                        'title'      => $card->getTitle(),
-                        'detaiUrl'   => $card->getDetailUrl(),
-                        'total'      => $card->getTotal(),
-                        'rate'       => $card->getRate(),
-                        'content'    => $card->getContentHtml(),
-                        'showDetail' => $card->canShowDetail(),
-                        'isCompare'  => ($this->_data->isCompare() ? 1: 0),
-                        'viewDetail' => _('View Details')
-                    ];
-                }
+        $layout = $this->_view->getLayout();
+        $data = [];
+        $cardsManager = $this->_cardsManageFactory->create();
+        if ($id && isset($cardsManager[$id]) && $this->getRequest()->isAjax()) {
+            try {
+                $block = $layout->createBlock(Card::class);
+                $block->setCard($cardsManager[$id]);
+                $data = [
+                    'html'   => $block->toHtml(),
+                    'status' => '1'
+                ];
+            } catch (Exception $exception) {
+                $data = [
+                    'error'   => $exception->getMessage(),
+                    'status' => '0'
+                ];
             }
-            $this->getResponse()->representJson(Data::jsonEncode($data));
         }
+        if (empty($data)) {
+            $data = [
+                'error'   => __('Can not be load Card'),
+                'status' => '0'
+            ];
+        }
+        return $this->getResponse()->representJson(Data::jsonEncode($data));
     }
 }
