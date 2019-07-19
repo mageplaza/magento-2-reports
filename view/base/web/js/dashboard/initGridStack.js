@@ -20,16 +20,17 @@
 
 define([
     'jquery',
+    'Magento_Ui/js/modal/alert',
     'gridstack',
     'gridstackJqueryUi',
     'touchPunch'
-], function ($) {
+], function ($, uiAlert) {
     'use strict';
 
     $.widget('mageplaza.initGridStack', {
         options: {
             url: '',
-            url_loadcard: '',
+            loadCardUrl: '',
             gridWidget: []
         },
         _create: function () {
@@ -76,7 +77,6 @@ define([
         },
         toggleCardVisible: function () {
             var self = this;
-            var url_load_card = self.options.url_loadcard;
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
                     var cartId = $(this).attr('data-cart-id'),
@@ -84,15 +84,18 @@ define([
                     if (cardEl.length < 1) {
                         var card = this;
                         $.ajax({
-                            url: url_load_card,
+                            url: self.options.loadCardUrl,
                             data: {id: cartId},
+                            showLoader: true,
                             success: function (result) {
-                                debugger;
                                 if ($('#' + cartId).length < 1) {
-                                    if (result.status === '1'){
+                                    if (result.html) {
                                         $('.grid-stack').append(result.html);
                                     }else{
-                                        console.log(result.error)
+                                        uiAlert({
+                                            content: result.message
+                                        });
+                                        return;
                                     }
                                 }
                                 self.changeCard(card, cartId);

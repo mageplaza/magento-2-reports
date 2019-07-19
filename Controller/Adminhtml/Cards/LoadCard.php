@@ -27,9 +27,9 @@ use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\Auth\Session;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
+use Mageplaza\Reports\Block\Dashboard\Card;
 use Mageplaza\Reports\Helper\Data;
 use Mageplaza\Reports\Model\CardsManageFactory;
-use Mageplaza\Reports\Block\Dashboard\Card;
 
 /**
  * Class SavePosition
@@ -59,7 +59,7 @@ class LoadCard extends Action
         Session $authSession,
         CardsManageFactory $cardsManageFactory
     ) {
-        $this->_authSession = $authSession;
+        $this->_authSession        = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
 
         parent::__construct($context);
@@ -71,31 +71,25 @@ class LoadCard extends Action
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam('id');
+        $id     = $this->getRequest()->getParam('id');
         $layout = $this->_view->getLayout();
-        $data = [];
+        $data   = [];
+
         $cardsManager = $this->_cardsManageFactory->create();
         if ($id && isset($cardsManager[$id]) && $this->getRequest()->isAjax()) {
             try {
+                /** @var Card $block */
                 $block = $layout->createBlock(Card::class);
                 $block->setCard($cardsManager[$id]);
-                $data = [
-                    'html'   => $block->toHtml(),
-                    'status' => '1'
-                ];
+                $data['html'] = $block->toHtml();
             } catch (Exception $exception) {
-                $data = [
-                    'error'   => $exception->getMessage(),
-                    'status' => '0'
-                ];
+                $data['message'] = $exception->getMessage();
             }
         }
         if (empty($data)) {
-            $data = [
-                'error'   => __('Can not be load Card'),
-                'status' => '0'
-            ];
+            $data['message'] = __('Can not be load Card');
         }
+
         return $this->getResponse()->representJson(Data::jsonEncode($data));
     }
 }

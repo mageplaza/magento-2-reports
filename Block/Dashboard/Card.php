@@ -76,8 +76,7 @@ class Card extends Template
     }
 
     /**
-     * @return array
-     * @throws Exception
+     * @return mixed
      */
     public function getCard()
     {

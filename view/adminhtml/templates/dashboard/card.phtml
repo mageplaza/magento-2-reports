@@ -19,34 +19,31 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-/** @var Card $block */
-/** @var Mageplaza\Reports\Model\CardsManageFactory $card */
 
-try {
-    $card = $block->getCard();
-} catch (Exception $e) {
-    $card = [];
-}
+/** @var \Mageplaza\Reports\Block\Dashboard\Card $block */
+/** @var \Mageplaza\Reports\Block\Dashboard\AbstractClass $card */
+$card = $block->getCard();
+
 ?>
-<div id="<?= $card->getId() ?>"
+<div id="<?= /** @noEscape */ $card->getId() ?>"
      class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-     data-gs-id="<?= $card->getId() ?>"
-     data-gs-x="<?= $card->getX() !== null ? $card->getX() : '0' ?>"
-     data-gs-y="<?= $card->getY() !== null ? $card->getY() : '100' ?>"
-     data-gs-width="<?= $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
-     data-gs-height="<?= $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
+     data-gs-id="<?= /** @noEscape */ $card->getId() ?>"
+     data-gs-x="<?= $card->getX() !== null ? /** @noEscape */ $card->getX() : '0' ?>"
+     data-gs-y="<?= $card->getY() !== null ? /** @noEscape */ $card->getY() : '100' ?>"
+     data-gs-width="<?= $card->getWidth() !== null ? /** @noEscape */ $card->getWidth() : '3' ?>"
+     data-gs-height="<?= $card->getHeight() !== null ? /** @noEscape */ $card->getHeight() : '4' ?>"
      data-gs-min-width="2" data-gs-min-height="3">
     <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
     <div class="not-draggable">
         <div class="dashboard-item-container">
             <div class="dashboard-item-header">
                 <?php if ($title = $card->getTitle()) : ?>
-                    <div class="dashboard-item-title"><?= $title; ?></div>
+                    <div class="dashboard-item-title"><?= $block->escapeHtml($title) ?></div>
                 <?php endif; ?>
                 <?php if ($card->canShowDetail()) : ?>
                     <div class="view-detail">
-                        <a href="<?= $card->getDetailUrl() ?>"
-                           target="_blank"><?= __('View Details') ?></a>
+                        <a href="<?= /** @noEscape */ $card->getDetailUrl() ?>"
+                           target="_blank"><?= $block->escapeHtml(__('View Details')) ?></a>
                     </div>
                 <?php endif; ?>
                 <div style="clear: both"></div>

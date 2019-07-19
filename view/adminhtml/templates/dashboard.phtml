@@ -18,16 +18,13 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-/** @var Dashboard $block */
-/** @var Mageplaza\Reports\Model\CardsManageFactory $card */
-try {
-    $cards = $block->getCards();
-} catch (Exception $e) {
-    $cards = [];
-}
-$params = $block->getRequest()->getParams();
 
-use Mageplaza\Reports\Block\Dashboard; ?>
+/** @var \Mageplaza\Reports\Block\Dashboard $block */
+/** @var \Mageplaza\Reports\Block\Dashboard\AbstractClass $card */
+
+$cards = $block->getCards();
+
+?>
 <div style="clear: both; height: 20px"></div>
 <div class="ar_dashboard">
     <div class="date-range-picker"
@@ -38,7 +35,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
             <i class="fa fa-caret-down"></i>
         </div>
         <?php if ($block->isCompare()) : ?>
-            <div class="compare"><?= __('compare with') ?></div>
+            <div class="compare"><?= $block->escapeHtml(__('compare with')) ?></div>
             <div id="compare-daterange">
                 <i class="fa fa-calendar"></i>
                 <span></span>
@@ -51,7 +48,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
             <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
                  style="float: right">
                 <button id="mp-ar-card" class="admin__action-dropdown" type="button">
-                    <span class="admin__action-dropdown-text"><?= __('Card') ?></span>
+                    <span class="admin__action-dropdown-text"><?= $block->escapeHtml(__('Card')) ?></span>
                 </button>
                 <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
                     <div class="admin__action-dropdown-menu-header"></div>
@@ -60,11 +57,13 @@ use Mageplaza\Reports\Block\Dashboard; ?>
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
                                        type="checkbox" <?= $card->getVisible() ? 'checked' : ''; ?>
-                                       id="card-<?= $card->getId() ?>"
-                                       data-cart-id="<?= $card->getId(); ?>">
+                                       id="card-<?= /** @noEscape */ $card->getId() ?>"
+                                       data-cart-id="<?= /** @noEscape */ $card->getId() ?>">
                                 <label class="admin__field-label"
-                                       title="<?= $card->getTitle(); ?>"
-                                       for="card-<?= $card->getId() ?>"><?= $card->getTitle(); ?></label>
+                                       title="<?= $block->escapeHtml($card->getTitle()) ?>"
+                                       for="card-<?= /** @noEscape */ $card->getId() ?>">
+                                    <?= $block->escapeHtml($card->getTitle()) ?>
+                                </label>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -76,7 +75,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
         <div class="grid-stack"
              data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
             <?php foreach ($cards as $card) : ?>
-                <?php if ($card->getVisible()): ?>
+                <?php if ($card->getVisible()) : ?>
                     <?= $block->getChildBlock('mp_card')->setCard($card)->toHtml() ?>
                 <?php endif; ?>
             <?php endforeach; ?>
