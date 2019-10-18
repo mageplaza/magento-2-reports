@@ -56,7 +56,7 @@ $cards = $block->getCards();
                         <?php foreach ($cards as $card) : ?>
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
-                                       type="checkbox" <?= $card->getVisible() ? 'checked' : ''; ?>
+                                       type="checkbox" <?= $card->getVisible() ? 'checked' : '' ?>
                                        id="card-<?= /** @noEscape */ $card->getId() ?>"
                                        data-cart-id="<?= /** @noEscape */ $card->getId() ?>">
                                 <label class="admin__field-label"

@@ -257,7 +257,7 @@ abstract class AbstractClass extends Template
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        return mt_rand(1, 10);
+        return random_int(1, 10);
     }
 
     /**
