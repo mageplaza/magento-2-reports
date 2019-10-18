@@ -28,6 +28,7 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\OrderFactory;
 use Mageplaza\Reports\Helper\Data;
+use Magento\Framework\Math\Random;
 
 /**
  * Class RepeatCustomerRate
@@ -58,17 +59,19 @@ class RepeatCustomerRate extends AbstractClass
      * @param Template\Context $context
      * @param Data $helperData
      * @param OrderFactory $orderFactory
+     * @param Random $random
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Data $helperData,
         OrderFactory $orderFactory,
+        Random $random,
         array $data = []
     ) {
         $this->_orderFactory = $orderFactory;
 
-        parent::__construct($context, $helperData, $data);
+        parent::__construct($context, $helperData, $random, $data);
     }
 
     /**

@@ -29,6 +29,7 @@ use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollec
 use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Mageplaza\Reports\Helper\Data;
 use Mageplaza\Reports\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
+use Magento\Framework\Math\Random;
 
 /**
  * Class ConversionFunnel
@@ -66,6 +67,7 @@ class ConversionFunnel extends AbstractClass
      * @param ItemCollectionFactory $itemCollectionFactory
      * @param OrderItemCollectionFactory $orderItemCollectionFactory
      * @param Data $helperData
+     * @param Random $random
      * @param array $data
      */
     public function __construct(
@@ -74,13 +76,14 @@ class ConversionFunnel extends AbstractClass
         ItemCollectionFactory $itemCollectionFactory,
         OrderItemCollectionFactory $orderItemCollectionFactory,
         Data $helperData,
+        Random $random,
         array $data = []
     ) {
         $this->viewedCollectionFactory = $viewedCollectionFactory;
         $this->itemCollectionFactory = $itemCollectionFactory;
         $this->orderItemCollectionFactory = $orderItemCollectionFactory;
 
-        parent::__construct($context, $helperData, $data);
+        parent::__construct($context, $helperData, $random, $data);
     }
 
     /**
