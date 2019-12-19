@@ -28,7 +28,6 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Locale\FormatInterface;
-use Magento\Framework\Math\Random;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -65,10 +64,6 @@ abstract class AbstractClass extends Template
      * @var
      */
     protected $_currency;
-    /**
-     * @var Random
-     */
-    protected $random;
 
     /**
      * AbstractClass constructor.
@@ -80,14 +75,12 @@ abstract class AbstractClass extends Template
     public function __construct(
         Template\Context $context,
         Data $helperData,
-        Random $random,
         array $data = []
     ) {
         parent::__construct($context, $data);
 
         $this->setArea('adminhtml');
         $this->_helperData = $helperData;
-        $this->random = $random;
     }
 
     /**
@@ -264,7 +257,13 @@ abstract class AbstractClass extends Template
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        return $this->random->getRandomNumber(1, 10);
+        if ($this->_helperData->versionCompare("2.3.3")) {
+            $random = $this->_helperData->createObject('Magento\Framework\Math\Random');
+            return $random->getRandomNumber(1, 10);
+        }
+
+        return random_int(1, 10);
+
     }
 
     /**
