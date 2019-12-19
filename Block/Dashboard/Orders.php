@@ -27,7 +27,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 use Magento\Sales\Model\OrderFactory;
 use Mageplaza\Reports\Helper\Data;
-use Magento\Framework\Math\Random;
 
 /**
  * Class Orders
@@ -53,19 +52,17 @@ class Orders extends AbstractClass
      * @param Template\Context $context
      * @param OrderFactory $orderFactory
      * @param Data $helperData
-     * @param Random $random
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         OrderFactory $orderFactory,
         Data $helperData,
-        Random $random,
         array $data = []
     ) {
         $this->_orderFactory = $orderFactory;
 
-        parent::__construct($context, $helperData, $random, $data);
+        parent::__construct($context, $helperData, $data);
     }
 
     /**

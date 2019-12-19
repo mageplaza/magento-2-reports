@@ -29,7 +29,6 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Model\OrderFactory;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Mageplaza\Reports\Helper\Data;
-use Magento\Framework\Math\Random;
 
 /**
  * Class SalesByLocation
@@ -61,7 +60,6 @@ class SalesByLocation extends AbstractClass
      * @param OrderFactory $orderFactory
      * @param CountryFactory $countryFactory
      * @param Data $helperData
-     * @param Random $random
      * @param array $data
      */
     public function __construct(
@@ -69,13 +67,12 @@ class SalesByLocation extends AbstractClass
         OrderFactory $orderFactory,
         CountryFactory $countryFactory,
         Data $helperData,
-        Random $random,
         array $data = []
     ) {
         $this->_countryFactory = $countryFactory;
         $this->_orderFactory = $orderFactory;
 
-        parent::__construct($context, $helperData, $random, $data);
+        parent::__construct($context, $helperData, $data);
     }
 
     /**
