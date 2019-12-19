@@ -18,16 +18,13 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-/** @var Dashboard $block */
-/** @var Mageplaza\Reports\Model\CardsManageFactory $card */
-try {
-    $cards = $block->getCards();
-} catch (Exception $e) {
-    $cards = [];
-}
-$params = $block->getRequest()->getParams();
 
-use Mageplaza\Reports\Block\Dashboard; ?>
+/** @var \Mageplaza\Reports\Block\Dashboard $block */
+/** @var \Mageplaza\Reports\Block\Dashboard\AbstractClass $card */
+
+$cards = $block->getCards();
+
+?>
 <div style="clear: both; height: 20px"></div>
 <div class="ar_dashboard">
     <div class="date-range-picker"
@@ -38,7 +35,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
             <i class="fa fa-caret-down"></i>
         </div>
         <?php if ($block->isCompare()) : ?>
-            <div class="compare"><?= __('compare with') ?></div>
+            <div class="compare"><?= $block->escapeHtml(__('compare with')) ?></div>
             <div id="compare-daterange">
                 <i class="fa fa-calendar"></i>
                 <span></span>
@@ -51,7 +48,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
             <div class="mp-ar-card admin__action-dropdown-wrap admin__data-grid-action-columns"
                  style="float: right">
                 <button id="mp-ar-card" class="admin__action-dropdown" type="button">
-                    <span class="admin__action-dropdown-text"><?= __('Card') ?></span>
+                    <span class="admin__action-dropdown-text"><?= $block->escapeHtml(__('Card')) ?></span>
                 </button>
                 <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
                     <div class="admin__action-dropdown-menu-header"></div>
@@ -59,12 +56,14 @@ use Mageplaza\Reports\Block\Dashboard; ?>
                         <?php foreach ($cards as $card) : ?>
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
-                                       type="checkbox" <?= $card->getVisible() ? 'checked' : ''; ?>
-                                       id="card-<?= $card->getId() ?>"
-                                       data-cart-id="<?= $card->getId(); ?>">
+                                       type="checkbox" <?= $card->getVisible() ? 'checked' : '' ?>
+                                       id="card-<?= /** @noEscape */ $card->getId() ?>"
+                                       data-cart-id="<?= /** @noEscape */ $card->getId() ?>">
                                 <label class="admin__field-label"
-                                       title="<?= $card->getTitle(); ?>"
-                                       for="card-<?= $card->getId() ?>"><?= $card->getTitle(); ?></label>
+                                       title="<?= $block->escapeHtml($card->getTitle()) ?>"
+                                       for="card-<?= /** @noEscape */ $card->getId() ?>">
+                                    <?= $block->escapeHtml($card->getTitle()) ?>
+                                </label>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -76,47 +75,9 @@ use Mageplaza\Reports\Block\Dashboard; ?>
         <div class="grid-stack"
              data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
             <?php foreach ($cards as $card) : ?>
-                <div id="<?= $card->getId() ?>"
-                     class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-                     data-gs-id="<?= $card->getId() ?>"
-                     data-gs-x="<?= $card->getX() !== null ? $card->getX() : '0' ?>"
-                     data-gs-y="<?= $card->getY() !== null ? $card->getY() : '100' ?>"
-                     data-gs-width="<?= $card->getWidth() !== null ? $card->getWidth() : '3' ?>"
-                     data-gs-height="<?= $card->getHeight() !== null ? $card->getHeight() : '4' ?>"
-                     data-gs-min-width="2" data-gs-min-height="3">
-                    <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
-                    <div class="not-draggable">
-                        <div class="dashboard-item-container">
-                            <div class="dashboard-item-header">
-                                <?php if ($title = $card->getTitle()) : ?>
-                                    <div class="dashboard-item-title"><?= $title; ?></div>
-                                <?php endif; ?>
-                                <?php if ($card->canShowDetail()) : ?>
-                                    <div class="view-detail">
-                                        <a href="<?= $card->getDetailUrl() ?>"
-                                           target="_blank"><?= __('View Details') ?></a>
-                                    </div>
-                                <?php endif; ?>
-                                <div style="clear: both"></div>
-                                <?php
-                                $totalLabel = $card->getTotal();
-                                if ($totalLabel !== '') : ?>
-                                    <div class="dashboard-sales-value">
-                                        <?= $totalLabel ?>
-                                        <?php
-                                        $rate = $card->getRate();
-                                        if (($rate !== '') && $block->isCompare()) : ?>
-                                            <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                                <?= abs($rate) . '%' ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <?= $card->getContentHtml() ?>
-                        </div>
-                    </div>
-                </div>
+                <?php if ($card->getVisible()) : ?>
+                    <?= $block->getChildBlock('mp_card')->setCard($card)->toHtml() ?>
+                <?php endif; ?>
             <?php endforeach; ?>
             <script>
                 require(['jquery'], function ($) {
@@ -136,7 +97,7 @@ use Mageplaza\Reports\Block\Dashboard; ?>
                         if (!$(e.target).parents().hasClass('view-detail')) {
                             $('.upgrade-nof').remove();
                         }
-                    })
+                    });
                 })
             </script>
         </div>

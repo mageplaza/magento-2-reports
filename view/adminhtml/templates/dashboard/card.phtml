@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Reports
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\Reports\Block\Dashboard\Card $block */
+/** @var \Mageplaza\Reports\Block\Dashboard\AbstractClass $card */
+$card = $block->getCard();
+
+?>
+<div id="<?= /** @noEscape */ $card->getId() ?>"
+     class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
+     data-gs-id="<?= /** @noEscape */ $card->getId() ?>"
+     data-gs-x="<?= $card->getX() !== null ? /** @noEscape */ $card->getX() : '0' ?>"
+     data-gs-y="<?= $card->getY() !== null ? /** @noEscape */ $card->getY() : '100' ?>"
+     data-gs-width="<?= $card->getWidth() !== null ? /** @noEscape */ $card->getWidth() : '3' ?>"
+     data-gs-height="<?= $card->getHeight() !== null ? /** @noEscape */ $card->getHeight() : '4' ?>"
+     data-gs-min-width="2" data-gs-min-height="3">
+    <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
+    <div class="not-draggable">
+        <div class="dashboard-item-container">
+            <div class="dashboard-item-header">
+                <?php if ($title = $card->getTitle()) : ?>
+                    <div class="dashboard-item-title"><?= $block->escapeHtml($title) ?></div>
+                <?php endif; ?>
+                <?php if ($card->canShowDetail()) : ?>
+                    <div class="view-detail">
+                        <a href="<?= /** @noEscape */ $card->getDetailUrl() ?>"
+                           target="_blank"><?= $block->escapeHtml(__('View Details')) ?></a>
+                    </div>
+                <?php endif; ?>
+                <div style="clear: both"></div>
+                <?php
+                $totalLabel = $card->getTotal();
+                if ($totalLabel !== '') : ?>
+                    <div class="dashboard-sales-value">
+                        <?= $totalLabel ?>
+                        <?php
+                        $rate = $card->getRate();
+                        if (($rate !== '') && $block->isCompare()) : ?>
+                            <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
+                                <?= abs($rate) . '%' ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <?= $card->getContentHtml() ?>
+        </div>
+    </div>
+</div>

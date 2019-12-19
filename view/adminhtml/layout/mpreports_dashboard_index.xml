@@ -31,7 +31,9 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" ifconfig="mageplaza_reports/general/enabled"/>
+            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" ifconfig="mageplaza_reports/general/enabled">
+                <block class="Mageplaza\Reports\Block\Dashboard\Card" name="mp_card"/>
+            </block>
         </referenceContainer>
         <referenceBlock name="analytics_service_external_link" remove="true"/>
         <referenceBlock name="switch_to_ar_dashboard" remove="true"/>

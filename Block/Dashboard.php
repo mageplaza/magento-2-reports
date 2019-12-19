@@ -63,7 +63,7 @@ class Dashboard extends Template
         array $data = []
     ) {
         $this->_cardsManageFactory = $cardsManageFactory;
-        $this->_helperData = $helperData;
+        $this->_helperData         = $helperData;
 
         parent::__construct($context, $data);
     }
@@ -116,11 +116,17 @@ class Dashboard extends Template
 
     /**
      * @return array
-     * @throws Exception
      */
     public function getCards()
     {
-        return $this->_cardsManageFactory->create();
+        try {
+            $result = $this->_cardsManageFactory->create();
+        } catch (Exception $e) {
+            $result = [];
+            $this->_logger->critical($e);
+        }
+
+        return $result;
     }
 
     /**
@@ -150,11 +156,13 @@ class Dashboard extends Template
 
     /**
      * @return array
+     * @return array
      */
     public function getGridStackConfig()
     {
         $config = [
-            'url' => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()])
+            'url'         => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()]),
+            'loadCardUrl' => $this->getUrl('mpreports/cards/loadcard', ['form_key' => $this->getFormKey()])
         ];
 
         return $config;

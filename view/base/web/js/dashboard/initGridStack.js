@@ -20,15 +20,17 @@
 
 define([
     'jquery',
+    'Magento_Ui/js/modal/alert',
     'gridstack',
     'gridstackJqueryUi',
     'touchPunch'
-], function ($) {
+], function ($, uiAlert) {
     'use strict';
 
     $.widget('mageplaza.initGridStack', {
         options: {
             url: '',
+            loadCardUrl: '',
             gridWidget: []
         },
         _create: function () {
@@ -79,26 +81,53 @@ define([
                 $(this).change(function () {
                     var cartId = $(this).attr('data-cart-id'),
                         cardEl = $('#' + cartId);
-                    if (this.checked) {
-                        cardEl.removeClass('hide');
-                        self.options.grid.addWidget(cardEl);
+                    if (cardEl.length < 1) {
+                        var card = this;
+                        $.ajax({
+                            url: self.options.loadCardUrl,
+                            data: {id: cartId},
+                            showLoader: true,
+                            success: function (result) {
+                                if ($('#' + cartId).length < 1) {
+                                    if (result.html) {
+                                        $('.grid-stack').append(result.html);
+                                    }else{
+                                        uiAlert({
+                                            content: result.message
+                                        });
+                                        return;
+                                    }
+                                }
+                                self.changeCard(card, cartId);
+                                $('#' + cartId).trigger('contentUpdated');
+                            }
+                        });
                     } else {
-                        self.options.grid.removeWidget(cardEl, 0);
-                        cardEl.attr('data-gs-y', 100).attr('data-gs-x', 0);
-                        cardEl.addClass('hide');
+                        self.changeCard(this, cartId);
                     }
-                    var data = {};
-                    data[cartId] = {
-                        'visible': this.checked ? 1 : 0,
-                        'x': cardEl.attr('data-gs-x'),
-                        'y': cardEl.attr('data-gs-y'),
-                        'width': cardEl.attr('data-gs-width'),
-                        'height': cardEl.attr('data-gs-height')
-                    };
-                    // save card position when show/hide card
-                    self.saveCardPosition(data);
                 });
             });
+        },
+        changeCard: function (card, cartId) {
+            var cardEl = $('#' + cartId);
+            if (card.checked) {
+                cardEl.removeClass('hide');
+                this.options.grid.addWidget(cardEl);
+            } else {
+                this.options.grid.removeWidget(cardEl, 0);
+                cardEl.attr('data-gs-y', 100).attr('data-gs-x', 0);
+                cardEl.addClass('hide');
+            }
+            var data = {};
+            data[cartId] = {
+                'visible': card.checked ? 1 : 0,
+                'x': cardEl.attr('data-gs-x'),
+                'y': cardEl.attr('data-gs-y'),
+                'width': cardEl.attr('data-gs-width'),
+                'height': cardEl.attr('data-gs-height')
+            };
+            // save card position when show/hide card
+            this.saveCardPosition(data);
         },
         saveCardPosition: function (data) {
             $.ajax({

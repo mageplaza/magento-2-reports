@@ -31,7 +31,6 @@ define([
             }
         },
         _create: function () {
-            self = this;
             var ctx = $('#' + this.options.chartData.name + '-chart');
             var data = {
                 type: 'line',
@@ -43,6 +42,7 @@ define([
         },
         getOptions: function () {
             var self = this;
+
             return {
                 fillColor: 'rgba(220,220,220,0.9)',
                 legend: {
@@ -61,7 +61,11 @@ define([
                         label: function (tooltipItem, data) {
                             var dataset = data.datasets[tooltipItem.datasetIndex];
                             var index = tooltipItem.index;
-                            return dataset.labels[index] + ': ' + (data.yUnit ? priceUtils.formatPrice(dataset.data[index], data.yUnit) : dataset.data[index]);
+
+                            return dataset.labels[index] + ': ' +
+                                (data.yUnit
+                                    ? priceUtils.formatPrice(dataset.data[index], data.yUnit)
+                                    : dataset.data[index]);
                         },
                         title: function (tooltipItems, data) {
                             if (data.index === 'repeatCustomerRate') {
@@ -103,7 +107,9 @@ define([
                             // Include a currency sign in the ticks
                             callback: function (value, index, values) {
                                 if (Math.floor(value) === value) {
-                                    return self.options.chartData.yUnit ? priceUtils.formatPrice(value, self.options.chartData.yUnit) : value;
+                                    return self.options.chartData.yUnit
+                                        ? priceUtils.formatPrice(value, self.options.chartData.yUnit)
+                                        : value;
                                 }
                             }
                         }
@@ -132,6 +138,7 @@ define([
                 ]
             };
             var compareDataset = this.getCompareDataSet();
+
             if (this.options.chartData.isCompare === '1' || this.options.chartData.name === 'repeatCustomerRate') {
                 data.datasets.push(compareDataset);
             }
