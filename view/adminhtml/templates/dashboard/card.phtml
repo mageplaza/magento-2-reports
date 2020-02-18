@@ -47,22 +47,48 @@ $card = $block->getCard();
                     </div>
                 <?php endif; ?>
                 <div style="clear: both"></div>
-                <?php
-                $totalLabel = $card->getTotal();
-                if ($totalLabel !== '') : ?>
-                    <div class="dashboard-sales-value">
-                        <?= $totalLabel ?>
-                        <?php
-                        $rate = $card->getRate();
-                        if (($rate !== '') && $block->isCompare()) : ?>
-                            <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                <?= abs($rate) . '%' ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                <?php if ($block->getRequest()->isAjax()) : ?>
+                    <?php
+                    $totalLabel = $card->getTotal();
+                    if ($totalLabel !== '') : ?>
+                        <div class="dashboard-sales-value">
+                            <?= /** @noEscape */ $totalLabel ?>
+                            <?php
+                            $rate = $card->getRate();
+                            if (($rate !== '') && $block->isCompare()) : ?>
+                                <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
+                                    <?= /** @noEscape */ abs($rate) . '%' ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <?= $card->getContentHtml() ?>
+            <?php if ($block->getRequest()->isAjax()) : ?>
+                <?= $card->getContentHtml() ?>
+            <?php else : ?>
+            <div class="mp-card loading-mask">
+                <img src="<?= /** @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>" alt="Loading..."/>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
+<?php if (!$block->getRequest()->isAjax()) : ?>
+<script>
+    require([
+        'jquery'
+    ],function ($) {
+        $.ajax({
+            url: '<?= /** @noEscape */ $block->getUrl('mpreports/cards/loadcard', ['_current' => true]) ?>',
+            data: <?= \Mageplaza\Reports\Helper\Data::jsonEncode($card->getData()) ?>,
+            success: function (res) {
+                $('#<?= /** @noEscape */ $card->getId() ?> .dashboard-item-container').html($(res.html).find('.dashboard-item-container').html());
+            },
+            error: function () {
+                $('#<?= /** @noEscape */ $card->getId() ?> .dashboard-item-container').html('<?php __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+            }
+        })
+    })
+</script>
+<?php endif; ?>

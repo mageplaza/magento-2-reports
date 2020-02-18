@@ -49,7 +49,7 @@ class Shipping extends AbstractClass
         $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
-        return $this->getBaseCurrency()->format($totals->getShipping() ? $totals->getShipping() : 0);
+        return $this->getBaseCurrency()->format($totals->getShipping() ?: 0);
     }
 
     /**

@@ -361,3 +361,14 @@
 .funnel-container .ordered {
     top: 73%;
 }
+
+.mp-card.loading-mask img {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.mp-card.loading-mask {
+    position: absolute;
+}

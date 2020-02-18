@@ -20,11 +20,12 @@
 
 define([
     'jquery',
+    'underscore',
     'Magento_Ui/js/modal/alert',
     'gridstack',
     'gridstackJqueryUi',
     'touchPunch'
-], function ($, uiAlert) {
+], function ($, _, uiAlert) {
     'use strict';
 
     $.widget('mageplaza.initGridStack', {
@@ -41,6 +42,7 @@ define([
         },
         toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
+            
             $('button#mp-ar-card').on('click', function () {
                 if (cardsTableEl.hasClass('_active')) {
                     cardsTableEl.removeClass('_active');
@@ -60,29 +62,33 @@ define([
 
             gridStackEl.on('change', function (event, items) {
                 var data = {};
+                
                 if (items === undefined) {
                     return;
                 }
-                for (var item of items) {
+                _.each(items, function (item) {
                     data[item.id] = {
                         'x': item.x,
                         'y': item.y,
                         'width': item.width,
                         'height': item.height
-                    }
-                }
+                    };
+                });
 
                 self.saveCardPosition(data);
             });
         },
         toggleCardVisible: function () {
             var self = this;
+            
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
                     var cartId = $(this).attr('data-cart-id'),
-                        cardEl = $('#' + cartId);
+                        cardEl = $('#' + cartId),
+                        card;
+                    
                     if (cardEl.length < 1) {
-                        var card = this;
+                        card = this;
                         $.ajax({
                             url: self.options.loadCardUrl,
                             data: {id: cartId},
@@ -109,7 +115,9 @@ define([
             });
         },
         changeCard: function (card, cartId) {
-            var cardEl = $('#' + cartId);
+            var cardEl = $('#' + cartId),
+                data = {};
+            
             if (card.checked) {
                 cardEl.removeClass('hide');
                 this.options.grid.addWidget(cardEl);
@@ -118,7 +126,6 @@ define([
                 cardEl.attr('data-gs-y', 100).attr('data-gs-x', 0);
                 cardEl.addClass('hide');
             }
-            var data = {};
             data[cartId] = {
                 'visible': card.checked ? 1 : 0,
                 'x': cardEl.attr('data-gs-x'),
@@ -138,13 +145,14 @@ define([
         },
         initGrid: function () {
             var gridStackEl = $('.grid-stack');
-
             var options = {
-                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+                alwaysShowResizeHandle: 
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
                 cellHeight: 30,
                 verticalMargin: 10,
                 draggable: {handle: '.draggable', scroll: true, appendTo: 'body'},
             };
+            
             gridStackEl.gridstack(options);
             this.options.grid = gridStackEl.data('gridstack');
         }

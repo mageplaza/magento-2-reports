@@ -20,7 +20,7 @@
  */
 ?>
 <div id="popup-modal">
-    <h1> <?= __('Let’s experience your new dashboard') ?> </h1>
+    <h1> <?= $block->escapeHtml(__('Let’s experience your new dashboard')) ?> </h1>
 </div>
 <script>
     require(['jquery', 'Magento_Ui/js/modal/modal'], function ($, modal) {
@@ -28,13 +28,13 @@
                 type: 'popup',
                 responsive: true,
                 innerScroll: true,
-                title: '<?= __('Hello there! Better reports are available') ?>',
+                title: '<?= $block->escapeHtml(__('Hello there! Better reports are available')) ?>',
                 buttons: [{
                     text: $.mage.__('Continue'),
                     class: '',
                     click: function () {
                         $.ajax({
-                            url: '<?= $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                            url: '<?= /** @noEscape */ $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
                             data: {switchToNew: 1},
                             success: function (res) {
                                 if (res) {
@@ -51,7 +51,7 @@
             popup.modal('openModal');
             popup.on('modalclosed', function () {
                 $.ajax({
-                    url: '<?= $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                    url: '<?= /** @noEscape */ $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
                     data: {firstTimeInstall: 1}
                 })
             });

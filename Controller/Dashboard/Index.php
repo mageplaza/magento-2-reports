@@ -27,7 +27,6 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Forward;
 use Magento\Framework\Controller\Result\ForwardFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\Reports\Helper\Data;
@@ -51,11 +50,6 @@ class Index extends Action
     /**
      * @var Data
      */
-    protected $_jsonHelper;
-
-    /**
-     * @var Data
-     */
     protected $helperData;
 
     /**
@@ -64,19 +58,16 @@ class Index extends Action
      * @param Context $context
      * @param PageFactory $resultPageFactory
      * @param ForwardFactory $resultForwardFactory
-     * @param JsonHelper $jsonHelper
      * @param Data $helperData
      */
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
         ForwardFactory $resultForwardFactory,
-        JsonHelper $jsonHelper,
         Data $helperData
     ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->_jsonHelper = $jsonHelper;
         $this->helperData = $helperData;
 
         parent::__construct($context);
@@ -98,7 +89,7 @@ class Index extends Action
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
             $result = ['dashboard' => $dashBoard->toHtml()];
 
-            return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
+            return $this->getResponse()->representJson(Data::jsonEncode($result));
         }
 
         return $resultPage;

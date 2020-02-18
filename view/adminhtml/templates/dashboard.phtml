@@ -28,7 +28,7 @@ $cards = $block->getCards();
 <div style="clear: both; height: 20px"></div>
 <div class="ar_dashboard">
     <div class="date-range-picker"
-         data-mage-init='{"initDateRange":{"url":"<?= $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?= $block->isCompare() ?>,"date":<?= $block->getDate() ?>}}'>
+         data-mage-init='{"initDateRange":{"url":"<?= /** @noEscape */ $block->getUrl('mpreports/dashboard/index', ['_current' => true]) ?>","isCompare":<?= /** @noEscape */ $block->isCompare() ?>,"date":<?= /** @noEscape */ $block->getDate() ?>}}'>
         <div id="daterange">
             <i class="fa fa-calendar"></i>
             <span></span>
@@ -86,7 +86,7 @@ $cards = $block->getCards();
                         if (href === '') {
                             if (!$(this).parent().find('.upgrade-nof').length) {
                                 $(this).parent().append('<div class="upgrade-nof">' +
-                                    '<?= __('Please upgrade to %1 version to see more detail', '<a href="https://www.mageplaza.com/magento-2-reports-extension/#pricing-table" target="_blank">Pro</a>') ?>'
+                                    '<?= /** @noEscape */ __('Please upgrade to %1 version to see more detail', '<a href="https://www.mageplaza.com/magento-2-reports-extension/#pricing-table" target="_blank">Pro</a>') ?>'
                                     + '</div>');
                             }
                             e.stopPropagation();

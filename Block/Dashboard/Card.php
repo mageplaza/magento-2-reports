@@ -21,7 +21,6 @@
 
 namespace Mageplaza\Reports\Block\Dashboard;
 
-use Exception;
 use Magento\Backend\Block\Template;
 use Mageplaza\Reports\Helper\Data;
 
@@ -90,5 +89,13 @@ class Card extends Template
     public function setCard($card)
     {
         return $this->setData('mp_card', $card);
+    }
+
+    /**
+     * @return string
+     */
+    public function getArea()
+    {
+        return 'adminhtml';
     }
 }

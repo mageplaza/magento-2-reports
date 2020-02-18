@@ -25,16 +25,16 @@
             <tbody>
             <?php foreach ($block->getCollection() as $item) : ?>
                 <tr title="">
-                    <td class=""><?= $item['country'] ?></td>
-                    <td class=""><?= $item['count'] ?></td>
+                    <td class=""><?= /** @noEscape */ $item['country'] ?></td>
+                    <td class=""><?= /** @noEscape */ $item['count'] ?></td>
                     <?php if ($block->isCompare()) : ?>
-                        <td class="<?= $item['rate'] > 0 ? 'up-rate mp-green' : ($item['rate'] < 0 ? 'down-rate mp-red' : '') ?>"><?= abs($item['rate']) . '%' ?></td>
+                        <td class="<?= $item['rate'] > 0 ? 'up-rate mp-green' : ($item['rate'] < 0 ? 'down-rate mp-red' : '') ?>"><?= /** @noEscape */ abs($item['rate']) . '%' ?></td>
                     <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
     <?php else : ?>
-        <div class="empty-text"><?= __('We couldn\'t find any records.') ?></div>
+        <div class="empty-text"><?= $block->escapeHtml(__('We couldn\'t find any records.')) ?></div>
     <?php endif; ?>
 </div>

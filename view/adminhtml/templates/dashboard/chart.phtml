@@ -22,11 +22,11 @@
 <div class="dashboard-item-content-chart">
     <?php if ($block->isEnabledChart()) : ?>
         <?php $chartData = $block->getChartData(); ?>
-        <canvas id="<?php echo $chartData['name'] ?>-chart"
-                data-mage-init='{"initChart":{"chartData":<?php echo \Mageplaza\Reports\Helper\Data::jsonEncode($chartData) ?>}}'></canvas>
+        <canvas id="<?= /** @noEscape */ $chartData['name'] ?>-chart"
+                data-mage-init='{"initChart":{"chartData":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($chartData) ?>}}'></canvas>
     <?php else : ?>
         <div class="ar-empty-text empty-text">
-            <?php echo __("Chart is disabled. To enable the chart, click <a href='%1'>here</a>", $block->getUrl('adminhtml/system_config/edit', ['section' => 'mageplaza_reports', 'store' => $this->getRequest()->getParam('store')])) ?>
+            <?= /** @noEscape */ __("Chart is disabled. To enable the chart, click <a href='%1'>here</a>", $block->getUrl('adminhtml/system_config/edit', ['section' => 'mageplaza_reports', 'store' => $block->getRequest()->getParam('store')])) ?>
         </div>
     <?php endif; ?>
 </div>

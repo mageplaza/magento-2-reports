@@ -49,7 +49,7 @@ class Tax extends AbstractClass
         $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
-        return $this->getBaseCurrency()->format($totals->getTax() ? $totals->getTax() : 0);
+        return $this->getBaseCurrency()->format($totals->getTax() ?: 0);
     }
 
     /**

@@ -272,10 +272,10 @@ class Data extends AbstractData
         $daterange = new DatePeriod($startDate, $interval, $endDate);
         /** @var \DateTime $date */
         foreach ($daterange as $date) {
-            if (!$isObject) {
-                $data[] = $date->format('Y-m-d');
-            } else {
+            if ($isObject) {
                 $data[$date->format('Y-m-d')] = new DataObject();
+            } else {
+                $data[] = $date->format('Y-m-d');
             }
         }
 

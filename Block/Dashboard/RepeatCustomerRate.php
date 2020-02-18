@@ -161,7 +161,8 @@ class RepeatCustomerRate extends AbstractClass
         }
         $data['data'] = $this->getDataByDateRange($date[0], $date[1])['data'];
         $data['compareData'] = $this->getDataByDateRange($date[0], $date[1])['compareData'];
-        $data['days'] = $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
+        $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
+        $data['days'] = $days;
         $data['labels'] = $this->_helperData->getPeriodsDate($date[0], null, $days);
         $data['stepSize'] = round($days / 6);
         $data['total'] = $this->getTotal();

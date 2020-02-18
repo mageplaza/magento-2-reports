@@ -29,7 +29,7 @@ use Magento\Framework\App\Config\Storage\Writer;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Json\Helper\Data as JsonHelper;
+use Mageplaza\Reports\Helper\Data;
 use Magento\Store\Model\Store;
 
 /**
@@ -49,27 +49,19 @@ class SwitchToNew extends Action
     protected $_cache;
 
     /**
-     * @var JsonHelper
-     */
-    protected $_jsonHelper;
-
-    /**
      * SwitchToNew constructor.
      *
      * @param Context $context
      * @param Writer $storageWriter
      * @param TypeListInterface $typeList
-     * @param JsonHelper $jsonHelper
      */
     public function __construct(
         Context $context,
         Writer $storageWriter,
-        TypeListInterface $typeList,
-        JsonHelper $jsonHelper
+        TypeListInterface $typeList
     ) {
         $this->_storageWriter = $storageWriter;
         $this->_cache = $typeList;
-        $this->_jsonHelper = $jsonHelper;
 
         parent::__construct($context);
     }
@@ -83,7 +75,7 @@ class SwitchToNew extends Action
             if ($this->getRequest()->getParam('switchToNew')) {
                 $this->saveConfig('mageplaza_reports/general/enabled', 1);
                 $this->getResponse()->representJson(
-                    $this->_jsonHelper->jsonEncode($this->getUrl('admin/dashboard/index'))
+                    Data::jsonEncode($this->getUrl('admin/dashboard/index'))
                 );
             }
             if ($this->getRequest()->getParam('firstTimeInstall')) {
