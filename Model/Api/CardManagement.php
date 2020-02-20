@@ -218,10 +218,10 @@ class CardManagement implements CardManagementInterface
         $result->setName($cardName);
         switch ($cardName) {
             case 'averageOrder':
-                $result->setData(['total' => $this->averageOrderCard->getTotal()]);
+                $result->setData(['total' => $this->averageOrderCard->getTotal(false)]);
                 break;
             case 'averageOrderValue':
-                $result->setData(['total' => $this->averageOrderValue->getTotal()]);
+                $result->setData(['total' => $this->averageOrderValue->getTotal(false)]);
                 break;
             case 'bestsellers':
                 $collection = $this->bestsellersCollectionFactory->create()->setModel(
@@ -305,10 +305,10 @@ class CardManagement implements CardManagementInterface
                 $result->setData($collection);
                 break;
             case 'shipping':
-                $result->setData(['total' => $this->shipping->getTotal()]);
+                $result->setData(['total' => $this->shipping->getTotal(false)]);
                 break;
             case 'tax':
-                $result->setData(['total' => $this->tax->getTotal()]);
+                $result->setData(['total' => $this->tax->getTotal(false)]);
                 break;
             case 'topSearches':
                 $collection = $this->queriesFactory->create();
@@ -321,7 +321,7 @@ class CardManagement implements CardManagementInterface
                 $result->setData($collection->getData());
                 break;
             case 'totalSales':
-                $result->setData(['total' => $this->totalSales->getTotal()]);
+                $result->setData(['total' => $this->totalSales->getTotal(false)]);
                 break;
             default:
                 $result = null;

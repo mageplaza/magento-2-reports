@@ -48,16 +48,17 @@ class AverageOrderValue extends AbstractClass
     }
 
     /**
+     * @param bool $includeContainer
      * @return float|int|string
      * @throws LocalizedException
-     * @throws Exception
+     * @throws NoSuchEntityException
      */
-    public function getTotal()
+    public function getTotal($includeContainer = true)
     {
         $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getSalesByDateRange($date[0], $date[1]);
 
-        return $this->getBaseCurrency()->format($totals->getAverage() ?: 0);
+        return $this->getBaseCurrency()->format($totals->getAverage() ?: 0, [], $includeContainer);
     }
 
     /**

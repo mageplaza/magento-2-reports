@@ -126,12 +126,15 @@ abstract class AbstractClass extends Template
      *
      * @param $price
      *
+     * @param array $options
+     * @param bool $includeContainer
+     * @param bool $addBrackets
      * @return string
      * @throws LocalizedException
      */
-    public function format($price)
+    public function format($price, $options = [], $includeContainer = true, $addBrackets = false)
     {
-        return $this->getCurrency()->format($price);
+        return $this->getCurrency()->format($price, $options, $includeContainer, $addBrackets);
     }
 
     /**

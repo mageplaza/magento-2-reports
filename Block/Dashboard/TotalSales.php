@@ -40,16 +40,17 @@ class TotalSales extends AbstractClass
     protected $_template = 'dashboard/chart.phtml';
 
     /**
+     * @param $includeContainer
      * @return float|int|string
      * @throws LocalizedException
-     * @throws Exception
+     * @throws NoSuchEntityException
      */
-    public function getTotal()
+    public function getTotal($includeContainer = true)
     {
         $date = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
-        return $this->getBaseCurrency()->format($totals->getRevenue() ?: 0);
+        return $this->getBaseCurrency()->format($totals->getRevenue() ?: 0, [], $includeContainer);
     }
 
     /**
