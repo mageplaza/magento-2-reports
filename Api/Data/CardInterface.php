@@ -42,13 +42,16 @@ interface CardInterface
     public function setName($name);
 
     /**
+     * @param string $key
+     * @param null $index
      * @return mixed
      */
-    public function getData();
+    public function getData($key = '', $index = null);
 
     /**
-     * @param $data
+     * @param $key
+     * @param null $value
      * @return mixed
      */
-    public function setData($data);
+    public function setData($key, $value = null);
 }

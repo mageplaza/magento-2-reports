@@ -2,32 +2,16 @@
 
 namespace Mageplaza\Reports\Model\Api\Data;
 
+use Magento\Framework\DataObject;
+
 /**
  * Class Card
  * @package Mageplaza\Reports\Model
  */
-class Card implements \Mageplaza\Reports\Api\Data\CardInterface
+class Card extends DataObject implements \Mageplaza\Reports\Api\Data\CardInterface
 {
     protected $name = '';
     protected $data;
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param $data
-     * @return mixed
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-        return $data;
-    }
 
     /**
      * @return string

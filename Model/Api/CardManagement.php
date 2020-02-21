@@ -221,7 +221,11 @@ class CardManagement implements CardManagementInterface
                 $result->setData(['total' => $this->averageOrderCard->getTotal(false)]);
                 break;
             case 'averageOrderValue':
-                $result->setData(['total' => $this->averageOrderValue->getTotal(false)]);
+                $result->setData([
+                    'total' => $this->averageOrderValue->getTotal(false),
+                    'rate' =>$this->averageOrderValue->getRate(),
+                    'chartData' => $this->averageOrderValue->getChartData(),
+                ]);
                 break;
             case 'bestsellers':
                 $collection = $this->bestsellersCollectionFactory->create()->setModel(
@@ -295,20 +299,35 @@ class CardManagement implements CardManagementInterface
                 $result->setData($collection->getData());
                 break;
             case 'orders':
-                $result->setData(['total' => $this->orders->getTotal()]);
+                $result->setData([
+                    'total' => $this->orders->getTotal(),
+                    'rate' => $this->orders->getRate(),
+                    'chartData' => $this->orders->getChartData(),
+                ]);
                 break;
             case 'repeatCustomerRate':
-                $result->setData(['repeat_rate' => $this->repeatCustomerRate->getTotal()]);
+                $result->setData([
+                    'repeat_rate' => $this->repeatCustomerRate->getRate(),
+                    'chartData' => $this->repeatCustomerRate->getChartData()
+                ]);
                 break;
             case 'saleByLocation':
                 $collection = $this->salesByLocation->getCollection();
                 $result->setData($collection);
                 break;
             case 'shipping':
-                $result->setData(['total' => $this->shipping->getTotal(false)]);
+                $result->setData([
+                    'total' => $this->shipping->getTotal(false),
+                    'rate' => $this->shipping->getRate(),
+                    'chartData' => $this->shipping->getChartData()
+                ]);
                 break;
             case 'tax':
-                $result->setData(['total' => $this->tax->getTotal(false)]);
+                $result->setData([
+                    'total' => $this->tax->getTotal(false),
+                    'rate' => $this->tax->getRate(),
+                    'chartData' => $this->tax->getChartData()
+                ]);
                 break;
             case 'topSearches':
                 $collection = $this->queriesFactory->create();
@@ -321,7 +340,11 @@ class CardManagement implements CardManagementInterface
                 $result->setData($collection->getData());
                 break;
             case 'totalSales':
-                $result->setData(['total' => $this->totalSales->getTotal(false)]);
+                $result->setData([
+                    'total' => $this->totalSales->getTotal(false),
+                    'rate' => $this->totalSales->getRate(),
+                    'chartData' => $this->totalSales->getChartData()
+                ]);
                 break;
             default:
                 $result = null;
@@ -339,11 +362,11 @@ class CardManagement implements CardManagementInterface
         $params = $this->request->getParams();
         if (isset($params['startDate'])) {
             $params['dateRange'][0] = $params['startDate'];
-            $params['dateRange'][2] = null;
+            $params['dateRange'][2] = isset($params['compareStartDate']) ? $params['compareStartDate'] : null;
         }
         if (isset($params['endDate'])) {
             $params['dateRange'][1] = $params['endDate'];
-            $params['dateRange'][3] = null;
+            $params['dateRange'][3] = isset($params['compareEndDate']) ? $params['compareEndDate'] : null;
         }
         $storeFilter = 0;
         $storeId = null;

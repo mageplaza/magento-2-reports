@@ -58,7 +58,7 @@ $cards = $block->getCards();
                                 <input class="admin__control-checkbox"
                                        type="checkbox" <?= $card->getVisible() ? 'checked' : '' ?>
                                        id="card-<?= /** @noEscape */ $card->getId() ?>"
-                                       data-cart-id="<?= /** @noEscape */ $card->getId() ?>">
+                                       data-card-id="<?= /** @noEscape */ $card->getId() ?>">
                                 <label class="admin__field-label"
                                        title="<?= $block->escapeHtml($card->getTitle()) ?>"
                                        for="card-<?= /** @noEscape */ $card->getId() ?>">

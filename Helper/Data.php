@@ -141,31 +141,35 @@ class Data extends AbstractData
      * @param null $format
      *
      * @return array
-     * @throws Exception
      */
     public function getDateRange($format = null)
     {
-        if ($dateRange = $this->_request->getParam('dateRange')) {
-            if ($this->isCompare()) {
-                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
-                $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
-                $compareEndDate = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
+        try {
+            if ($dateRange = $this->_request->getParam('dateRange')) {
+                if ($this->isCompare()) {
+                    $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                    $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                    $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
+                    $compareEndDate = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
+                } else {
+                    $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                    $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                    $compareStartDate = null;
+                    $compareEndDate = null;
+                }
             } else {
-                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
-                $compareStartDate = null;
-                $compareEndDate = null;
+                list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
+                $days = date('z', strtotime($endDate) - strtotime($startDate));
+                list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat(
+                    '-1 month -' . ($days + 1) . ' day',
+                    '-1 month -1 day',
+                    null,
+                    $format
+                );
             }
-        } else {
-            list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
-            $days = date('z', strtotime($endDate) - strtotime($startDate));
-            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat(
-                '-1 month -' . ($days + 1) . ' day',
-                '-1 month -1 day',
-                null,
-                $format
-            );
+        } catch (Exception $e) {
+            $this->_logger->critical($e);
+            return [null, null, null, null];
         }
 
         return [$startDate, $endDate, $compareStartDate, $compareEndDate];
@@ -344,7 +348,7 @@ class Data extends AbstractData
 
                 $this->lifetimeSales = [
                     'lifetime' => $sales->getLifetime(),
-                    'average'  => $sales->getAverage()
+                    'average' => $sales->getAverage()
                 ];
             } catch (Exception $e) {
                 $this->lifetimeSales = [];
