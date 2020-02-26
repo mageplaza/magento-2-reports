@@ -277,7 +277,7 @@ class CardManagement implements CardManagementInterface
                 $result->setData($collection->getData());
                 break;
             case 'lifetimeSales':
-                $result->setData(['total' => $this->lifetimeSales->getTotal()]);
+                $result->setData(['total' => $this->lifetimeSales->getTotal(false)]);
                 break;
             case 'mostViewedProducts':
                 $collection = $this->productsFactory->create()->addAttributeToSelect(
@@ -287,7 +287,11 @@ class CardManagement implements CardManagementInterface
                     $collection->addViewsCount()->setStoreId($storeId)->addStoreFilter($storeId);
                 }
                 $collection->setPageSize(5)->load();
-                $result->setData($collection->getData());
+                $data = [];
+                foreach ($collection as $item) {
+                    $data[] = $item->getData();
+                }
+                $result->setData($data);
                 break;
             case 'newCustomers':
                 $collection = $this->customerCollectionFactory->create()->addCustomerName();
@@ -313,7 +317,7 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'saleByLocation':
                 $collection = $this->salesByLocation->getCollection();
-                $result->setData($collection);
+                $result->setData(['items' => $collection, 'chartData' => $this->salesByLocation->getChartData()]);
                 break;
             case 'shipping':
                 $result->setData([
