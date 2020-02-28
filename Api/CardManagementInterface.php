@@ -33,7 +33,6 @@ interface CardManagementInterface
      * Adds a gift card code to a specified cart.
      *
      * @param string $cardName The card ID.
-     * @param array $filters The gift card code data.
      *
      * @return CardInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException The specified cart does not exist.
