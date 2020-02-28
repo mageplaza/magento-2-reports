@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_GiftCard
+ * @package     Mageplaza_Reports
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -129,8 +129,7 @@ class CardManagement implements CardManagementInterface
     protected $totalSales;
 
     /**
-     * GiftCodeManagement constructor.
-     *
+     * CardManagement constructor.
      * @param RequestInterface $request
      * @param HelperData $helperData
      * @param Card $card

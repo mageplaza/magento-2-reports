@@ -21,12 +21,6 @@
  */
 -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/mpreports/card/" method="GET">
-        <service class="Mageplaza\GiftCard\Api\GiftCodeManagementInterface" method="getList"/>
-        <resources>
-            <resource ref="Mageplaza_Reports::dashboard"/>
-        </resources>
-    </route>
     <route url="/V1/mpreports/card/:cardName" method="GET">
         <service class="Mageplaza\Reports\Api\CardManagementInterface" method="get"/>
         <resources>

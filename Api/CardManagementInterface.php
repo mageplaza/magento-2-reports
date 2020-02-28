@@ -30,9 +30,7 @@ use Mageplaza\Reports\Api\Data\CardInterface;
 interface CardManagementInterface
 {
     /**
-     * Adds a gift card code to a specified cart.
-     *
-     * @param string $cardName The card ID.
+     * @param string $cardName The card name.
      *
      * @return CardInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException The specified cart does not exist.
