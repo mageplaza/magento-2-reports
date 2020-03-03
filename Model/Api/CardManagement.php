@@ -314,7 +314,7 @@ class CardManagement implements CardManagementInterface
                     'chartData' => $this->repeatCustomerRate->getChartData()
                 ]);
                 break;
-            case 'saleByLocation':
+            case 'salesByLocation':
                 $collection = $this->salesByLocation->getCollection();
                 $result->setData(['items' => $collection, 'chartData' => $this->salesByLocation->getChartData()]);
                 break;
