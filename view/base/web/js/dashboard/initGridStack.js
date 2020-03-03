@@ -39,6 +39,7 @@ define([
             this.changeCardPositionObs();
             this.toggleCardTable();
             this.toggleCardVisible();
+            this.element.trigger('mpCardLoaded');
         },
         toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');

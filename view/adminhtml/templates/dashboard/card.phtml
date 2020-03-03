@@ -79,16 +79,31 @@ $card = $block->getCard();
     require([
         'jquery'
     ],function ($) {
-        $.ajax({
-            url: '<?= /** @noEscape */ $block->getUrl('mpreports/cards/loadcard', ['_current' => true]) ?>',
-            data: <?= \Mageplaza\Reports\Helper\Data::jsonEncode($card->getData()) ?>,
-            success: function (res) {
-                $('#<?= /** @noEscape */ $card->getId() ?> .dashboard-item-container').html($(res.html).find('.dashboard-item-container').html());
-            },
-            error: function () {
-                $('#<?= /** @noEscape */ $card->getId() ?> .dashboard-item-container').html('<?php __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+        var cardEl = $('#<?= /** @noEscape */ $card->getId() ?>');
+        var boardEl = $('.grid-stack');
+        boardEl.on('mpCardLoaded', function () {
+            if(boardEl.data('isLoading') === true || cardEl.data('isLoaded')) {
+                return;
             }
-        })
+            boardEl.data('isLoading', true);
+            $.ajax({
+                url: '<?= /** @noEscape */ $block->getUrl('mpreports/cards/loadcard', ['_current' => true]) ?>',
+                data: <?= \Mageplaza\Reports\Helper\Data::jsonEncode($card->getData()) ?>,
+                success: function (res) {
+                    cardEl.find('.dashboard-item-container').html($(res.html).find('.dashboard-item-container').html());
+                    cardEl.data('isLoaded', true);
+                    cardEl.trigger('contentUpdated');
+                    boardEl.data('isLoading', false);
+                    boardEl.trigger('mpCardLoaded');
+                },
+                error: function () {
+                    cardEl.data('isLoaded', true);
+                    boardEl.data('isLoading', false);
+                    boardEl.trigger('mpCardLoaded');
+                    cardEl.find('.dashboard-item-container').html('<?php __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+                }
+            })
+        });
     })
 </script>
 <?php endif; ?>
