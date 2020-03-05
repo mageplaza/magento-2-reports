@@ -25,8 +25,7 @@ use Exception;
 use Magento\Backend\Block\Template;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\OrderFactory;
+use Magento\Sales\Model\ResourceModel\Report\Order as AbstractReport;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -43,85 +42,27 @@ class RepeatCustomerRate extends AbstractClass
     protected $_template = 'dashboard/chart.phtml';
 
     /**
-     * @var OrderFactory
+     * @var AbstractReport
      */
-    protected $_orderFactory;
-
-    /**
-     * @var
-     */
-    protected $_orderReportCollectionFactory;
+    protected $abstractReport;
 
     /**
      * RepeatCustomerRate constructor.
      *
      * @param Template\Context $context
      * @param Data $helperData
-     * @param OrderFactory $orderFactory
+     * @param AbstractReport $abstractReport
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Data $helperData,
-        OrderFactory $orderFactory,
+        AbstractReport $abstractReport,
         array $data = []
     ) {
-        $this->_orderFactory = $orderFactory;
+        $this->abstractReport = $abstractReport;
 
         parent::__construct($context, $helperData, $data);
-    }
-
-    /**
-     * @param $customerId
-     * @param $time
-     *
-     * @return mixed
-     * @throws LocalizedException
-     */
-    private function checkRepeatCustomer($customerId, $time)
-    {
-        $collection = $this->_orderFactory->create()->getCollection();
-        $collection = $this->_helperData->addStoreFilter($collection);
-        $collection = $this->_helperData->addStatusFilter($collection);
-        $collection->addFieldToFilter('created_at', ['lt' => $time]);
-
-        return $collection->addFieldToFilter('customer_id', $customerId)->getSize();
-    }
-
-    /**
-     * @param      $startDate
-     * @param null $endDate
-     *
-     * @return array
-     * @throws LocalizedException*@throws \Exception
-     * @throws Exception
-     */
-    protected function getDataByDate($startDate, $endDate = null)
-    {
-        $customerOrdersPerTime = $this->_orderFactory->create()->getCollection();
-        $customerOrdersPerTime = $this->_helperData->addStoreFilter($customerOrdersPerTime);
-        $customerOrdersPerTime = $this->_helperData->addStatusFilter($customerOrdersPerTime);
-        $customerOrdersPerTime = $this->_helperData->addTimeFilter($customerOrdersPerTime, $startDate, $endDate);
-        $customerOrdersPerTime->addFieldToFilter('customer_is_guest', 0);
-
-        $orders = $this->_orderFactory->create()->getCollection();
-        $orders = $this->_helperData->addStoreFilter($orders);
-        $orders = $this->_helperData->addStatusFilter($orders);
-        $orders = $this->_helperData->addTimeFilter($orders, $startDate, $endDate);
-        $guestOrdersPerTimeCount = $orders->addFieldToFilter('customer_is_guest', 1)->getSize();
-
-        $first = 0;
-        $repeat = [];
-        /** @var Order $order */
-        foreach ($customerOrdersPerTime as $order) {
-            if ($this->checkRepeatCustomer($order->getCustomerId(), $order->getCreatedAt())) {
-                $repeat[$order->getCustomerId()] = 1;
-            } else {
-                $first++;
-            }
-        }
-
-        return [$first + $guestOrdersPerTimeCount, count($repeat)];
     }
 
     /**
@@ -134,14 +75,88 @@ class RepeatCustomerRate extends AbstractClass
     protected function getDataByDateRange($startDate, $endDate)
     {
         $data = [];
+
+        $customerRepeatData = $this->getCustomerRepeatDataByDateRange($startDate, $endDate);
+
         while (strtotime($endDate) >= strtotime($startDate)) {
-            $data['data']['labels'][] = __('first');
+            $data['data']['labels'][]        = __('first');
             $data['compareData']['labels'][] = __('repeat');
-            $customerRepeat = $this->getDataByDate($startDate);
-            $data['data']['data'][] = $customerRepeat[0];
-            $data['compareData']['data'][] = $customerRepeat[1];
+            $data['data']['data'][]          = isset($customerRepeatData[$startDate])
+                ? (int) $customerRepeatData[$startDate]['new_customer']
+                : 0;
+            $data['compareData']['data'][]   = isset($customerRepeatData[$startDate])
+                ? (int) $customerRepeatData[$startDate]['repeat_customer']
+                : 0;
+
             $startDate = strtotime('+1 day', strtotime($startDate));
-            $startDate = date('Y-m-d H:i:s', $startDate);
+            $startDate = date('Y-m-d', $startDate);
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     *
+     * @return array
+     */
+    protected function getCustomerRepeatDataByDateRange($startDate, $endDate)
+    {
+        $connection = $this->abstractReport->getConnection();
+        $select     = $connection->select();
+
+        $periodExpr = $connection->getDatePartSql(
+            $this->abstractReport->getStoreTZOffsetQuery(
+                ['source_table' => $this->abstractReport->getTable('sales_order')],
+                'source_table.created_at',
+                $startDate,
+                $endDate
+            )
+        );
+
+        $select->from(
+            ['source_table' => $this->abstractReport->getTable('sales_order')],
+            [
+                'period'      => $periodExpr,
+                'customer_id' => 'customer_id',
+                'count'       => 'COUNT(customer_id)',
+            ]
+        );
+        $select->where('state NOT IN (?)', ['pending_payment', 'new']);
+        $select->where('status != ?', 'Canceled');
+        $select->where('(customer_id > 0 OR customer_id IS NOT NULL)');
+        $select->where($periodExpr . ' >= ?', $startDate);
+        if ($endDate) {
+            $select->where($periodExpr . ' <= ?', $endDate);
+        }
+
+        if ($storeId = $this->_request->getParam('store')) {
+            $select->where('store_id = ?', $storeId);
+        }
+
+        $select->group(['period', 'customer_id']);
+
+        $customerSelect = $connection->select();
+
+        $customerSelect->from(
+            ['sub_table' => $select],
+            [
+                'period'          => 'period',
+                'new_customer'    => 'COUNT(CASE WHEN sub_table.count = 1 THEN 1 END)',
+                'repeat_customer' => 'COUNT(CASE WHEN sub_table.count > 1 THEN 1 END)',
+            ]
+        );
+
+        $customerSelect->group('period');
+        $result = $connection->fetchAll($customerSelect);
+
+        $data = [];
+        foreach ($result as $value) {
+            $data[$value['period']] = [
+                'new_customer'    => $value['new_customer'],
+                'repeat_customer' => $value['repeat_customer'],
+            ];
         }
 
         return $data;
@@ -159,21 +174,21 @@ class RepeatCustomerRate extends AbstractClass
         } catch (Exception $e) {
             $date = ['', ''];
         }
-        $chartData = $this->getDataByDateRange($date[0], $date[1]);
-        $data['data'] = $chartData['data'];
+        $chartData           = $this->getDataByDateRange($date[0], $date[1]);
+        $data['data']        = $chartData['data'];
         $data['compareData'] = $chartData['compareData'];
-        $days = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
-        $data['days'] = $days;
-        $data['labels'] = $this->_helperData->getPeriodsDate($date[0], null, $days);
-        $data['stepSize'] = round($days / 6);
-        $data['total'] = $this->getTotal();
-        $data['rate'] = $this->getRate();
-        $data['label'] = $this->getChartDataLabel();
-        $data['yUnit'] = $this->getYUnit();
-        $data['yLabel'] = $this->getYLabel();
-        $data['isFill'] = $this->isFill();
-        $data['isCompare'] = $this->isCompare();
-        $data['name'] = $this->getName();
+        $days                = $this->_helperData->getDaysByDateRange($date[0], $date[1]);
+        $data['days']        = $days;
+        $data['labels']      = $this->_helperData->getPeriodsDate($date[0], null, $days);
+        $data['stepSize']    = round($days / 6);
+        $data['total']       = $this->getTotal();
+        $data['rate']        = $this->getRate();
+        $data['label']       = $this->getChartDataLabel();
+        $data['yUnit']       = $this->getYUnit();
+        $data['yLabel']      = $this->getYLabel();
+        $data['isFill']      = $this->isFill();
+        $data['isCompare']   = $this->isCompare();
+        $data['name']        = $this->getName();
 
         return $data;
     }
@@ -183,26 +198,28 @@ class RepeatCustomerRate extends AbstractClass
      * @param $endDate
      *
      * @return float|int
-     * @throws LocalizedException
      */
     private function getRepeatRateByDateRange($startDate, $endDate)
     {
-        $customerRepeat = $this->getDataByDate($startDate, $endDate);
-        if (($customerRepeat[1] + $customerRepeat[0]) === 0) {
-            return 0;
+        $customerRepeatData = $this->getCustomerRepeatDataByDateRange($startDate, $endDate);
+        $newCustomer        = 0;
+        $repeatCustomer     = 0;
+        foreach ($customerRepeatData as $datum) {
+            $newCustomer    += $datum['new_customer'];
+            $repeatCustomer += $datum['repeat_customer'];
         }
 
-        return ($customerRepeat[1] / ($customerRepeat[1] + $customerRepeat[0])) * 100;
+        $total = $newCustomer + $repeatCustomer;
+
+        return $total === 0 ? 0 : ($repeatCustomer / $total) * 100;
     }
 
     /**
      * @return int|string
-     * @throws LocalizedException
-     * @throws Exception
      */
     public function getTotal()
     {
-        $date = $this->_helperData->getDateRange();
+        $date  = $this->_helperData->getDateRange();
         $total = $this->getRepeatRateByDateRange($date[0], $date[1]);
 
         return round($total, 2) . '%';
@@ -210,15 +227,14 @@ class RepeatCustomerRate extends AbstractClass
 
     /**
      * @return float|int
-     * @throws LocalizedException
      * @throws Exception
      */
     public function getRate()
     {
-        $date = $this->_helperData->getDateRange();
-        $repeatRate = $this->getRepeatRateByDateRange($date[0], $date[1]);
+        $date              = $this->_helperData->getDateRange();
+        $repeatRate        = $this->getRepeatRateByDateRange($date[0], $date[1]);
         $compareRepeatRate = $this->getRepeatRateByDateRange($date[2], $date[3]);
-        $rate = $repeatRate - $compareRepeatRate;
+        $rate              = $repeatRate - $compareRepeatRate;
 
         return round($rate, 2);
     }
