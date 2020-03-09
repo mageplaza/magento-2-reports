@@ -64,7 +64,7 @@ $card = $block->getCard();
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <?php if ($block->getRequest()->isAjax()) : ?>
+            <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
                 <?= $card->getContentHtml() ?>
             <?php else : ?>
             <div class="mp-card loading-mask">
