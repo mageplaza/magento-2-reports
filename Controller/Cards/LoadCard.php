@@ -71,7 +71,7 @@ class LoadCard extends Action
      */
     public function execute()
     {
-        $id     = $this->getRequest()->getParam('id');
+        $id     = $this->getRequest()->getParam('card_id');
         $layout = $this->_view->getLayout();
         $data   = [];
 

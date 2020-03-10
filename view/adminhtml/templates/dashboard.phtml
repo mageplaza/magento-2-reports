@@ -57,11 +57,11 @@ $cards = $block->getCards();
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
                                        type="checkbox" <?= $card->getVisible() ? 'checked' : '' ?>
-                                       id="card-<?= /** @noEscape */ $card->getId() ?>"
-                                       data-card-id="<?= /** @noEscape */ $card->getId() ?>">
+                                       id="card-<?= /** @noEscape */ $card->getCardId() ?>"
+                                       data-card-id="<?= /** @noEscape */ $card->getCardId() ?>">
                                 <label class="admin__field-label"
                                        title="<?= $block->escapeHtml($card->getTitle()) ?>"
-                                       for="card-<?= /** @noEscape */ $card->getId() ?>">
+                                       for="card-<?= /** @noEscape */ $card->getCardId() ?>">
                                     <?= $block->escapeHtml($card->getTitle()) ?>
                                 </label>
                             </div>

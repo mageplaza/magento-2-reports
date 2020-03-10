@@ -25,9 +25,9 @@
 $card = $block->getCard();
 
 ?>
-<div id="<?= /** @noEscape */ $card->getId() ?>"
+<div id="<?= /** @noEscape */ $card->getCardId() ?>"
      class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-     data-gs-id="<?= /** @noEscape */ $card->getId() ?>"
+     data-gs-id="<?= /** @noEscape */ $card->getCardId() ?>"
      data-gs-x="<?= $card->getX() !== null ? /** @noEscape */ $card->getX() : '0' ?>"
      data-gs-y="<?= $card->getY() !== null ? /** @noEscape */ $card->getY() : '100' ?>"
      data-gs-width="<?= $card->getWidth() !== null ? /** @noEscape */ $card->getWidth() : '3' ?>"
@@ -76,7 +76,7 @@ $card = $block->getCard();
                     require([
                         'jquery'
                     ],function ($) {
-                        var cardEl = $('#<?= /** @noEscape */ $card->getId() ?>');
+                        var cardEl = $('#<?= /** @noEscape */ $card->getCardId() ?>');
                         var boardEl = $('.grid-stack');
                         boardEl.on('mpCardLoaded', function () {
                             if(boardEl.data('isLoading') === true || cardEl.data('isLoaded')) {
