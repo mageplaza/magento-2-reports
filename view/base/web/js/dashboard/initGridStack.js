@@ -104,7 +104,7 @@ define([
                         }
                         $.ajax({
                             url: self.options.loadCardUrl,
-                            data: {id: cardId, dateRange: dateRange},
+                            data: {card_id: cardId, dateRange: dateRange},
                             showLoader: true,
                             success: function (result) {
                                 if (cardEl.length < 1) {
