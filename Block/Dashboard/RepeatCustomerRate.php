@@ -130,8 +130,10 @@ class RepeatCustomerRate extends AbstractClass
         if ($endDate) {
             $select->where($periodExpr . ' <= ?', $endDate);
         }
-        $storeId = $this->_request->getParam('store', 0);
-        $select->where('store_id = ?', $storeId);
+
+        if ($storeId = $this->_request->getParam('store')) {
+            $select->where('store_id = ?', $storeId);
+        }
 
         $select->group(['period', 'customer_id']);
 

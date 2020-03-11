@@ -36,7 +36,7 @@ use Mageplaza\Reports\Helper\Data;
  */
 class SalesByLocation extends AbstractClass
 {
-    const NAME = 'saleByLocation';
+    const NAME = 'salesByLocation';
 
     /**
      * @var string
