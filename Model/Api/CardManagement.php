@@ -310,7 +310,8 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'repeatCustomerRate':
                 $result->setData([
-                    'repeat_rate' => $this->repeatCustomerRate->getRate(),
+                    'total' => $this->repeatCustomerRate->getTotal(),
+                    'rate' => $this->repeatCustomerRate->getRate(),
                     'chartData' => $this->repeatCustomerRate->getChartData()
                 ]);
                 break;
