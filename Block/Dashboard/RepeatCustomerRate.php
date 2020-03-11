@@ -130,10 +130,8 @@ class RepeatCustomerRate extends AbstractClass
         if ($endDate) {
             $select->where($periodExpr . ' <= ?', $endDate);
         }
-
-        if ($storeId = $this->_request->getParam('store')) {
-            $select->where('store_id = ?', $storeId);
-        }
+        $storeId = $this->_request->getParam('store', 0);
+        $select->where('store_id = ?', $storeId);
 
         $select->group(['period', 'customer_id']);
 
@@ -219,7 +217,7 @@ class RepeatCustomerRate extends AbstractClass
      */
     public function getTotal()
     {
-        $date  = $this->_helperData->getDateRange();
+        $date  = $this->_helperData->getDateRange('Y-m-d');
         $total = $this->getRepeatRateByDateRange($date[0], $date[1]);
 
         return round($total, 2) . '%';
@@ -231,7 +229,7 @@ class RepeatCustomerRate extends AbstractClass
      */
     public function getRate()
     {
-        $date              = $this->_helperData->getDateRange();
+        $date              = $this->_helperData->getDateRange('Y-m-d');
         $repeatRate        = $this->getRepeatRateByDateRange($date[0], $date[1]);
         $compareRepeatRate = $this->getRepeatRateByDateRange($date[2], $date[3]);
         $rate              = $repeatRate - $compareRepeatRate;
