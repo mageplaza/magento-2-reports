@@ -18,10 +18,12 @@ class DataObjectProcessor
      * @var MethodsMap
      */
     private $methodsMapProcessor;
+
     /**
      * @var FieldNamer
      */
     private $fieldNamer;
+
     /**
      * @var Data
      */
@@ -29,6 +31,7 @@ class DataObjectProcessor
 
     /**
      * DataObjectProcessor constructor.
+     *
      * @param MethodsMap $methodsMapProcessor
      * @param FieldNamer $fieldNamer
      * @param Data $helperData
@@ -39,8 +42,8 @@ class DataObjectProcessor
         Data $helperData
     ) {
         $this->methodsMapProcessor = $methodsMapProcessor;
-        $this->fieldNamer = $fieldNamer;
-        $this->helperData = $helperData;
+        $this->fieldNamer          = $fieldNamer;
+        $this->helperData          = $helperData;
     }
 
     /**
@@ -48,6 +51,7 @@ class DataObjectProcessor
      * @param $dataObject
      * @param $dataObjectType
      * @param $outputData
+     *
      * @return mixed
      * @throws ReflectionException
      */
@@ -68,7 +72,7 @@ class DataObjectProcessor
             if (!$this->methodsMapProcessor->isMethodValidForDataField($dataObjectType, $methodName)) {
                 continue;
             }
-            $key = $this->fieldNamer->getFieldNameForMethodName($methodName);
+            $key   = $this->fieldNamer->getFieldNameForMethodName($methodName);
             $value = $dataObject->{$methodName}();
             if ($key === 'data') {
                 $outputData[$key] = $value;

@@ -41,13 +41,14 @@ class TotalSales extends AbstractClass
 
     /**
      * @param $includeContainer
+     *
      * @return float|int|string
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
     public function getTotal($includeContainer = true)
     {
-        $date = $this->_helperData->getDateRange();
+        $date   = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
         return $this->getBaseCurrency()->format($totals->getRevenue() ?: 0, [], $includeContainer);
@@ -60,8 +61,8 @@ class TotalSales extends AbstractClass
      */
     public function getRate()
     {
-        $dates = $this->_helperData->getDateRange();
-        $totals = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
+        $dates         = $this->_helperData->getDateRange();
+        $totals        = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
         $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3]);
         if ((int) $totals->getRevenue() === 0 && (int) $compareTotals->getRevenue() === 0) {
             return 0;

@@ -58,7 +58,7 @@ class SavePosition extends Action
         Session $authSession,
         CardsManageFactory $cardsManageFactory
     ) {
-        $this->_authSession = $authSession;
+        $this->_authSession        = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
 
         parent::__construct($context);
@@ -73,14 +73,14 @@ class SavePosition extends Action
         $items = $this->getRequest()->getParam('items');
         if ($items && $this->getRequest()->isAjax()) {
             $config = $this->_cardsManageFactory->getCurrentConfig();
-            $data = $config->getId()
+            $data   = $config->getId()
                 ? $config->getConfig()
                 : $this->_cardsManageFactory->getDefaultConfig()->getConfig();
             foreach ($items as $id => $item) {
-                $data[$id]['x'] = $item['x'];
-                $data[$id]['y'] = $item['y'];
-                $data[$id]['width'] = $item['width'];
-                $data[$id]['height'] = $item['height'];
+                $data[$id]['x']       = $item['x'];
+                $data[$id]['y']       = $item['y'];
+                $data[$id]['width']   = $item['width'];
+                $data[$id]['height']  = $item['height'];
                 $data[$id]['visible'] = isset($item['visible']) ? $item['visible'] : 1;
             }
             $data = Data::jsonEncode($data);

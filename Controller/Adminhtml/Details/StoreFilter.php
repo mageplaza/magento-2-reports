@@ -23,9 +23,9 @@ namespace Mageplaza\Reports\Controller\Adminhtml\Details;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\Block\Store\Switcher;
-use Mageplaza\Reports\Helper\Data;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class StoreFilter

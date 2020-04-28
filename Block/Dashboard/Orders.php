@@ -90,8 +90,8 @@ class Orders extends AbstractClass
      */
     public function getRate()
     {
-        $date = $this->_helperData->getDateRange();
-        $count = $this->getDataByDate($date[0], $date[1]);
+        $date         = $this->_helperData->getDateRange();
+        $count        = $this->getDataByDate($date[0], $date[1]);
         $countCompare = $this->getDataByDate($date[2], $date[3]);
         if ($countCompare === 0 && $count === 0) {
             return 0;

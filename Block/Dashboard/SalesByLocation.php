@@ -69,7 +69,7 @@ class SalesByLocation extends AbstractClass
         Data $helperData,
         array $data = []
     ) {
-        $this->_countryFactory = $countryFactory;
+        $this->_countryFactory         = $countryFactory;
         $this->_orderCollectionFactory = $orderCollectionFactory;
 
         parent::__construct($context, $helperData, $data);
@@ -115,9 +115,9 @@ class SalesByLocation extends AbstractClass
      */
     public function getCollection()
     {
-        $collection = [];
-        $date = $this->_helperData->getDateRange();
-        $data = $this->getDataByDateRange($date[0], $date[1], 5);
+        $collection  = [];
+        $date        = $this->_helperData->getDateRange();
+        $data        = $this->getDataByDateRange($date[0], $date[1], 5);
         $compareData = $this->getDataByDateRange($date[2], $date[3]);
         foreach ($data as $key => $item) {
             if (isset($compareData[$key]) && $compareData[$key] > 0) {

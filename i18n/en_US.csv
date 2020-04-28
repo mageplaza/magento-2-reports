@@ -1,6 +1,7 @@
 "Average Order","Average Order"
 "Average Order Value","Average Order Value"
 Bestsellers,Bestsellers
+"Conversion Funnel","Conversion Funnel"
 Customers,Customers
 "Last Order","Last Order"
 "Last Search Terms","Last Search Terms"
@@ -11,33 +12,50 @@ Orders,Orders
 first,first
 repeat,repeat
 "Repeat Customer Rate","Repeat Customer Rate"
-"Sale By Location","Sale By Location"
+"Sales By Location","Sales By Location"
 Shipping,Shipping
 Tax,Tax
 "Top Search Terms","Top Search Terms"
 Totals,Totals
+"Can not be load Card","Can not be load Card"
 Dashboard,Dashboard
 "All Websites","All Websites"
 "compare with","compare with"
 Card,Card
-"View Details","View Details"
 "Please upgrade to %1 version to see more detail","Please upgrade to %1 version to see more detail"
+"View Details","View Details"
+"Something went wrong while loading %1 card","Something went wrong while loading %1 card"
 "Chart is disabled. To enable the chart, click <a href='%1'>here</a>","Chart is disabled. To enable the chart, click <a href='%1'>here</a>"
+"Product Viewed: %1","Product Viewed: %1"
+"Add To Cart: %1","Add To Cart: %1"
+"Ordered: %1","Ordered: %1"
 "We couldn't find any records.","We couldn't find any records."
-"Group By","Group By"
+Period,Period
 Day,Day
 Week,Week
 Month,Month
 Year,Year
+"Order Status","Order Status"
+--Select--,--Select--
+"Date Used","Date Used"
+"Created At","Created At"
+"Updated At","Updated At"
 "Let’s experience your new dashboard","Let’s experience your new dashboard"
 "Hello there! Better reports are available","Hello there! Better reports are available"
 "Mageplaza Advanced Reporting","Mageplaza Advanced Reporting"
 "The better reports provides ecommerce insights across performance metrics, product sales, customers, and cost of goods sold. Instantly measure metrics like customer lifetime value, gross margin, net profit, and more to build and automate high-quality ecommerce reports.","The better reports provides ecommerce insights across performance metrics, product sales, customers, and cost of goods sold. Instantly measure metrics like customer lifetime value, gross margin, net profit, and more to build and automate high-quality ecommerce reports."
 "Try to use new Dashboard","Try to use new Dashboard"
+"Change Key","Change Key"
+"Generate Url","Generate Url"
+Copied!,Copied!
 Continue,Continue
 "Mageplaza Reports Dashboard","Mageplaza Reports Dashboard"
 Reports,Reports
 "General Configuration","General Configuration"
 "Module Enable","Module Enable"
+"Enable Dashboard","Enable Dashboard"
 "Enable Chart","Enable Chart"
 "Enable Comparison","Enable Comparison"
+"Mobile Dashboard","Mobile Dashboard"
+"Access Key","Access Key"
+"You must save config to apply change.","You must save config to apply change."

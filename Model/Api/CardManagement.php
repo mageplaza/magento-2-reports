@@ -55,74 +55,92 @@ class CardManagement implements CardManagementInterface
      * @var HelperData
      */
     protected $helperData;
+
     /**
      * @var AverageOrder
      */
     protected $averageOrderCard;
+
     /**
      * @var Card
      */
     protected $card;
+
     /**
      * @var AverageOrderValue
      */
     protected $averageOrderValue;
+
     /**
      * @var RequestInterface
      */
     protected $request;
+
     /**
      * @var BestsellersCollectionFactory
      */
     protected $bestsellersCollectionFactory;
+
     /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
+
     /**
      * @var ConversionFunnel
      */
     protected $conversionFunnel;
+
     /**
      * @var OrderCollectionFactory
      */
     protected $orderCollectionFactory;
+
     /**
      * @var QueriesCollectionFactory
      */
     protected $queriesFactory;
+
     /**
      * @var LifetimeSales
      */
     protected $lifetimeSales;
+
     /**
      * @var ProductCollectionFactory
      */
     protected $productsFactory;
+
     /**
      * @var CustomerCollectionFactory
      */
     protected $customerCollectionFactory;
+
     /**
      * @var Orders
      */
     protected $orders;
+
     /**
      * @var RepeatCustomerRate
      */
     protected $repeatCustomerRate;
+
     /**
      * @var SalesByLocation
      */
     protected $salesByLocation;
+
     /**
      * @var Shipping
      */
     protected $shipping;
+
     /**
      * @var Tax
      */
     protected $tax;
+
     /**
      * @var TotalSales
      */
@@ -130,6 +148,7 @@ class CardManagement implements CardManagementInterface
 
     /**
      * CardManagement constructor.
+     *
      * @param RequestInterface $request
      * @param HelperData $helperData
      * @param Card $card
@@ -171,25 +190,25 @@ class CardManagement implements CardManagementInterface
         Tax $tax,
         TotalSales $totalSales
     ) {
-        $this->helperData = $helperData;
-        $this->averageOrderCard = $averageOrderCard;
-        $this->card = $card;
-        $this->averageOrderValue = $averageOrderValue;
-        $this->request = $request;
+        $this->helperData                   = $helperData;
+        $this->averageOrderCard             = $averageOrderCard;
+        $this->card                         = $card;
+        $this->averageOrderValue            = $averageOrderValue;
+        $this->request                      = $request;
         $this->bestsellersCollectionFactory = $bestsellersCollectionFactory;
-        $this->storeManager = $storeManager;
-        $this->conversionFunnel = $conversionFunnel;
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->queriesFactory = $queriesFactory;
-        $this->lifetimeSales = $lifetimeSales;
-        $this->productsFactory = $productsFactory;
-        $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->orders = $orders;
-        $this->repeatCustomerRate = $repeatCustomerRate;
-        $this->salesByLocation = $salesByLocation;
-        $this->shipping = $shipping;
-        $this->tax = $tax;
-        $this->totalSales = $totalSales;
+        $this->storeManager                 = $storeManager;
+        $this->conversionFunnel             = $conversionFunnel;
+        $this->orderCollectionFactory       = $orderCollectionFactory;
+        $this->queriesFactory               = $queriesFactory;
+        $this->lifetimeSales                = $lifetimeSales;
+        $this->productsFactory              = $productsFactory;
+        $this->customerCollectionFactory    = $customerCollectionFactory;
+        $this->orders                       = $orders;
+        $this->repeatCustomerRate           = $repeatCustomerRate;
+        $this->salesByLocation              = $salesByLocation;
+        $this->shipping                     = $shipping;
+        $this->tax                          = $tax;
+        $this->totalSales                   = $totalSales;
     }
 
     /**
@@ -206,12 +225,13 @@ class CardManagement implements CardManagementInterface
     /**
      * @param $cardName
      * @param $filters
+     *
      * @return Card|null
      * @throws LocalizedException
      */
     protected function getCard($cardName, $filters)
     {
-        list($storeFilter, $storeId, $storeIds) = $filters;
+        [$storeFilter, $storeId, $storeIds] = $filters;
 
         $result = new Card();
         $result->setName($cardName);
@@ -221,8 +241,8 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'averageOrderValue':
                 $result->setData([
-                    'total' => $this->averageOrderValue->getTotal(false),
-                    'rate' =>$this->averageOrderValue->getRate(),
+                    'total'     => $this->averageOrderValue->getTotal(false),
+                    'rate'      => $this->averageOrderValue->getRate(),
                     'chartData' => $this->averageOrderValue->getChartData(),
                 ]);
                 break;
@@ -238,8 +258,8 @@ class CardManagement implements CardManagementInterface
             case 'conversionFunnel':
                 $data = [
                     'product_viewed' => $this->conversionFunnel->getProductViews(),
-                    'add_to_cart' => $this->conversionFunnel->getAllCartItems(),
-                    'ordered' => $this->conversionFunnel->getAllOrderItem(),
+                    'add_to_cart'    => $this->conversionFunnel->getAllCartItems(),
+                    'ordered'        => $this->conversionFunnel->getAllOrderItem(),
                 ];
                 $result->setData($data);
                 break;
@@ -303,15 +323,15 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'orders':
                 $result->setData([
-                    'total' => $this->orders->getTotal(),
-                    'rate' => $this->orders->getRate(),
+                    'total'     => $this->orders->getTotal(),
+                    'rate'      => $this->orders->getRate(),
                     'chartData' => $this->orders->getChartData(),
                 ]);
                 break;
             case 'repeatCustomerRate':
                 $result->setData([
-                    'total' => $this->repeatCustomerRate->getTotal(),
-                    'rate' => $this->repeatCustomerRate->getRate(),
+                    'total'     => $this->repeatCustomerRate->getTotal(),
+                    'rate'      => $this->repeatCustomerRate->getRate(),
                     'chartData' => $this->repeatCustomerRate->getChartData()
                 ]);
                 break;
@@ -321,15 +341,15 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'shipping':
                 $result->setData([
-                    'total' => $this->shipping->getTotal(false),
-                    'rate' => $this->shipping->getRate(),
+                    'total'     => $this->shipping->getTotal(false),
+                    'rate'      => $this->shipping->getRate(),
                     'chartData' => $this->shipping->getChartData()
                 ]);
                 break;
             case 'tax':
                 $result->setData([
-                    'total' => $this->tax->getTotal(false),
-                    'rate' => $this->tax->getRate(),
+                    'total'     => $this->tax->getTotal(false),
+                    'rate'      => $this->tax->getRate(),
                     'chartData' => $this->tax->getChartData()
                 ]);
                 break;
@@ -345,8 +365,8 @@ class CardManagement implements CardManagementInterface
                 break;
             case 'totalSales':
                 $result->setData([
-                    'total' => $this->totalSales->getTotal(false),
-                    'rate' => $this->totalSales->getRate(),
+                    'total'     => $this->totalSales->getTotal(false),
+                    'rate'      => $this->totalSales->getRate(),
                     'chartData' => $this->totalSales->getChartData()
                 ]);
                 break;
@@ -373,17 +393,17 @@ class CardManagement implements CardManagementInterface
             $params['dateRange'][3] = isset($params['compareEndDate']) ? $params['compareEndDate'] : null;
         }
         $storeFilter = 0;
-        $storeId = null;
-        $storeIds = null;
+        $storeId     = null;
+        $storeIds    = null;
         if ($this->getParam('website')) {
             $storeIds = $this->storeManager->getWebsite($this->getParam('website'))->getStoreIds();
-            $storeId = array_pop($storeIds);
+            $storeId  = array_pop($storeIds);
         } elseif ($this->getParam('group')) {
             $storeIds = $this->storeManager->getGroup($this->getParam('group'))->getStoreIds();
-            $storeId = array_pop($storeIds);
+            $storeId  = array_pop($storeIds);
         } elseif ($this->getParam('store')) {
-            $storeId = (int)$this->getParam('store');
-            $storeIds = [$storeId];
+            $storeId     = (int) $this->getParam('store');
+            $storeIds    = [$storeId];
             $storeFilter = 1;
         } else {
             $storeFilter = null;
@@ -397,6 +417,7 @@ class CardManagement implements CardManagementInterface
     /**
      * @param $key
      * @param null $defaultValue
+     *
      * @return mixed
      */
     protected function getParam($key, $defaultValue = null)

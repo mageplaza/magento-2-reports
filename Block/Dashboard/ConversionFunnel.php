@@ -26,11 +26,11 @@ use Magento\Backend\Block\Template;
 use Magento\Framework\Phrase;
 use Magento\Quote\Model\ResourceModel\Quote\Item\Collection;
 use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollectionFactory;
-use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OrderItemCollection;
+use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Mageplaza\Reports\Helper\Data;
-use Mageplaza\Reports\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
 use Mageplaza\Reports\Model\ResourceModel\Viewed\Collection as ViewedCollection;
+use Mageplaza\Reports\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
 
 /**
  * Class ConversionFunnel
@@ -78,8 +78,8 @@ class ConversionFunnel extends AbstractClass
         Data $helperData,
         array $data = []
     ) {
-        $this->viewedCollectionFactory = $viewedCollectionFactory;
-        $this->itemCollectionFactory = $itemCollectionFactory;
+        $this->viewedCollectionFactory    = $viewedCollectionFactory;
+        $this->itemCollectionFactory      = $itemCollectionFactory;
         $this->orderItemCollectionFactory = $orderItemCollectionFactory;
 
         parent::__construct($context, $helperData, $data);
@@ -174,7 +174,7 @@ class ConversionFunnel extends AbstractClass
                 : $this->_request->getParam('endDate');
         }
         if ($toDate === null || $fromDate === null) {
-            list($fromDate, $toDate) = $this->_helperData->getDateRange();
+            [$fromDate, $toDate] = $this->_helperData->getDateRange();
         }
 
         return [$fromDate, $toDate];
@@ -185,10 +185,10 @@ class ConversionFunnel extends AbstractClass
      */
     protected function getStore()
     {
-        $storeParam = $this->_request->getParam('store') ?: 0;
+        $storeParam       = $this->_request->getParam('store') ?: 0;
         $storeFilterParam = isset($this->_request->getParam('mpFilter')['store'])
             ? $this->_request->getParam('mpFilter')['store'] : null;
-        $storeId = ($storeFilterParam !== null && $storeFilterParam !== '')
+        $storeId          = ($storeFilterParam !== null && $storeFilterParam !== '')
             ? $storeFilterParam
             : $storeParam;
 

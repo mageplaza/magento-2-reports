@@ -42,6 +42,7 @@ class SwitchToNew extends Template
 
     /**
      * SwitchToNew constructor.
+     *
      * @param Template\Context $context
      * @param Data $helperData
      * @param array $data

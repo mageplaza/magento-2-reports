@@ -29,8 +29,8 @@ use Magento\Framework\App\Config\Storage\Writer;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
-use Mageplaza\Reports\Helper\Data;
 use Magento\Store\Model\Store;
+use Mageplaza\Reports\Helper\Data;
 
 /**
  * Class SwitchToNew
@@ -61,7 +61,7 @@ class SwitchToNew extends Action
         TypeListInterface $typeList
     ) {
         $this->_storageWriter = $storageWriter;
-        $this->_cache = $typeList;
+        $this->_cache         = $typeList;
 
         parent::__construct($context);
     }

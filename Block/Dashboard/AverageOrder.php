@@ -42,6 +42,7 @@ class AverageOrder extends AbstractClass
 
     /**
      * @param bool $includeContainer
+     *
      * @return string
      * @throws LocalizedException
      */

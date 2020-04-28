@@ -48,6 +48,7 @@ class Config
     /**
      * @param BackendConfig $subject
      * @param $result
+     *
      * @return mixed
      */
     public function afterGetRouteByFrontName(BackendConfig $subject, $result)

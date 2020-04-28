@@ -37,7 +37,7 @@ use Mageplaza\Reports\Helper\Data;
  */
 abstract class AbstractClass extends Template
 {
-    const NAME = '';
+    const NAME              = '';
     const MAGE_REPORT_CLASS = '';
 
     /**
@@ -129,6 +129,7 @@ abstract class AbstractClass extends Template
      * @param array $options
      * @param bool $includeContainer
      * @param bool $addBrackets
+     *
      * @return string
      * @throws LocalizedException
      */
@@ -244,9 +245,9 @@ abstract class AbstractClass extends Template
         $data = [];
         while (strtotime($endDate) >= strtotime($startDate)) {
             $data['labels'][] = date('Y-m-d', strtotime($startDate));
-            $data['data'][] = $this->getDataByDate($startDate);
-            $startDate = strtotime('+1 day', strtotime($startDate));
-            $startDate = date('Y-m-d H:i:s', $startDate);
+            $data['data'][]   = $this->getDataByDate($startDate);
+            $startDate        = strtotime('+1 day', strtotime($startDate));
+            $startDate        = date('Y-m-d H:i:s', $startDate);
         }
 
         return $data;
@@ -322,8 +323,10 @@ abstract class AbstractClass extends Template
     {
         $date = $this->_helperData->getDateRange();
 
-        return [date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
-            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
+        return [
+            date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
+            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))
+        ];
     }
 
     /**

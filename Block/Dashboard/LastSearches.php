@@ -30,7 +30,7 @@ use Magento\Search\Block\Adminhtml\Dashboard\Last;
  */
 class LastSearches extends AbstractClass
 {
-    const NAME = 'lastSearches';
+    const NAME              = 'lastSearches';
     const MAGE_REPORT_CLASS = Last::class;
 
     /**

@@ -84,6 +84,7 @@ class Card extends Template
 
     /**
      * @param $card
+     *
      * @return Card
      */
     public function setCard($card)

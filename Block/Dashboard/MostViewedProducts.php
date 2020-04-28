@@ -30,7 +30,7 @@ use Magento\Framework\Phrase;
  */
 class MostViewedProducts extends AbstractClass
 {
-    const NAME = 'mostViewedProducts';
+    const NAME              = 'mostViewedProducts';
     const MAGE_REPORT_CLASS = Viewed::class;
 
     /**

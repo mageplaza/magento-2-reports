@@ -66,9 +66,9 @@ class Index extends Action
         ForwardFactory $resultForwardFactory,
         Data $helperData
     ) {
-        $this->resultPageFactory = $resultPageFactory;
+        $this->resultPageFactory    = $resultPageFactory;
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->helperData = $helperData;
+        $this->helperData           = $helperData;
 
         parent::__construct($context);
     }
@@ -80,14 +80,14 @@ class Index extends Action
     {
         $resultPage = $this->resultPageFactory->create();
 
-        $accessKey = $this->getRequest()->getParam('accessKey');
+        $accessKey       = $this->getRequest()->getParam('accessKey');
         $accessKeyConfig = $this->helperData->getConfigMobileAccessKey();
         if ($accessKey !== $accessKeyConfig) {
             return $this->_redirect('noroute');
         }
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result = ['dashboard' => $dashBoard->toHtml()];
+            $result    = ['dashboard' => $dashBoard->toHtml()];
 
             return $this->getResponse()->representJson(Data::jsonEncode($result));
         }

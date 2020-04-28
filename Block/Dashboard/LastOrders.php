@@ -30,7 +30,7 @@ use Magento\Framework\Phrase;
  */
 class LastOrders extends AbstractClass
 {
-    const NAME = 'lastOrders';
+    const NAME              = 'lastOrders';
     const MAGE_REPORT_CLASS = Grid::class;
 
     /**
