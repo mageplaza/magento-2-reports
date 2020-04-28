@@ -20,11 +20,12 @@
 
 define([
     'jquery',
+    'underscore',
     'Magento_Ui/js/modal/alert',
     'gridstack',
     'gridstackJqueryUi',
     'touchPunch'
-], function ($, uiAlert) {
+], function ($, _, uiAlert) {
     'use strict';
 
     $.widget('mageplaza.initGridStack', {
@@ -38,9 +39,11 @@ define([
             this.changeCardPositionObs();
             this.toggleCardTable();
             this.toggleCardVisible();
+            this.element.trigger('mpCardLoaded');
         },
         toggleCardTable: function () {
             var cardsTableEl = $('.mp-ar-card.admin__action-dropdown-wrap.admin__data-grid-action-columns');
+
             $('button#mp-ar-card').on('click', function () {
                 if (cardsTableEl.hasClass('_active')) {
                     cardsTableEl.removeClass('_active');
@@ -60,56 +63,74 @@ define([
 
             gridStackEl.on('change', function (event, items) {
                 var data = {};
+
                 if (items === undefined) {
                     return;
                 }
-                for (var item of items) {
+                _.each(items, function (item) {
                     data[item.id] = {
                         'x': item.x,
                         'y': item.y,
                         'width': item.width,
                         'height': item.height
-                    }
-                }
+                    };
+                });
 
                 self.saveCardPosition(data);
             });
         },
         toggleCardVisible: function () {
             var self = this;
+
             $('.admin__action-dropdown-menu-content .admin__control-checkbox').each(function () {
                 $(this).change(function () {
-                    var cartId = $(this).attr('data-cart-id'),
-                        cardEl = $('#' + cartId);
+                    var cardId = $(this).attr('data-card-id'),
+                        cardEl = $('#' + cardId),
+                        card, dateRange,
+                        dateRangeEl = $('.ar_dashboard #daterange'),
+                        compareDateRangEl = $('.ar_dashboard #compare-daterange');
+
                     if (cardEl.length < 1) {
-                        var card = this;
+                        card = this;
+                        dateRange = [
+                            dateRangeEl.data('startDate').format('Y-MM-DD'),
+                            dateRangeEl.data('endDate').format('Y-MM-DD'),
+                        ];
+                        if (compareDateRangEl.length) {
+                            dateRange[2] = compareDateRangEl.data('startDate').format('Y-MM-DD');
+                            dateRange[3] = compareDateRangEl.data('endDate').format('Y-MM-DD');
+                        } else {
+                            dateRange[2] = dateRange[3] = null;
+                        }
                         $.ajax({
                             url: self.options.loadCardUrl,
-                            data: {id: cartId},
+                            data: {card_id: cardId, dateRange: dateRange},
                             showLoader: true,
                             success: function (result) {
-                                if ($('#' + cartId).length < 1) {
+                                if (cardEl.length < 1) {
                                     if (result.html) {
                                         $('.grid-stack').append(result.html);
-                                    }else{
+                                    } else {
                                         uiAlert({
                                             content: result.message
                                         });
                                         return;
                                     }
                                 }
-                                self.changeCard(card, cartId);
-                                $('#' + cartId).trigger('contentUpdated');
+                                self.changeCard(card, cardId);
+                                $('#' + cardId).trigger('contentUpdated');
                             }
                         });
                     } else {
-                        self.changeCard(this, cartId);
+                        self.changeCard(this, cardId);
                     }
                 });
             });
         },
-        changeCard: function (card, cartId) {
-            var cardEl = $('#' + cartId);
+        changeCard: function (card, cardId) {
+            var cardEl = $('#' + cardId),
+                data = {};
+
             if (card.checked) {
                 cardEl.removeClass('hide');
                 this.options.grid.addWidget(cardEl);
@@ -118,8 +139,7 @@ define([
                 cardEl.attr('data-gs-y', 100).attr('data-gs-x', 0);
                 cardEl.addClass('hide');
             }
-            var data = {};
-            data[cartId] = {
+            data[cardId] = {
                 'visible': card.checked ? 1 : 0,
                 'x': cardEl.attr('data-gs-x'),
                 'y': cardEl.attr('data-gs-y'),
@@ -138,13 +158,14 @@ define([
         },
         initGrid: function () {
             var gridStackEl = $('.grid-stack');
-
             var options = {
-                alwaysShowResizeHandle: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+                alwaysShowResizeHandle:
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
                 cellHeight: 30,
                 verticalMargin: 10,
                 draggable: {handle: '.draggable', scroll: true, appendTo: 'body'},
             };
+
             gridStackEl.gridstack(options);
             this.options.grid = gridStackEl.data('gridstack');
         }

@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  * Mageplaza
  *
@@ -15,16 +14,26 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_Reports
+ * @package     Mageplaza_Repoprts
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Mageplaza_Reports" setup_version="1.0.0">
-        <sequence>
-            <module name="Mageplaza_Core"/>
-            <module name="Magento_Backend"/>
-        </sequence>
-    </module>
-</config>
+
+namespace Mageplaza\Reports\Api;
+
+use Mageplaza\Reports\Api\Data\CardInterface;
+
+/**
+ * Interface CardManagementInterface
+ * @package Mageplaza\Reports\Api
+ */
+interface CardManagementInterface
+{
+    /**
+     * @param string $cardName The card name.
+     *
+     * @return CardInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException The specified cart does not exist.
+     */
+    public function get($cardName);
+}

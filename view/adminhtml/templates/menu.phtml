@@ -32,9 +32,9 @@ $menu = $block->getMenuUrls() ?: [];
 $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' => $block->getFormKey()]);
 ?>
 <div id="menu" class="mp_menu" data-mage-init='{"Mageplaza_Reports/js/detail/menu":{
-                                                    "gridName":"<?= $gridName ?>",
-                                                    "date":<?= json_encode($date) ?>,
-                                                    "storeUrl":"<?= $storeFilterUrl ?>"
+                                                    "gridName":"<?= /** @noEscape */ $gridName ?>",
+                                                    "date":<?= /** @noEscape */ json_encode($date) ?>,
+                                                    "storeUrl":"<?= /** @noEscape */ $storeFilterUrl ?>"
                                                 }}'>
     <div class="admin__action-dropdown-wrap menu-select">
         <a href="#" class="admin__action-dropdown"
@@ -45,7 +45,7 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </a>
         <ul class="admin__action-dropdown-menu">
             <?php foreach ($menu as $item) : ?>
-                <li><a href="<?= $item['path'] ?>"><?= $item['label'] ?></a></li>
+                <li><a href="<?= /** @noEscape */ $item['path'] ?>"><?= /** @noEscape */ $item['label'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -62,25 +62,25 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
     <div class="customer-group">
         <select id="customer-group-id">
             <?php foreach ($block->getCustomerGroup() as $group) : ?>
-                <option value="<?= $group['value'] ?>"><?= $group['label'] ?></option>
+                <option value="<?= /** @noEscape */ $group['value'] ?>"><?= /** @noEscape */ $group['label'] ?></option>
             <?php endforeach; ?>
         </select>
     </div>
     <div class="period">
-        <span><strong><?= __('Period') ?></strong></span>
+        <span><strong><?= $block->escapeHtml(__('Period')) ?></strong></span>
         <select id="period">
-            <option value="day"><?= __('Day') ?></option>
-            <option value="week"><?= __('Week') ?></option>
-            <option value="month"><?= __('Month') ?></option>
-            <option value="year"><?= __('Year') ?></option>
+            <option value="day"><?= $block->escapeHtml(__('Day')) ?></option>
+            <option value="week"><?= $block->escapeHtml(__('Week')) ?></option>
+            <option value="month"><?= $block->escapeHtml(__('Month')) ?></option>
+            <option value="year"><?= $block->escapeHtml(__('Year')) ?></option>
         </select>
     </div>
     <div class="order_status">
-        <span class="label"><strong><?= __('Order Status') ?></strong></span>
+        <span class="label"><strong><?= $block->escapeHtml(__('Order Status')) ?></strong></span>
         <div class="mp-rp-order-status admin__action-dropdown-wrap admin__data-grid-action-columns"
              style="float: right">
             <button id="mp-rp-order-status" class="admin__action-dropdown" type="button">
-                <span class="admin__action-dropdown-text"><?= __('--Select--') ?></span>
+                <span class="admin__action-dropdown-text"><?= $block->escapeHtml(__('--Select--')) ?></span>
             </button>
             <div class="admin__action-dropdown-menu _overflow" id="order_status">
                 <div class="admin__action-dropdown-menu-header"></div>
@@ -90,10 +90,10 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
                             <input class="admin__control-checkbox"
                                    type="checkbox"
                                    checked
-                                   name="<?= $status['value'] ?>"
-                                   id="<?= $status['value'] ?>">
+                                   name="<?= /** @noEscape */ $status['value'] ?>"
+                                   id="<?= /** @noEscape */ $status['value'] ?>">
                             <label class="admin__field-label"
-                                   for="<?= $status['value'] ?>"><?= $status['label']; ?></label>
+                                   for="<?= /** @noEscape */ $status['value'] ?>"><?= /** @noEscape */ $status['label'] ?></label>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -101,10 +101,10 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
         </div>
     </div>
     <div class="date_used">
-        <span><strong><?= __('Date Used') ?></strong></span>
+        <span><strong><?= $block->escapeHtml(__('Date Used')) ?></strong></span>
         <select id="date_used" class="select-box">
-            <option value="created_at"><?= __('Created At') ?></option>
-            <option value="updated_at"><?= __('Updated At') ?></option>
+            <option value="created_at"><?= $block->escapeHtml(__('Created At')) ?></option>
+            <option value="updated_at"><?= $block->escapeHtml(__('Updated At')) ?></option>
         </select>
     </div>
 </div>

@@ -58,7 +58,7 @@ abstract class AbstractClass extends Template
     /**
      * @var Currency|null
      */
-    protected $_currentCurrencyCode = null;
+    protected $_currentCurrencyCode;
 
     /**
      * @var
@@ -126,12 +126,15 @@ abstract class AbstractClass extends Template
      *
      * @param $price
      *
+     * @param array $options
+     * @param bool $includeContainer
+     * @param bool $addBrackets
      * @return string
      * @throws LocalizedException
      */
-    public function format($price)
+    public function format($price, $options = [], $includeContainer = true, $addBrackets = false)
     {
-        return $this->getCurrency()->format($price);
+        return $this->getCurrency()->format($price, $options, $includeContainer, $addBrackets);
     }
 
     /**
@@ -234,6 +237,7 @@ abstract class AbstractClass extends Template
      * @param $endDate
      *
      * @return array
+     * @throws Exception
      */
     protected function getDataByDateRange($startDate, $endDate)
     {
@@ -254,16 +258,11 @@ abstract class AbstractClass extends Template
      *
      * @return int
      * @SuppressWarnings(Unused)
+     * @throws Exception
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        if ($this->_helperData->versionCompare("2.3.3")) {
-            $random = $this->_helperData->createObject('Magento\Framework\Math\Random');
-            return $random->getRandomNumber(1, 10);
-        }
-
         return random_int(1, 10);
-
     }
 
     /**

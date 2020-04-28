@@ -41,14 +41,16 @@ class LifetimeSales extends AbstractClass
     }
 
     /**
+     * @param bool $includeContainer
+     *
      * @return string
      * @throws LocalizedException
      */
-    public function getTotal()
+    public function getTotal($includeContainer = true)
     {
         $total = $this->_helperData->getLifetimeSales();
         if (isset($total['lifetime'])) {
-            return $this->format($total['lifetime']);
+            return $this->format($total['lifetime'], [], $includeContainer);
         }
 
         return '';

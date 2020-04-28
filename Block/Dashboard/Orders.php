@@ -47,7 +47,7 @@ class Orders extends AbstractClass
     protected $_orderFactory;
 
     /**
-     * Orders constructor.
+     * Transactions constructor.
      *
      * @param Template\Context $context
      * @param OrderFactory $orderFactory

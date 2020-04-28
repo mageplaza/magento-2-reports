@@ -21,7 +21,7 @@
 ?>
 
 <button id="mp-reports-builder" type="button" class="primary">
-    <?= $block->getAccessKey() ? __('Change Key') : __('Generate Url') ?>
+    <?= $block->escapeHtml($block->getAccessKey() ? __('Change Key') : __('Generate Url')) ?>
 </button>
 <div class="mp-reports-link-builder">
     <input type="text" id="mp-reports-link-builder-input" value="" readonly="readonly"/>
@@ -38,7 +38,7 @@
         var urlInput = $('#mp-reports-link-builder-input'),
             buttonCopy = $('#mp-reports-link-builder-copy'),
             accessKeyEl = $('#mageplaza_reports_mobile_access_key'),
-            urlOrg = '<?= $block->getBuilderUrl() ?>';
+            urlOrg = '<?= /** @noEscape */ $block->getBuilderUrl() ?>';
 
         changeUrl(accessKeyEl.val().trim());
         urlInput.on('click', function () {
@@ -51,7 +51,7 @@
             window.getSelection().removeAllRanges();
 
             e.currentTarget.setAttribute('class', 'mp-tooltipped');
-            e.currentTarget.setAttribute('aria-label', '<?= __('Copied!') ?>');
+            e.currentTarget.setAttribute('aria-label', '<?= $block->escapeHtml(__('Copied!')) ?>');
         });
         buttonCopy.on('mouseleave', function (e) {
             e.currentTarget.removeAttribute('class');

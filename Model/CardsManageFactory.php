@@ -119,7 +119,7 @@ class CardsManageFactory
 
         foreach ($map as $alias => $blockInstanceName) {
             $block = $this->objectManager->create($blockInstanceName);
-            $block->setId($alias);
+            $block->setCardId($alias);
             if (isset($config[$alias])) {
                 $block->addData([
                     'x'       => $config[$alias]['x'],

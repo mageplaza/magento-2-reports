@@ -19,12 +19,12 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\Reports\Controller\Adminhtml\Cards;
+namespace Mageplaza\Reports\Controller\Cards;
 
 use Exception;
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\Auth\Session;
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Mageplaza\Reports\Block\Dashboard\Card;
@@ -33,7 +33,7 @@ use Mageplaza\Reports\Model\CardsManageFactory;
 
 /**
  * Class SavePosition
- * @package Mageplaza\Reports\Controller\Adminhtml\Cards
+ * @package Mageplaza\Reports\Controller\Cards
  */
 class LoadCard extends Action
 {

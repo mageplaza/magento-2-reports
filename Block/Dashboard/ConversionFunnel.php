@@ -27,8 +27,10 @@ use Magento\Framework\Phrase;
 use Magento\Quote\Model\ResourceModel\Quote\Item\Collection;
 use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory as ItemCollectionFactory;
 use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
+use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OrderItemCollection;
 use Mageplaza\Reports\Helper\Data;
 use Mageplaza\Reports\Model\ResourceModel\Viewed\CollectionFactory as ViewedCollectionFactory;
+use Mageplaza\Reports\Model\ResourceModel\Viewed\Collection as ViewedCollection;
 
 /**
  * Class ConversionFunnel
@@ -130,7 +132,7 @@ class ConversionFunnel extends AbstractClass
     }
 
     /**
-     * @param \Magento\Sales\Model\ResourceModel\Order\Item\Collection|\Mageplaza\Reports\Model\ResourceModel\Viewed\Collection|Collection| $collection
+     * @param OrderItemCollection|ViewedCollection|Collection| $collection
      *
      * @return mixed
      * @throws Exception
