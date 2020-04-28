@@ -63,7 +63,7 @@ class Index extends Action
         Data $jsonHelper
     ) {
         $this->resultPageFactory = $resultPageFactory;
-        $this->_jsonHelper = $jsonHelper;
+        $this->_jsonHelper       = $jsonHelper;
 
         parent::__construct($context);
     }
@@ -80,7 +80,7 @@ class Index extends Action
         $resultPage->getConfig()->getTitle()->prepend(__('Dashboard'));
         if ($this->getRequest()->isAjax()) {
             $dashBoard = $resultPage->getLayout()->getBlock('ar_dashboard');
-            $result = ['dashboard' => $dashBoard->toHtml()];
+            $result    = ['dashboard' => $dashBoard->toHtml()];
 
             return $this->getResponse()->representJson($this->_jsonHelper->jsonEncode($result));
         }

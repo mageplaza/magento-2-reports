@@ -41,14 +41,16 @@ class AverageOrder extends AbstractClass
     }
 
     /**
+     * @param bool $includeContainer
+     *
      * @return string
      * @throws LocalizedException
      */
-    public function getTotal()
+    public function getTotal($includeContainer = true)
     {
         $total = $this->_helperData->getLifetimeSales();
         if (isset($total['average'])) {
-            return $this->format($total['average']);
+            return $this->format($total['average'], [], $includeContainer);
         }
 
         return '';

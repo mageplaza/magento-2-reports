@@ -79,10 +79,10 @@ class Menu extends Template
         array $data = []
     ) {
         $this->customerGroup = $customerGroup;
-        $this->orderStatus = $orderStatus;
-        $this->helperData = $helperData;
-        $this->girdName = $girdName;
-        $this->menuUrls = $menuUrls;
+        $this->orderStatus   = $orderStatus;
+        $this->helperData    = $helperData;
+        $this->girdName      = $girdName;
+        $this->menuUrls      = $menuUrls;
 
         parent::__construct($context, $data);
     }

@@ -26,8 +26,8 @@ use Magento\Backend\Block\Template;
 use Magento\Directory\Model\CountryFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
-use Magento\Sales\Model\OrderFactory;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Mageplaza\Reports\Helper\Data;
 
 /**
@@ -36,7 +36,7 @@ use Mageplaza\Reports\Helper\Data;
  */
 class SalesByLocation extends AbstractClass
 {
-    const NAME = 'saleByLocation';
+    const NAME = 'salesByLocation';
 
     /**
      * @var string
@@ -44,9 +44,9 @@ class SalesByLocation extends AbstractClass
     protected $_template = 'dashboard/sales_by_location.phtml';
 
     /**
-     * @var OrderFactory
+     * @var CollectionFactory
      */
-    protected $_orderFactory;
+    protected $_orderCollectionFactory;
 
     /**
      * @var CountryFactory
@@ -57,20 +57,20 @@ class SalesByLocation extends AbstractClass
      * SalesByLocation constructor.
      *
      * @param Template\Context $context
-     * @param OrderFactory $orderFactory
+     * @param CollectionFactory $orderCollectionFactory
      * @param CountryFactory $countryFactory
      * @param Data $helperData
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
-        OrderFactory $orderFactory,
+        CollectionFactory $orderCollectionFactory,
         CountryFactory $countryFactory,
         Data $helperData,
         array $data = []
     ) {
-        $this->_countryFactory = $countryFactory;
-        $this->_orderFactory = $orderFactory;
+        $this->_countryFactory         = $countryFactory;
+        $this->_orderCollectionFactory = $orderCollectionFactory;
 
         parent::__construct($context, $helperData, $data);
     }
@@ -88,7 +88,7 @@ class SalesByLocation extends AbstractClass
     {
         $data = [];
         /** @var Collection $collection */
-        $collection = $this->_orderFactory->create()->getCollection();
+        $collection = $this->_orderCollectionFactory->create();
         $collection = $this->_helperData->addStoreFilter($collection);
         $collection = $this->_helperData->addStatusFilter($collection);
         $collection = $this->_helperData->addTimeFilter($collection, $startDate, $endDate);
@@ -96,8 +96,7 @@ class SalesByLocation extends AbstractClass
             ['soa' => $collection->getTable('sales_order_address')],
             "main_table.entity_id=soa.parent_id AND soa.address_type='billing'",
             ['country_count' => 'COUNT(country_id)', 'country_id']
-        )
-            ->group('country_id')->order('country_count DESC');
+        )->group('country_id')->order('country_count DESC');
         if ($size) {
             $collection->setPageSize($size);
         }
@@ -116,9 +115,9 @@ class SalesByLocation extends AbstractClass
      */
     public function getCollection()
     {
-        $collection = [];
-        $date = $this->_helperData->getDateRange();
-        $data = $this->getDataByDateRange($date[0], $date[1], 5);
+        $collection  = [];
+        $date        = $this->_helperData->getDateRange();
+        $data        = $this->getDataByDateRange($date[0], $date[1], 5);
         $compareData = $this->getDataByDateRange($date[2], $date[3]);
         foreach ($data as $key => $item) {
             if (isset($compareData[$key]) && $compareData[$key] > 0) {

@@ -23,14 +23,14 @@
 ?>
 <div class="funnel-container funnel">
     <img alt="image"
-         src="<?= $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/funnel-container.png') ?>">
+         src="<?= /** @noEscape */ $block->getViewFileUrl('Mageplaza_Reports::css/images/conversion_funnel/funnel-container.png') ?>">
     <div class="viewed">
-        <?= __('Product Viewed: %1', $block->getProductViews()) ?>
+        <?= /** @noEscape */ __('Product Viewed: %1', $block->getProductViews()) ?>
     </div>
     <div class="cart">
-        <?= __('Add To Cart: %1', $block->getAllCartItems()) ?>
+        <?= /** @noEscape */ __('Add To Cart: %1', $block->getAllCartItems()) ?>
     </div>
     <div class="ordered">
-        <?= __('Ordered: %1', $block->getAllOrderItem()) ?>
+        <?= /** @noEscape */ __('Ordered: %1', $block->getAllOrderItem()) ?>
     </div>
 </div>

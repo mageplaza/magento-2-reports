@@ -85,14 +85,15 @@ class Data extends AbstractData
         TimezoneInterface $timezone
     ) {
         $this->_orderCollectionFactory = $orderCollectionFactory;
-        $this->_dateTime = $dateTime;
-        $this->_timezone = $timezone;
+        $this->_dateTime               = $dateTime;
+        $this->_timezone               = $timezone;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
 
     /**
      * @param null $storeId
+     *
      * @return mixed
      */
     public function isCompare($storeId = null)
@@ -104,6 +105,7 @@ class Data extends AbstractData
 
     /**
      * @param null $storeId
+     *
      * @return mixed
      */
     public function isEnabledChart($storeId = null)
@@ -141,31 +143,36 @@ class Data extends AbstractData
      * @param null $format
      *
      * @return array
-     * @throws Exception
      */
     public function getDateRange($format = null)
     {
-        if ($dateRange = $this->_request->getParam('dateRange')) {
-            if ($this->isCompare()) {
-                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
-                $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
-                $compareEndDate = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
+        try {
+            if ($dateRange = $this->_request->getParam('dateRange')) {
+                if ($this->isCompare()) {
+                    $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                    $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                    $compareStartDate = $format ? $this->formatDate($format, $dateRange[2]) : $dateRange[2];
+                    $compareEndDate   = $format ? $this->formatDate($format, $dateRange[3]) : $dateRange[3];
+                } else {
+                    $startDate        = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
+                    $endDate          = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
+                    $compareStartDate = null;
+                    $compareEndDate   = null;
+                }
             } else {
-                $startDate = $format ? $this->formatDate($format, $dateRange[0]) : $dateRange[0];
-                $endDate = $format ? $this->formatDate($format, $dateRange[1]) : $dateRange[1];
-                $compareStartDate = null;
-                $compareEndDate = null;
+                [$startDate, $endDate] = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
+                $days = date('z', strtotime($endDate) - strtotime($startDate));
+                [$compareStartDate, $compareEndDate] = $this->getDateTimeRangeFormat(
+                    '-1 month -' . ($days + 1) . ' day',
+                    '-1 month -1 day',
+                    null,
+                    $format
+                );
             }
-        } else {
-            list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
-            $days = date('z', strtotime($endDate) - strtotime($startDate));
-            list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat(
-                '-1 month -' . ($days + 1) . ' day',
-                '-1 month -1 day',
-                null,
-                $format
-            );
+        } catch (Exception $e) {
+            $this->_logger->critical($e);
+
+            return [null, null, null, null];
         }
 
         return [$startDate, $endDate, $compareStartDate, $compareEndDate];
@@ -195,7 +202,11 @@ class Data extends AbstractData
      */
     public function getDateTimeRangeFormat($startDate, $endDate = null, $isConvertToLocalTime = null, $format = null)
     {
-        $endDate = (new \DateTime($endDate ?: $startDate, new DateTimeZone($this->getTimezone())))->setTime(23, 59, 59);
+        $endDate   = (new \DateTime($endDate ?: $startDate, new DateTimeZone($this->getTimezone())))->setTime(
+            23,
+            59,
+            59
+        );
         $startDate = (new \DateTime($startDate, new DateTimeZone($this->getTimezone())))->setTime(00, 00, 00);
 
         if ($isConvertToLocalTime) {
@@ -226,7 +237,7 @@ class Data extends AbstractData
             return 0;
         }
 
-        return (int)((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
+        return (int) ((strtotime($endDate) - strtotime($startDate)) / (60 * 60 * 24));
     }
 
     /**
@@ -239,7 +250,7 @@ class Data extends AbstractData
      */
     public function addTimeFilter($collection, $startDate, $endDate = null)
     {
-        list($startDate, $endDate) = $this->getDateTimeRangeFormat($startDate, $endDate, 1);
+        [$startDate, $endDate] = $this->getDateTimeRangeFormat($startDate, $endDate, 1);
 
         return $collection
             ->addFieldToFilter('created_at', ['gteq' => $startDate])
@@ -268,14 +279,14 @@ class Data extends AbstractData
 
         $startDate = new \DateTime($startDate);
 
-        $interval = new DateInterval('P1D');
+        $interval  = new DateInterval('P1D');
         $daterange = new DatePeriod($startDate, $interval, $endDate);
         /** @var \DateTime $date */
         foreach ($daterange as $date) {
-            if (!$isObject) {
-                $data[] = $date->format('Y-m-d');
-            } else {
+            if ($isObject) {
                 $data[$date->format('Y-m-d')] = new DataObject();
+            } else {
+                $data[] = $date->format('Y-m-d');
             }
         }
 
@@ -324,7 +335,7 @@ class Data extends AbstractData
     {
         if (!count($this->lifetimeSales)) {
             try {
-                $isFilter = $this->_request->getParam('store')
+                $isFilter   = $this->_request->getParam('store')
                     || $this->_request->getParam('website')
                     || $this->_request->getParam('group');
                 $collection = $this->_orderCollectionFactory->create()->calculateSales($isFilter);

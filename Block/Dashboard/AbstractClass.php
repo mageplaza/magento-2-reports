@@ -37,7 +37,7 @@ use Mageplaza\Reports\Helper\Data;
  */
 abstract class AbstractClass extends Template
 {
-    const NAME = '';
+    const NAME              = '';
     const MAGE_REPORT_CLASS = '';
 
     /**
@@ -58,7 +58,7 @@ abstract class AbstractClass extends Template
     /**
      * @var Currency|null
      */
-    protected $_currentCurrencyCode = null;
+    protected $_currentCurrencyCode;
 
     /**
      * @var
@@ -126,12 +126,16 @@ abstract class AbstractClass extends Template
      *
      * @param $price
      *
+     * @param array $options
+     * @param bool $includeContainer
+     * @param bool $addBrackets
+     *
      * @return string
      * @throws LocalizedException
      */
-    public function format($price)
+    public function format($price, $options = [], $includeContainer = true, $addBrackets = false)
     {
-        return $this->getCurrency()->format($price);
+        return $this->getCurrency()->format($price, $options, $includeContainer, $addBrackets);
     }
 
     /**
@@ -234,15 +238,16 @@ abstract class AbstractClass extends Template
      * @param $endDate
      *
      * @return array
+     * @throws Exception
      */
     protected function getDataByDateRange($startDate, $endDate)
     {
         $data = [];
         while (strtotime($endDate) >= strtotime($startDate)) {
             $data['labels'][] = date('Y-m-d', strtotime($startDate));
-            $data['data'][] = $this->getDataByDate($startDate);
-            $startDate = strtotime('+1 day', strtotime($startDate));
-            $startDate = date('Y-m-d H:i:s', $startDate);
+            $data['data'][]   = $this->getDataByDate($startDate);
+            $startDate        = strtotime('+1 day', strtotime($startDate));
+            $startDate        = date('Y-m-d H:i:s', $startDate);
         }
 
         return $data;
@@ -254,16 +259,11 @@ abstract class AbstractClass extends Template
      *
      * @return int
      * @SuppressWarnings(Unused)
+     * @throws Exception
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        if ($this->_helperData->versionCompare("2.3.3")) {
-            $random = $this->_helperData->createObject('Magento\Framework\Math\Random');
-            return $random->getRandomNumber(1, 10);
-        }
-
         return random_int(1, 10);
-
     }
 
     /**
@@ -323,8 +323,10 @@ abstract class AbstractClass extends Template
     {
         $date = $this->_helperData->getDateRange();
 
-        return [date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
-            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))];
+        return [
+            date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
+            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))
+        ];
     }
 
     /**

@@ -48,11 +48,12 @@ class Config
     /**
      * @param BackendConfig $subject
      * @param $result
+     *
      * @return mixed
      */
     public function afterGetRouteByFrontName(BackendConfig $subject, $result)
     {
-        if (!$result && $this->helper->versionCompare('2.2.8', '>=')) {
+        if (!$result && $this->helper->versionCompare('2.2.8', '=')) {
             return 'adminhtml';
         }
 

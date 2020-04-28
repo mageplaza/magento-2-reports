@@ -14,30 +14,26 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_Reports
+ * @package     Mageplaza_Repoprts
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\Reports\Block\Dashboard;
+namespace Mageplaza\Reports\Api;
 
-use Magento\Backend\Block\Dashboard\Tab\Products\Viewed;
-use Magento\Framework\Phrase;
+use Mageplaza\Reports\Api\Data\CardInterface;
 
 /**
- * Class MostViewedProducts
- * @package Mageplaza\Reports\Block\Dashboard
+ * Interface CardManagementInterface
+ * @package Mageplaza\Reports\Api
  */
-class MostViewedProducts extends AbstractClass
+interface CardManagementInterface
 {
-    const NAME              = 'mostViewedProducts';
-    const MAGE_REPORT_CLASS = Viewed::class;
-
     /**
-     * @return Phrase|string
+     * @param string $cardName The card name.
+     *
+     * @return CardInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException The specified cart does not exist.
      */
-    public function getTitle()
-    {
-        return __('Most Viewed Products');
-    }
+    public function get($cardName);
 }

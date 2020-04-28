@@ -50,6 +50,7 @@ class LinkBuilder extends Field
 
     /**
      * LinkBuilder constructor.
+     *
      * @param Template\Context $context
      * @param Data $helper
      * @param Url $url
@@ -62,7 +63,7 @@ class LinkBuilder extends Field
         array $data = []
     ) {
         $this->helper = $helper;
-        $this->url = $url;
+        $this->url    = $url;
 
         parent::__construct($context, $data);
     }

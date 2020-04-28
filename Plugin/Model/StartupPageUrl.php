@@ -52,7 +52,7 @@ class StartupPageUrl
         Data $helperData
     ) {
         $this->resultRedirectFactory = $resultRedirectFactory;
-        $this->_helperData = $helperData;
+        $this->_helperData           = $helperData;
     }
 
     /**

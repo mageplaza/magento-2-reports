@@ -30,7 +30,7 @@ use Magento\Search\Block\Adminhtml\Dashboard\Top;
  */
 class TopSearches extends AbstractClass
 {
-    const NAME = 'topSearches';
+    const NAME              = 'topSearches';
     const MAGE_REPORT_CLASS = Top::class;
 
     /**

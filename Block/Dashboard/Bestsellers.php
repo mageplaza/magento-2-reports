@@ -30,7 +30,7 @@ use Magento\Framework\Phrase;
  */
 class Bestsellers extends AbstractClass
 {
-    const NAME = 'bestsellers';
+    const NAME              = 'bestsellers';
     const MAGE_REPORT_CLASS = Ordered::class;
 
     /**

@@ -44,4 +44,12 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Mageplaza\Reports\Api\CardManagementInterface" type="Mageplaza\Reports\Model\Api\CardManagement"/>
+    <preference for="Mageplaza\Reports\Api\Data\CardInterface" type="Mageplaza\Reports\Model\Api\Data\Card"/>
+    <type name="Magento\Framework\Reflection\DataObjectProcessor">
+        <plugin name="mageplaza_reports_api_data" type="Mageplaza\Reports\Plugin\Framework\Reflection\DataObjectProcessor"/>
+    </type>
+    <type name="Magento\Framework\Reflection\DataObjectProcessorPermissionChecked">
+        <plugin name="mageplaza_reports_api_data" type="Mageplaza\Reports\Plugin\Framework\Reflection\DataObjectProcessor"/>
+    </type>
 </config>

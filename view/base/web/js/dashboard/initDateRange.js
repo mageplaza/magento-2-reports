@@ -45,8 +45,8 @@ define([
         },
 
         initDateRange: function (el, start, end, data) {
-            function cb(start, end) {
-                el.find('span').html(start.format('MMM DD, YYYY') + ' - ' + end.format('MMM DD, YYYY'));
+            function cb(cbStart, cbEnd) {
+                el.find('span').html(cbStart.format('MMM DD, YYYY') + ' - ' + cbEnd.format('MMM DD, YYYY'));
             }
 
             el.daterangepicker(data, cb);
@@ -65,11 +65,15 @@ define([
                         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                         'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                        'Last Month': [
+                            moment().subtract(1, 'month').startOf('month'),
+                            moment().subtract(1, 'month').endOf('month')
+                        ],
                         'YTD': [moment().subtract(1, 'year'), moment()],
                         '2YTD': [moment().subtract(2, 'year'), moment()]
                     }
                 };
+
             this.initDateRange(dateRangeEl, start, end, dateRangeData);
         },
 
@@ -85,9 +89,13 @@ define([
                     endDate: compareEndDate,
                     ranges: {
                         'Previous period': [compareStartDate, compareEndDate],
-                        'Previous year': [moment(startDate.format('Y-MM-DD')).subtract(1, 'year'), moment(endDate.format('Y-MM-DD')).subtract(1, 'year')]
+                        'Previous year': [
+                            moment(startDate.format('Y-MM-DD')).subtract(1, 'year'),
+                            moment(endDate.format('Y-MM-DD')).subtract(1, 'year')
+                        ]
                     }
                 };
+
             this.initDateRange(compareDateRangeEl, compareStartDate, compareEndDate, compareDateRangeData);
 
             compareDateRangeEl.on('apply.daterangepicker', function (ev, picker) {
@@ -99,6 +107,7 @@ define([
                         3: picker.endDate.format('Y-MM-DD H:m:s')
                     }
                 };
+
                 self.ajaxSubmit(data);
             });
         },
@@ -111,19 +120,22 @@ define([
                 showLoader: true,
                 success: function (res) {
                     var dashboard = $('<div>' + res.dashboard + '</div>').find('.dashboard-container');
+
                     dashboardContainer.html(dashboard.html());
                     dashboardContainer.trigger('contentUpdated');
                 },
-            })
+            });
         },
 
         initNowDateRangeObserver: function () {
             var self = this;
 
-            dateRangeEl.on('apply.daterangepicker', function (ev, picker, moment) {
+            dateRangeEl.on('apply.daterangepicker', function (ev, picker) {
+                var data;
+
                 dateRangeEl.data().startDate = picker.startDate;
                 dateRangeEl.data().endDate = picker.endDate;
-                var data = {
+                data = {
                     dateRange: {
                         0: picker.startDate.format('Y-MM-DD H:m:s'),
                         1: picker.endDate.format('Y-MM-DD H:m:s'),
@@ -131,12 +143,14 @@ define([
                         3: self.options.isCompare ? compareDateRangeEl.data().endDate.format('Y-MM-DD H:m:s') : null
                     }
                 };
+
                 self.ajaxSubmit(data);
             });
         },
 
         initNowDateRangeHideObserver: function () {
             var self = this;
+
             dateRangeEl.on('hide.daterangepicker', function (ev, picker) {
                 self.initCompareDateRange(picker.startDate, picker.endDate);
             });

@@ -44,7 +44,7 @@
         $('.mp-remove-dashboard-advanced-reports').on('click', function () {
             $('.mp-dashboard-advanced-reports').remove();
             $.ajax({
-                url: '<?= $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
+                url: '<?= /** @noEscape */ $block->getUrl('mpreports/dashboard/switchtonew', ['form_key' => $block->getFormKey()]) ?>',
             })
         });
     })

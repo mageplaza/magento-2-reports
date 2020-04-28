@@ -93,13 +93,13 @@ class CardsManageFactory
         array $map = [],
         array $charts = []
     ) {
-        $this->_authSession = $authSession;
+        $this->_authSession  = $authSession;
         $this->objectManager = $objectManager;
-        $this->eventManager = $eventManager;
-        $this->_bookmark = $bookmark;
-        $this->_helperData = $helperData;
-        $this->_map = $map;
-        $this->_charts = $charts;
+        $this->eventManager  = $eventManager;
+        $this->_bookmark     = $bookmark;
+        $this->_helperData   = $helperData;
+        $this->_map          = $map;
+        $this->_charts       = $charts;
     }
 
     /** create Cards Collection
@@ -119,7 +119,7 @@ class CardsManageFactory
 
         foreach ($map as $alias => $blockInstanceName) {
             $block = $this->objectManager->create($blockInstanceName);
-            $block->setId($alias);
+            $block->setCardId($alias);
             if (isset($config[$alias])) {
                 $block->addData([
                     'x'       => $config[$alias]['x'],
@@ -143,13 +143,13 @@ class CardsManageFactory
     public function getCurrentConfig()
     {
         if ($this->_authSession->getUser()) {
-            $userId = $this->_authSession->getUser()->getId();
+            $userId  = $this->_authSession->getUser()->getId();
             $current = $this->_bookmark->create()->getCollection()
                 ->addFieldToFilter('namespace', 'mageplaza_reports_cards')
                 ->addFieldToFilter('user_id', $userId)
                 ->addFieldToFilter('identifier', 'current')->getFirstItem();
         } else {
-            $userId = '1';
+            $userId  = '1';
             $current = $this->_bookmark->create()->getCollection()
                 ->addFieldToFilter('namespace', 'mageplaza_reports_cards_mobile')
                 ->addFieldToFilter('user_id', $userId)
@@ -167,7 +167,7 @@ class CardsManageFactory
     {
         /** @var Bookmark $default */
         if ($this->_authSession->getUser()) {
-            $userId = $this->_authSession->getUser()->getId();
+            $userId  = $this->_authSession->getUser()->getId();
             $default = $this->_bookmark->create()->getCollection()
                 ->addFieldToFilter('namespace', 'mageplaza_reports_cards')
                 ->addFieldToFilter('user_id', $userId)

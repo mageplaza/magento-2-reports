@@ -25,9 +25,9 @@
 $card = $block->getCard();
 
 ?>
-<div id="<?= /** @noEscape */ $card->getId() ?>"
+<div id="<?= /** @noEscape */ $card->getCardId() ?>"
      class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
-     data-gs-id="<?= /** @noEscape */ $card->getId() ?>"
+     data-gs-id="<?= /** @noEscape */ $card->getCardId() ?>"
      data-gs-x="<?= $card->getX() !== null ? /** @noEscape */ $card->getX() : '0' ?>"
      data-gs-y="<?= $card->getY() !== null ? /** @noEscape */ $card->getY() : '100' ?>"
      data-gs-width="<?= $card->getWidth() !== null ? /** @noEscape */ $card->getWidth() : '3' ?>"
@@ -47,22 +47,79 @@ $card = $block->getCard();
                     </div>
                 <?php endif; ?>
                 <div style="clear: both"></div>
-                <?php
-                $totalLabel = $card->getTotal();
-                if ($totalLabel !== '') : ?>
-                    <div class="dashboard-sales-value">
-                        <?= $totalLabel ?>
-                        <?php
-                        $rate = $card->getRate();
-                        if (($rate !== '') && $block->isCompare()) : ?>
-                            <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                <?= abs($rate) . '%' ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
+                    <?php
+                    $totalLabel = $card->getTotal();
+                    if ($totalLabel !== '') : ?>
+                        <div class="dashboard-sales-value">
+                            <?= /** @noEscape */ $totalLabel ?>
+                            <?php
+                            $rate = $card->getRate();
+                            if (($rate !== '') && $block->isCompare()) : ?>
+                                <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
+                                    <?= /** @noEscape */ abs($rate) . '%' ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <?= $card->getContentHtml() ?>
+            <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
+                <?= $card->getContentHtml() ?>
+            <?php else : ?>
+            <div class="mp-card loading-mask">
+                <img src="<?= /** @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>" alt="Loading..."/>
+            </div>
+            <?php endif; ?>
+            <?php if ($block->getRequest()->getFullActionName() !== 'mpreports_cards_loadcard') : ?>
+                <script>
+                    require([
+                        'jquery'
+                    ],function ($) {
+                        var cardEl = $('#<?= /** @noEscape */ $card->getCardId() ?>');
+                        var boardEl = $('.grid-stack');
+                        boardEl.on('mpCardLoaded', function () {
+                            if(boardEl.data('isLoading') === true || cardEl.data('isLoaded')) {
+                                return;
+                            }
+
+                            var dateRangeEl = $('#daterange'),
+                                compareDateRangeEl = $('#compare-daterange'),
+                                isCompare = <?= /** @noEscape */ $block->isCompare() ?>;
+
+                            var data = <?= \Mageplaza\Reports\Helper\Data::jsonEncode($card->getData()) ?>;
+
+                            data = dateRangeEl.data().startDate ? $.extend(data, {
+                                dateRange: {
+                                    0: dateRangeEl.data().startDate.format('Y-MM-DD H:m:s'),
+                                    1: dateRangeEl.data().endDate.format('Y-MM-DD H:m:s'),
+                                    2: isCompare ? compareDateRangeEl.data().startDate.format('Y-MM-DD H:m:s') : null,
+                                    3: isCompare ? compareDateRangeEl.data().endDate.format('Y-MM-DD H:m:s') : null
+                                }
+                            }) : data;
+
+                            boardEl.data('isLoading', true);
+                            $.ajax({
+                                url: '<?= /** @noEscape */ $block->getUrl('mpreports/cards/loadcard', ['_current' => true]) ?>',
+                                data: data,
+                                success: function (res) {
+                                    cardEl.find('.dashboard-item-container').html($(res.html).find('.dashboard-item-container').html());
+                                    cardEl.data('isLoaded', true);
+                                    cardEl.trigger('contentUpdated');
+                                    boardEl.data('isLoading', false);
+                                    boardEl.trigger('mpCardLoaded');
+                                },
+                                error: function () {
+                                    cardEl.data('isLoaded', true);
+                                    boardEl.data('isLoading', false);
+                                    boardEl.trigger('mpCardLoaded');
+                                    cardEl.find('.dashboard-item-container').html('<?php __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+                                }
+                            })
+                        });
+                    })
+                </script>
+            <?php endif; ?>
         </div>
     </div>
 </div>

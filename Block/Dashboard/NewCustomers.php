@@ -30,7 +30,7 @@ use Magento\Framework\Phrase;
  */
 class NewCustomers extends AbstractClass
 {
-    const NAME = 'newCustomers';
+    const NAME              = 'newCustomers';
     const MAGE_REPORT_CLASS = Newest::class;
 
     /**

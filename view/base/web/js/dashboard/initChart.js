@@ -38,7 +38,7 @@ define([
                 options: this.getOptions()
             };
 
-            new Chart(ctx, data);
+            new window.Chart(ctx, data);
         },
         getOptions: function () {
             var self = this;
@@ -89,7 +89,7 @@ define([
                             }
                         },
                         ticks: {
-                            callback: function (label, index, labels) {
+                            callback: function (label) {
                                 return label;
                             }
                         }
@@ -105,7 +105,7 @@ define([
                         ticks: {
                             min: 0,
                             // Include a currency sign in the ticks
-                            callback: function (value, index, values) {
+                            callback: function (value) {
                                 if (Math.floor(value) === value) {
                                     return self.options.chartData.yUnit
                                         ? priceUtils.formatPrice(value, self.options.chartData.yUnit)
