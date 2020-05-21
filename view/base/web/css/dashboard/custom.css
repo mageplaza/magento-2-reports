@@ -371,4 +371,5 @@
 
 .mp-card.loading-mask {
     position: absolute;
+    z-index: 500;
 }
