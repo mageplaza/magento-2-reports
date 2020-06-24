@@ -99,6 +99,8 @@ define([
             this.initDateRange(compareDateRangeEl, compareStartDate, compareEndDate, compareDateRangeData);
 
             compareDateRangeEl.on('apply.daterangepicker', function (ev, picker) {
+                compareDateRangeEl.data().startDate = picker.startDate;
+                compareDateRangeEl.data().endDate = picker.endDate;
                 var data = {
                     dateRange: {
                         0: dateRangeEl.data().startDate.format('Y-MM-DD H:m:s'),
