@@ -21,6 +21,7 @@
 
 namespace Mageplaza\Reports\Api;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Mageplaza\Reports\Api\Data\CardInterface;
 
 /**
@@ -33,7 +34,7 @@ interface CardManagementInterface
      * @param string $cardName The card name.
      *
      * @return CardInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException The specified cart does not exist.
+     * @throws NoSuchEntityException The specified cart does not exist.
      */
     public function get($cardName);
 }
