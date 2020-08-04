@@ -8,7 +8,7 @@ To facilitate the management of statistics, we proudly introduce **Magento 2 Adv
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-reports/v/stable)](https://packagist.org/packages/mageplaza/module-reports)
 [![Total Downloads](https://poser.pugx.org/mageplaza/module-reports/downloads)](https://packagist.org/packages/mageplaza/module-reports)
 
-
+**IMPORTANT NOTE:** This version of Mageplaza Reports extension on Github is free as a contribution to the Magento community from Mageplaza. This package does not include the technical support. Should you need technical support for this extension, you will have to buy a license from Mageplaza. [Click here to buy](https://www.mageplaza.com/magento-2-reports-extension/).
 
 ## 1. Advanced Reports Documentation
 - [Mageplaza sale page](https://www.mageplaza.com/magento-2-reports-extension/)
