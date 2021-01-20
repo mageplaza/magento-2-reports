@@ -34,7 +34,7 @@ $cards = $block->getCards();
             <span></span>
             <i class="fa fa-caret-down"></i>
         </div>
-        <?php if ($block->isCompare()) : ?>
+        <?php if ($block->isCompare()): ?>
             <div class="compare"><?= $block->escapeHtml(__('compare with')) ?></div>
             <div id="compare-daterange">
                 <i class="fa fa-calendar"></i>
@@ -53,7 +53,7 @@ $cards = $block->getCards();
                 <div class="admin__action-dropdown-menu admin__data-grid-action-columns-menu _overflow">
                     <div class="admin__action-dropdown-menu-header"></div>
                     <div class="admin__action-dropdown-menu-content">
-                        <?php foreach ($cards as $card) : ?>
+                        <?php foreach ($cards as $card): ?>
                             <div class="admin__field-option" data-repeat-index="0">
                                 <input class="admin__control-checkbox"
                                        type="checkbox" <?= $card->getVisible() ? 'checked' : '' ?>
@@ -74,8 +74,8 @@ $cards = $block->getCards();
         <div style="clear: both; height: 20px"></div>
         <div class="grid-stack"
              data-mage-init='{"initGridStack":<?= \Mageplaza\Reports\Helper\Data::jsonEncode($block->getGridStackConfig()) ?>}'>
-            <?php foreach ($cards as $card) : ?>
-                <?php if ($card->getVisible()) : ?>
+            <?php foreach ($cards as $card): ?>
+                <?php if ($card->getVisible()): ?>
                     <?= $block->getChildBlock('mp_card')->setCard($card)->toHtml() ?>
                 <?php endif; ?>
             <?php endforeach; ?>

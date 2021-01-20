@@ -37,25 +37,25 @@ $card = $block->getCard();
     <div class="not-draggable">
         <div class="dashboard-item-container">
             <div class="dashboard-item-header">
-                <?php if ($title = $card->getTitle()) : ?>
+                <?php if ($title = $card->getTitle()): ?>
                     <div class="dashboard-item-title"><?= $block->escapeHtml($title) ?></div>
                 <?php endif; ?>
-                <?php if ($card->canShowDetail()) : ?>
+                <?php if ($card->canShowDetail()): ?>
                     <div class="view-detail">
                         <a href="<?= /** @noEscape */ $card->getDetailUrl() ?>"
                            target="_blank"><?= $block->escapeHtml(__('View Details')) ?></a>
                     </div>
                 <?php endif; ?>
                 <div style="clear: both"></div>
-                <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
+                <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard'): ?>
                     <?php
                     $totalLabel = $card->getTotal();
-                    if ($totalLabel !== '') : ?>
+                    if ($totalLabel !== ''): ?>
                         <div class="dashboard-sales-value">
                             <?= /** @noEscape */ $totalLabel ?>
                             <?php
                             $rate = $card->getRate();
-                            if (($rate !== '') && $block->isCompare()) : ?>
+                            if (($rate !== '') && $block->isCompare()): ?>
                                 <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
                                     <?= /** @noEscape */ abs($rate) . '%' ?>
                                 </div>
@@ -64,14 +64,14 @@ $card = $block->getCard();
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
+            <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard'): ?>
                 <?= $card->getContentHtml() ?>
-            <?php else : ?>
+            <?php else: ?>
             <div class="mp-card loading-mask">
                 <img src="<?= /** @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>" alt="Loading..."/>
             </div>
             <?php endif; ?>
-            <?php if ($block->getRequest()->getFullActionName() !== 'mpreports_cards_loadcard') : ?>
+            <?php if ($block->getRequest()->getFullActionName() !== 'mpreports_cards_loadcard'): ?>
                 <script>
                     require([
                         'jquery'
