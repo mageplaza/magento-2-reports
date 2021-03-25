@@ -182,6 +182,15 @@ In the Dashboard, you can:
 - [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
 - [Magento 2 security extension](https://github.com/mageplaza/magento-2-security)
 
+**Other extensions on Our store:**
+- [Magento 2 Google Tag Manager](https://www.mageplaza.com/magento-2-google-tag-manager/)
+- [Magneto 2 Store Locator](https://www.mageplaza.com/magento-2-store-locator-extension/)
+- [Magento 2 customer attributes](https://www.mageplaza.com/magento-2-customer-attributes/)
+- [Magento 2 Ajax Cart module](https://www.mageplaza.com/magento-2-quick-view/)
+- [Magento 2 Store Pickup Module](https://www.mageplaza.com/magento-2-store-pickup-extension/)
+- [Magento 2 Google Map](https://www.mageplaza.com/magento-2-google-maps/)
+- [Magento 2 Sorting extension](https://www.mageplaza.com/magento-2-better-sorting/)
+- [Magento 2 Google Analytics](https://www.mageplaza.com/magento-2-google-analytics-pro/)
 
 **The Most Popular Magento 2 Advanced Reports extension FREE**
 - [Advanced Reports Documentation](#1-advanced-reports-documentation)
