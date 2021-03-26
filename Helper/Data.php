@@ -36,6 +36,7 @@ use Magento\Reports\Model\ResourceModel\Order\Collection;
 use Magento\Reports\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Tax\Model\ResourceModel\Report\Collection as TaxCollection;
 use Mageplaza\Core\Helper\AbstractData;
 
 /**
@@ -252,6 +253,12 @@ class Data extends AbstractData
     {
         [$startDate, $endDate] = $this->getDateTimeRangeFormat($startDate, $endDate, 1);
 
+        if ($this->_request->getParam('card_id') === 'tax') {
+            return $collection
+                ->addFieldToFilter('period', ['gteq' => $startDate])
+                ->addFieldToFilter('period', ['lteq' => $endDate]);
+        }
+
         return $collection
             ->addFieldToFilter('created_at', ['gteq' => $startDate])
             ->addFieldToFilter('created_at', ['lteq' => $endDate]);
@@ -401,10 +408,16 @@ class Data extends AbstractData
             || $this->_request->getParam('website')
             || $this->_request->getParam('group');
 
-        /* @var $collection Collection */
-        $collection = $this->_orderCollectionFactory->create();
-        $collection = $this->addTimeFilter($collection, $startDate, $endDate);
-        $collection->checkIsLive('')->calculateTotals($isFilter);
+        if ($this->_request->getParam('card_id') === 'tax') {
+            /** @var TaxCollection $collection */
+            $collection = $this->createObject(TaxCollection::class);
+            $collection = $this->addTimeFilter($collection, $startDate, $endDate);
+        } else {
+            /* @var $collection Collection */
+            $collection = $this->_orderCollectionFactory->create();
+            $collection = $this->addTimeFilter($collection, $startDate, $endDate);
+            $collection->checkIsLive('')->calculateTotals($isFilter);
+        }
 
         if ($this->_request->getParam('store')) {
             $collection->addFieldToFilter('store_id', $this->_request->getParam('store'));
@@ -414,7 +427,7 @@ class Data extends AbstractData
         } elseif ($this->_request->getParam('group')) {
             $storeIds = $this->storeManager->getGroup($this->_request->getParam('group'))->getStoreIds();
             $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
-        } elseif (!$collection->isLive()) {
+        } elseif (method_exists($collection, 'isLive') && !$collection->isLive()) {
             $collection->addFieldToFilter(
                 'store_id',
                 ['eq' => $this->storeManager->getStore(Store::ADMIN_CODE)->getId()]
@@ -422,6 +435,10 @@ class Data extends AbstractData
         }
 
         $collection->load();
+
+        if ($this->_request->getParam('card_id') === 'tax') {
+            return $collection;
+        }
 
         return $collection->getFirstItem();
     }
