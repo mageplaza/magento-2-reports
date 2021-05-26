@@ -48,10 +48,15 @@ class Tax extends AbstractClass
      */
     public function getTotal($includeContainer = true)
     {
+        $total  = 0;
         $date   = $this->_helperData->getDateRange();
         $totals = $this->_helperData->getTotalsByDateRange($date[0], $date[1]);
 
-        return $this->getBaseCurrency()->format($totals->getTax() ?: 0, [], $includeContainer);
+        foreach ($totals->getItems() as $item) {
+            $total += $item->getTaxBaseAmountSum();
+        }
+
+        return $this->getBaseCurrency()->format($total, [], $includeContainer);
     }
 
     /**
@@ -62,19 +67,19 @@ class Tax extends AbstractClass
     public function getRate()
     {
         $dates         = $this->_helperData->getDateRange();
-        $totals        = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1]);
-        $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3]);
-        if ((int) $totals->getTax() === 0 && (int) $compareTotals->getTax() === 0) {
+        $totals        = $this->_helperData->getTotalsByDateRange($dates[0], $dates[1])->getFirstItem();
+        $compareTotals = $this->_helperData->getTotalsByDateRange($dates[2], $dates[3])->getFirstItem();
+        if ((int) $totals->getTaxBaseAmountSum() === 0 && (int) $compareTotals->getTaxBaseAmountSum() === 0) {
             return 0;
         }
-        if ((int) $compareTotals->getTax() === 0) {
+        if ((int) $compareTotals->getTaxBaseAmountSum() === 0) {
             return 100;
         }
-        if ((int) $totals->getTax() === 0) {
+        if ((int) $totals->getTaxBaseAmountSum() === 0) {
             return -100;
         }
 
-        return round((($totals->getTax() - $compareTotals->getTax()) / $compareTotals->getTax()) * 100, 2);
+        return round((($totals->getTaxBaseAmountSum() - $compareTotals->getTaxBaseAmountSum()) / $compareTotals->getTaxBaseAmountSum()) * 100, 2);
     }
 
     /**
@@ -86,9 +91,9 @@ class Tax extends AbstractClass
      */
     protected function getDataByDate($date, $endDate = null)
     {
-        $totals = $this->_helperData->getTotalsByDateRange($date, $endDate);
+        $totals = $this->_helperData->getTotalsByDateRange($date, $endDate)->getFirstItem();
 
-        return round($totals->getTax() ?: 0, 2);
+        return round($totals->getTaxBaseAmountSum() ?: 0, 2);
     }
 
     /**

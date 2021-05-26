@@ -37,6 +37,7 @@ define([
             this.initPeriodSelect();
             this.initOrderStatusSelect();
             this.initDateUsedSelect();
+            this.initColumnsSelect();
         },
         initDateRange: function (el, start, end, data) {
             function cb(cbStart, cbEnd) {
@@ -185,6 +186,24 @@ define([
             $('body').on('click',function (e) {
                 if (!$(e.target).parents().hasClass('mp-rp-order-status')) {
                     $('.mp-rp-order-status').removeClass('_active');
+                }
+            });
+        },
+        initColumnsSelect: function () {
+            $('body').on('click',function (e) {
+                var parent;
+
+                if ($(e.target).is('input')
+                    && $(e.target).hasClass('admin__control-checkbox')
+                    && $(e.target).parents().hasClass('admin__data-grid-action-columns-menu')
+                ) {
+                    $('#mp-grid-tfoot th').hide();
+                    parent = $(e.target).parent().parent();
+                    parent.find('input:checked').each(function () {
+                        var id = $(this).parent().attr('data-repeat-index');
+
+                        $('#mp-grid-tfoot th[id="' + id + '"]').show();
+                    });
                 }
             });
         }
