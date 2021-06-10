@@ -54,6 +54,6 @@ class Bestsellers extends AbstractClass
      */
     public function canShowDetail()
     {
-        return true;
+        return $this->_helperData->moduleIsEnable('Mageplaza_ReportsPro');
     }
 }
