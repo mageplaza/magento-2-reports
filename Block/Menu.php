@@ -92,13 +92,7 @@ class Menu extends Template
      */
     public function getCustomerGroup()
     {
-        $customerGroups = $this->customerGroup->toOptionArray();
-
-        if ($this->_request->getFullActionName() === 'mpreports_details_newandreturningcustomers') {
-            unset($customerGroups[1]);
-        }
-
-        return $customerGroups;
+        return $this->customerGroup->toOptionArray();
     }
 
     /**
