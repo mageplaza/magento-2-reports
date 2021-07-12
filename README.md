@@ -1,8 +1,8 @@
-# The Most Popular Magento 2 Advanced Reports extension FREE!
+# Magento 2 Advanced Reports extension FREE!
 
 **Mageplaza Magento 3 Advanced Reports** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
-To facilitate the management of statistics, we proudly introduce **Magento 2 Advanced Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
+To facilitate the management of statistics, we proudly introduce **[Magento 2 Advanced Reports extension](https://www.mageplaza.com/magento-2-reports-extension/)** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
 
 
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-reports/v/stable)](https://packagist.org/packages/mageplaza/module-reports)
@@ -41,7 +41,7 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-## 4. Mageplaza Advanced Reports features
+## 4. Magento 2 Advanced Reports features
 
 ### New advanced reports
 
@@ -93,7 +93,7 @@ On the **Magento 2 dashboard**, store admins can drag and drop to move report ar
 ![Magento 2 dashboard extension](https://i.imgur.com/cLbXk6G.gif)
 
 
-## 5. More Advanced Reports features
+## 5. More Magento 2 Reports features
 
 ### Friendly presentation
 
@@ -125,7 +125,7 @@ Advanced Reports extension is compatible with many [other Mageplaza products](ht
 - Drag and drop to arrange report layouts
 - Adjust report boards’ sizes by pulling double arrows
 
-## 7. How to configure Advanced Reports extension
+## 7. How to configure Magento 2 Reports extension
 
 First, you need to enable the module. Login to Magento backend, then on the admin panel choose **Store > Settings > Configuration > Mageplaza Extensions > Reports**. 
 
