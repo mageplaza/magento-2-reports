@@ -35,6 +35,14 @@ A: Yes, it can.
 ### ✓ Install via composer (recommend)
 Run the following command in Magento 2 root folder:
 
+With Marketing Automation (recommend):
+```
+composer require mageplaza/module-reports mageplaza/module-smtp
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Without Marketing Automation:
 ```
 composer require mageplaza/module-reports
 php bin/magento setup:upgrade
