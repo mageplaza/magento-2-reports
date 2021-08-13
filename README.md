@@ -1,8 +1,8 @@
-# The Most Popular Magento 2 Advanced Reports extension FREE!
+# Magento 2 Advanced Reports extension FREE!
 
 **Mageplaza Magento 3 Advanced Reports** is a free extension which helps stores quickly access to advanced reports on Dashboard. As your shop grows, so is the amount of numbers you have to deal with everyday. Eventually, it would reach a point where you find yourself in dire need of a tool that can take care of the figures for you.
 
-To facilitate the management of statistics, we proudly introduce **Magento 2 Advanced Reports extension** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
+To facilitate the management of statistics, we proudly introduce **[Magento 2 Advanced Reports extension](https://www.mageplaza.com/magento-2-reports-extension/)** by Mageplaza. This module would help store admins keep their number neat and clean while enable them to see the level of progress made in comparison to the same period last month, last year and so on.
 
 
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-reports/v/stable)](https://packagist.org/packages/mageplaza/module-reports)
@@ -35,13 +35,21 @@ A: Yes, it can.
 ### ✓ Install via composer (recommend)
 Run the following command in Magento 2 root folder:
 
+With Marketing Automation (recommend):
+```
+composer require mageplaza/module-reports mageplaza/module-smtp
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Without Marketing Automation:
 ```
 composer require mageplaza/module-reports
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-## 4. Mageplaza Advanced Reports features
+## 4. Magento 2 Advanced Reports features
 
 ### New advanced reports
 
@@ -93,7 +101,7 @@ On the **Magento 2 dashboard**, store admins can drag and drop to move report ar
 ![Magento 2 dashboard extension](https://i.imgur.com/cLbXk6G.gif)
 
 
-## 5. More Advanced Reports features
+## 5. More Magento 2 Reports features
 
 ### Friendly presentation
 
@@ -125,7 +133,7 @@ Advanced Reports extension is compatible with many [other Mageplaza products](ht
 - Drag and drop to arrange report layouts
 - Adjust report boards’ sizes by pulling double arrows
 
-## 7. How to configure Advanced Reports extension
+## 7. How to configure Magento 2 Reports extension
 
 First, you need to enable the module. Login to Magento backend, then on the admin panel choose **Store > Settings > Configuration > Mageplaza Extensions > Reports**. 
 
@@ -182,22 +190,31 @@ In the Dashboard, you can:
 - [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
 - [Magento 2 security extension](https://github.com/mageplaza/magento-2-security)
 
+**Other extensions on Our store:**
+- [Magento 2 Google Tag Manager](https://www.mageplaza.com/magento-2-google-tag-manager/)
+- [Magneto 2 Store Locator](https://www.mageplaza.com/magento-2-store-locator-extension/)
+- [Magento 2 customer attributes](https://www.mageplaza.com/magento-2-customer-attributes/)
+- [Magento 2 Ajax Cart module](https://www.mageplaza.com/magento-2-quick-view/)
+- [Magento 2 Store Pickup Module](https://www.mageplaza.com/magento-2-store-pickup-extension/)
+- [Magento 2 Google Map](https://www.mageplaza.com/magento-2-google-maps/)
+- [Magento 2 Sorting extension](https://www.mageplaza.com/magento-2-better-sorting/)
+- [Magento 2 Google Analytics](https://www.mageplaza.com/magento-2-google-analytics-pro/)
 
 **The Most Popular Magento 2 Advanced Reports extension FREE**
 - [Advanced Reports Documentation](#1-advanced-reports-documentation)
 - [Advanced Reports FAQs](#2-advanced-reports-faqs)
 - [How to install Magento 2 Advanced Reports extension](#3-how-to-install-magento-2-advanced-reports-extension)
-- [Mageplaza Advanced Reports features](#4-mageplaza-advanced-reports-features)
+- [Magento 2 Advanced Reports features](#4-magento-2-advanced-reports-features)
   - [New advanced reports](#new-advanced-reports)
   - [Customizable report period & report comparison](#customizable-report-period--report-comparison)
   - [Line-chart reports](#line-chart-reports)
   - [Flexible reports dashboard layouts](#flexible-reports-dashboard-layouts)
-- [More Advanced Reports features](#5-more-advanced-reports-features)
+- [More Magento 2 Reports features](#5-more-magento-2-reports-features)
   - [Friendly presentation](#friendly-presentation)
   - [Rates & Changes](#rates--changes)
   - [Enhance default reports](#enhance-default-reports)
 - [Full Magento 2 Advanced Reports features](#6-full-magento-2-advanced-reports-features)
-- [How to configure Advanced Reports extension](#7-how-to-configure-advanced-reports-extension)
+- [How to configure Magento 2 Reports extension](#7-how-to-configure-magento-2-reports-extension)
   - [Advanced Reports General Configuration](#advanced-reports-general-configuration)
   - [Quick report outside the Dashboard](#quick-report-outside-the-dashboard)
 
