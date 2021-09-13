@@ -161,9 +161,9 @@ class Data extends AbstractData
                     $compareEndDate   = null;
                 }
             } else {
-                [$startDate, $endDate] = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
+                list($startDate, $endDate) = $this->getDateTimeRangeFormat('-1 month', 'now', null, $format);
                 $days = date('z', strtotime($endDate) - strtotime($startDate));
-                [$compareStartDate, $compareEndDate] = $this->getDateTimeRangeFormat(
+                list($compareStartDate, $compareEndDate) = $this->getDateTimeRangeFormat(
                     '-1 month -' . ($days + 1) . ' day',
                     '-1 month -1 day',
                     null,
@@ -180,8 +180,8 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $format
-     * @param $date
+     * @param null $format
+     * @param mixed $date
      *
      * @return string
      * @throws Exception
@@ -227,8 +227,8 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $startDate
-     * @param $endDate
+     * @param string $startDate
+     * @param string $endDate
      *
      * @return false|int|string
      */
@@ -243,7 +243,7 @@ class Data extends AbstractData
 
     /**
      * @param AbstractCollection $collection
-     * @param $startDate
+     * @param string $startDate
      * @param null $endDate
      *
      * @return mixed
@@ -251,7 +251,7 @@ class Data extends AbstractData
      */
     public function addTimeFilter($collection, $startDate, $endDate = null)
     {
-        [$startDate, $endDate] = $this->getDateTimeRangeFormat($startDate, $endDate, 1);
+        list($startDate, $endDate) = $this->getDateTimeRangeFormat($startDate, $endDate, 1);
 
         if ($this->_request->getParam('card_id') === 'tax') {
             return $collection
@@ -265,7 +265,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param      $startDate
+     * @param string $startDate
      * @param null $endDate
      * @param int $days
      * @param int $isObject
@@ -287,9 +287,9 @@ class Data extends AbstractData
         $startDate = new \DateTime($startDate);
 
         $interval  = new DateInterval('P1D');
-        $daterange = new DatePeriod($startDate, $interval, $endDate);
+        $dateRange = new DatePeriod($startDate, $interval, $endDate);
         /** @var \DateTime $date */
-        foreach ($daterange as $date) {
+        foreach ($dateRange as $date) {
             if ($isObject) {
                 $data[$date->format('Y-m-d')] = new DataObject();
             } else {
@@ -373,7 +373,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param      $startDate
+     * @param string $startDate
      * @param null $endDate
      *
      * @return mixed
@@ -395,8 +395,8 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $startDate
-     * @param $endDate
+     * @param string $startDate
+     * @param string $endDate
      *
      * @return DataObject
      * @throws LocalizedException
@@ -449,5 +449,17 @@ class Data extends AbstractData
     public function getConfigMobileAccessKey()
     {
         return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/mobile/access_key');
+    }
+
+    /**
+     * Check the following modules is installed
+     *
+     * @param string $moduleName
+     *
+     * @return bool
+     */
+    public function moduleIsEnable($moduleName)
+    {
+        return $this->_moduleManager->isEnabled($moduleName);
     }
 }

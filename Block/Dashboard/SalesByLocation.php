@@ -90,7 +90,6 @@ class SalesByLocation extends AbstractClass
         /** @var Collection $collection */
         $collection = $this->_orderCollectionFactory->create();
         $collection = $this->_helperData->addStoreFilter($collection);
-        $collection = $this->_helperData->addStatusFilter($collection);
         $collection = $this->_helperData->addTimeFilter($collection, $startDate, $endDate);
         $collection->getSelect()->join(
             ['soa' => $collection->getTable('sales_order_address')],
@@ -160,6 +159,6 @@ class SalesByLocation extends AbstractClass
      */
     public function canShowDetail()
     {
-        return true;
+        return $this->_helperData->moduleIsEnable('Mageplaza_ReportsPro');
     }
 }
