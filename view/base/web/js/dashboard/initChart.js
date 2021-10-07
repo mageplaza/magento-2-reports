@@ -31,12 +31,12 @@ define([
             }
         },
         _create: function () {
-            var ctx = $('#' + this.options.chartData.name + '-chart');
-            var data = {
-                type: 'line',
-                data: this.getData(),
-                options: this.getOptions()
-            };
+            var ctx  = $('#' + this.options.chartData.name + '-chart'),
+                data = {
+                    type: 'line',
+                    data: this.getData(),
+                    options: this.getOptions()
+                };
 
             new window.Chart(ctx, data);
         },
@@ -59,8 +59,8 @@ define([
                     intersect: true,
                     callbacks: {
                         label: function (tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var index = tooltipItem.index;
+                            var dataset = data.datasets[tooltipItem.datasetIndex],
+                                index   = tooltipItem.index;
 
                             return dataset.labels[index] + ': ' +
                                 (data.yUnit
@@ -85,7 +85,7 @@ define([
                             stepSize: this.options.chartData.stepSize,
                             unit: 'day',
                             displayFormats: {
-                                day: 'Y-MMM-D'
+                                day: 'Y-M-D'
                             }
                         },
                         ticks: {
@@ -118,7 +118,7 @@ define([
             };
         },
         getData: function () {
-            var data = {
+            var data           = {
                 index: this.options.chartData.name,
                 labels: this.options.chartData['labels'],
                 yUnit: this.options.chartData['yUnit'],
@@ -157,7 +157,7 @@ define([
                 pointBorderColor: 'transparent',
                 // pointBackgroundColor: 'transparent',
                 // pointHoverBackgroundColor: 'blue',
-                fill: this.options.chartData.isFill,
+                fill: this.options.chartData.isFill
             };
         }
     });

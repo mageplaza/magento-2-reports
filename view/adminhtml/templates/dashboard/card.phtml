@@ -20,10 +20,14 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-/** @var \Mageplaza\Reports\Block\Dashboard\Card $block */
-/** @var \Mageplaza\Reports\Block\Dashboard\AbstractClass $card */
-$card = $block->getCard();
+use Mageplaza\Reports\Block\Dashboard\AbstractClass;
+use Mageplaza\Reports\Block\Dashboard\Card;
+use Mageplaza\Reports\Helper\Data;
 
+/** @var Card $block */
+/** @var AbstractClass $card */
+
+$card = $block->getCard();
 ?>
 <div id="<?= /** @noEscape */ $card->getCardId() ?>"
      class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
@@ -37,57 +41,63 @@ $card = $block->getCard();
     <div class="not-draggable">
         <div class="dashboard-item-container">
             <div class="dashboard-item-header">
-                <?php if ($title = $card->getTitle()): ?>
+                <?php if ($title = $card->getTitle()) : ?>
                     <div class="dashboard-item-title"><?= $block->escapeHtml($title) ?></div>
                 <?php endif; ?>
-                <?php if ($card->canShowDetail()): ?>
+                <?php if ($card->canShowDetail() && $card->getDetailUrl()) : ?>
                     <div class="view-detail">
-                        <a href="<?= /** @noEscape */ $card->getDetailUrl() ?>"
+                        <a href="<?= /** @noEscape */
+                        $card->getDetailUrl() ?>"
                            target="_blank"><?= $block->escapeHtml(__('View Details')) ?></a>
                     </div>
                 <?php endif; ?>
                 <div style="clear: both"></div>
-                <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard'): ?>
+                <?php if ($block->getRequest()->isAjax()
+                    && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
                     <?php
                     $totalLabel = $card->getTotal();
-                    if ($totalLabel !== ''): ?>
+                    if ($totalLabel !== '') : ?>
                         <div class="dashboard-sales-value">
-                            <?= /** @noEscape */ $totalLabel ?>
+                            <?= /** @noEscape */
+                            $totalLabel ?>
                             <?php
                             $rate = $card->getRate();
-                            if (($rate !== '') && $block->isCompare()): ?>
-                                <div class="chart-rate <?= $rate > 0 ? 'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
-                                    <?= /** @noEscape */ abs($rate) . '%' ?>
+                            if (($rate !== '') && $block->isCompare()) : ?>
+                                <div class="chart-rate <?= $rate > 0 ?
+                                    'up-rate mp-green' : ($rate < 0 ? 'down-rate mp-red' : '') ?>">
+                                    <?= /** @noEscape */
+                                    abs($rate) . '%' ?>
                                 </div>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
-            <?php if ($block->getRequest()->isAjax() && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard'): ?>
+            <?php if ($block->getRequest()->isAjax()
+                && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
                 <?= $card->getContentHtml() ?>
-            <?php else: ?>
-            <div class="mp-card loading-mask">
-                <img src="<?= /** @noEscape */ $block->getViewFileUrl('images/loader-1.gif') ?>" alt="Loading..."/>
-            </div>
+            <?php else : ?>
+                <div class="mp-card loading-mask">
+                    <img src="<?= /** @noEscape */
+                    $block->getViewFileUrl('images/loader-1.gif') ?>" alt="Loading..."/>
+                </div>
             <?php endif; ?>
-            <?php if ($block->getRequest()->getFullActionName() !== 'mpreports_cards_loadcard'): ?>
+            <?php if ($block->getRequest()->getFullActionName() !== 'mpreports_cards_loadcard') : ?>
                 <script>
                     require([
                         'jquery'
-                    ],function ($) {
-                        var cardEl = $('#<?= /** @noEscape */ $card->getCardId() ?>');
+                    ], function ($) {
+                        var cardEl  = $('#<?= /** @noEscape */ $card->getCardId() ?>');
                         var boardEl = $('.grid-stack');
                         boardEl.on('mpCardLoaded', function () {
-                            if(boardEl.data('isLoading') === true || cardEl.data('isLoaded')) {
+                            if (boardEl.data('isLoading') === true || cardEl.data('isLoaded')) {
                                 return;
                             }
 
-                            var dateRangeEl = $('#daterange'),
+                            var dateRangeEl        = $('#daterange'),
                                 compareDateRangeEl = $('#compare-daterange'),
-                                isCompare = <?= /** @noEscape */ $block->isCompare() ?>;
-
-                            var data = <?= \Mageplaza\Reports\Helper\Data::jsonEncode($card->getData()) ?>;
+                                isCompare          = <?= /** @noEscape */ $block->isCompare() ?>,
+                                data               = <?= /** @noEscape */ Data::jsonEncode($card->getData()) ?>;
 
                             data = dateRangeEl.data().startDate ? $.extend(data, {
                                 dateRange: {
@@ -113,7 +123,7 @@ $card = $block->getCard();
                                     cardEl.data('isLoaded', true);
                                     boardEl.data('isLoading', false);
                                     boardEl.trigger('mpCardLoaded');
-                                    cardEl.find('.dashboard-item-container').html('<?php __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+                                    cardEl.find('.dashboard-item-container').html('<?= __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
                                 }
                             })
                         });
