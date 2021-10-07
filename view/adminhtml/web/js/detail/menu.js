@@ -186,6 +186,10 @@ define([
             $('body').on('click',function (e) {
                 if (!$(e.target).parents().hasClass('mp-rp-order-status')) {
                     $('.mp-rp-order-status').removeClass('_active');
+                    if ($('.daterangepicker').is(':visible')) {
+                        $('.drp-calendar.left').show();
+                        $('.drp-calendar.right').show();
+                    }
                 }
             });
         },

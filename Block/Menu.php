@@ -148,4 +148,13 @@ class Menu extends Template
 
         return $statuses;
     }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getDate()
+    {
+        return Data::jsonEncode($this->helperData->getDateRange());
+    }
 }

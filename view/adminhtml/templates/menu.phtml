@@ -44,12 +44,12 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
             <i class="fa fa-bars"></i>
         </a>
         <ul class="admin__action-dropdown-menu">
-            <?php foreach ($menu as $item): ?>
+            <?php foreach ($menu as $item) : ?>
                 <li><a href="<?= /** @noEscape */ $item['path'] ?>"><?= /** @noEscape */ $item['label'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="date-range-picker">
+    <div class="date-range-picker" data-mage-init='{"initDateRange":{"date":<?= /** @noEscape */ $block->getDate() ?>}}'>
         <div id="daterange">
             <i class="fa fa-calendar"></i>
             <span></span>
@@ -61,7 +61,7 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
     </div>
     <div class="customer-group">
         <select id="customer-group-id">
-            <?php foreach ($block->getCustomerGroup() as $group): ?>
+            <?php foreach ($block->getCustomerGroup() as $group) : ?>
                 <option value="<?= /** @noEscape */ $group['value'] ?>"><?= /** @noEscape */ $group['label'] ?></option>
             <?php endforeach; ?>
         </select>
@@ -85,7 +85,7 @@ $storeFilterUrl = $block->getUrl('mpreports/details/storefilter', ['form_key' =>
             <div class="admin__action-dropdown-menu _overflow" id="order_status">
                 <div class="admin__action-dropdown-menu-header"></div>
                 <div class="admin__action-dropdown-menu-content">
-                    <?php foreach ($block->getOrderStatusList() as $status): ?>
+                    <?php foreach ($block->getOrderStatusList() as $status) : ?>
                         <div class="admin__field-option" data-repeat-index="0">
                             <input class="admin__control-checkbox"
                                    type="checkbox"
