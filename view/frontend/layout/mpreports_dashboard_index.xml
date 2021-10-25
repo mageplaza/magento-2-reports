@@ -31,7 +31,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Magento\Backend\Block\Store\Switcher" name="mp.report.store_switcher">
+            <block class="Mageplaza\Reports\Block\Store\Switcher" name="mp.report.store_switcher">
                 <arguments>
                     <argument name="switch_websites" xsi:type="string">0</argument>
                     <argument name="area" xsi:type="string">adminhtml</argument>
