@@ -77,6 +77,7 @@ class RepeatCustomerRate extends AbstractClass
         $data = [];
 
         $customerRepeatData = $this->getCustomerRepeatDataByDateRange($startDate, $endDate);
+        $startDate          = date('Y-m-d', strtotime($startDate));
 
         while (strtotime($endDate) >= strtotime($startDate)) {
             $data['data']['labels'][]        = __('first');
