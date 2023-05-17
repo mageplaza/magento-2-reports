@@ -203,6 +203,7 @@ class Data extends AbstractData
      */
     public function getDateTimeRangeFormat($startDate, $endDate = null, $isConvertToLocalTime = null, $format = null)
     {
+        $startDate = $startDate ? : '';
         $endDate   = (new \DateTime($endDate ?: $startDate, new DateTimeZone($this->getTimezone())))->setTime(
             23,
             59,
@@ -439,7 +440,7 @@ class Data extends AbstractData
         if ($this->_request->getParam('card_id') === 'tax') {
             return $collection;
         }
-        
+
         return $collection->getFirstItem();
     }
 
