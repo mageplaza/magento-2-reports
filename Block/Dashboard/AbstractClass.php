@@ -325,7 +325,7 @@ abstract class AbstractClass extends Template
 
         return [
             date('Y-m-d', strtotime($date[0])) . ' to ' . date('Y-m-d', strtotime($date[1])),
-            date('Y-m-d', strtotime($date[2])) . ' to ' . date('Y-m-d', strtotime($date[3]))
+            date('Y-m-d', strtotime($date[2] ?? '')) . ' to ' . date('Y-m-d', strtotime($date[3] ?? ''))
         ];
     }
 
