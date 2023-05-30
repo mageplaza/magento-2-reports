@@ -42,6 +42,8 @@ Year,Year
 "Updated At","Updated At"
 "Let’s experience your new dashboard","Let’s experience your new dashboard"
 "Hello there! Better reports are available","Hello there! Better reports are available"
+Scope:,Scope:
+"Stores Configuration","Stores Configuration"
 "Mageplaza Advanced Reporting","Mageplaza Advanced Reporting"
 "The better reports provides ecommerce insights across performance metrics, product sales, customers, and cost of goods sold. Instantly measure metrics like customer lifetime value, gross margin, net profit, and more to build and automate high-quality ecommerce reports.","The better reports provides ecommerce insights across performance metrics, product sales, customers, and cost of goods sold. Instantly measure metrics like customer lifetime value, gross margin, net profit, and more to build and automate high-quality ecommerce reports."
 "Try to use new Dashboard","Try to use new Dashboard"
@@ -49,6 +51,7 @@ Year,Year
 "Generate Url","Generate Url"
 Copied!,Copied!
 Continue,Continue
+"Please confirm scope switching. All data that hasn't been saved will be lost.","Please confirm scope switching. All data that hasn't been saved will be lost."
 "Mageplaza Reports Dashboard","Mageplaza Reports Dashboard"
 Reports,Reports
 "General Configuration","General Configuration"
