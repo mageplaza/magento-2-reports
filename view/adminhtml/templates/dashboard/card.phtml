@@ -56,7 +56,7 @@ $card = $block->getCard();
                     && $block->getRequest()->getFullActionName() === 'mpreports_cards_loadcard') : ?>
                     <?php
                     $totalLabel = $card->getTotal();
-                    if ($totalLabel !== '') : ?>
+                    if ($totalLabel) : ?>
                         <div class="dashboard-sales-value">
                             <?= /** @noEscape */
                             $totalLabel ?>
