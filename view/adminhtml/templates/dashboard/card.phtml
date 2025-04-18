@@ -123,7 +123,7 @@ $card = $block->getCard();
                                     cardEl.data('isLoaded', true);
                                     boardEl.data('isLoading', false);
                                     boardEl.trigger('mpCardLoaded');
-                                    cardEl.find('.dashboard-item-container').html('<?= __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
+                                    cardEl.find('.dashboard-item-container').html('<?= /** @noEscape */ __('Something went wrong while loading %1 card', $card->getTitle()) ?>');
                                 }
                             })
                         });
