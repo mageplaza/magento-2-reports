@@ -2,10 +2,10 @@
   "name": "mageplaza/module-reports",
   "description": "Magento 2 Reports Extension",
   "require": {
-    "mageplaza/module-core": "^1.5.3"
+    "mageplaza/module-core": "^1.5.13"
   },
   "type": "magento2-module",
-  "version": "4.1.5",
+  "version": "4.1.6",
   "license": "proprietary",
   "authors": [
     {
