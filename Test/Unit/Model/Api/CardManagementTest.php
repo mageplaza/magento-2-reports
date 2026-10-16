@@ -76,7 +76,6 @@ class CardManagementTest extends TestCase
     private function invokeAddFilter()
     {
         $method = new ReflectionMethod(CardManagement::class, 'addFilter');
-        $method->setAccessible(true);
 
         return $method->invoke($this->model);
     }
@@ -87,7 +86,6 @@ class CardManagementTest extends TestCase
     private function invokeGetCard(string $cardName, array $filters)
     {
         $method = new ReflectionMethod(CardManagement::class, 'getCard');
-        $method->setAccessible(true);
 
         return $method->invoke($this->model, $cardName, $filters);
     }
@@ -202,7 +200,6 @@ class CardManagementTest extends TestCase
         ]);
 
         $method = new ReflectionMethod(CardManagement::class, 'getCard');
-        $method->setAccessible(true);
         $result = $method->invoke($model, 'totalSales', [null, null, null]);
 
         $this->assertInstanceOf(Card::class, $result);
@@ -222,7 +219,6 @@ class CardManagementTest extends TestCase
         ]);
 
         $method = new ReflectionMethod(CardManagement::class, 'getCard');
-        $method->setAccessible(true);
         $result = $method->invoke($model, 'averageOrder', [null, null, null]);
 
         $this->assertInstanceOf(Card::class, $result);

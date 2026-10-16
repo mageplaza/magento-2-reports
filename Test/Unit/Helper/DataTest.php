@@ -69,7 +69,6 @@ class DataTest extends TestCase
     private function setProp(object $obj, string $prop, mixed $val): void
     {
         $ref = new ReflectionProperty(Data::class, $prop);
-        $ref->setAccessible(true);
         $ref->setValue($obj, $val);
     }
 
