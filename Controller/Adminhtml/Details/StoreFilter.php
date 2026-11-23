@@ -56,6 +56,15 @@ class StoreFilter extends Action
     }
 
     /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(self::ADMIN_RESOURCE)
+            || $this->_authorization->isAllowed('Mageplaza_Reports::report');
+    }
+
+    /**
      * @return Page
      */
     public function execute()
