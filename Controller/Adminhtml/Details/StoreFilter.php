@@ -33,6 +33,8 @@ use Mageplaza\Reports\Helper\Data;
  */
 class StoreFilter extends Action
 {
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::dashboard';
+
     /**
      * @var bool|PageFactory
      */

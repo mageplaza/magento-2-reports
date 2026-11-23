@@ -38,6 +38,8 @@ use Mageplaza\Reports\Helper\Data;
  */
 class SwitchToNew extends Action
 {
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::configuration';
+
     /**
      * @var Writer
      */
