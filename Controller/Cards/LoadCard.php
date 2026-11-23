@@ -48,19 +48,27 @@ class LoadCard extends Action
     protected $_cardsManageFactory;
 
     /**
+     * @var Data
+     */
+    protected $helperData;
+
+    /**
      * SavePosition constructor.
      *
      * @param Context $context
      * @param Session $authSession
      * @param CardsManageFactory $cardsManageFactory
+     * @param Data $helperData
      */
     public function __construct(
         Context $context,
         Session $authSession,
-        CardsManageFactory $cardsManageFactory
+        CardsManageFactory $cardsManageFactory,
+        Data $helperData
     ) {
         $this->_authSession        = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
+        $this->helperData          = $helperData;
 
         parent::__construct($context);
     }
@@ -76,7 +84,11 @@ class LoadCard extends Action
         $data   = [];
 
         $cardsManager = $this->_cardsManageFactory->create();
-        if ($id && isset($cardsManager[$id]) && $this->getRequest()->isAjax()) {
+        if ($id
+            && isset($cardsManager[$id])
+            && $this->getRequest()->isAjax()
+            && $this->helperData->isValidMobileAccessKey($this->getRequest()->getParam('accessKey'))
+        ) {
             try {
                 /** @var Card $block */
                 $block = $layout->createBlock(Card::class);

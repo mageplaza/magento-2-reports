@@ -32,10 +32,10 @@ $card = $block->getCard();
 <div id="<?= /** @noEscape */ $card->getCardId() ?>"
      class="<?= $card->getVisible() ? 'grid-stack-item' : 'hide' ?>"
      data-gs-id="<?= /** @noEscape */ $card->getCardId() ?>"
-     data-gs-x="<?= $card->getX() !== null ? /** @noEscape */ $card->getX() : '0' ?>"
-     data-gs-y="<?= $card->getY() !== null ? /** @noEscape */ $card->getY() : '100' ?>"
-     data-gs-width="<?= $card->getWidth() !== null ? /** @noEscape */ $card->getWidth() : '3' ?>"
-     data-gs-height="<?= $card->getHeight() !== null ? /** @noEscape */ $card->getHeight() : '4' ?>"
+     data-gs-x="<?= $card->getX() !== null ? (int) $card->getX() : '0' ?>"
+     data-gs-y="<?= $card->getY() !== null ? (int) $card->getY() : '100' ?>"
+     data-gs-width="<?= $card->getWidth() !== null ? (int) $card->getWidth() : '3' ?>"
+     data-gs-height="<?= $card->getHeight() !== null ? (int) $card->getHeight() : '4' ?>"
      data-gs-min-width="2" data-gs-min-height="3">
     <div class="draggable"><i class="fa fa-arrows-alt"></i></div>
     <div class="not-draggable">
