@@ -37,6 +37,8 @@ use Mageplaza\Reports\Model\CardsManageFactory;
  */
 class LoadCard extends Action
 {
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::dashboard';
+
     /**
      * @var Session
      */

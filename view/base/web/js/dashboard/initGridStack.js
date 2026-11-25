@@ -150,11 +150,16 @@ define([
             this.saveCardPosition(data);
         },
         saveCardPosition: function (data) {
-            $.ajax({
-                url: this.options.url,
-                data: {items: data},
-                type: 'POST'
-            });
+            var self = this,
+                send = function () {
+                    return $.ajax({
+                        url: self.options.url,
+                        data: {items: data},
+                        type: 'POST'
+                    });
+                };
+
+            this.saveRequest = $.when(this.saveRequest).then(send, send);
         },
         initGrid: function () {
             var gridStackEl = $('.grid-stack');

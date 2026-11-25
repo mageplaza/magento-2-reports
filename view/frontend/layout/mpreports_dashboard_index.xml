@@ -41,7 +41,7 @@
                     <argument name="default_selection_name" xsi:type="string" translate="true">All Websites</argument>
                 </arguments>
             </block>
-            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" ifconfig="mageplaza_reports/general/enabled">
+            <block class="Mageplaza\Reports\Block\Dashboard" name="ar_dashboard" ifconfig="mageplaza_reports/general/enabled" cacheable="false">
                 <block class="Mageplaza\Reports\Block\Dashboard\Card" name="mp_card"/>
             </block>
 

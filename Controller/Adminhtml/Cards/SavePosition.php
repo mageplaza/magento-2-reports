@@ -36,6 +36,8 @@ use Mageplaza\Reports\Model\CardsManageFactory;
  */
 class SavePosition extends Action
 {
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::dashboard';
+
     /**
      * @var Session
      */

@@ -33,6 +33,8 @@ use Mageplaza\Reports\Helper\Data;
  */
 class StoreFilter extends Action
 {
+    const ADMIN_RESOURCE = 'Mageplaza_Reports::dashboard';
+
     /**
      * @var bool|PageFactory
      */
@@ -51,6 +53,15 @@ class StoreFilter extends Action
         $this->resultPageFactory = $resultPageFactory;
 
         parent::__construct($context);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed(self::ADMIN_RESOURCE)
+            || $this->_authorization->isAllowed('Mageplaza_Reports::report');
     }
 
     /**
