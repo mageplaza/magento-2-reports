@@ -160,9 +160,13 @@ class Dashboard extends Template
      */
     public function getGridStackConfig()
     {
+        $params = ['form_key' => $this->getFormKey()];
+        if ($accessKey = $this->getRequest()->getParam('accessKey')) {
+            $params['accessKey'] = $accessKey;
+        }
         $config = [
-            'url'         => $this->getUrl('mpreports/cards/saveposition', ['form_key' => $this->getFormKey()]),
-            'loadCardUrl' => $this->getUrl('mpreports/cards/loadcard', ['form_key' => $this->getFormKey()])
+            'url'         => $this->getUrl('mpreports/cards/saveposition', $params),
+            'loadCardUrl' => $this->getUrl('mpreports/cards/loadcard', $params)
         ];
 
         return $config;

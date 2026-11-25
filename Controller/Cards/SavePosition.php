@@ -47,19 +47,27 @@ class SavePosition extends Action
     protected $_cardsManageFactory;
 
     /**
+     * @var Data
+     */
+    protected $helperData;
+
+    /**
      * SavePosition constructor.
      *
      * @param Context $context
      * @param Session $authSession
      * @param CardsManageFactory $cardsManageFactory
+     * @param Data $helperData
      */
     public function __construct(
         Context $context,
         Session $authSession,
-        CardsManageFactory $cardsManageFactory
+        CardsManageFactory $cardsManageFactory,
+        Data $helperData
     ) {
         $this->_authSession        = $authSession;
         $this->_cardsManageFactory = $cardsManageFactory;
+        $this->helperData          = $helperData;
 
         parent::__construct($context);
     }
@@ -71,17 +79,20 @@ class SavePosition extends Action
     public function execute()
     {
         $items = $this->getRequest()->getParam('items');
-        if ($items && $this->getRequest()->isAjax()) {
+        if ($items
+            && $this->getRequest()->isAjax()
+            && $this->helperData->isValidMobileAccessKey($this->getRequest()->getParam('accessKey'))
+        ) {
             $config = $this->_cardsManageFactory->getCurrentConfig();
             $data   = $config->getId()
                 ? $config->getConfig()
                 : $this->_cardsManageFactory->getDefaultConfig()->getConfig();
             foreach ($items as $id => $item) {
-                $data[$id]['x']       = $item['x'];
-                $data[$id]['y']       = $item['y'];
-                $data[$id]['width']   = $item['width'];
-                $data[$id]['height']  = $item['height'];
-                $data[$id]['visible'] = isset($item['visible']) ? $item['visible'] : 1;
+                $data[$id]['x']       = (int) $item['x'];
+                $data[$id]['y']       = (int) $item['y'];
+                $data[$id]['width']   = (int) $item['width'];
+                $data[$id]['height']  = (int) $item['height'];
+                $data[$id]['visible'] = isset($item['visible']) ? (int) $item['visible'] : 1;
             }
             $data = Data::jsonEncode($data);
             if ($config->getId()) {

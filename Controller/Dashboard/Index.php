@@ -80,9 +80,7 @@ class Index extends Action
     {
         $resultPage = $this->resultPageFactory->create();
 
-        $accessKey       = $this->getRequest()->getParam('accessKey');
-        $accessKeyConfig = $this->helperData->getConfigMobileAccessKey();
-        if ($accessKey !== $accessKeyConfig) {
+        if (!$this->helperData->isValidMobileAccessKey($this->getRequest()->getParam('accessKey'))) {
             return $this->_redirect('noroute');
         }
         if ($this->getRequest()->isAjax()) {

@@ -451,4 +451,19 @@ class Data extends AbstractData
     {
         return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/mobile/access_key');
     }
+
+    /**
+     * @param mixed $accessKey
+     *
+     * @return bool
+     */
+    public function isValidMobileAccessKey($accessKey): bool
+    {
+        $accessKeyConfig = (string) $this->getConfigMobileAccessKey();
+
+        return $this->isEnabled()
+            && $accessKeyConfig !== ''
+            && is_string($accessKey)
+            && hash_equals($accessKeyConfig, $accessKey);
+    }
 }
